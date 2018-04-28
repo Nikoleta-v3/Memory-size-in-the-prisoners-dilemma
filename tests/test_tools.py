@@ -1,14 +1,14 @@
 import unittest
-import opt_mo.tools as tools
+import opt_mo
 
 import sympy as sym
 
 
-class TestTransitions(unittest.TestCase):
-    p = tools.MemoryOneStrategy(0.1, 0.5, 0.6, 0.7)
+class TestMemoryOneStrategy(unittest.TestCase):
+    p = opt_mo.MemoryOneStrategy(0.1, 0.5, 0.6, 0.7)
 
     q_1, q_2, q_3, q_4 = sym.symbols("q_1, q_2, q_3, q_4")
-    q = tools.MemoryOneStrategy(q_1, q_2, q_3, q_4)
+    q = opt_mo.MemoryOneStrategy(q_1, q_2, q_3, q_4)
 
     def test_init(self):
         self.assertEqual(self.p.cc, 0.1)
@@ -53,7 +53,7 @@ class TestStates(unittest.TestCase):
         matrix = sym.Matrix([[0.9, 0.075, 0.025],
                              [0.15, 0.8, 0.05],
                              [0.25, 0.25, 0.5]])
-        v = tools.stable_states(matrix, pi)
+        v = opt_mo.stable_states(matrix, pi)
 
         self.assertEqual(v[pi_1], 0.6250)
         self.assertEqual(v[pi_2], 0.3125)
@@ -69,7 +69,7 @@ class TestMakeB(unittest.TestCase):
     q = (q_1, q_2, q_3, q_4)
     S = (3, 0, 5, 1)
 
-    B = tools.make_B(S, p, q)
+    B = opt_mo.make_B(S, p, q)
 
     def test_make_B(self):
 
