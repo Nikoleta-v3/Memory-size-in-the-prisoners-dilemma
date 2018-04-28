@@ -274,7 +274,47 @@ simulated behaviour.
 
 \section{Proximate of best responses}
 
+The analytical formulation gives the advantage of time. That is because the 
+payoffs of a match between two opponents are now retrievable without 
+simulating the actual match itself. Utility \(u_q(p)\) can 
+now be calculated numerically instead of using simulation. In the introduction 
+a question was raised: which memory one strategy is the \textbf{best response}
+against another memory one? This will be considered as an optimisation problem,
+where a memory one strategy \(p\) wants to optimise it's utility \(u_q(p)\)
+against an opponent \(q\). The decision variable is the vector \(p\) and the 
+solitary constrains \(p \in \R^4_{[0, 1]} \). The optimisation problem is 
+given by~(\ref{eq:mo_optimisation}).
+
+\begin{equation}\label{eq:mo_optimisation}
+\begin{aligned}
+& \max_p: && \frac{\frac{1}{2}  p  Q  p^T + c^T p + a} 
+                  {\frac{1}{2}  p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a}}
+\\
+& \text{such that}: && \ p \in \R^4_{[0, 1]}.
+\end{aligned}
+\end{equation}
+
 \subsection{In purely random strategies}
+
+% Notebooks A.0.7.1- A.0.7.3
+In this section we explore a simplified version of the main problem. A set of 
+memory one strategies where the transition probabilities of each state are the 
+same, are called \textbf{purely random strategies}. 
+as
+
+The optimisation problem of (\ref{eq:mo_optimisation}) now has an extra constraint
+and is re written as,
+
+\begin{equation}\label{eq:random_optimisation}
+\begin{aligned}
+\max_p: & \ u_q(p)
+\\
+\text{such that}: & \ p_1 = p_2 = p_3 = p_4 = p\\
+    & \ 0 \leq p \leq 1. 
+\end{aligned}
+\end{equation}
+
+
 \subsection{In memory one strategies}
 
 \section{Stability of defection}
