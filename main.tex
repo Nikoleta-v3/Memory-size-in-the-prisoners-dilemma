@@ -16,6 +16,7 @@
 \usepackage{standalone}
 
 \newcommand{\R}{\mathbb{R}}
+\newtheorem{theorem}{Theorem}
 \usetikzlibrary{decorations.pathmorphing, decorations.pathreplacing, angles,
                 quotes, calc, er, positioning}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -196,16 +197,83 @@ theoretic results will be proven:
     \item Cases where defection is stationary.
 \end{itemize}
 
-% All results are validated using~\cite{axelrodproject} which is an open research
-% framework for the study of the Iterated Prisoner's Dilemma. This package is
-% described in~\cite{Knight2016}.
-
 \section{Utility}
 
+\begin{theorem}\label{theorem:quadratic_form_u}
+    For a given memory one strategy \(p\in\mathbb{R}_{[0,1]}^4\) playing another 
+    memory one strategy \(q\in\mathbb{R}_{[0,1]}^4\), the 
+    utility of the player \(u_q(p)\) can be re written as a ratio of two quadratic
+    forms:
+    
+    \begin{equation}\label{eq:optimisation_quadratic}
+    u_q(p) = \frac{\frac{1}{2}p^TQp + c^Tp + a}
+                {\frac{1}{2}p^T\bar{Q}p + \bar{c}^Tp + \bar{a}}, 
+    \end{equation}
+    where \(Q, \bar{Q}\) are matrices of \(4 \times 4\) defined with the transition
+    probabilities of the opponent's transition probabilities \(q_1, q_2, q_3, q_4\).
+    
+    \begin{center}
+    \begin{equation}
+    \resizebox{0.9\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(
+    Q = \input{tex/q_numerator}\)},
+    \end{equation}
+    \begin{equation}\label{eq:q_bar_matrix}
+    \resizebox{0.8\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(
+    \bar{Q} =  \input{tex/q_denominator}\)}.
+    \end{equation}
+    \end{center}
+    
+    \(c \text{ and } \bar{c}\), are \(4 \times 1\) vectors defined by the transition rates 
+    \(q_1, q_2, q_3, q_4\).
+    
+    \begin{equation}\label{eq:q_matrix_numerator}
+    \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
+    \(c = \input{tex/c_numerator}\),}
+    \end{equation}
+    \begin{equation}\label{eq:q_matrix_denominator}
+    \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
+    \(\bar{c} = \input{tex/c_denominator}\).
+    }
+    \end{equation}
+    
+    Lastly, \(a = \input{tex/numerator_constant}\) and 
+    \(\bar{a} = \input{tex/denominator_constant}\).
+    \end{theorem}
 
 \subsection{Validation}
 
+All results are validated using~\cite{axelrodproject} which is an open research
+framework for the study of the Iterated Prisoner's Dilemma. This package is
+described in~\cite{Knight2016}.
+
+To validate the formulation of \(u_q(p)\) several memory one players were 
+matched against 20 opponents. Note that the payoff values  used hereafter in this
+work are \((3, 1, 0, 5)\). 
+The simulated value of \(u_q(p)\) has been calculated using \cite{axelrodproject}
+and the theoretical by  substituting in equation~(\ref{eq:optimisation_quadratic}).
+In Figure~\ref{fig:analytical_simulated}, both the simulated and the theoretical
+value of \(u_q(p)\), against each opponent, are plotted for three different memory
+one strategies. Figure \ref{fig:analytical_simulated} indicates that the 
+formulation of \(u_q(p)\) as a quadratic ratio successfully captures the 
+simulated behaviour.
+
+\begin{figure}[!htbp]
+\begin{center}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\linewidth]{img/validation_img_two.png}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\linewidth]{img/validation_img_three.png}
+    \end{subfigure}
+\end{center}
+\caption{Differences between simulated and analytical results.}
+\label{fig:analytical_simulated}
+\end{figure}
+
 \section{Proximate of best responses}
+
 \subsection{In purely random strategies}
 \subsection{In memory one strategies}
 
