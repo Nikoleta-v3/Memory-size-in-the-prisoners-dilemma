@@ -1,4 +1,15 @@
 # latex files
 *.aux
 *.log
+*.bbl
+*.blg
 
+# notebooks
+nbs/.ipynb_checkpoints/*
+
+# tests
+tests/__pycache__/*
+
+# packaging
+opt_mo/__pycache__/*
+opt_mo.*

@@ -1,7 +1,24 @@
 \documentclass[10pt]{article}
-% Package to manage page layout
-\usepackage[margin=2.5cm, includefoot, footskip=30pt]{geometry}
 
+% Manage page layout
+\usepackage[margin=2.5cm, includefoot, footskip=30pt]{geometry}
+\pagestyle{plain}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1}
+
+%%%%%%%PACKAGES HERE%%%%%%%
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{standalone}
+
+\newcommand{\R}{\mathbb{R}}
+\usetikzlibrary{decorations.pathmorphing, decorations.pathreplacing, angles,
+                quotes, calc, er, positioning}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Memory size in the Prisoner's Dilemma}
 \author{Nikoleta E. Glynatsi \and Vincent Knight}
 \date{}
@@ -27,11 +44,164 @@ interactions. A number of theoretic results are presented.
 %TODO: Expand when we get results
 \end{abstract}
 
-\section{Introduction}
+\section{Introduction}\label{section:introduction}
+
+The Prisoner's Dilemma (PD) is a two player person game used in understanding the
+evolution of co-operative behaviour. Each player can choose between cooperation
+(C) or defection (D). The decisions are made simultaneously and independently.
+The normal form representation of the game is given by:
+
+\begin{equation}\label{equ:pd_definition}
+    S_p = \begin{pmatrix}
+    R & S  \\
+    T & P
+    \end{pmatrix} \quad
+    S_q = \begin{pmatrix}
+        R & T  \\
+        S & P
+        \end{pmatrix}
+\end{equation}
+
+where \(S_p\) represents the utilities of the first player and \(S_q\) the utilities
+of the second player. The payoffs, \((R, P, S, T)\), are constrained by equations
+(\ref{eq:pd_constrain_one}) and~(\ref{eq:pd_constrain_two}). Constrain
+(\ref{eq:pd_constrain_one}) ensures that defection dominates cooperation and
+constrain (\ref{eq:pd_constrain_two}) ensures that there is a dilemma. Because
+the sum of the utilities for both players is better when both choose cooperation.
+The most common values used in the literature are \((3, 1, 0, 5)\)~\cite{Axelrod1981}.
+
+\begin{equation}\label{eq:pd_constrain_one}
+    T > R > P > S 
+\end{equation}
+
+\begin{equation}\label{eq:pd_constrain_two}
+    2R > T + S
+\end{equation}
+
+The PD is a one shot game, however it is commonly studied in a manner where the
+history of the interactions matters. The repeated form of the game is called the
+Iterated Prisoner's Dilemma (IPD) and in the 1980s following the work of
+\cite{Axelrod1980a, Axelrod1980b} it attracted the attention of the scientific
+community.
+
+In~\cite{Axelrod1980a} a computer tournament of the IPD was performed. A
+tournament is a series of rounds of the IPD between pairs of strategies. The
+topology commonly used, \cite{Axelrod1980a, Axelrod1980b}, is that of a round
+robin where all contestants compete against each other. The winner of these
+tournament was decided on the average score and not in the number of wins.
+
+These tournaments were the milestones of an era which to today is using
+computer tournaments to explore the robustness of strategies of IPD. Though
+the robustness can also be checked through evolutionary process~\cite{Nowak}.
+However, this aspect will not be considered here, instead the focus is on
+performance in tournaments.
+
+In Axelrod's original tournaments \cite{Axelrod1980a, Axelrod1980b}, strategies
+were allowed access to the history and in the first tournament they also knew
+the number of total turns in each interaction. The history included the
+previous moves of both the player and the opponent. How many turns of history
+that a strategy would ue, the memory size, was left to the creator of the
+strategy to decide. For example the winning strategy of the first tournaments,
+Tit for Tat was a strategy that made use of the previous move of the opponent
+only. Tit for Tat is a strategy that starts by cooperating and then mimics the
+previous action of it's opponent. Strategies like Tit for Tat are called memory
+one strategies. A framework for studying memory one strategies was introduced
+in~\cite{Nowak1989} and further used in~\cite{Nowak1993, Nowak1990}.
+
+In~\cite{Press2012} Press and Dyson, introduced a new set of memory one
+strategies called zero determinant (ZD) strategies. The ZD strategies,
+manage to force a linear relationship between the score of the strategy
+and the opponent. Press and Dyson, prove their concept of the ZD strategies
+and claim that a ZD strategy can outperform any given opponent.
+
+The ZD strategies have tracked a lot of attention. It was stated that
+``Press and Dyson have fundamentally changed the viewpoint on the Prisoner's
+Dilemma''~\cite{Stewart2012}. In~\cite{Stewart2012}, the Axelrod's
+tournament have been re-run including ZD strategies and a new set of ZD
+strategies the Generous ZD. Even so, ZD and memory one strategies have
+also received criticism. In~\cite{Harper2015}, the `memory of a strategy does
+not matter' statement was questioned. A set of more complex strategies,
+strategies that take in account the entire history set of the game, were
+trained and proven to be more robust than ZD strategies.
 
 \subsection{Background}
 
+A memory one strategy \(p\) in a match against a strategy \(q\) would decide it's
+action in turn \(m\) based on what occurred in turn \(m - 1\). If a strategy is concerned with only the outcome
+of a single turn then there are four possible `states' the strategy could be in.
+These are \(CC, CD, DC,CC\). A memory one strategy is denoted by the probabilities
+of cooperating after each of these states, \(p=p_1, p_2, p_3, p_4 \in \R_{[0,1]} ^ 4\) 
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \includestandalone[width=.6\textwidth]{tex/states}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includestandalone[width=.85\textwidth]{tex/markov_chain}
+    \end{subfigure}
+\end{figure}
+
+In 1989 a framework was introduced by to study the interactions of memory
+strategies.
+
+- the mathematics
+- the state states 
+- examples
+
+As described in~\cite{Nowak1990}, a match between players \(p\) and \(q\)
+can be modelled as a stochastic process, where the players move from state to 
+state. More specifically, it can be modelled by the use of a Markov process of
+four states. The transition probability matrix is defined as \(M\) and is given
+by,
+
+\begin{equation}\label{eq:m_matrix}
+    \input{tex/m_matrix.tex}.
+\end{equation}
+
+Let \(v\) be the vector of the stationary probabilities of \(M\) and \(S_p\)
+payoff vector of player \(p\). The states of vector \(v\) are given in the
+Appendix. The scores of each player can be
+retrieved by multiplying the probabilities of each state, at the stationary state,
+with the equivalent payoff. Thus, the  utility for player \(p\) against \(q\),
+denoted as \(u_q(p)\), is defined by,
+
+\begin{equation}\label{eq:press_dyson_utility}
+    u_q(p) = v \times S_p.
+\end{equation}
+
+\subsection{Problem Description}
+
+The purpose of this work is to consider a given memory one strategy 
+\(p=(p_1, p_2, p_3, p_4)\), (in a similar fashion to~\cite{Press2012}). However
+whilst~\cite{Press2012} found a way for the opponent of \(p\) to manipulate 
+\(q\), this work will consider an optimisation approach to identify the best 
+response \(p^*=(p_1, p_2, p_3, p_4)\) to a strategy \(q\). In essence 
+answering the question: what is the best memory one strategy against a given 
+memory one strategy.
+
+This approach is then be expanded on to consider multiple players \(q^{(1)},
+q^{(2)}, \dots ,q^{(N)}\) which in turn allows for the optimisation  of a given memory
+one strategy in a group of memory one strategies. Along the way a number of
+theoretic results will be proven:
+
+\begin{itemize}
+    \item The utility of a given player \(p\) against a given opponent \(q\) 
+    is a ratio of quadratic forms.
+    \item For given structural constraints on \(p\) (\(p_1=p_2=p_3=p_4\)) a number
+    of theoretic conditions are found to allow for further categorization of the
+    utility of \(p\).
+    \item Optimization procedures, often reducing the complex optimisation 
+    problem to a search over a small finite set are found.
+    \item Cases where defection is stationary.
+\end{itemize}
+
+% All results are validated using~\cite{axelrodproject} which is an open research
+% framework for the study of the Iterated Prisoner's Dilemma. This package is
+% described in~\cite{Knight2016}.
+
 \section{Utility}
+
 
 \subsection{Validation}
 
