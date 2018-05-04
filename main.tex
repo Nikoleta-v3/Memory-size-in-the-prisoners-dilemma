@@ -17,6 +17,7 @@
 
 \newcommand{\R}{\mathbb{R}}
 \newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
 \usetikzlibrary{decorations.pathmorphing, decorations.pathreplacing, angles,
                 quotes, calc, er, positioning}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -125,35 +126,64 @@ not matter' statement was questioned. A set of more complex strategies,
 strategies that take in account the entire history set of the game, were
 trained and proven to be more robust than ZD strategies.
 
-\subsection{Background}
+\section{Problem Description}
 
-A memory one strategy \(p\) in a match against a strategy \(q\) would decide it's
-action in turn \(m\) based on what occurred in turn \(m - 1\). If a strategy is concerned with only the outcome
-of a single turn then there are four possible `states' the strategy could be in.
-These are \(CC, CD, DC,CC\). A memory one strategy is denoted by the probabilities
-of cooperating after each of these states, \(p=p_1, p_2, p_3, p_4 \in \R_{[0,1]} ^ 4\) 
+The work of~\cite{Press2012} is considered a milestone in the study of the IPD.
+The authors managed to discover a new family of memory on strategies that are
+able to manipulate another player. Their work however suffered from limitations.
+Only pair wise interactions are taken into account and not multi agent interactions;
+interactions in a tournament setting.
+
+This manuscript will consider an optimisation approach to identify the best
+response memory one strategy. That will be done for a given opponent as well as
+in tournaments. The aim of this work in to:
+
+\begin{itemize}
+    \item construct compact methods of identifying best responses.
+    \item numerically tests the analytical methods.
+    \item prove that memory one strategies suffer for their memory size constrain.
+\end{itemize}
+
+The search of best responses will be considered as an optimisation problem.
+In the following section the formulation is introduced as well as the objective
+function.
+
+\subsection{Utility}
+
+The objective function in a match of the IPD can be no other than the utility
+the players receive at the end of the match. More specifically we will consider
+the utility of a given memory one strategy against another such strategy.
+
+Initially we properly define memory one strategies. A memory one strategy \(p\)
+in a match against a strategy \(q\) would decide it's next action in turn based
+on only what occurred in the previous turn. If a strategy is concerned with only
+the outcome of a single turn then there are four possible `states' the strategy
+could be in. These are \(CC, CD, DC,CC\). A memory one strategy is denoted by the
+probabilities of cooperating after each of these states,
+\(p=p_1, p_2, p_3, p_4 \in \R_{[0,1]} ^ 4\) as shown by Figure~\ref{fig:diagrammatic_mem_one}.
 
 \begin{figure}
-    \centering
+    \begin{center}
     \begin{subfigure}{0.45\textwidth}
         \includestandalone[width=.6\textwidth]{tex/states}
+        \caption{Diagrammatic representation of a memory one strategy.}
+        \label{fig:diagrammatic_mem_one}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
         \includestandalone[width=.85\textwidth]{tex/markov_chain}
+        \caption{Markov chain.}
+        \label{fig:markov_chain}
     \end{subfigure}
+    \end{center}
 \end{figure}
 
-In 1989 a framework was introduced by to study the interactions of memory
-strategies.
+In~\cite{Nowak1990} a framework was introduced by to study the interactions of memory
+strategies as a stochastic process. It was described how a match between players
+\(p\) and \(q\) can be modelled as a stochastic process, where the players move
+from state to  state. More specifically, it can be modelled by the use of a Markov
+process of four states, shown in Figure~\ref{fig:markov_chain}.
 
-- the mathematics
-- the state states 
-- examples
-
-As described in~\cite{Nowak1990}, a match between players \(p\) and \(q\)
-can be modelled as a stochastic process, where the players move from state to 
-state. More specifically, it can be modelled by the use of a Markov process of
-four states. The transition probability matrix is defined as \(M\) and is given
+The transition probability matrix is defined as \(M\) and is given
 by,
 
 \begin{equation}\label{eq:m_matrix}
@@ -170,34 +200,6 @@ denoted as \(u_q(p)\), is defined by,
 \begin{equation}\label{eq:press_dyson_utility}
     u_q(p) = v \times S_p.
 \end{equation}
-
-\subsection{Problem Description}
-
-The purpose of this work is to consider a given memory one strategy 
-\(p=(p_1, p_2, p_3, p_4)\), (in a similar fashion to~\cite{Press2012}). However
-whilst~\cite{Press2012} found a way for the opponent of \(p\) to manipulate 
-\(q\), this work will consider an optimisation approach to identify the best 
-response \(p^*=(p_1, p_2, p_3, p_4)\) to a strategy \(q\). In essence 
-answering the question: what is the best memory one strategy against a given 
-memory one strategy.
-
-This approach is then be expanded on to consider multiple players \(q^{(1)},
-q^{(2)}, \dots ,q^{(N)}\) which in turn allows for the optimisation  of a given memory
-one strategy in a group of memory one strategies. Along the way a number of
-theoretic results will be proven:
-
-\begin{itemize}
-    \item The utility of a given player \(p\) against a given opponent \(q\) 
-    is a ratio of quadratic forms.
-    \item For given structural constraints on \(p\) (\(p_1=p_2=p_3=p_4\)) a number
-    of theoretic conditions are found to allow for further categorization of the
-    utility of \(p\).
-    \item Optimization procedures, often reducing the complex optimisation 
-    problem to a search over a small finite set are found.
-    \item Cases where defection is stationary.
-\end{itemize}
-
-\section{Utility}
 
 \begin{theorem}\label{theorem:quadratic_form_u}
     For a given memory one strategy \(p\in\mathbb{R}_{[0,1]}^4\) playing another 
@@ -242,7 +244,7 @@ theoretic results will be proven:
     \(\bar{a} = \input{tex/denominator_constant}\).
     \end{theorem}
 
-\subsection{Validation}
+\subsubsection{Validation}
 
 All results are validated using~\cite{axelrodproject} which is an open research
 framework for the study of the Iterated Prisoner's Dilemma. This package is
@@ -272,18 +274,19 @@ simulated behaviour.
 \label{fig:analytical_simulated}
 \end{figure}
 
-\section{Proximate of best responses}
+\section{Best responses Analytically}
 
-The analytical formulation gives the advantage of time. That is because the 
-payoffs of a match between two opponents are now retrievable without 
-simulating the actual match itself. Utility \(u_q(p)\) can 
-now be calculated numerically instead of using simulation. In the introduction 
+The analytical formulation gives the advantage of time. That is because the
+payoffs of a match between two opponents are now retrievable without
+simulating the actual match itself. Utility \(u_q(p)\) can
+now be calculated numerically instead of using simulation. In the introduction
 a question was raised: which memory one strategy is the \textbf{best response}
-against another memory one? This will be considered as an optimisation problem,
-where a memory one strategy \(p\) wants to optimise it's utility \(u_q(p)\)
-against an opponent \(q\). The decision variable is the vector \(p\) and the 
-solitary constrains \(p \in \R^4_{[0, 1]} \). The optimisation problem is 
-given by~(\ref{eq:mo_optimisation}).
+against another memory one?
+
+This will be considered as an optimisation problem, where a memory one strategy
+\(p\) wants to optimise it's utility \(u_q(p)\) against an opponent \(q\).
+The decision variable is the vector \(p\) and the solitary constrains
+\(p \in \R^4_{[0, 1]} \). The optimisation problem is given by~(\ref{eq:mo_optimisation}).
 
 \begin{equation}\label{eq:mo_optimisation}
 \begin{aligned}
@@ -296,30 +299,195 @@ given by~(\ref{eq:mo_optimisation}).
 
 \subsection{In purely random strategies}
 
-% Notebooks A.0.7.1- A.0.7.3
-In this section we explore a simplified version of the main problem. A set of 
-memory one strategies where the transition probabilities of each state are the 
-same, are called \textbf{purely random strategies}. 
+In this section we explore a simplified version of the main problem. A set of
+memory one strategies where the transition probabilities of each state are the
+same, are called \textbf{purely random strategies}.
 as
 
 The optimisation problem of (\ref{eq:mo_optimisation}) now has an extra constraint
 and is re written as,
 
 \begin{equation}\label{eq:random_optimisation}
-\begin{aligned}
-\max_p: & \ u_q(p)
-\\
-\text{such that}: & \ p_1 = p_2 = p_3 = p_4 = p\\
-    & \ 0 \leq p \leq 1. 
-\end{aligned}
+    \begin{aligned}
+    \max_p: & \ u_q(p)
+    \\
+    \text{such that}: & \ p_1 = p_2 = p_3 = p_4 = p \\
+        & \ 0 \leq p \leq 1. 
+    \end{aligned}
 \end{equation}
 
+Note that now \(u_q(p)\) is given by,
+
+\begin{equation}\label{eq:random_utility}
+    \begin{aligned}
+    u_q(p) & = \frac{n_2p^2 + n_1p +n_0 } {d_1p + d_0}, \ \text{where} \\
+    n_2 =  - q_{1} + q_{2} + 2 q_{3} - 2 q_{4},\ n_1 & =  q_{1} - 2 q_{2} - 5 q_{3} + 7 q_{4} + 1, \ n_0 =  q_{2} - 5 q_{4} - 1 \ \text{and}\\
+    d_1 =  q_{1} - q_{2} - q_{3} + q_{4},\ d_0 & =  q_{2} - q_{4} - 1. \\
+    \end{aligned}
+\end{equation}
+
+The utility now is a function of a single variable. Moreover due the format of the
+utility we know that the maximum degree is that of a degree equal to 2. Thus
+for identifying the best response the following theorem is stated:
+
+\begin{theorem}[Optimisation of purely random player in a match]
+\label{theorem:random_optimisation_match}
+
+    The optimal behaviour of a \textbf{purely random} player \((p, p, p, p)\)
+    against a memory one opponent \(q\) is given by:
+
+    \[p^* = \textnormal{argmax}(u_q(p)), \ p \in S_q,\]
+
+    where the set \(S_q\) is defined as
+
+    \[S_q = \left \{0, p_{\pm}, 1 \left |
+        \begin{array}{l} 0 < p_{\pm} < 1, \\ p_{\pm} \neq \frac{-d_0}{d_1}
+        \end{array} \right. \right\}\]
+\end{theorem}
+
+Moreover, due the form of the utility for the purely random case, a few interesting cases
+have been identified. These are:
+
+\begin{itemize}
+    \item Constant case. The plater \(p\) becomes indifferent
+    \item Linear case. The utility against \(q\) is linear. Thus the best
+    response is a pure strategy.
+\end{itemize}
+
+For each case the following Lemmas are stated equivalently. Proofs can be
+found in the appendix.
+
+\begin{lemma}\label{lemma:constant}
+    A given memory one player, \((q_1, q_2, q_3, q_4)\), makes a \textbf{purely
+    random} player, \((p, p, p, p)\), indifferent if and only if, 
+    \(-q_1 + q_2 + 2q_3 - 2q_4 = 0 \) and 
+    \((q_2 - q_4 - 1)(q_1 - 2q_2 - 5q_3 + 7q_4 + 1) -(q_2 - 5q_4 - 1)(q_1 - q_2 - q_3 + q_4) = 0 \).
+    \end{lemma}
+
+\begin{lemma}\label{lemma:linear}
+    Against a memory one player, \((q_1, q_2, q_3, q_4)\), a \textbf{purely random}
+    player would always play a pure strategy if and only if
+    \((q_{1}q_{4} - q_{2} q_{3} + q_{3} - q_{4}) (4 q_{1} - 3 q_{2} - 4 q_{3} + 3 
+    q_{4} - 1) = 0\).
+    \end{lemma}
+
+Now in a tournament the utility is changed and can be written as:
+
+\begin{equation}\label{eq:tournament_utility}
+        \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p) = \frac{1}{N}
+        \frac{\sum\limits_{i=1} ^ {N} (n_2^{(i)} p^2 + n_1^{(i)} p + n_0^
+        {(i)}) \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ 
+        N (d_1 ^ {(j)}p +
+        d_0 ^ {(j)})}{\prod\limits_{i=1} ^ N (d_1 ^ {(i)}p +
+        d_0 ^ {(i)})}.
+\end{equation}
+
+Let us ignore the coefficients of the utility for now and only consider the degree of \(u_{q(i)} (p)\). Note that the degree of 
+\(\sum\limits_{i=1} ^ {N}(n_2^{(i)} p^2 + n_1^{(i)} p + n_0^{(i)})\) is \(N\)
+.The sum being multiplied by the product of \(\prod\limits_{\tiny\begin{array}
+{l} j=1 \\ j \neq i \end{array}} ^ N (d_1 ^ {(j)}p + d_0 ^ {(j)})\) with a 
+degree \(N\). Thus the numerator is determined to be a polynomial of degree 
+\(N +1\). The denominator is also a polynomial of degree \(N\). Now that
+the degree have been established, equation~(\ref{eq:tournament_utility}) can
+be simplified to the following ratio of polynomials:
+
+\begin{equation}\label{eq:utility_polynomial}
+    \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p) =
+    \frac{1}{N}\left(\frac{\sum\limits_{i=0}^{N+1} h_i p^i} {\sum\limits_{i=0}^{N}
+    k_i p^i}\right)
+\end{equation}
+
+Following a similar approach to the study of matches, see equation
+(\ref{eq:diff_random_utility}), now \(\frac{du_{q(i)}(p)}{dp}\) can be 
+calculated. Differentiating equation~(\ref{eq:tournament_utility}) yields to 
+the following:
+
+% \begin{equation}\label{eq:utility_polynomial_diff}
+%     \begin{aligned}
+%         \frac{d}{dp} \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p) = &
+%         \frac{\frac{d}{dp}\left(\sum\limits_{i = 0} ^ {N + 1} h_ip^i\right)
+%                \sum\limits_{i = 0} ^ {N} k_ip^i -
+%               \frac{d}{dp}\left(\sum\limits_{i = 0} ^ {N} k_ip^i\right)
+%                \sum\limits_{i = 0} ^ {N + 1} h_ip^i}
+%              {N\left(\sum\limits_{i = 0} ^ {N + 1} k_ip^i\right)^ 2} \\
+%         = &
+%         \frac{\sum\limits_{i = 0} ^ {N + 1} ih_ip^{i-1}
+%                \sum\limits_{i = 0} ^ {N} k_ip^i -
+%                \sum\limits_{i = 0} ^ {N} ik_ip^{i-1}
+%                \sum\limits_{i = 0} ^ {N + 1} h_ip^i}
+%              {N\left(\sum\limits_{i = 0} ^ {N + 1} k_ip^i\right)^ 2}
+%     \end{aligned}
+% \end{equation}
+
+Similar to identifying \(p^*\) in match, the roots 
+of \(\frac{d}{dp} \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p)\) alongside the 
+bounds compose the candidate set 
+of solutions. The roots of 
+\(\frac{d}{dp} \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p)\) are the roots 
+only of the numerator, as the denominator can not be nullified. Studying 
+equation (\ref{eq:utility_polynomial_diff}), the degree of the numerator can 
+be verified to be equal to \(2N\). Thus, the size of roots of the numerator
+is equal to \(2N\).
+
+The roots on the polynomial in this work will be calculated using a companion 
+matrix method~\cite{Niu2003}. This method allows the roots of the polynomial to
+be computed by calculating the eigenvalues of the corresponding companion 
+matrix.
+
+Corresponding to Theorem~\ref{theorem:random_optimisation_match}, a theorem 
+for \(p^*\) in a tournament is given by Theorem
+\ref{theorem:random_optimisation_tournament}.
+
+\begin{theorem}[Optimisation of purely random player in a tournament]
+\label{theorem:random_optimisation_tournament}
+    The optimal behaviour of a \textbf{purely random} player \((p, p, p, p)\)
+    in an \(N-\)memory one player tournament, \(\{q_{(1)}, q_{(2)} \dots,q_{(N)} \}
+    \) is given by:
+
+    \[p^* = \textnormal{argmax}(\sum_{i=1} ^ {N} {u_q}^{(i)} (p) ), \ p \in S_{q(i)},\]
+
+    where the set \(S_{q}\) is defined as:
+
+    \[S_{q} = \
+    U_{\substack{i=1 \\ \lambda_i \neq \frac{do_i}{d1_i}}} ^ {2N}  \lambda_i \cup \{0, 1\},\]
+
+    and \(\lambda_i\) are the eigenvalues of the companion matrix corresponding to the
+    numerator of \[\frac{d}{dp} \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p).\]
+\end{theorem}
+
+Note that the size of candidate solutions is \( 1 \leq|S_{q(i)}| \leq 2N + 2\).
 
 \subsection{In memory one strategies}
 
-\section{Stability of defection}
+\begin{itemize}
+    \item Optimisation in matches.
+    \item + Lagrange
+    \item Optimisation in tournaments.
+\end{itemize}
 
-\section{Numerical experiments}
+\section{Best responses Numerically}
+
+\begin{itemize}
+    \item Purely random in matches. Yes our algorithm works
+    \item Purely random in tournaments. Yes our algorithm works
+    \item Reactive strategies and resultant theory
+    \item Differential evolution
+\end{itemize}
+
+\section{Limitation of memory}
+
+\begin{itemize}
+    \item Purely random in tournaments, compare with complex
+    \item Parameter sweep and how gambler do better?
+\end{itemize}
+
+\section{Extra: Stability of defection}
+
+\begin{itemize}
+    \item Stability of defection against mem one
+    \item Stability of defection against reactive
+\end{itemize}
+
 
 % Bibliography
 \bibliographystyle{plain}

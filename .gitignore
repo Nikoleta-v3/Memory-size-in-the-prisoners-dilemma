@@ -13,3 +13,6 @@ tests/__pycache__/*
 # packaging
 opt_mo/__pycache__/*
 opt_mo.*
+
+# data for now
+data/*
