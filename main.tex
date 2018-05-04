@@ -30,14 +30,6 @@
 
 \begin{abstract}
 
-The two player Iterated Prisoner's Dilemma is a fundamental iterated game used
-for studying the emergence of cooperation. The two players interact repeatedly
-and they have the ability to adopt strategies. A strategy allows a player to map
-the outcomes of the previous interactions to an action. A set of strategies that
-consider only the outcome of the previous round are called memory one. These
-players gain attention after a publication in 2012 that showed that a memory one
-strategy can manipulate its opponent.
-
 In this manuscript we build upon a framework provided in 1989 for the study of
 these strategies and identify the best responses of memory one players. The aim
 of this work is to show the limitations of memory one strategies in multi-opponent
@@ -49,7 +41,7 @@ interactions. A number of theoretic results are presented.
 
 The Prisoner's Dilemma (PD) is a two player person game used in understanding the
 evolution of co-operative behaviour. Each player can choose between cooperation
-(C) or defection (D). The decisions are made simultaneously and independently.
+(C) and defection (D). The decisions are made simultaneously and independently.
 The normal form representation of the game is given by:
 
 \begin{equation}\label{equ:pd_definition}
@@ -86,14 +78,14 @@ Iterated Prisoner's Dilemma (IPD) and in the 1980s following the work of
 community.
 
 In~\cite{Axelrod1980a} a computer tournament of the IPD was performed. A
-tournament is a series of rounds of the IPD between pairs of strategies. The
+tournament is a series of rounds of the PD between pairs of strategies. The
 topology commonly used, \cite{Axelrod1980a, Axelrod1980b}, is that of a round
 robin where all contestants compete against each other. The winner of these
-tournament was decided on the average score and not in the number of wins.
+tournaments was decided on the average score and not in the number of wins.
 
 These tournaments were the milestones of an era which to today is using
-computer tournaments to explore the robustness of strategies of IPD. Though
-the robustness can also be checked through evolutionary process~\cite{Nowak}.
+computer tournaments to explore the robustness of strategies of IPD.
+The robustness can also be checked through evolutionary process~\cite{Nowak}.
 However, this aspect will not be considered here, instead the focus is on
 performance in tournaments.
 
@@ -101,7 +93,7 @@ In Axelrod's original tournaments \cite{Axelrod1980a, Axelrod1980b}, strategies
 were allowed access to the history and in the first tournament they also knew
 the number of total turns in each interaction. The history included the
 previous moves of both the player and the opponent. How many turns of history
-that a strategy would ue, the memory size, was left to the creator of the
+that a strategy would use, the memory size, was left to the creator of the
 strategy to decide. For example the winning strategy of the first tournaments,
 Tit for Tat was a strategy that made use of the previous move of the opponent
 only. Tit for Tat is a strategy that starts by cooperating and then mimics the
@@ -125,79 +117,76 @@ not matter' statement was questioned. A set of more complex strategies,
 strategies that take in account the entire history set of the game, were
 trained and proven to be more robust than ZD strategies.
 
+\section{Problem}
+
+The purpose of this work is to consider a given memory one strategy 
+in a similar fashion to~\cite{Press2012}. However whilst~\cite{Press2012} found
+a way for a player to manipulate an opponent, this work will consider an
+optimisation approach to identify the best response to that opponent.
+In essence the aim is to produce a compact method of identifying the best memory
+one strategy against a given opponent.
+
+The second part of this manuscript we explore the limitation of the best response
+memory one strategies by comparing them to more complex strategies with a larger
+memory.
+
 \subsection{Background}
 
-A memory one strategy \(p\) in a match against a strategy \(q\) would decide it's
-action in turn \(m\) based on what occurred in turn \(m - 1\). If a strategy is concerned with only the outcome
-of a single turn then there are four possible `states' the strategy could be in.
-These are \(CC, CD, DC,CC\). A memory one strategy is denoted by the probabilities
-of cooperating after each of these states, \(p=p_1, p_2, p_3, p_4 \in \R_{[0,1]} ^ 4\) 
+In this manuscript we explore the robustness of memory one strategies.
+A memory one strategy is defined as a strategy that decides it's action in turn
+\(m\) based on what occurred in turn \(m - 1\). If a strategy is concerned with
+only the outcome of a single turn then there are four possible `states' the
+strategy could be in. These are \(CC, CD, DC,CC\). A memory one strategy is denoted
+by the probabilities of cooperating after each of these states,
+\(p=p_1, p_2, p_3, p_4 \in \R_{[0,1]} ^ 4\). A diagrammatic representation of
+such as strategy is given in Figure~\ref{fig:diagram_mem_one}.
 
 \begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includestandalone[width=.6\textwidth]{tex/states}
+        \subcaption{Diagrammatic representation of a memory one strategy.}
+        \label{fig:diagram_mem_one}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
         \includestandalone[width=.85\textwidth]{tex/markov_chain}
+        \subcaption{Markov chain on a PD game.}
+        \label{fig:markov_chain}
     \end{subfigure}
 \end{figure}
 
-In 1989 a framework was introduced by to study the interactions of memory
-strategies.
+In~\cite{Nowak1990} a framework was introduced to study the interactions of memory
+one strategies modelled as a stochastic process, where the players move from one
+of the states \(CC, CD, DC,CC\) to another. More specifically, it can be modelled
+by the use of a Markov process of four states, shown by Figure~\ref{fig:markov_chain}.
 
-- the mathematics
-- the state states 
-- examples
-
-As described in~\cite{Nowak1990}, a match between players \(p\) and \(q\)
-can be modelled as a stochastic process, where the players move from state to 
-state. More specifically, it can be modelled by the use of a Markov process of
-four states. The transition probability matrix is defined as \(M\) and is given
-by,
+The transition matrix of the markov chain in Figure~\ref{fig:markov_chain}
+is defined as \(M\) and is given by,
 
 \begin{equation}\label{eq:m_matrix}
     \input{tex/m_matrix.tex}.
 \end{equation}
 
-Let \(v\) be the vector of the stationary probabilities of \(M\) and \(S_p\)
-payoff vector of player \(p\). The states of vector \(v\) are given in the
-Appendix. The scores of each player can be
-retrieved by multiplying the probabilities of each state, at the stationary state,
-with the equivalent payoff. Thus, the  utility for player \(p\) against \(q\),
-denoted as \(u_q(p)\), is defined by,
+Let the vector of the stationary probabilities of \(M\) be defined as \(v\).
+Vector \(v\) are given in the Appendix. %TODO include Appendix
+The scores of each player can be retrieved by multiplying the probabilities of each
+state, at the stationary state, with the equivalent payoff. Thus, the  utility for
+player \(p\) against \(q\), denoted as \(u_q(p)\), is defined by,
 
 \begin{equation}\label{eq:press_dyson_utility}
     u_q(p) = v \times S_p.
 \end{equation}
 
-\subsection{Problem Description}
+\subsection{Utility}
 
-The purpose of this work is to consider a given memory one strategy 
-\(p=(p_1, p_2, p_3, p_4)\), (in a similar fashion to~\cite{Press2012}). However
-whilst~\cite{Press2012} found a way for the opponent of \(p\) to manipulate 
-\(q\), this work will consider an optimisation approach to identify the best 
-response \(p^*=(p_1, p_2, p_3, p_4)\) to a strategy \(q\). In essence 
-answering the question: what is the best memory one strategy against a given 
-memory one strategy.
+The analytical formulation gives the advantage of time. That is because the 
+payoffs of a match between two opponents are now retrievable without 
+simulating the actual match itself.
 
-This approach is then be expanded on to consider multiple players \(q^{(1)},
-q^{(2)}, \dots ,q^{(N)}\) which in turn allows for the optimisation  of a given memory
-one strategy in a group of memory one strategies. Along the way a number of
-theoretic results will be proven:
-
-\begin{itemize}
-    \item The utility of a given player \(p\) against a given opponent \(q\) 
-    is a ratio of quadratic forms.
-    \item For given structural constraints on \(p\) (\(p_1=p_2=p_3=p_4\)) a number
-    of theoretic conditions are found to allow for further categorization of the
-    utility of \(p\).
-    \item Optimization procedures, often reducing the complex optimisation 
-    problem to a search over a small finite set are found.
-    \item Cases where defection is stationary.
-\end{itemize}
-
-\section{Utility}
+Note though that \(u_q(p)\) is a function of 4 variables which is also affected
+by the transition probabilities of the opponent \(q\). The first theoretical
+result that we introduce in this work is a compact way of writing \(u_q(p)\).
+This is given by the Theorem~\ref{theorem:quadratic_form_u}.
 
 \begin{theorem}\label{theorem:quadratic_form_u}
     For a given memory one strategy \(p\in\mathbb{R}_{[0,1]}^4\) playing another 
@@ -244,15 +233,15 @@ theoretic results will be proven:
 
 \subsection{Validation}
 
-All results are validated using~\cite{axelrodproject} which is an open research
-framework for the study of the Iterated Prisoner's Dilemma. This package is
-described in~\cite{Knight2016}.
+In this section we validate the formulation of Theorem~\ref{theorem:quadratic_form_u}
+using numerical experiments. All the simulated results of this work are done
+using~\cite{axelrodproject} which is an open research framework for the study of
+the IPD. This package is described in~\cite{Knight2016}.
 
 To validate the formulation of \(u_q(p)\) several memory one players were 
-matched against 20 opponents. Note that the payoff values  used hereafter in this
-work are \((3, 1, 0, 5)\). 
-The simulated value of \(u_q(p)\) has been calculated using \cite{axelrodproject}
-and the theoretical by  substituting in equation~(\ref{eq:optimisation_quadratic}).
+matched against 20 opponents.The simulated value of \(u_q(p)\) has been calculated
+using \cite{axelrodproject} and the theoretical by  substituting in equation~(\ref{eq:optimisation_quadratic}).
+
 In Figure~\ref{fig:analytical_simulated}, both the simulated and the theoretical
 value of \(u_q(p)\), against each opponent, are plotted for three different memory
 one strategies. Figure \ref{fig:analytical_simulated} indicates that the 
@@ -272,13 +261,9 @@ simulated behaviour.
 \label{fig:analytical_simulated}
 \end{figure}
 
-\section{Proximate of best responses}
+\section{Best responses Analytically}
 
-The analytical formulation gives the advantage of time. That is because the 
-payoffs of a match between two opponents are now retrievable without 
-simulating the actual match itself. Utility \(u_q(p)\) can 
-now be calculated numerically instead of using simulation. In the introduction 
-a question was raised: which memory one strategy is the \textbf{best response}
+In the introduction a question was raised: which memory one strategy is the \textbf{best response}
 against another memory one? This will be considered as an optimisation problem,
 where a memory one strategy \(p\) wants to optimise it's utility \(u_q(p)\)
 against an opponent \(q\). The decision variable is the vector \(p\) and the 
@@ -294,28 +279,28 @@ given by~(\ref{eq:mo_optimisation}).
 \end{aligned}
 \end{equation}
 
-\subsection{In purely random strategies}
+% \subsection{In purely random strategies}
 
-% Notebooks A.0.7.1- A.0.7.3
-In this section we explore a simplified version of the main problem. A set of 
-memory one strategies where the transition probabilities of each state are the 
-same, are called \textbf{purely random strategies}. 
-as
+% % Notebooks A.0.7.1- A.0.7.3
+% In this section we explore a simplified version of the main problem. A set of 
+% memory one strategies where the transition probabilities of each state are the 
+% same, are called \textbf{purely random strategies}. 
+% as
 
-The optimisation problem of (\ref{eq:mo_optimisation}) now has an extra constraint
-and is re written as,
+% The optimisation problem of (\ref{eq:mo_optimisation}) now has an extra constraint
+% and is re written as,
 
-\begin{equation}\label{eq:random_optimisation}
-\begin{aligned}
-\max_p: & \ u_q(p)
-\\
-\text{such that}: & \ p_1 = p_2 = p_3 = p_4 = p\\
-    & \ 0 \leq p \leq 1. 
-\end{aligned}
-\end{equation}
+% \begin{equation}\label{eq:random_optimisation}
+% \begin{aligned}
+% \max_p: & \ u_q(p)
+% \\
+% \text{such that}: & \ p_1 = p_2 = p_3 = p_4 = p\\
+%     & \ 0 \leq p \leq 1. 
+% \end{aligned}
+% \end{equation}
+\section{Best responses Numerically}
 
-
-\subsection{In memory one strategies}
+\section{Limitation of memory}
 
 \section{Stability of defection}
 
