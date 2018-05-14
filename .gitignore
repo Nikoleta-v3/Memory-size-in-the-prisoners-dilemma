@@ -21,3 +21,6 @@ src/opt_mo/__pycache__/*
 # vim temp files
 .*.swp
 .*.swo
+
+# data
+data/*
