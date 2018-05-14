@@ -56,7 +56,7 @@ def pattern_size(params):
 
     return len(list(keys))
 
-def optimal_memory_one(opponents, turns, repetitions, popsize=500, strategy='best1bin'):
+def optimal_memory_one(opponents, turns, repetitions, popsize=700, strategy='best1bin'):
     """
     Approximates the best memory one strategy for the given environment.
     Returns the strategy, the utility u and U.
@@ -95,9 +95,9 @@ def optimal_gambler(opponents, turns, repetitions, params, n_calls=50, n_random_
 
     return res.x, -res.fun
 
-def get_filename(location, folder, params):
+def get_filename(location, folder, params, index):
     filename = location + 'gambler{}_{}_{}/'.format(params[0], params[1], params[2])
-    filename += folder + '/'
+    filename += folder + '/{}.csv'.format(index)
     return filename
 
 def write_results(list_opponents, index, folder, location, params, turns, repetitions):
@@ -110,7 +110,8 @@ def write_results(list_opponents, index, folder, location, params, turns, repeti
 
     row = [q for player in list_opponents for q in player]
     if len(row) == 4:
-        row.append([None for _ in range(4)])
+        for _ in range(4):
+            row.append(None)
 
     start_differential_evolution = time.clock()
     best_response, theoretical, simulated = optimal_memory_one(opponents=list_opponents,
@@ -128,13 +129,13 @@ def write_results(list_opponents, index, folder, location, params, turns, repeti
     frame = frame.append([row])
     frame.columns = cols
 
-    filename =  get_filename(location, folder, params)
+    filename =  get_filename(location, folder, params, index)
     frame.to_csv(filename, index=False)
 
 if __name__ == '__main__':
     num_turns = 200
     num_repetitions = 5
-    location = '../data/random_numerical_experiments/'
+    location = 'data/random_numerical_experiments/'
 
     index = int(sys.argv[1])
     num_plays = int(sys.argv[2])
@@ -143,8 +144,8 @@ if __name__ == '__main__':
 
     params = [num_plays, num_op_plays, num_op_start_plays]
 
-    i = (index - 1) * 100
-    while i <= index * 100:
+    i = (index - 1) * 1
+    while i <= index * 1:
         axl.seed(i)
         main_op = [np.random.random(4)]
 
