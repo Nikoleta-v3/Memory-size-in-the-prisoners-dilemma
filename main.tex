@@ -19,6 +19,8 @@
 \newtheorem{theorem}{Theorem}
 \usetikzlibrary{decorations.pathmorphing, decorations.pathreplacing, angles,
                 quotes, calc, er, positioning}
+
+\newtheorem{lemma}[theorem]{Lemma}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Memory size in the Prisoner's Dilemma}
 \author{Nikoleta E. Glynatsi \and Vincent Knight}
@@ -144,12 +146,14 @@ such as strategy is given in Figure~\ref{fig:diagram_mem_one}.
 \begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
-        \includestandalone[width=.6\textwidth]{tex/states}
+        \centering
+        \includestandalone[width=.65\textwidth]{tex/states}
         \subcaption{Diagrammatic representation of a memory one strategy.}
         \label{fig:diagram_mem_one}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-        \includestandalone[width=.85\textwidth]{tex/markov_chain}
+        \centering
+        \includestandalone[width=.88\textwidth]{tex/markov_chain}
         \subcaption{Markov chain on a PD game.}
         \label{fig:markov_chain}
     \end{subfigure}
@@ -279,32 +283,168 @@ given by~(\ref{eq:mo_optimisation}).
 \end{aligned}
 \end{equation}
 
-% \subsection{In purely random strategies}
+\subsection{Convexity}
 
-% % Notebooks A.0.7.1- A.0.7.3
-% In this section we explore a simplified version of the main problem. A set of 
-% memory one strategies where the transition probabilities of each state are the 
-% same, are called \textbf{purely random strategies}. 
-% as
+This work is concerned with a fractional optimisation problem of quadratic forms.
+Initially, the convexity, whether or not \(u_{q}(p)\) is concave~\cite{Gradshteyn2007},
+will be checked (concave because is a maximisation  problem).
 
-% The optimisation problem of (\ref{eq:mo_optimisation}) now has an extra constraint
-% and is re written as,
+To test the hypothesis that \(u_q(p)\) is concave an empirical analysis
+was performed using computer code. %TODO add the data generated
+It was shown that there exists at least one point for which the definition of
+concavity does not hold. Optimising a non concave function is rather tricky.
 
-% \begin{equation}\label{eq:random_optimisation}
-% \begin{aligned}
-% \max_p: & \ u_q(p)
-% \\
-% \text{such that}: & \ p_1 = p_2 = p_3 = p_4 = p\\
-%     & \ 0 \leq p \leq 1. 
-% \end{aligned}
-% \end{equation}
+Several articles in fractional optimisation of quadratic forms that was non concave
+can be found~\cite{Beck2009, Hongyan2014}. Though in these works both the numerator
+and denominator of the fractional problem were concave. In~\cite{Anton2014} it is
+stated that a quadratic form will be concave if and only if it's symmetric matrix is
+negative semi definite.
+
+In Appendix, it is proved that neither the numerator or the denominator of
+equation~(\ref{eq:optimisation_quadratic}) are concave.
+
+\subsection{Matches}
+
+The non concavity of \(u(p)\) indicates multiple local optimal points. Thus a
+compact way of searching the candidate optimal points needs to be introduced.
+Once the method is defined then the utility of each point is compared to the
+rest. The optimal point is the point that has the highest value of \(u(p)\).
+
+Our problem is a constrained optimisation problem and it is known that for such
+problems the set of candidate optimal solutions consists by edge cases and the roots
+of the utility's derivative. Edges case are all the possible combinations of
+\(p_1, p_2, p_3, p_4 \in \{0, 1\}\).
+
+Because of the non convexity we know we that there is a set of candidnate solutions.
+The candinate solution with the maximum utility is also the optimal. Furthermore,
+we have a bounded problem, this mean that the we know that the candinate solutions
+will be either on the bounds of our feasable solution in a point in the center.
+Note that the points are the roots of the derivate ${du}{dp}$.
+%TODO reference
+%TODO image
+
+The derivative of \(u(p)\) is calculated as follows,
+
+\begin{equation}\label{eq:derivative_of_quadratic}
+    \begin{aligned}
+     \frac{du}{dp} & = && \frac{(  \frac{1}{2}p  Q  p^T + c^T p + a)'
+      (  \frac{1}{2} p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a}) - 
+      (  \frac{1}{2} p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a})'
+      (  \frac{1}{2} p  Q  p^T + c^T p + a)}
+      {(  \frac{1}{2} p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a})^2} \\
+      \\
+    & = && \frac{(pQ + c^T) ( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a}) 
+    - (p\bar{Q} + \bar{c}^T)( \frac{1}{2} p  Q  p^T + c^T p + a)}
+      {( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a})^2} \\
+    \end{aligned}
+\end{equation}
+
+Thus we can conclude that best response memory one strategy is given by Theorem.
+
+\begin{lemma}\label{lemma:memone_best_response}
+    The optimal behaviour of a memory one strategy player \((p^*)\) against a
+    given opponent \(q\) is given by:
+    
+    \[p^* = \textnormal{argmax}(u_q(p)), \ p \in S_q,\]
+    
+    where the set \(S_q\) is defined as 
+    
+    \[S_q = \{0, \bar{p}, 1 \} \]
+    
+    where the set \(\bar{p}\) is defined as the vector for which the following condition is true:
+    
+    {\small
+    \begin{equation*}
+        pQp\bar{Q}p^T - p\bar{Q}pQp^T + p(Q\bar{c}^T - \bar{Q}c^T)p + 2p(Q\bar{a} - 
+        \bar{Q}a + (c^T\bar{Q} - \bar{c}^TQ)p^T) = 2 (\bar{c}^Ta - c^T\bar{a})
+    \end{equation*}}
+    
+    where,
+
+    Note that this is a \(4-\) polynomial system of \(4\) variables. Each polynomial
+    corresponds to a partial derivative of \(u_q(p)\).
+\end{lemma}
+
+This can not be handle analytically further. The roots of the derivate are given
+by solving a multivariare system of 4 variavles where n=4. No further consideration
+was given into founding  a propiateanalytical method for that. This is mainle because
+the problem is already not as handaler that further more these are oble for the
+matches, where are in this work we want to consider tournament interactions are well.
+
+The derivative of the a tournament is given by,
+
+\subsection{Tournament}
+Our approach can then be generalised to consider any given number of opponents. Against
+a set of opponents we want to optimise against the average utility, as it was
+proven by Lemma~\ref{lemma:approximate_opponent} that optimising against the average
+player is not representative. Thus the utility is given by,
+
+\begin{equation}\label{eq:tournament_utility}
+    \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) = \frac{1}{N}
+    \frac{\sum\limits_{i=1} ^ {N} (\frac{1}{2} pQ^{(i)} p^T + c^{(i)T} p + a^ {(i)})
+    \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ 
+    N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)T} p + \bar{a}^ {(i)})}
+    {\prod\limits_{i=1} ^ N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)T} p + \bar{a}^ {(i)})}.
+\end{equation}
+
+The derivative of which can be calculated as follow,
+{\scriptsize
+\begin{align*}
+\frac{d}{dp} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) & = \\
+& =\frac{
+(\sum\limits_{i=1} ^ {N} Q_{N}^{(i)'} \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N Q_{D}^{(i)}
++ \sum\limits_{i=1} ^ {N} Q_{D}^{(i)'} \sum\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ {N} Q_{N}^{(i)}
+\prod\limits_{\tiny\begin{array}{l} l=1 \\ l \neq i \ \\ l \neq j \end{array}} ^ N Q_{D}^{(i)}) \times
+\prod\limits_{i=1} ^ N Q_{D}^{(i)} - (\sum\limits_{i=1} ^ {N} Q_{D}^{(i)'}
+\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N Q_{D}^{(i)}) \times 
+(\sum\limits_{i=1} ^ {N} Q_{N}^{(i)} \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N Q_{D}^{(i)})}
+{(\prod\limits_{i=1} ^ N Q_{D}^{(i)})^{2}}
+\end{align*}
+}
+where,
+
+\begin{align*}
+Q_{N}^{(i) } & = \frac{1}{2} pQ^{(i)} p^T + c^{(i)T} p + a^ {(i)}, \\
+Q_{N}^{(i)'} & =  pQ^{(i)} + c^{(i)T}, \\
+Q_{D}^{(i) } & = \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)T} p + \bar{a}^ {(i)}, \\
+Q_{D}^{(i)'} & =  p\bar{Q}^{(i)} + \bar{c}^{(i)T}. \\
+\end{align*}
+
+More specifically the derivative of the smallest possible tournament of size 3
+is given by:
+
+
+It can be seen that the size of the problem is gradually increasing as opponents
+are being added to the the tournament.
+THough no further consideration can be put into these in the following section
+we will introducde several numerical ways of getting the best response to these.
+
+However this formulatio still five us inshights.One of those is the stability
+of defection.
+
+Also for constrain versions susch as purely ranom player where \(p_1= ...\)
+the following two lemmas can be extracted. Both 
+
+In the following section we introduce a numerical method which will be used in 
+following section.
+
 \section{Best responses Numerically}
+
+In this section we introcude several numerical methos. Numerical methods are use
+to supplement our analytical approach.
+
+Initally we would like to present several insghts and excated methods considered
+in this work to indeftie best response in constrains problems. These are
+in the purely random case 
+and in the reactive case.
+
+
+The numerical methods
+results.
 
 \section{Limitation of memory}
 
 \section{Stability of defection}
-
-\section{Numerical experiments}
 
 % Bibliography
 \bibliographystyle{plain}
