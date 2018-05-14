@@ -101,9 +101,9 @@ def utility(p, q):
 
 def tournament_utility(p, opponents):
     """
-    Returns the utility of a player against a list of opponents.
+    Returns the negative utility of a player against a list of opponents.
     """
     obj = 0
     for q in opponents:
         obj += utility(p, q)
-    return (obj / len(opponents))
+    return - (obj / len(opponents))
