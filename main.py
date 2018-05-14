@@ -134,7 +134,7 @@ def write_results(list_opponents, index, folder, location, params, turns, repeti
 if __name__ == '__main__':
     num_turns = 200
     num_repetitions = 5
-    filename = '../data/random_numerical_experiments/'
+    location = '../data/random_numerical_experiments/'
 
     index = int(sys.argv[1])
     num_plays = int(sys.argv[2])
@@ -150,14 +150,14 @@ if __name__ == '__main__':
 
         # match
         write_results(list_opponents=main_op, folder='matches', index=i,
-                      filename=filename, params=params, turns=turns,
-                      repetitions=repetitions)
+                      location=location, params=params, turns=num_turns,
+                      repetitions=num_repetitions)
 
         # tournament
         axl.seed(index + 10000)
         op = main_op + [np.random.random(4)]
         write_results(list_opponents=main_op, folder='tournaments', index=i,
-                      filename=filename, params=params, turns=turns,
-                      repetitions=repetitions)
+                      location=location, params=params, turns=num_turns,
+                      repetitions=num_repetitions)
 
         i += 1
