@@ -36,7 +36,10 @@ def objective_score(pattern, turns, repetitions, opponents, params):
     """Objective function to maximize total score over matches."""
 
     parameters = Plays(self_plays=params[0], op_plays=params[1], op_openings=params[2])
-    initial_action = [np.random.choice([C, D], p=[pattern[0], 1 - pattern[0]])]
+    size = pattern_size(params)
+
+    initial_action = [np.random.choice([C, D], p=[pattern[0], 1 - pattern[0]])
+                      for _ in range(size)]
 
     player = axl.Gambler(pattern=pattern[1:], parameters=parameters,
                          initial_actions=initial_action)
@@ -144,8 +147,8 @@ if __name__ == '__main__':
 
     params = [num_plays, num_op_plays, num_op_start_plays]
 
-    i = (index - 1) * 1
-    while i <= index * 1:
+    i = (index - 1) * 100
+    while i <= index * 100:
         axl.seed(i)
         main_op = [np.random.random(4)]
 
