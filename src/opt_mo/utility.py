@@ -98,3 +98,12 @@ def utility(p, q):
     denominator = np.dot(x, Q_d.dot(x.T) * 1/2) + np.dot(d, x.T) + b
 
     return numerator / denominator
+
+def tournament_utility(p, opponents):
+    """
+    Returns the utility of a player against a list of opponents.
+    """
+    obj = 0
+    for q in opponents:
+        obj += utility(p, q)
+    return (obj / len(opponents))
