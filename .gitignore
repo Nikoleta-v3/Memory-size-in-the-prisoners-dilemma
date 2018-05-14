@@ -11,5 +11,5 @@ nbs/.ipynb_checkpoints/*
 tests/__pycache__/*
 
 # packaging
-opt_mo/__pycache__/*
-opt_mo.*
+src/opt_mo/__pycache__/*
+*opt_mo.*

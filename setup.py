@@ -1,10 +1,10 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # import unittest
 # import doctest
 
 # Read in the version number
-exec(open('opt_mo/version.py', 'r').read())
+exec(open('src/opt_mo/version.py', 'r').read())
 
 requirements = ["pandas"]
 
@@ -26,6 +26,7 @@ setup(
     install_requires=requirements,
     author='Nikoleta Glynatsi',
     author_email=('glynatsine@cardiff.ac.uk'),
-    packages=['opt_mo'],
+    packages=find_packages('src'),
+    package_dir={"": "src"},
     description='A package used in the study of memory one strategies.',
 )
