@@ -5,11 +5,19 @@
 *.blg
 
 # notebooks
-nbs/.ipynb_checkpoints/*
+*/.ipynb_checkpoints/*
+*.ipynb_checkpoints/*
 
 # tests
 tests/__pycache__/*
 
 # packaging
-opt_mo/__pycache__/*
-opt_mo.*
+src/opt_mo/__pycache__/*
+*opt_mo.*
+
+# vscode
+.vscode/*
+
+# vim temp files
+.*.swp
+.*.swo
