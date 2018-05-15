@@ -1,0 +1,129 @@
+import imp
+main = imp.load_source('main', '../main.py')
+
+import unittest
+import numpy as np
+import axelrod as axl
+
+import warnings
+warnings.filterwarnings("ignore")
+
+class TestGetFilename(unittest.TestCase):
+
+    def test_example_one(self):
+        location = '/home/Documents/'
+        folder = 'matches'
+        params = [0, 1, 1]
+        index=0
+
+        filename = main.get_filename(location, folder, params, index)
+        self.assertEqual(filename, '/home/Documents/gambler0_1_1/matches/0.csv')
+
+    def test_example_two(self):
+        location = ''
+        folder = 'tournaments'
+        params = [2, 1, 1]
+        index=1
+
+        filename = main.get_filename(location, folder, params, index)
+        self.assertEqual(filename, 'gambler2_1_1/tournaments/1.csv')
+
+class TestObjectiveScore(unittest.TestCase):
+    turns, repetitions, params = 100, 5, [1, 1, 1]
+
+    def test_against_defector(self):
+        opponent = [(0, 0, 0, 0)]
+        pattern_1 = [0 for _ in range(9)]
+        pattern_2 = [1 for _ in range(9)]
+
+        obj_1 = main.objective_score(pattern=pattern_1, turns=self.turns,
+                                     repetitions=self.repetitions, opponents=opponent,
+                                     params=self.params)
+        obj_2 = main.objective_score(pattern=pattern_2, turns=self.turns,
+                                     repetitions=self.repetitions, opponents=opponent,
+                                     params=self.params)
+        self.assertTrue(np.isclose(abs(obj_1), 1.04))
+        self.assertTrue(np.isclose(abs(obj_2), 0.03))
+
+    def test_against_cooperator(self):
+        opponent = [(1, 1, 1, 1)]
+        pattern_1 = [0 for _ in range(9)]
+        pattern_2 = [1 for _ in range(9)]
+
+        obj_1 = main.objective_score(pattern=pattern_1, turns=self.turns,
+                                     repetitions=self.repetitions, opponents=opponent,
+                                     params=self.params)
+        obj_2 = main.objective_score(pattern=pattern_2, turns=self.turns,
+                                     repetitions=self.repetitions, opponents=opponent,
+                                     params=self.params)
+        self.assertTrue(np.isclose(abs(obj_1), 5))
+        self.assertTrue(np.isclose(abs(obj_2), 3))
+
+    def test_against_tit_for_tat(self):
+        opponent = [(1, 0, 1, 0)]
+        pattern_1 = [0 for _ in range(9)]
+        pattern_2 = [1 for _ in range(9)]
+
+        obj_1 = main.objective_score(pattern=pattern_1, turns=self.turns,
+                                     repetitions=self.repetitions, opponents=opponent,
+                                     params=self.params)
+        obj_2 = main.objective_score(pattern=pattern_2, turns=self.turns,
+                                     repetitions=self.repetitions, opponents=opponent,
+                                     params=self.params)
+        self.assertTrue(np.isclose(abs(obj_1), 1.04))
+        self.assertTrue(np.isclose(abs(obj_2), 3))
+
+class TestPatternSize(unittest.TestCase):
+
+    def test_example_one(self):
+        params = [1, 1, 1]
+        self.assertEqual(main.pattern_size(params), 8)
+
+    def test_example_two(self):
+        params = [1, 1, 2]
+        self.assertEqual(main.pattern_size(params), 16)
+
+class TestTrainGambler(unittest.TestCase):
+    opponents = [[0, 0, 0, 0], [1, 1, 1, 1]]
+    turns, repetitions = 10, 2
+
+    def test_bayesian(self):
+        axl.seed(0)
+        x, fun = main.train_gambler(method='bayesian', opponents=self.opponents,
+                                    turns=self.turns, repetitions=self.repetitions,
+                                    params=[1, 1, 2], n_random_starts=10)
+
+        self.assertEqual(len(x), main.pattern_size([1, 1, 2]) + 1)
+        self.assertEqual(fun, 2.875)
+
+    def test_differential(self):
+        axl.seed(0)
+        x, fun = main.train_gambler(method='differential', opponents=self.opponents,
+                                    turns=self.turns, repetitions=self.repetitions,
+                                    params=[0, 0, 1], popsize=5)
+
+        self.assertEqual(len(x), main.pattern_size([0, 0, 1]) + 1)
+        self.assertEqual(fun, 3.2)
+
+class TestOptimalMemoryOne(unittest.TestCase):
+    opponents = [[0, 0, 0, 0], [1, 1, 1, 1]]
+    turns, repetitions = 100, 5
+
+    def test_bayesian(self):
+        axl.seed(0)
+        x, theor, simul = main.optimal_memory_one(method='differential', opponents=self.opponents,
+                                                  turns=self.turns, repetitions=self.repetitions)
+
+        self.assertEqual(len(x), 4)
+        self.assertEqual(theor, 3.0)
+        self.assertTrue(np.isclose(simul, theor, atol=10 ** -2))
+
+    def test_differential(self):
+        axl.seed(0)
+        x, theor, simul = main.optimal_memory_one(method='bayesian', opponents=self.opponents,
+                                                  turns=self.turns, repetitions=self.repetitions,
+                                                  n_calls=40)
+
+        self.assertEqual(len(x), 4)
+        self.assertEqual(theor, 3.0)
+        self.assertTrue(np.isclose(simul, theor, atol=10 ** -2))
