@@ -81,7 +81,7 @@ def optimal_memory_one(opponents, turns, repetitions, popsize=700, strategy='bes
 
     return best_response, -result.fun, score
 
-def optimal_gambler(opponents, turns, repetitions, params, n_calls=50, n_random_starts=20):
+def train_gambler(opponents, turns, repetitions, params, n_calls=50, n_random_starts=20):
     """
     Approximates the best gambler for the given environment.
     Returns the strategy and it's utility.
@@ -124,7 +124,7 @@ def write_results(list_opponents, index, folder, location, params, turns, repeti
     row.append(time.clock() - start_differential_evolution)
 
     start_gambler_train = time.clock()
-    opt_gambler, utility = optimal_gambler(opponents=list_opponents, turns=turns,
+    opt_gambler, utility = train_gambler(opponents=list_opponents, turns=turns,
                                            repetitions=repetitions, params=params)
     row.append(opt_gambler), row.append(utility)
     row.append(time.clock() - start_gambler_train)
