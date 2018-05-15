@@ -13,13 +13,13 @@ from functools import partial
 
 import numpy as np
 import pandas as pd
-from scipy.optimize import differential_evolution
+import scipy.optimize
+import skopt
 
 import axelrod as axl
+import opt_mo
 from axelrod.action import Action
 from axelrod.strategies.lookerup import Plays
-from opt_mo import tournament_utility
-from skopt import gp_minimize
 
 C, D = Action.C, Action.D
 
@@ -29,7 +29,7 @@ def prepare_objective_bayesian(turns, repetitions, opponents, params):
     return objective
 
 def prepare_objective_differential(opponents):
-    objective = partial(tournament_utility, opponents=opponents)
+    objective = partial(opt_mo.tournament_utility, opponents=opponents)
     return objective
 
 def objective_score(pattern, turns, repetitions, opponents, params):
@@ -71,8 +71,9 @@ def optimal_memory_one(opponents, turns, repetitions, popsize=700, strategy='bes
     seed = 0
     objective = prepare_objective_differential(opponents=opponents)
 
-    result = differential_evolution(func=objective, bounds=bounds, strategy=strategy,
-                                    popsize=popsize, seed=seed)
+    result = scipy.optimize.differential_evolution(func=objective, bounds=bounds,
+                                                   strategy=strategy, popsize=popsize,
+                                                   seed=seed)
     best_response = list(result.x)
 
     mem_players = [axl.MemoryOnePlayer(i) for i in opponents]
@@ -97,11 +98,11 @@ def train_gambler(opponents, turns, repetitions, params, n_calls=50, n_random_st
     objective = prepare_objective_bayesian(turns=turns, repetitions=repetitions,
                                            opponents=opponents, params=params)
 
-    res = gp_minimize(objective, [(0.0, 1.0) for _ in range(size + 1)],
-                      acq_func="EI",                    # the acquisition function
-                      n_calls=n_calls,                  # the number of evaluations of f
-                      n_random_starts=n_random_starts,  # the number of random initialization points
-                      random_state=1)                   # the random seed
+    res = skopt.gp_minimize(objective, [(0.0, 1.0) for _ in range(size + 1)],
+                            acq_func="EI",                    # the acquisition function
+                            n_calls=n_calls,                  # the number of evaluations of f
+                            n_random_starts=n_random_starts,  # the number of random initialization points
+                            random_state=1)                   # the random seed
 
     return res.x, -res.fun
 
