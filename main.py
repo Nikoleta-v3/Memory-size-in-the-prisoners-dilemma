@@ -46,7 +46,10 @@ def objective_score(pattern, turns, repetitions, opponents, params):
     opponents = [axl.MemoryOnePlayer(q) for q in opponents]
     players = opponents + [player]
 
-    tournament = axl.Tournament(players=players, turns=turns, repetitions=repetitions)
+    number_of_players = len(players)
+    edges = [(i, number_of_players - 1) for i in range(number_of_players - 1)]
+    tournament = axl.Tournament(players=players, turns=turns, edges=edges,
+                                repetitions=repetitions)
     results = tournament.play(progress_bar=False)
     return - np.mean(results.normalised_scores[-1])
 
@@ -75,9 +78,13 @@ def optimal_memory_one(opponents, turns, repetitions, popsize=700, strategy='bes
     mem_players = [axl.MemoryOnePlayer(i) for i in opponents]
     mem_players.append(axl.MemoryOnePlayer(best_response))
 
-    tournament = axl.Tournament(players=mem_players, turns=turns, repetitions=repetitions)
+    number_of_players = len(mem_players)
+    edges = [(i, number_of_players - 1) for i in range(number_of_players - 1)]
+
+    tournament = axl.Tournament(players=mem_players, turns=turns, edges=edges,
+                                repetitions=repetitions)
     results = tournament. play(progress_bar=False)
-    score = sum(results.normalised_scores[-1]) / repetitions
+    score = np.mean(results.normalised_scores[-1])
 
     return best_response, -result.fun, score
 
