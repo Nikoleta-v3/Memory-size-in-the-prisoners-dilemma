@@ -26,12 +26,12 @@ warnings.filterwarnings("ignore")
 
 C, D = Action.C, Action.D
 
-def prepare_objective_gambler(turns, repetitions, opponents, params):
+def prepare_objective_training(turns, repetitions, opponents, params):
     objective = partial(objective_score, turns=turns, repetitions=repetitions,
                         params=params, opponents=opponents)
     return objective
 
-def prepare_objective_differential(opponents):
+def prepare_objective_optimisation(opponents):
     objective = partial(opt_mo.tournament_utility, opponents=opponents)
     return objective
 
@@ -74,7 +74,7 @@ def optimal_memory_one(method, opponents, turns, repetitions, n_calls=40,
     bounds = [(0, 0.9999) for _ in range(4)]
     seed = 0
     random_state = 0
-    objective = prepare_objective_differential(opponents=opponents)
+    objective = prepare_objective_optimisation(opponents=opponents)
 
     if method == 'bayesian':
         result = skopt.gp_minimize(objective, bounds,
@@ -112,7 +112,7 @@ def train_gambler(method, opponents, turns, repetitions, params, n_calls=20,
     bounds = [(0.0, .99999) for _ in range(size + 1)]
     seed = 0
     random_state = 0
-    objective = prepare_objective_gambler(turns=turns, repetitions=repetitions,
+    objective = prepare_objective_training(turns=turns, repetitions=repetitions,
                                           opponents=opponents, params=params)
 
     if method == 'bayesian':
@@ -132,13 +132,12 @@ def get_filename(location, folder, params, index):
     filename += folder + '/{}.csv'.format(index)
     return filename
 
-def write_results(method, list_opponents, index, folder, location, params, turns,
-                  repetitions):
+def write_results(method, list_opponents, filename, params, turns, repetitions):
 
     cols = ['$q_1$', '$q_2$', '$q_3$', '$q_4$', r'$\bar{q}_1$', r'$\bar{q}_2$',
             r'$\bar{q}_3$', r'$\bar{q}_4$', '$p_1$', '$p_2$', '$p_3$', '$p_4$',
-            '$u_q$', '$U_q$', 'Differential evol. time', 'gambler', '$U_{G}$',
-            'Gambler train time']
+            '$u_q$', '$U_q$', 'Optimisation time', 'gambler', '$U_{G}$',
+            'Training time']
     frame = pd.DataFrame()
 
     row = [q for player in list_opponents for q in player]
@@ -162,7 +161,6 @@ def write_results(method, list_opponents, index, folder, location, params, turns
     frame = frame.append([row])
     frame.columns = cols
 
-    filename =  get_filename(location, folder, params, index)
     frame.to_csv(filename, index=False)
 
 if __name__ == '__main__':
@@ -185,15 +183,19 @@ if __name__ == '__main__':
         main_op = [np.random.random(4)]
 
         # match
-        write_results(method=method, list_opponents=main_op, folder='matches',
-                      index=i, location=location, params=params, turns=num_turns,
-                      repetitions=num_repetitions)
+        filename =  get_filename(location=location, folder='matches', params=params,
+                                 index=index)
+        write_results(method=method, list_opponents=main_op, filename=filename, params=params,
+                      turns=num_turns, repetitions=num_repetitions)
 
         # tournament
         axl.seed(index + 10000)
-        op = main_op + [np.random.random(4)]
-        write_results(method=method, list_opponents=main_op, folder='tournaments',
-                      index=i, location=location, params=params, turns=num_turns,
-                      repetitions=num_repetitions)
+        other = [np.random.random(4)]
+
+        opponents = main_op + other
+        filename =  get_filename(location=location, folder='tournaments', params=params,
+                                 index=index)
+        write_results(method=method, list_opponents=opponents, filename=filename,
+                      params=params, turns=num_turns, repetitions=num_repetitions)
 
         i += 1

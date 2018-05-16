@@ -1,9 +1,11 @@
 import imp
 main = imp.load_source('main', '../main.py')
 
+import os
 import unittest
 import numpy as np
 import axelrod as axl
+import pandas as pd
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -127,3 +129,39 @@ class TestOptimalMemoryOne(unittest.TestCase):
         self.assertEqual(len(x), 4)
         self.assertTrue(np.isclose(theor, 3.0, atol=10 ** -2))
         self.assertTrue(np.isclose(simul, theor, atol=10 ** -1))
+
+class TestWriteFile(unittest.TestCase):
+    method='bayesian'
+    params=[0, 0, 1]
+    turns=10
+    repetitions=2
+
+    def test_match(self):
+        filename = 'match_example.csv'
+        main.write_results(method=self.method, list_opponents=[[0, 0, 0, 0]],
+                           filename=filename, params=self.params,
+                           turns=self.turns, repetitions=self.repetitions)
+        df = pd.read_csv(filename)
+
+        self.assertEqual(len(df.columns), 18)
+        self.assertTrue(df[r'$\bar{q}_1$'].isnull().all())
+        self.assertTrue(df[r'$\bar{q}_2$'].isnull().all())
+        self.assertTrue(df[r'$\bar{q}_3$'].isnull().all())
+        self.assertTrue(df[r'$\bar{q}_4$'].isnull().all())
+
+        os.remove(filename)
+
+    def test_tournament(self):
+        filename = 'tournament_example.csv'
+        main.write_results(method=self.method, list_opponents=[[0, 0, 0, 0], [1, 1, 1, 1]],
+                           filename=filename, params=self.params,
+                           turns=self.turns, repetitions=self.repetitions)
+        df = pd.read_csv(filename)
+
+        self.assertEqual(len(df.columns), 18)
+        self.assertFalse(df[r'$\bar{q}_1$'].isnull().all())
+        self.assertFalse(df[r'$\bar{q}_2$'].isnull().all())
+        self.assertFalse(df[r'$\bar{q}_3$'].isnull().all())
+        self.assertFalse(df[r'$\bar{q}_4$'].isnull().all())
+
+        os.remove(filename)
