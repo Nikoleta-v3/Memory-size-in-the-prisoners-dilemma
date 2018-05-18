@@ -125,7 +125,7 @@ not matter' statement was questioned. A set of more complex strategies,
 strategies that take in account the entire history set of the game, were
 trained and proven to be more robust than ZD strategies.
 
-\section{Problem}
+\section{The Problem}
 
 The purpose of this work is to consider a given memory one strategy 
 in a similar fashion to~\cite{Press2012}. However whilst~\cite{Press2012} found
@@ -146,7 +146,7 @@ A memory one strategy is defined as a strategy that decides it's action in turn
 only the outcome of a single turn then there are four possible `states' the
 strategy could be in. These are \(CC, CD, DC,CC\). A memory one strategy is denoted
 by the probabilities of cooperating after each of these states,
-\(p=p_1, p_2, p_3, p_4 \in \R_{[0,1]} ^ 4\). A diagrammatic representation of
+\(p=(p_1, p_2, p_3, p_4) \in \R_{[0,1]} ^ 4\). A diagrammatic representation of
 such as strategy is given in Figure~\ref{fig:diagram_mem_one}.
 
 \begin{figure}
@@ -205,11 +205,11 @@ This is given by the Theorem~\ref{theorem:quadratic_form_u}.
     forms:
     
     \begin{equation}\label{eq:optimisation_quadratic}
-    u_q(p) = \frac{\frac{1}{2}p^TQp + c^Tp + a}
-                {\frac{1}{2}p^T\bar{Q}p + \bar{c}^Tp + \bar{a}}, 
+    u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
+                {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}}, 
     \end{equation}
-    where \(Q, \bar{Q}\) are matrices of \(4 \times 4\) defined with the transition
-    probabilities of the opponent's transition probabilities \(q_1, q_2, q_3, q_4\).
+    where \(Q, \bar{Q}\) \(4 \times 4\) matrices defined by the transition
+    probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
     
     \begin{center}
     \begin{equation}
@@ -224,8 +224,7 @@ This is given by the Theorem~\ref{theorem:quadratic_form_u}.
     \end{equation}
     \end{center}
     
-    \(c \text{ and } \bar{c}\), are \(4 \times 1\) vectors defined by the transition rates 
-    \(q_1, q_2, q_3, q_4\).
+    \(c \text{ and } \bar{c}\), are \(4 \times 1\) vectors defined by:
     
     \begin{equation}\label{eq:q_matrix_numerator}
     \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
@@ -241,22 +240,15 @@ This is given by the Theorem~\ref{theorem:quadratic_form_u}.
     \(\bar{a} = \input{tex/denominator_constant}\).
     \end{theorem}
 
-\subsection{Validation}
+To validate the formulation of \(u_q(p)\) given by Theorem~\ref{theorem:quadratic_form_u}
+several memory one players were matched against 20 opponents. In Figure~\ref{fig:analytical_simulated}
+both the simulated and the theoretical of \(u_q(p)\) are shown for two different
+players. The simulated value has been calculated using \cite{axelrodproject}, and
+will be refered to as \(U_q(p)\). Note that~\cite{axelrodproject} is an open research
+framework for the study of the IPD. This package is described in~\cite{Knight2016}.
 
-In this section we validate the formulation of Theorem~\ref{theorem:quadratic_form_u}
-using numerical experiments. All the simulated results of this work are done
-using~\cite{axelrodproject} which is an open research framework for the study of
-the IPD. This package is described in~\cite{Knight2016}.
-
-To validate the formulation of \(u_q(p)\) several memory one players were 
-matched against 20 opponents.The simulated value of \(u_q(p)\) has been calculated
-using \cite{axelrodproject} and the theoretical by  substituting in equation~(\ref{eq:optimisation_quadratic}).
-
-In Figure~\ref{fig:analytical_simulated}, both the simulated and the theoretical
-value of \(u_q(p)\), against each opponent, are plotted for three different memory
-one strategies. Figure \ref{fig:analytical_simulated} indicates that the 
-formulation of \(u_q(p)\) as a quadratic ratio successfully captures the 
-simulated behaviour.
+Figure \ref{fig:analytical_simulated} indicates that the  formulation of \(u_q(p)\)
+as a quadratic ratio successfully captures the simulated behaviour.
 
 \begin{figure}[!htbp]
 \begin{center}
@@ -271,7 +263,7 @@ simulated behaviour.
 \label{fig:analytical_simulated}
 \end{figure}
 
-\section{Best responses Analytically}
+\section{Analytically Results}
 
 In the introduction a question was raised: which memory one strategy is the \textbf{best response}
 against another memory one? This will be considered as an optimisation problem,
@@ -438,6 +430,15 @@ In the following sections numerical methods are introduced which will be used to
 discover best responses. Moreover, several constrain versions of our problem
 and their exact solutions are discussed.
 
+Thought the best responses casn no longer be explored in an excat analytical way
+the denefit of constructing a promble in such form are several. A number of theoretical
+results will be presented here are results of out formulation.
+
+Initially, though the memory one best respones for a pairwise interactions can
+be used. and compare results to press and syson. We can explore this case 
+for a subset of strategies called reactive. Reactve strategies and using the same
+formulation we. We can use 
+
 \section{Numerical Experiments}
 
 In this section we introcude several numerical methods to supplement our analytical
@@ -512,6 +513,11 @@ These are the cases where:
     \item the oppponent has manage to make us indifferent
     \item the best behaviour is pure strategy.
 \end{itemize}
+
+The importance of these two lemmas is as follow equivilently. Being indifferent
+means that a plaers action no longer affect the game. Indentifying when a player
+makes a indifferent is good. Moreover by pure strategy we mean that a player
+would want to act as a defector or cooperator, as amixed stragegy is not ideal.
 
 The results are given equivilently by Lemmas~\ref{lemma:constant} and~\ref{lemma:linear}
 and they are respective to the actions of the opponent.
