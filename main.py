@@ -37,7 +37,7 @@ def prepare_objective_optimisation(opponents):
 
 def objective_score(pattern, turns, repetitions, opponents, params):
     """Objective function to maximize total score over matches."""
-
+    print('Here')
     parameters = Plays(self_plays=params[0], op_plays=params[1], op_openings=params[2])
     size = pattern_size(params)
 
@@ -54,6 +54,7 @@ def objective_score(pattern, turns, repetitions, opponents, params):
     tournament = axl.Tournament(players=players, turns=turns, edges=edges,
                                 repetitions=repetitions)
     results = tournament.play(progress_bar=False)
+    print('and here')
     return - np.mean(results.normalised_scores[-1])
 
 def pattern_size(params):
@@ -66,7 +67,8 @@ def pattern_size(params):
     return len(list(keys))
 
 def optimal_memory_one(method, opponents, turns, repetitions, n_calls=40,
-                       n_random_starts=20, popsize=100, strategy='best1bin'):
+                       n_random_starts=20, popsize=100, strategy='best1bin', 
+                       mutation=.2):
     """
     Approximates the best memory one strategy for the given environment.
     Returns the strategy, the utility u and U.
@@ -85,7 +87,7 @@ def optimal_memory_one(method, opponents, turns, repetitions, n_calls=40,
     if method == 'differential':
         result = scipy.optimize.differential_evolution(func=objective, bounds=bounds,
                                                        strategy=strategy, popsize=popsize,
-                                                       seed=seed)
+                                                       seed=seed, mutation=mutation)
 
     best_response = list(result.x)
 
@@ -103,7 +105,7 @@ def optimal_memory_one(method, opponents, turns, repetitions, n_calls=40,
     return best_response, -result.fun, score
 
 def train_gambler(method, opponents, turns, repetitions, params, n_calls=20,
-                  n_random_starts=20, popsize=50, strategy='best1bin'):
+                  n_random_starts=20, popsize=50, strategy='best1bin', mutation=.2):
     """
     Approximates the best gambler for the given environment.
     Returns the strategy and it's utility.
@@ -124,7 +126,7 @@ def train_gambler(method, opponents, turns, repetitions, params, n_calls=20,
     if method == 'differential':
         result = scipy.optimize.differential_evolution(func=objective, bounds=bounds,
                                                        strategy=strategy, popsize=popsize,
-                                                       seed=seed)
+                                                       seed=seed, mutation=mutation)
     return result.x, -result.fun
 
 def get_filename(location, folder, params, index):
@@ -132,12 +134,21 @@ def get_filename(location, folder, params, index):
     filename += folder + '/{}.csv'.format(index)
     return filename
 
-def write_results(method, list_opponents, filename, params, turns, repetitions):
-
-    cols = ['$q_1$', '$q_2$', '$q_3$', '$q_4$', r'$\bar{q}_1$', r'$\bar{q}_2$',
+def get_columns(params):
+    cols = ['index', '$q_1$', '$q_2$', '$q_3$', '$q_4$', r'$\bar{q}_1$', r'$\bar{q}_2$',
             r'$\bar{q}_3$', r'$\bar{q}_4$', '$p_1$', '$p_2$', '$p_3$', '$p_4$',
-            '$u_q$', '$U_q$', 'Optimisation time', 'gambler', '$U_{G}$',
-            'Training time']
+            '$u_q$', '$U_q$', 'Optimisation time', '$U_{G}$', 'Training time',
+            'Gambler Initial']
+    size = pattern_size(params)
+    gambler_cols = ['Gambler {} key'.format(i) for i in range(size)]
+    method_cols = ['method'] + ['method param {}'.format(i) for i in range(2)]
+    
+    return cols + gambler_cols + method_cols
+
+def write_results(method, method_params, list_opponents, filename, params, turns,
+                  repetitions):
+
+    cols = get_columns(params)
     frame = pd.DataFrame()
 
     row = [q for player in list_opponents for q in player]
@@ -155,9 +166,12 @@ def write_results(method, list_opponents, filename, params, turns, repetitions):
     start_training = time.clock()
     opt_gambler, utility = train_gambler(method, opponents=list_opponents, turns=turns,
                                          repetitions=repetitions, params=params)
-    row.append(opt_gambler), row.append(utility)
-    row.append(time.clock() - start_training)
+    
+    for vector in opt_gambler:
+        row.append(vector)
 
+    row.append(utility), row.append(time.clock() - start_training)
+    row.append(method), row.append(method_params[0]), row.append(method_params[1])
     frame = frame.append([row])
     frame.columns = cols
 
@@ -166,8 +180,6 @@ def write_results(method, list_opponents, filename, params, turns, repetitions):
 if __name__ == '__main__':
     num_turns = 200
     num_repetitions = 5
-    location = 'data/random_numerical_experiments/'
-    
 
     index = int(sys.argv[1])
     num_plays = int(sys.argv[2])
@@ -175,6 +187,7 @@ if __name__ == '__main__':
     num_op_start_plays = int(sys.argv[4])
     method = sys.argv[5]
 
+    location = 'data/random_numerical_experiments/{}/'.format(method)
     params = [num_plays, num_op_plays, num_op_start_plays]
 
     i = (index - 1) * 100
@@ -184,17 +197,17 @@ if __name__ == '__main__':
 
         # match
         filename =  get_filename(location=location, folder='matches', params=params,
-                                 index=index)
+                                 index=i)
         write_results(method=method, list_opponents=main_op, filename=filename, params=params,
                       turns=num_turns, repetitions=num_repetitions)
 
         # tournament
-        axl.seed(index + 10000)
+        axl.seed(i + 10000)
         other = [np.random.random(4)]
 
         opponents = main_op + other
         filename =  get_filename(location=location, folder='tournaments', params=params,
-                                 index=index)
+                                 index=i)
         write_results(method=method, list_opponents=opponents, filename=filename,
                       params=params, turns=num_turns, repetitions=num_repetitions)
 
