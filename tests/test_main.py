@@ -14,21 +14,21 @@ class TestGetFilename(unittest.TestCase):
 
     def test_example_one(self):
         location = '/home/Documents/'
-        folder = 'matches'
         params = [0, 1, 1]
-        index=0
+        index = 0
+        method = 'bayesian'
 
-        filename = main.get_filename(location, folder, params, index)
-        self.assertEqual(filename, '/home/Documents/gambler0_1_1/matches/0.csv')
+        filename = main.get_filename(location, params, index, method)
+        self.assertEqual(filename, '/home/Documents/gambler0_1_1/bayesian_0.csv')
 
     def test_example_two(self):
         location = ''
-        folder = 'tournaments'
         params = [2, 1, 1]
-        index=1
+        index = 1
+        method = 'differential'
 
-        filename = main.get_filename(location, folder, params, index)
-        self.assertEqual(filename, 'gambler2_1_1/tournaments/1.csv')
+        filename = main.get_filename(location, params, index, method)
+        self.assertEqual(filename, 'gambler2_1_1/differential_1.csv')
 
 class TestObjectiveScore(unittest.TestCase):
     turns, repetitions, params = 100, 5, [1, 1, 1]
@@ -93,7 +93,9 @@ class TestTrainGambler(unittest.TestCase):
         axl.seed(0)
         x, fun = main.train_gambler(method='bayesian', opponents=self.opponents,
                                     turns=self.turns, repetitions=self.repetitions,
-                                    params=[1, 1, 2], n_random_starts=10)
+                                    params=[1, 1, 2],
+                                    method_params ={'n_random_starts' : 10,
+                                                    'n_calls': 15})
 
         self.assertEqual(len(x), main.pattern_size([1, 1, 2]) + 1)
         self.assertTrue(np.isclose(fun, 2.9, atol=10 ** -1))
@@ -102,7 +104,7 @@ class TestTrainGambler(unittest.TestCase):
         axl.seed(0)
         x, fun = main.train_gambler(method='differential', opponents=self.opponents,
                                     turns=self.turns, repetitions=self.repetitions,
-                                    params=[0, 0, 1], popsize=5)
+                                    params=[0, 0, 1], method_params={'popsize': 5})
 
         self.assertEqual(len(x), main.pattern_size([0, 0, 1]) + 1)
         self.assertTrue(np.isclose(fun, 3.2, atol=10 ** -1))
@@ -114,7 +116,8 @@ class TestOptimalMemoryOne(unittest.TestCase):
     def test_bayesian(self):
         axl.seed(0)
         x, theor, simul = main.optimal_memory_one(method='differential', opponents=self.opponents,
-                                                  turns=self.turns, repetitions=self.repetitions)
+                                                  turns=self.turns, repetitions=self.repetitions,
+                                                  method_params={'popsize': 100})
 
         self.assertEqual(len(x), 4)
         self.assertTrue(np.isclose(theor, 3.0, atol=10 ** -2))
@@ -124,44 +127,59 @@ class TestOptimalMemoryOne(unittest.TestCase):
         axl.seed(0)
         x, theor, simul = main.optimal_memory_one(method='bayesian', opponents=self.opponents,
                                                   turns=self.turns, repetitions=self.repetitions,
-                                                  n_calls=40)
+                                                  method_params ={'n_random_starts' : 20,
+                                                                  'n_calls': 40})
 
         self.assertEqual(len(x), 4)
         self.assertTrue(np.isclose(theor, 3.0, atol=10 ** -2))
         self.assertTrue(np.isclose(simul, theor, atol=10 ** -1))
 
 class TestWriteFile(unittest.TestCase):
-    method='bayesian'
-    params=[0, 0, 1]
-    turns=10
-    repetitions=2
+    method = 'bayesian'
+    params = [0, 0, 1]
+    turns = 10
+    repetitions = 2
+    method_params = {'n_random_starts' : 1, 'n_calls': 5}
 
     def test_match(self):
-        filename = 'match_example.csv'
-        main.write_results(method=self.method, list_opponents=[[0, 0, 0, 0]],
-                           filename=filename, params=self.params,
-                           turns=self.turns, repetitions=self.repetitions)
-        df = pd.read_csv(filename)
+        # filename = 'match_example.csv'
+        df = main.write_results(index=1, method=self.method, list_opponents=[[0, 0, 0, 0]],
+                                params=self.params, turns=self.turns,
+                                repetitions=self.repetitions, method_params=self.method_params)
 
-        self.assertEqual(len(df.columns), 18)
+        self.assertEqual(len(df.columns), 24)
         self.assertTrue(df[r'$\bar{q}_1$'].isnull().all())
         self.assertTrue(df[r'$\bar{q}_2$'].isnull().all())
         self.assertTrue(df[r'$\bar{q}_3$'].isnull().all())
         self.assertTrue(df[r'$\bar{q}_4$'].isnull().all())
 
-        os.remove(filename)
-
     def test_tournament(self):
-        filename = 'tournament_example.csv'
-        main.write_results(method=self.method, list_opponents=[[0, 0, 0, 0], [1, 1, 1, 1]],
-                           filename=filename, params=self.params,
-                           turns=self.turns, repetitions=self.repetitions)
-        df = pd.read_csv(filename)
+        # filename = 'tournament_example.csv'
+        df = main.write_results(index=1, method=self.method, list_opponents=[[0, 0, 0, 0],
+                                [1, 1, 1, 1]], params=self.params, turns=self.turns,
+                                repetitions=self.repetitions, method_params=self.method_params)
 
-        self.assertEqual(len(df.columns), 18)
+        self.assertEqual(len(df.columns), 24)
         self.assertFalse(df[r'$\bar{q}_1$'].isnull().all())
         self.assertFalse(df[r'$\bar{q}_2$'].isnull().all())
         self.assertFalse(df[r'$\bar{q}_3$'].isnull().all())
         self.assertFalse(df[r'$\bar{q}_4$'].isnull().all())
 
-        os.remove(filename)
+class TestGetColumns(unittest.TestCase):
+    # without gambler
+    len_cols = 22
+
+    def test_get_columns_no_params(self):
+        params = [0, 0, 0]
+        method_params = {'n_random_starts' : 1, 'n_calls': 1}
+        self.assertEqual(len(main.get_columns(params, method_params)), self.len_cols + 1)
+
+    def test_get_columns_op_initial_move(self):
+        params = [0, 0, 1]
+        method_params = {'n_random_starts' : 1, 'n_calls': 1}
+        self.assertEqual(len(main.get_columns(params, method_params)), self.len_cols + 2)
+
+    def test_get_columns(self):
+        params = [0, 1, 1]
+        method_params = {'n_random_starts' : 1, 'n_calls': 1}
+        self.assertEqual(len(main.get_columns(params, method_params)), self.len_cols + 4)
