@@ -14,6 +14,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{standalone}
+\usepackage{booktabs}
 \usepackage{algorithm, setspace}
 \usepackage[noend]{algpseudocode}
 
@@ -85,47 +86,50 @@ Iterated Prisoner's Dilemma (IPD) and in the 1980s following the work of
 \cite{Axelrod1980a, Axelrod1980b} it attracted the attention of the scientific
 community.
 
-In~\cite{Axelrod1980a} a computer tournament of the IPD was performed. A
-tournament is a series of rounds of the PD between pairs of strategies. The
-topology commonly used, \cite{Axelrod1980a, Axelrod1980b}, is that of a round
-robin where all contestants compete against each other. The winner of these
-tournaments was decided on the average score and not in the number of wins.
+In~\cite{Axelrod1980a} and~\cite{Axelrod1980b}, the first well known computer
+tournaments of the IPD were performed. A total of 13 and 63 strategies were submitted
+in computer code and competed against each other in a round robin tournament.
+All contestants competed against each other, themselves and random strategy and the
+winner was decided on the average score a strategy achieved and not in the number of wins.
+The strategies were allowed access to the full history of each match. The history
+included the previous moves of both the player and the opponent. How many turns of history
+that a strategy would use, the memory size, was left to the creator of the strategy to
+decide.
 
-These tournaments were the milestones of an era which to today is using
-computer tournaments to explore the robustness of strategies of IPD.
-The robustness can also be checked through evolutionary process~\cite{Nowak}.
-However, this aspect will not be considered here, instead the focus is on
-performance in tournaments.
+The winning strategy of both tournaments was a strategy called Tit for Tat. Tit for Tat
+is a strategy which starts by cooperating and then mimics the last move of
+it's opponent. This is a strategy which makes use of the previous move of the opponent
+only and it's called a reactive strategy. Reactive strategies have been used
+to explore best behavior in the IPD and a framework for studying such strategies
+was introduced in~\cite{Nowak1989}. This was later used to introduce other
+reactive strategies such as Generous Tit For Tat~\cite{Nowak1990}.
 
-In Axelrod's original tournaments \cite{Axelrod1980a, Axelrod1980b}, strategies
-were allowed access to the history and in the first tournament they also knew
-the number of total turns in each interaction. The history included the
-previous moves of both the player and the opponent. How many turns of history
-that a strategy would use, the memory size, was left to the creator of the
-strategy to decide. For example the winning strategy of the first tournaments,
-Tit for Tat was a strategy that made use of the previous move of the opponent
-only. Tit for Tat is a strategy that starts by cooperating and then mimics the
-previous action of it's opponent. Strategies like Tit for Tat are called memory
-one strategies. A framework for studying memory one strategies was introduced
-in~\cite{Nowak1989} and further used in~\cite{Nowak1993, Nowak1990}.
+Reactive strategies are a subset of memory one strategies. Memory one strategies
+similarly are only concern with the previous turn. However, they take into consideration
+both players' recent moves to decide on an action. Several successful memory one
+strategies are found in literature, for example Pavlov~\cite{Nowak1993}.
 
-In~\cite{Press2012} Press and Dyson, introduced a new set of memory one
-strategies called zero determinant (ZD) strategies. The ZD strategies,
-manage to force a linear relationship between the score of the strategy
-and the opponent. Press and Dyson, prove their concept of the ZD strategies
-and claim that a ZD strategy can outperform any given opponent.
+A well known set of memory on strategies were introduced in~\cite{Press2012}
+called zero determinant (ZD) strategies. The ZD strategies, manage to force a linear
+relationship between the score of the strategy and the opponent. The authors showed
+that ZD strategies were a set of strategies that could dominate any evolutionary
+opponent, in pairwise interactions. ZD strategies were dominating using a single
+size memory and authors questioned the usefulness of memory in the IPD.
 
-The ZD strategies have tracked a lot of attention. It was stated that
+The ZD strategies tracked a lot of attention. It was stated that
 ``Press and Dyson have fundamentally changed the viewpoint on the Prisoner's
 Dilemma''~\cite{Stewart2012}. In~\cite{Stewart2012}, the Axelrod's
 tournament have been re-run including ZD strategies and a new set of ZD
-strategies the Generous ZD. Even so, ZD and memory one strategies have
-also received criticism. In~\cite{Harper2015}, the `memory of a strategy does
-not matter' statement was questioned. A set of more complex strategies,
-strategies that take in account the entire history set of the game, were
-trained and proven to be more robust than ZD strategies.
+strategies the Generous ZD.
 
-\section{The Problem}
+Even so, ZD and memory one strategies have also received criticism. In~\cite{Harper2015},
+the `memory of a strategy does not matter' statement was questioned. A set of more
+complex strategies, strategies that take in account the entire history set of the
+game, were trained and proven to be more robust than ZD strategies.
+
+\subsection{The Problem}
+
+In this manuscript we explore the size of memory for strategies of IPD.%TODO: expand when we know the results
 
 The purpose of this work is to consider a given memory one strategy 
 in a similar fashion to~\cite{Press2012}. However whilst~\cite{Press2012} found
@@ -134,20 +138,23 @@ optimisation approach to identify the best response to that opponent.
 In essence the aim is to produce a compact method of identifying the best memory
 one strategy against a given opponent.
 
-The second part of this manuscript we explore the limitation of the best response
-memory one strategies by comparing them to more complex strategies with a larger
-memory.
+In the second part of this manuscript we explore the limitation of these best response
+strategies. This is achieved by comparing the performance of an optimal
+memory one strategy, for a given environment, with the performance of a more complex
+strategy. The type of complex strategy used is described in depth in the
+following Sections. Keep in mind, that the complex strategies used here has a memory
+greater than one and it keeps track of the initial move.
 
-\subsection{Background}
+\section{Methodology}
 
-In this manuscript we explore the robustness of memory one strategies.
-A memory one strategy is defined as a strategy that decides it's action in turn
-\(m\) based on what occurred in turn \(m - 1\). If a strategy is concerned with
-only the outcome of a single turn then there are four possible `states' the
-strategy could be in. These are \(CC, CD, DC,CC\). A memory one strategy is denoted
+In~\cite{Nowak1989} a framework was introduced to study the interactions of memory
+one strategies modelled as a stochastic process. The work~\cite{Press2012} of is
+also build upon at manuscript. There it is stated that if a strategy
+is concerned with only the outcome of a single turn then there are four possible `states'
+the strategy could be in. These are \(CC, CD, DC,CC\). A memory one strategy is denoted
 by the probabilities of cooperating after each of these states,
 \(p=(p_1, p_2, p_3, p_4) \in \R_{[0,1]} ^ 4\). A diagrammatic representation of
-such as strategy is given in Figure~\ref{fig:diagram_mem_one}.
+such strategy is given in Figure~\ref{fig:diagram_mem_one}.
 
 \begin{figure}
     \centering
@@ -165,45 +172,40 @@ such as strategy is given in Figure~\ref{fig:diagram_mem_one}.
     \end{subfigure}
 \end{figure}
 
-In~\cite{Nowak1990} a framework was introduced to study the interactions of memory
-one strategies modelled as a stochastic process, where the players move from one
-of the states \(CC, CD, DC,CC\) to another. More specifically, it can be modelled
-by the use of a Markov process of four states, shown by Figure~\ref{fig:markov_chain}.
-
-The transition matrix of the markov chain in Figure~\ref{fig:markov_chain}
-is defined as \(M\) and is given by,
+Moreover, if two players are moving from state to state using the transition
+probabilities, this can be modelled as a Markov process of four states, shown by
+Figure~\ref{fig:markov_chain}. The transition matrix \(M\) of Figure~\ref{fig:markov_chain}
+is defined as,
 
 \begin{equation}\label{eq:m_matrix}
     \input{tex/m_matrix.tex}.
 \end{equation}
 
-Let the vector of the stationary probabilities of \(M\) be defined as \(v\).
-Vector \(v\) are given in the Appendix. %TODO include Appendix
-The scores of each player can be retrieved by multiplying the probabilities of each
-state, at the stationary state, with the equivalent payoff. Thus, the  utility for
-player \(p\) against \(q\), denoted as \(u_q(p)\), is defined by,
+where the vector of the stationary probabilities of is \(v\)(given in the Appendix). %TODO include Appendix
+Combining the stationary vector \(v\) with the payoff matrices\ref{equ:pd_definition}
+allow us to retrieve the expected outcome for each player. Thus, the utility for
+player \(p\) against \(q\), denoted as \(u_q(p)\), can defined by,
 
 \begin{equation}\label{eq:press_dyson_utility}
     u_q(p) = v \times S_p.
 \end{equation}
 
-\subsection{Utility}
-
 The analytical formulation gives the advantage of time. That is because the 
 payoffs of a match between two opponents are now retrievable without 
-simulating the actual match itself.
+simulating the actual match itself. This analytical formulation will be used
+hereupon and it will will allow us to study best responses in an analytical way.
 
-Note though that \(u_q(p)\) is a function of 4 variables which is also affected
-by the transition probabilities of the opponent \(q\). The first theoretical
-result that we introduce in this work is a compact way of writing \(u_q(p)\).
-This is given by the Theorem~\ref{theorem:quadratic_form_u}.
+Though this formulation, which was described in 1989~\cite{Nowak1989}, have been
+used in several different works not many insights have been given for form of \(u_q(p)\).
+Here we present one of our first results which concerns the form \(u_q(p)\). That is
+that \(u_q(p)\) is given by a ratio of two quadratic forms, as presented
+by Theorem~\ref{theorem:quadratic_form_u}.
 
 \begin{theorem}\label{theorem:quadratic_form_u}
-    For a given memory one strategy \(p\in\mathbb{R}_{[0,1]}^4\) playing another 
-    memory one strategy \(q\in\mathbb{R}_{[0,1]}^4\), the 
-    utility of the player \(u_q(p)\) can be re written as a ratio of two quadratic
-    forms:
-    
+    The expected utility of a memory one strategy \(p\in\mathbb{R}_{[0,1]}^4\)
+    against a memory one opponent strategy \(q\in\mathbb{R}_{[0,1]}^4\), denoted
+    as \(u_q(p)\), can be written as a ratio of two quadratic forms:
+
     \begin{equation}\label{eq:optimisation_quadratic}
     u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
                 {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}}, 
@@ -228,27 +230,29 @@ This is given by the Theorem~\ref{theorem:quadratic_form_u}.
     
     \begin{equation}\label{eq:q_matrix_numerator}
     \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
-    \(c = \input{tex/c_numerator}\),}
+    \boldmath\(c = \input{tex/c_numerator}\),}
     \end{equation}
     \begin{equation}\label{eq:q_matrix_denominator}
     \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
-    \(\bar{c} = \input{tex/c_denominator}\).
+    \boldmath\(\bar{c} = \input{tex/c_denominator}\).
     }
     \end{equation}
     
-    Lastly, \(a = \input{tex/numerator_constant}\) and 
+    Finally, \(a = \input{tex/numerator_constant}\) and 
     \(\bar{a} = \input{tex/denominator_constant}\).
     \end{theorem}
 
-To validate the formulation of \(u_q(p)\) given by Theorem~\ref{theorem:quadratic_form_u}
-several memory one players were matched against 20 opponents. In Figure~\ref{fig:analytical_simulated}
-both the simulated and the theoretical of \(u_q(p)\) are shown for two different
-players. The simulated value has been calculated using \cite{axelrodproject}, and
-will be refered to as \(U_q(p)\). Note that~\cite{axelrodproject} is an open research
-framework for the study of the IPD. This package is described in~\cite{Knight2016}.
+The formulation of \(u_q(p)\) has been validated using numerical experiments.
+Several memory one players were matched against 20 opponents and their theoretical
+utility \(u_q(p)\) was compared to a simulated one. Figure~\ref{fig:analytical_simulated}
+indicates that the  formulation of \(u_q(p)\) as a quadratic ratio successfully 
+captures the simulated behaviour.
 
-Figure \ref{fig:analytical_simulated} indicates that the  formulation of \(u_q(p)\)
-as a quadratic ratio successfully captures the simulated behaviour.
+The simulated utility, denoted
+as \(U_q(p)\) has been calculated using~\cite{axelrodproject}. It is an open research
+framework for the study of the IPD and is described in~\cite{Knight2016}. Note that
+when referring to \(U_q(p)\) here onwards we mean the simulated utility calculated
+with~\cite{axelrodproject}.
 
 \begin{figure}[!htbp]
 \begin{center}
@@ -262,6 +266,11 @@ as a quadratic ratio successfully captures the simulated behaviour.
 \caption{Differences between simulated and analytical results.}
 \label{fig:analytical_simulated}
 \end{figure}
+
+Now that the analytical formulation has been validated in the following Sections
+is used to explore bests responses in memory one strategies. Moreover, the new
+formulation of Theorem~\ref{theorem:quadratic_form_u} allow us to retrieve a number
+of theoretical results. These are also discussed in the next sections.
 
 \section{Analytically Results}
 
@@ -285,61 +294,60 @@ given by~(\ref{eq:mo_optimisation}).
 
 This work is concerned with a fractional optimisation problem of quadratic forms.
 Initially, the convexity, whether or not \(u_{q}(p)\) is concave~\cite{Gradshteyn2007},
-will be checked (concave because is a maximisation  problem).
+is checked (concave because is a maximisation problem).
 
 To test the hypothesis that \(u_q(p)\) is concave an empirical analysis
 was performed using computer code. %TODO add the data generated
 It was shown that there exists at least one point for which the definition of
-concavity does not hold. Optimising a non concave function is rather tricky.
+concavity does not hold.
 
-Several articles in fractional optimisation of quadratic forms that was non concave
+Several articles in fractional optimisation of quadratic forms that were non concave
 can be found~\cite{Beck2009, Hongyan2014}. Though in these works both the numerator
 and denominator of the fractional problem were concave. In~\cite{Anton2014} it is
 stated that a quadratic form will be concave if and only if it's symmetric matrix is
-negative semi definite.
+negative semi definite. In Appendix, it is proved that neither the numerator or %TODO add appendix
+the denominator of equation~(\ref{eq:optimisation_quadratic}) are concave.
 
-In Appendix, it is proved that neither the numerator or the denominator of
-equation~(\ref{eq:optimisation_quadratic}) are concave.
+\subsection{Best responses}
 
-\subsection{Proof}
+The non concavity of \(u(p)\) indicates multiple local optimal points. Thus we
+are not searching a single optimal point but a set of candidate optimal points.
+The aim is to introduce a compact way of constructing the candidate set. Once
+the set is defined the point that maximises \(u(p)\) corresponds to the best
+response strategy.
 
-The non concavity of \(u(p)\) indicates multiple local optimal points. Thus a
-compact way of searching the candidate optimal points needs to be introduced.
-Once the method is defined then the utility of each point is compared to the
-rest. The optimal point is the point that has the highest value of \(u(p)\).
+The problem considered is a bounded because \(p \in \R^4_{[0, 1]}\). Because of
+this it is known that the candidate solutions will exist either at the boundaries
+of the feasible solution space, either within that space. The method of Lagrange
+Multipliers and Karush-Kuhn-Tucker conditions also agrees with this conclusion. %TODO add reference.
+The Karush-Kuhn-Tucker conditions are used because our constrains are inequalities.
 
-The problem considered is a bounded, this mean that the we know that the candinate solutions
-will be either on the bounds of our feasable solution in a point in the center.
-Note that the points are the roots of the derivate \(\frac{du}{dp}\). Bound case are all
-the possible combinations of \(p_1, p_2, p_3, p_4 \in \{0, 1\}\). Figure~\ref{fig:cube}
-illustrates an example of possible locations of candidate solutions for a 3 dimensional
-problem.
+Thus the candidate solution set is constructed as follows:
 
-\begin{figure}
-\begin{center}
-    \includestandalone[width=\textwidth]{tex/cube}
-    \caption{Candidate solution of a 3 dimensional problem.}\label{fig:cube}
-\end{center}
-\end{figure}
+\begin{itemize}
+    \item any or all of \(p_1, p_2, p_3, p_4\) are \(\in {0, 1}\)
+    \item the rest or all of \(p_1, p_2, p_3, p_4\) are given by the roots of \(\frac{du}{dp}\).
+\end{itemize}
 
-The derivate \(\frac{du}{dp}\) is given by,
+The derivative \(\frac{du}{dp}\) is given by,
 
 \begin{equation}\label{eq:derivative_of_quadratic}
     \begin{aligned}
-     \frac{du}{dp} & = && \frac{(  \frac{1}{2}p  Q  p^T + c^T p + a)'
-      (  \frac{1}{2} p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a}) - 
-      (  \frac{1}{2} p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a})'
-      (  \frac{1}{2} p  Q  p^T + c^T p + a)}
-      {(  \frac{1}{2} p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a})^2} \\
+     \frac{du}{dp} & = && \frac{(  \frac{1}{2}p  Q  p^T + c p + a)'
+      (  \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a}) - 
+      (  \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a})'
+      (  \frac{1}{2} p  Q  p^T + c p + a)}
+      {(  \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a})^2} \\
       \\
-    & = && \frac{(pQ + c^T) ( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a}) 
-    - (p\bar{Q} + \bar{c}^T)( \frac{1}{2} p  Q  p^T + c^T p + a)}
-      {( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a})^2} \\
+    & = && \frac{(pQ + c) ( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a}) 
+    - (p\bar{Q} + \bar{c})( \frac{1}{2} p  Q  p^T + c p + a)}
+      {( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a})^2} \\
     \end{aligned}
 \end{equation}
 
-Thus we conclude that the best response of a memory one strategy in matchs is
-given by Lemma~\ref{lemma:memone_best_response}.
+For equation~\ref{eq:derivative_of_quadratic} to be zero, the numerator must fall
+to zero and the denominator can not nullified. Thus we conclude that the best
+response of a memory one strategy in match is given by Lemma~\ref{lemma:memone_best_response}.
 
 \begin{lemma}\label{lemma:memone_best_response}
     The optimal behaviour of a memory one strategy player \((p^*)\) against a
@@ -351,56 +359,87 @@ given by Lemma~\ref{lemma:memone_best_response}.
     
     \[S_q = \{0, \bar{p}, 1 \}^4 \]
     
-    where the vector \(\bar{p}\) is the vector for which the following condition is true:
+    where the vector \(\bar{p}\) is the vector for which the following conditions
+    are true:
     
     {\small
-    \begin{equation*}
-        (pQ + c^T) ( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a}) 
-        - (p\bar{Q} + \bar{c}^T)( \frac{1}{2} p  Q  p^T + c^T p + a) = 0
-    \end{equation*}}
+    \begin{equation}\label{eq:derivative_numerator_condition}
+        (pQ + c) ( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a}) 
+        - (p\bar{Q} + \bar{c})( \frac{1}{2} p  Q  p^T + c p + a) = 0
+    \end{equation}}
 
-    Note that this is a \(4-\) polynomial system of \(4\) variables. Each polynomial
-    corresponds to a partial derivative of \(u_q(p)\).
+    and
+
+    {\small
+    \begin{equation}
+        \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a} \neq 0
+    \end{equation}}
+
+    Note that equation~\ref{eq:derivative_numerator_condition}  is a \(4-\)
+    polynomial system of \(4\) variables. Each polynomial corresponds to a partial
+    derivative of \(u_q(p)\).
 \end{lemma}
 
-The method of Lagrange Multipliers and Karush-Kuhn-Tucker conditions has also been
-applied and reached the same conclusion. %TODO add reference.
-The Karush-Kuhn-Tucker conditions are used becase ourconstrains are inequalities.
+A question that arises immediately after capturing best responses of memory one
+strategies in pairwise interactions is: What is the optimal memory player against
+multiple opponents, in a tournament environment. Let us consider a collection of
+opponents: \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)}\}\),  finding the optimal behaviour
+is captured as:
 
-A question that arises immediately after the work that has been carried out to
-this point is the following: What is the optimal memory player against multiple
-opponents, in a tournament environment.
-
-Let us consider a collection of opponents: \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)}\}\), 
-finding the optimal behaviour of a strategy can now be written as:
-
-\begin{equation}\label{eq:random_tournament_optimisation}
+\begin{equation}\label{eq:mo_tournament_optimisation}
 \begin{aligned}
 \max_p: & \ \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p) 
 \\
-st: & \ p_1 = p_2 = p_3 = p_4 = p\\
-    & \ p \in \R_{[0, 1]} 
+st: & \ p \in \R_{[0, 1]} 
 \end{aligned}
 \end{equation}
 
-Thus, the average utility against a set of opponents is maximised and the average 
-utility is given by,
+where,
 
 \begin{equation}\label{eq:tournament_utility}
     \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) = \frac{1}{N}
-    \frac{\sum\limits_{i=1} ^ {N} (\frac{1}{2} pQ^{(i)} p^T + c^{(i)T} p + a^ {(i)})
+    \frac{\sum\limits_{i=1} ^ {N} (\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)})
     \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ 
-    N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)T} p + \bar{a}^ {(i)})}
-    {\prod\limits_{i=1} ^ N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)T} p + \bar{a}^ {(i)})}.
+    N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}
+    {\prod\limits_{i=1} ^ N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}.
 \end{equation}
 
-If we were to follow a similar approach to that of pairwise interactions the derivative
-of the utility would be calculated and set to zero. Furthemore, the bound cases would
-we explored. The derivate of the average utility is given by,
+Thus, we are optimising against the average utility over the set of opponents.
+Note that the best response can not be captured by optimising against the mean
+opponent. Thus, 
+
+\begin{equation}\label{eq:tournament_hypothesis}
+    \max_p \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p) \neq \max_p
+      u_{\frac {1}{N} \sum\limits_{i=1} ^ N q^{(i)}}(p).
+\end{equation}
+
+A number of numerical experiments have been performed for cases where \(p=(p, p, p, p\)
+and \(p= (p_1, p_2, p_1, p_2)\). This was done in order to compare the right hand
+side of equation~(\ref{eq:tournament_hypothesis}) to the left. The fact that
+equation~(\ref{eq:tournament_hypothesis}) holds is evident by Figure~\ref{fig:hypothesis}.
+
+\begin{figure}[!htbp]
+    \begin{center}
+        \begin{subfigure}{0.45\textwidth}
+            \includegraphics[width=\linewidth]{img/mean_vs_average.png}
+        \end{subfigure}
+        \begin{subfigure}{0.45\textwidth}
+            \includegraphics[width=\linewidth]{img/mean_vs_average_two.png}
+        \end{subfigure}
+    \end{center}
+    \caption{Hypothesis.}
+    \label{fig:hypothesis}
+\end{figure}
+
+A similar approach to the one considered for problem~\ref{eq:mo_optimisation} needs
+to be used for problem~\ref{eq:mo_tournament_optimisation} as well. The candidate
+solutions set would be constructed by considering the bounds of the feasible space
+and the roots of the derivative \(\frac{d}{dp} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)\).
+The derivative is given by,
 
 {\scriptsize
-\begin{align*}
-    \frac{d}{dp} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) & = \\
+\begin{align}\label{eq:mo_tournament_derivative}
+    \frac{d}{dp} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) & = \nonumber \\
     & =\frac{
     (\sum\limits_{i=1} ^ {N} Q_{N}^{(i)'} \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N Q_{D}^{(i)}
     + \sum\limits_{i=1} ^ {N} Q_{D}^{(i)'} \sum\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ {N} Q_{N}^{(i)}
@@ -409,50 +448,37 @@ we explored. The derivate of the average utility is given by,
     \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N Q_{D}^{(i)}) \times 
     (\sum\limits_{i=1} ^ {N} Q_{N}^{(i)} \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N Q_{D}^{(i)})}
     {(\prod\limits_{i=1} ^ N Q_{D}^{(i)})^{2}}
-\end{align*}
+\end{align}
 }
 where,
 
 \begin{align*}
-    Q_{N}^{(i) } & = \frac{1}{2} pQ^{(i)} p^T + c^{(i)T} p + a^ {(i)}, \\
-    Q_{N}^{(i)'} & =  pQ^{(i)} + c^{(i)T}, \\
-    Q_{D}^{(i) } & = \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)T} p + \bar{a}^ {(i)}, \\
-    Q_{D}^{(i)'} & =  p\bar{Q}^{(i)} + \bar{c}^{(i)T}. \\
+    Q_{N}^{(i) } & = \frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}, \\
+    Q_{N}^{(i)'} & =  pQ^{(i)} + c^{(i)}, \\
+    Q_{D}^{(i) } & = \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}, \\
+    Q_{D}^{(i)'} & =  p\bar{Q}^{(i)} + \bar{c}^{(i)}. \\
 \end{align*}
 
-Note that neither problems can be further handled analytically. For pairwise
-interactions, the roots of the derivate are given by solving a multivariare \(4-\)
-system of \(4-\) variables. The problem's size is gradually increasing every time
-an extra opponent is taken into account.
+Extracting the roots of equation's~(\ref{eq:mo_tournament_derivative}) numerator
+is not an easy task. This also applied to equation~(\ref{eq:derivative_numerator_condition}).
+Both equations are a system of \(4\) polynomials and the degree of the polynomials
+is gradually increasing every time an extra opponent is taken into account.
 
-Thus no further analytical consideration is given to these problem in this work.
-In the following sections numerical methods are introduced which will be used to
-discover best responses. Moreover, several constrain versions of our problem
-and their exact solutions are discussed.
+Because of that no further analytical consideration is given to problems~\ref{eq:mo_optimisation}
+and~\ref{eq:mo_tournament_optimisation}. Instead both best responses of memory one
+strategies, pairwise and in multi interactions, will be solved using numerical
+methods. The methods are their results are discussed in the following Section.
 
-Thought the best responses casn no longer be explored in an excat analytical way
-the denefit of constructing a promble in such form are several. A number of theoretical
-results will be presented here are results of out formulation.
+Though best responses can now longer be explored in an exact analytical way,
+there are still many advantages by the formulation of Theorem~\ref{theorem:mo_optimisation_tournament}.
+In the following subsection several theoretical results and exact ways of Identifying
+best responses in constrained versions of problem~\ref{eq:mo_tournament_optimisation} are presented.
+Moreover, the robustness of defection in specific interactions is investigated.
 
-Initially, though the memory one best respones for a pairwise interactions can
-be used. and compare results to press and syson. We can explore this case 
-for a subset of strategies called reactive. Reactve strategies and using the same
-formulation we. We can use 
+\subsection{Purely random}
 
-\section{Numerical Experiments}
-
-In this section we introcude several numerical methods to supplement our analytical
-approach.
-
-Initally, several insights and exact methods considered in this work to identify
-best responses in further constained problems are discussed. These further
-constrained problems taken into account subsets of memeory one strategies, which
-are
-
-\begin{itemize}
-    \item purely random strategies
-    \item reactive strategies.
-\end{itemize}
+A subset of memory one strategies are the purely random player. Purely random
+player....
 
 Purely random strategies are a set of memory one strategies where the transition
 probabilities of each state are the same. The optimisation problem of (\ref{eq:mo_optimisation})
@@ -462,49 +488,37 @@ now has an extra constraint and is re written as,
 \begin{aligned}
 \max_p: & \ u_q(p)
 \\
-\text{such that}: & \ p_1 = p_2 = p_3 = p_4 = p\\
-    & \ 0 \leq p \leq 1. 
+\text{such that}: & \ 0 \leq p \leq 1. 
 \end{aligned}
 \end{equation}
 
-The utility for a random player is now a function of a signle unknown. For the
-random player in an \(N\) interactions enviroment the folliwing algorithm allow us to
-retrieve the exact best responose.
+Note that \(u\) utility for a random player is now a function of a signle unknown.
+Solving analytically can be handeled. the utility is not given by
+and the maximum degreee fo the dervative it is know. Moreover
+the degree of the derivative of the average utilities can olso be calculated and we know
+that it ca not exceed th degree of 2N + 2. 
 
-\begin{algorithm}
-    \setstretch{1.35}
-    \caption{Best response algorithm for purely random strategies}\label{algo:purely}
-    \begin{algorithmic}[1]
-    \Procedure{Purely random search}{}
-    \State $N \gets \text{number of opponets}$ 
-    \State $S_q \gets \{0, 1\}$ 
-    \BState \emph{loop} $i=1 \text{ to } 2N$:
-    \State $S_q \cup \bar{p}_{i} \text{ for } \frac{du}{d\bar{p}_{i}} = 0$.
-    \State $i \gets i + 1$.
-    \State \textbf{goto} \emph{loop}.
-    \State \textbf{close};
-    \State $p^* \gets \text{argmax}(u_q (p)), p \in S_q $.
-    \EndProcedure
-    \end{algorithmic}
-    \end{algorithm}
+Thus in orde to maxmim we know the size of the candiate solution and the optimistically
+one is chosse from the set. This are given by Lemma
 
-Numerical experiments are perform and they suggest that algorithm~\ref{algo:purely}
-has managed to caputer the optimal behaviour. The results of the numerical experiments
-are given by Figure~\ref{fig:purely_random_results}.
+\begin{theorem}[Optimisation of purely random player in a tournament]
+    \label{theorem:mo_optimisation_tournament}
+    The optimal behaviour of a \textbf{purely random} player \((p, p, p, p)\)
+    in an \(N-\)memory one player tournament, \(\{q_{(1)}, q_{(2)} \dots,q_{(N)} \}
+    \) is given by:
+    
+    \[p^* = \textnormal{argmax}(\sum_{i=1} ^ {N} {u_q}^{(i)} (p) ), \ p \in S_{q(i)},\]
+    
+    where the set \(S_{q}\) is defined as:
+    
+    \[S_{q} = \
+    U_{\substack{i=1 \\ \lambda_i \neq \frac{do_i}{d1_i}}} ^ {2N}  \lambda_i \cup \{0, 1\},\]
+    
+    and \(\lambda_i\) are the eigenvalues of the companion matrix corresponding to the numerator of \[\frac{d}{dp} \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p).\]
+    \end{theorem}
+    
+    Note that the size of candidate solutions is \( 1 \leq|S_{q(i)}| \leq 2N + 2\).
 
-\begin{figure}
-    \centering
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=.95\textwidth]{img/match_random}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=.85\textwidth]{img/tournament_random}
-    \end{subfigure}
-    \caption{Numerical experiments for algorthim~\ref{algo:purely}.}
-    \label{fig:purely_random_results}
-\end{figure}
 
 For the case of the purely random players two more theoretical results are discussed.
 These are the cases where:
@@ -536,6 +550,9 @@ and they are respective to the actions of the opponent.
     q_{4} - 1) = 0\).
 \end{lemma}
 
+\subsection{Reactive Strategies}
+
+
 Reactive strategies are a set of memory one strategies where they only take into
 account the opponents's previous moves. The optimisation problem of (\ref{eq:mo_optimisation})
 now has an extra constraint and is re written as,
@@ -549,21 +566,236 @@ now has an extra constraint and is re written as,
 \end{aligned}
 \end{equation}
 
-The following algorithm is used.
+Such as tit for tat descirbed in Section Introduction. Reactive strageties
+allow us to look at \(u_p\) as a function of two unknow. Thus the partial
+derivates are 2 over 2 variables. This system can be solve analytically usin various
+methods. The method discribed in this work which has be choosen to be appropitate
+is the resultant theory. An example of this is given in lter sections, section\ref{}.
 
-Note that resultant theory is a field of algebraic geometry and Sylvester's formulation
-is a common resultant used for systems of 2 equations.
-We suggested that several other resultant can be used here but Sylberster; has been used for simplisiti and 
-speed reasons.
+\subsection{Stability of defection}
 
-A numerical experiment suggests that the best response behvaiour is captured by our algorithm.
+% Defection is known to ve the optimal action in the one shot game. Moreover,
+% was can be observed in nature~\cite{} humans tend to defect more because
+% of the assumption that defetion provides a player with the maximum payfoo.
+% And defection can be proven to me an optimal solution for given enviroments.
 
-The numerical methods
-results.
+% However can be provide a compact and exact condition to when is defection
+% the best response. Let us consider euqation~\ref{} again. We know will
+% consider the case where \(p = (0, 0, 0, 0)\), now for that point to be 
+% the best response the the sign of the derivate at tha given point mu be 
+% negative. Thus the utility function will onky be decreasing ater entering the
+% area of feasible solutions at point 0, 0, 0, 0.
 
-\section{Limitation of memory}
+% It has been shown that in order for the derivative to be zero then.
+% Lemma. Substituting p = (0, 0, 0, 0) the following condition is retrieved.
 
-\section{Stability of defection}
+% So we can assume that defection is stable as long as, given by lemma.
+
+
+% That holds true for pairwise interactions. It can then expand to mutly
+% interaction folloing equation.
+
+% It be more exact we can consider tha case where your opponent is indeed
+% a rective player.
+
+% Now that the condition for \(p^*\) has been defined in this sub section Lemma
+% \ref{lemma:memone_best_response} is used to inspect the stability of a defector.
+% For defection to be best response against a given opponent the point of \(p=(0, 0, 0,0)\)
+% should be the only optimal solution within our area of feasible solutions.
+% Thus the utility after the given point should be decreasing, this requires that
+% the derivative at the given point should be negative.
+
+% Consider the condition of Lemma~\ref{lemma:memone_best_response}. We substitute
+% vector \(p\) to be \(p=(0, 0, 0,0)\), the left hand size falls to zero and the
+% right hand sign remains \(\bar{c}^Ta - c^T\bar{a}\). Thus the signed of
+% the derivative is now given by rows:
+
+% \[\left[\begin{matrix}- q_{4} \left(4 q_{1} q_{2} - 3 q_{2}^{2} - 4 q_{2} q_{3} +
+%     3 q_{2} q_{4} + 4 q_{3} 5 q_{4} - 1\right),\\
+%     \left(q_{2} - 1\right) \left(4 q_{1} q_{4} - 3 q_{2} q_{4} + q_{2} - 4 q_{3} q_{4}
+%     + 4 q_{3} + 3 q_{4}^{2} - 6 q_{4} - 1\right)\end{matrix}\right]
+% \]
+
+% Both the first terms of the rows are known to be negative, thus the sign
+% of the rows is down to expressions:
+
+% \begin{subequations}
+% \begin{align}
+% \left(4 q_{1} q_{2} - 3 q_{2}^{2} - 4 q_{2} q_{3} + 3 q_{2} q_{4} + 4 q_{3} 5 q_{4} - 1\right)
+% \label{eq:derivative_sign_one} \\
+% \left(4 q_{1} q_{4} - 3 q_{2} q_{4} + q_{2} - 4 q_{3} q_{4}
+%     + 4 q_{3} + 3 q_{4}^{2} - 6 q_{4} - 1\right)\label{eq:derivative_sign_two}
+% \end{align}
+% \end{subequations}
+
+% The signs of equations (\ref{eq:derivative_sign_one}) and (\ref{eq:derivative_sign_two})
+% vary. There are cases that they have the same sign and cases that they do not,
+% this is shown by numerical example summarized in Table~\ref{table:sign_of_derivative}.
+
+% \begin{table}[htbp]
+% \begin{center}
+% \begin{tabular}{llllcc}
+%     \toprule
+%     {} & {}& {}& {}&  equation(\ref{eq:derivative_sign_one}) &  equation(\ref{eq:derivative_sign_two}) \\
+%     \midrule
+% \(q_1=\frac{3}{10}\),   & \(q_2=\frac{3}{20}\),  & \(q_3=\frac{13}{20}\), & \(q_4=\frac{7}{100}\)
+% &  + & + \\
+% \(q_1=\frac{17}{20}\),  & \(q_2=\frac{3}{4}\),   & \(q_3=\frac{2}{5}\),   & \(q_4=\frac{1}{4}\)
+% &  - & - \\
+% \(q_1=\frac{13}{100}\), & \(q_2=\frac{17}{20}\), & \(q_3=\frac{3}{4}\),   & \(q_4=\frac{1}{4}\)
+% &  - & + \\
+% \(q_1=\frac{11}{25}\),  & \(q_2=\frac{3}{10}\),  & \(q_3=\frac{9}{10}\),  & \(q_4=\frac{1}{2}\)
+% &  + & - \\
+%     \bottomrule
+% \end{tabular}
+% \end{center}
+% \caption{Numerical examples of the derivative's sign.}
+% \label{table:sign_of_derivative}
+% \end{table}
+
+% Defection is said to be stable if and only if both equation as negative, which
+% leads to the following lemma,
+
+% \begin{lemma}
+% Against a given opponent \(q\) defection is said to be the best response and if
+% and only if for the given opponent (\ref{eq:derivative_sign_one}) and
+% (\ref{eq:derivative_sign_two}) are negative.
+% \end{lemma}
+
+% Lets us consider a constrained version of the problem once again. Lets us
+% assume that the opponent is the  a reactive player \(q=(q_1, q_2, q_1, q_2)\).
+% By substituting \(q_3=q_1\) and \(q_4=q_2\) equations (\ref{eq:derivative_sign_one})
+% and (\ref{eq:derivative_sign_two}) are know re written as follow,
+
+% \[\left[\begin{matrix}- q_{2} \left(4 q_{1} - 5 q_{2} - 1\right)\\
+% \left(q_{2} - 1\right) \left(4 q_{1} - 5 q_{2} - 1\right)\end{matrix}\right]\]
+
+% The sign of both equations is now based on the same term,\(\left(4 q_{1} - 5 q_{2} - 1\right)\),
+% which is a term that can have both negative and positive values. This is shown
+% by Figure~\ref{fig:sign_against_reactive}.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.45\linewidth]{img/sign_against_reactive.pdf}
+%       \caption{Sign of \(\left(4 q_{1} - 5 q_{2} - 1\right)\).}
+%       \label{fig:sign_against_reactive}
+%   \end{figure}
+
+% Following this the following result is retrieved,
+
+% \begin{lemma}
+% Against a given reactive opponent \(q=(q_1, q_2, q_1, q_2)\) defection is said
+% to be stationary if and only if \(\left(4 q_{1} - 5 q_{2} - 1\right)\) is negative.
+% \end{lemma}
+
+% % Notebook A.0.9.3
+
+% In tournaments the derivative~\ref{} when we substitute \(p=(0, 0, 0, 0)\) the
+% equation is given by:
+ 
+% \begin{equation}
+% \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})
+% \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2
+% \end{equation}
+
+% The product is know to be positive thus in order for defection to be stable
+% in a tournament falls down to a similar case the match one. Now the sum of
+% columns must be negative.
+
+% \section{Numerical Experiments}
+
+% In this section we introcude several numerical methods to supplement our analytical
+% approach.
+
+% Initally, several insights and exact methods considered in this work to identify
+% best responses in further constained problems are discussed. These further
+% constrained problems taken into account subsets of memeory one strategies, which
+% are
+
+% \begin{itemize}
+%     \item purely random strategies
+%     \item reactive strategies.
+% \end{itemize}
+
+% Purely random strategies are a set of memory one strategies where the transition
+% probabilities of each state are the same. The optimisation problem of (\ref{eq:mo_optimisation})
+% now has an extra constraint and is re written as,
+
+% \begin{equation}\label{eq:random_optimisation}
+% \begin{aligned}
+% \max_p: & \ u_q(p)
+% \\
+% \text{such that}: & \ p_1 = p_2 = p_3 = p_4 = p\\
+%     & \ 0 \leq p \leq 1. 
+% \end{aligned}
+% \end{equation}
+
+% The utility for a random player is now a function of a signle unknown. For the
+% random player in an \(N\) interactions enviroment the folliwing algorithm allow us to
+% retrieve the exact best responose.
+
+% \begin{algorithm}
+%     \setstretch{1.35}
+%     \caption{Best response algorithm for purely random strategies}\label{algo:purely}
+%     \begin{algorithmic}[1]
+%     \Procedure{Purely random search}{}
+%     \State $N \gets \text{number of opponets}$ 
+%     \State $S_q \gets \{0, 1\}$ 
+%     \BState \emph{loop} $i=1 \text{ to } 2N$:
+%     \State $S_q \cup \bar{p}_{i} \text{ for } \frac{du}{d\bar{p}_{i}} = 0$.
+%     \State $i \gets i + 1$.
+%     \State \textbf{goto} \emph{loop}.
+%     \State \textbf{close};
+%     \State $p^* \gets \text{argmax}(u_q (p)), p \in S_q $.
+%     \EndProcedure
+%     \end{algorithmic}
+%     \end{algorithm}
+
+% Numerical experiments are perform and they suggest that algorithm~\ref{algo:purely}
+% has managed to caputer the optimal behaviour. The results of the numerical experiments
+% are given by Figure~\ref{fig:purely_random_results}.
+
+% \begin{figure}
+%     \centering
+%     \begin{subfigure}{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=.95\textwidth]{img/match_random}
+%     \end{subfigure}
+%     \begin{subfigure}{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=.85\textwidth]{img/tournament_random}
+%     \end{subfigure}
+%     \caption{Numerical experiments for algorthim~\ref{algo:purely}.}
+%     \label{fig:purely_random_results}
+% \end{figure}
+
+
+% Reactive strategies are a set of memory one strategies where they only take into
+% account the opponents's previous moves. The optimisation problem of (\ref{eq:mo_optimisation})
+% now has an extra constraint and is re written as,
+
+% \begin{equation}\label{eq:random_optimisation}
+% \begin{aligned}
+% \max_p: & \ u_q(p)
+% \\
+% \text{such that}: & \ p_1 = p_3 \text{ and } p_2 = p_4\\
+%     & \ 0 \leq p_1, p_2 \leq 1.
+% \end{aligned}
+% \end{equation}
+
+% The following algorithm is used.
+
+% Note that resultant theory is a field of algebraic geometry and Sylvester's formulation
+% is a common resultant used for systems of 2 equations.
+% We suggested that several other resultant can be used here but Sylberster; has been used for simplisiti and 
+% speed reasons.
+
+% A numerical experiment suggests that the best response behvaiour is captured by our algorithm.
+
+% The numerical methods
+% results.
+
+% \section{Limitation of memory}
 
 % Bibliography
 \bibliographystyle{plain}
