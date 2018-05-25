@@ -147,7 +147,9 @@ class TestWriteFile(unittest.TestCase):
                                 params=self.params, turns=self.turns,
                                 repetitions=self.repetitions, method_params=self.method_params)
 
-        self.assertEqual(len(df.columns), 24)
+        self.assertEqual(len(df.columns), 26)
+        self.assertEqual(df['turns'].values[0], 10)
+        self.assertEqual(df['repetitions'].values[0], 2)
         self.assertTrue(df[r'$\bar{q}_1$'].isnull().all())
         self.assertTrue(df[r'$\bar{q}_2$'].isnull().all())
         self.assertTrue(df[r'$\bar{q}_3$'].isnull().all())
@@ -159,7 +161,7 @@ class TestWriteFile(unittest.TestCase):
                                 [1, 1, 1, 1]], params=self.params, turns=self.turns,
                                 repetitions=self.repetitions, method_params=self.method_params)
 
-        self.assertEqual(len(df.columns), 24)
+        self.assertEqual(len(df.columns), 26)
         self.assertFalse(df[r'$\bar{q}_1$'].isnull().all())
         self.assertFalse(df[r'$\bar{q}_2$'].isnull().all())
         self.assertFalse(df[r'$\bar{q}_3$'].isnull().all())
@@ -167,7 +169,7 @@ class TestWriteFile(unittest.TestCase):
 
 class TestGetColumns(unittest.TestCase):
     # without gambler
-    len_cols = 22
+    len_cols = 24
 
     def test_get_columns_no_params(self):
         params = [0, 0, 0]
