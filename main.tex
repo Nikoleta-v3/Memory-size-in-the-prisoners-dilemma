@@ -272,7 +272,7 @@ is used to explore bests responses in memory one strategies. Moreover, the new
 formulation of Theorem~\ref{theorem:quadratic_form_u} allow us to retrieve a number
 of theoretical results. These are also discussed in the next sections.
 
-\section{Analytically Results}
+\section{Analytically Results}\label{section:analytical_results}
 
 In the introduction a question was raised: which memory one strategy is the \textbf{best response}
 against another memory one? This will be considered as an optimisation problem,
@@ -308,7 +308,7 @@ stated that a quadratic form will be concave if and only if it's symmetric matri
 negative semi definite. In Appendix, it is proved that neither the numerator or %TODO add appendix
 the denominator of equation~(\ref{eq:optimisation_quadratic}) are concave.
 
-\subsection{Best responses}
+\subsection{Best responses}\label{section:memory_one_analytical}
 
 The non concavity of \(u(p)\) indicates multiple local optimal points. Thus we
 are not searching a single optimal point but a set of candidate optimal points.
@@ -469,40 +469,44 @@ and~\ref{eq:mo_tournament_optimisation}. Instead both best responses of memory o
 strategies, pairwise and in multi interactions, will be solved using numerical
 methods. The methods are their results are discussed in the following Section.
 
-Though best responses can now longer be explored in an exact analytical way,
-there are still many advantages by the formulation of Theorem~\ref{theorem:mo_optimisation_tournament}.
-In the following subsection several theoretical results and exact ways of Identifying
+Though best responses can no longer be explored in an exact analytical way
+there are still many advantages by the formulation of Theorem~\ref{theorem:quadratic_form_u}.
+In the following subsections several theoretical results and exact ways of identifying
 best responses in constrained versions of problem~\ref{eq:mo_tournament_optimisation} are presented.
 Moreover, the robustness of defection in specific interactions is investigated.
 
-\subsection{Purely random}
+\subsection{Purely random}\label{section:purely_analytical}
 
-A subset of memory one strategies are the purely random player. Purely random
-player....
-
+The first constrained problem to be explored is that of the purely random strategies.
 Purely random strategies are a set of memory one strategies where the transition
 probabilities of each state are the same. The optimisation problem of (\ref{eq:mo_optimisation})
 now has an extra constraint and is re written as,
 
 \begin{equation}\label{eq:random_optimisation}
 \begin{aligned}
-\max_p: & \ u_q(p)
+\max_p: & \ \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p) 
 \\
-\text{such that}: & \ 0 \leq p \leq 1. 
+\text{such that}: & \ 0 \leq p \leq 1 \\
+                  & p_1 = p_2 = p_3 = p_4 = p.
 \end{aligned}
 \end{equation}
 
-Note that \(u\) utility for a random player is now a function of a signle unknown.
-Solving analytically can be handeled. the utility is not given by
-and the maximum degreee fo the dervative it is know. Moreover
-the degree of the derivative of the average utilities can olso be calculated and we know
-that it ca not exceed th degree of 2N + 2. 
+Due to the additional constrain, \(\sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) \) is now a function of a single
+variable \(p\) and it can be handled analytically. To construct the set of candidate
+solutions a similar approach as the one described in previous sections is used. Thus:
 
-Thus in orde to maxmim we know the size of the candiate solution and the optimistically
-one is chosse from the set. This are given by Lemma
+\begin{itemize}
+    \item either \(p\) is \(\in {0, 1}\)
+    \item or \(p\) is given by the roots of \(\frac{d \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)}{dp}\).
+\end{itemize}
 
-\begin{theorem}[Optimisation of purely random player in a tournament]
-    \label{theorem:mo_optimisation_tournament}
+The roots of the derivative are given by nullifying the numerator of the derivative.
+It has been proved, Appendix, that the degree of the numerator does not exceed
+\(2 N\) where \(N\) is the number of opponents. Thus there are \(2N\) possible
+roots in the feasible space. These results are summarized by Lemma~\ref{lemma:purely_optimisation}.
+
+\begin{lemma}[Optimisation of purely random player in a tournament]
+    \label{lemma:purely_optimisation}
     The optimal behaviour of a \textbf{purely random} player \((p, p, p, p)\)
     in an \(N-\)memory one player tournament, \(\{q_{(1)}, q_{(2)} \dots,q_{(N)} \}
     \) is given by:
@@ -511,29 +515,31 @@ one is chosse from the set. This are given by Lemma
     
     where the set \(S_{q}\) is defined as:
     
-    \[S_{q} = \
-    U_{\substack{i=1 \\ \lambda_i \neq \frac{do_i}{d1_i}}} ^ {2N}  \lambda_i \cup \{0, 1\},\]
-    
-    and \(\lambda_i\) are the eigenvalues of the companion matrix corresponding to the numerator of \[\frac{d}{dp} \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p).\]
-    \end{theorem}
-    
-    Note that the size of candidate solutions is \( 1 \leq|S_{q(i)}| \leq 2N + 2\).
+    \[S_{q} = \{0, \lambda_i, 1\},\text{ for } i \in [1, 2N].\]
 
+    Note that \(\lambda_i\) are the eigenvalues of the companion matrix corresponding
+    to the numerator of \[\frac{d}{dp} \sum_{i=1} ^ {N} {u_q}^{(i)} (p)\]
 
-For the case of the purely random players two more theoretical results are discussed.
-These are the cases where:
+    and \(\lambda_i\) are such that the denominator is not nullified.
+    \end{lemma}
+
+To compute the roots of the polynomial the algorithm used is that of computing the
+eigenvalues of the corresponding companion matrix. The algorithm is presented
+and discussed in~\cite{Edelman1995}.
+
+Furthermore, for the case of the purely random players two more theoretical results
+are discussed. These are the cases where:
 
 \begin{itemize}
-    \item the oppponent has manage to make us indifferent
-    \item the best behaviour is pure strategy.
+    \item the opponent has manage to make a random player indifferent
+    \item the best behaviour is a pure strategy.
 \end{itemize}
 
-The importance of these two lemmas is as follow equivilently. Being indifferent
-means that a plaers action no longer affect the game. Indentifying when a player
-makes a indifferent is good. Moreover by pure strategy we mean that a player
-would want to act as a defector or cooperator, as amixed stragegy is not ideal.
-
-The results are given equivilently by Lemmas~\ref{lemma:constant} and~\ref{lemma:linear}
+There is importance in both results. Initially, being indifferent refers to our
+actions no having any effects on the match. Thus our behaviour can not be optimised.
+Secondly, by a pure strategy we are referring to the edge cases, behaving as a
+defector or a cooperator. In in those case it is know that \(p^*\) is \(\in {0, 1}\).
+The results are given equivalently by Lemmas~\ref{lemma:constant} and~\ref{lemma:linear}
 and they are respective to the actions of the opponent.
 
 \begin{lemma}\label{lemma:constant}
@@ -550,29 +556,28 @@ and they are respective to the actions of the opponent.
     q_{4} - 1) = 0\).
 \end{lemma}
 
-\subsection{Reactive Strategies}
+% \subsection{Reactive Strategies}
 
+% Reactive strategies are a set of memory one strategies where they only take into
+% account the opponents's previous moves. The optimisation problem of (\ref{eq:mo_optimisation})
+% now has an extra constraint and is re written as,
 
-Reactive strategies are a set of memory one strategies where they only take into
-account the opponents's previous moves. The optimisation problem of (\ref{eq:mo_optimisation})
-now has an extra constraint and is re written as,
+% \begin{equation}\label{eq:random_optimisation}
+% \begin{aligned}
+% \max_p: & \ u_q(p)
+% \\
+% \text{such that}: & \ p_1 = p_3 \text{ and } p_2 = p_4\\
+%     & \ 0 \leq p_1, p_2 \leq 1.
+% \end{aligned}
+% \end{equation}
 
-\begin{equation}\label{eq:random_optimisation}
-\begin{aligned}
-\max_p: & \ u_q(p)
-\\
-\text{such that}: & \ p_1 = p_3 \text{ and } p_2 = p_4\\
-    & \ 0 \leq p_1, p_2 \leq 1.
-\end{aligned}
-\end{equation}
+% Such as tit for tat descirbed in Section Introduction. Reactive strageties
+% allow us to look at \(u_p\) as a function of two unknow. Thus the partial
+% derivates are 2 over 2 variables. This system can be solve analytically usin various
+% methods. The method discribed in this work which has be choosen to be appropitate
+% is the resultant theory. An example of this is given in lter sections, section\ref{}.
 
-Such as tit for tat descirbed in Section Introduction. Reactive strageties
-allow us to look at \(u_p\) as a function of two unknow. Thus the partial
-derivates are 2 over 2 variables. This system can be solve analytically usin various
-methods. The method discribed in this work which has be choosen to be appropitate
-is the resultant theory. An example of this is given in lter sections, section\ref{}.
-
-\subsection{Stability of defection}
+% \subsection{Stability of defection}
 
 % Defection is known to ve the optimal action in the one shot game. Moreover,
 % was can be observed in nature~\cite{} humans tend to defect more because
@@ -702,73 +707,84 @@ is the resultant theory. An example of this is given in lter sections, section\r
 % in a tournament falls down to a similar case the match one. Now the sum of
 % columns must be negative.
 
-% \section{Numerical Experiments}
+\section{Numerical Experiments}
 
-% In this section we introcude several numerical methods to supplement our analytical
-% approach.
+In this section several analytical results of Section~\ref{section:analytical_results}
+are validated using numerical experiments. Both methods and results are discussed.
+Initially, numerical methods for best responses in the constrained versions of
+the problem are presented. These further constrained problems taken into account
+in this work were:
 
-% Initally, several insights and exact methods considered in this work to identify
-% best responses in further constained problems are discussed. These further
-% constrained problems taken into account subsets of memeory one strategies, which
-% are
+\begin{itemize}
+    \item purely random strategies
+    \item reactive strategies.
+\end{itemize}
 
-% \begin{itemize}
-%     \item purely random strategies
-%     \item reactive strategies.
-% \end{itemize}
+Moreover the answer to the questions discussed in Section~\ref{section:memory_one_analytical}
+are answered via numerical algorithms. The question risen was identifying the best
+response memory one strategy.
 
-% Purely random strategies are a set of memory one strategies where the transition
-% probabilities of each state are the same. The optimisation problem of (\ref{eq:mo_optimisation})
-% now has an extra constraint and is re written as,
+\subsection{Purely Random Strategies}
 
-% \begin{equation}\label{eq:random_optimisation}
-% \begin{aligned}
-% \max_p: & \ u_q(p)
-% \\
-% \text{such that}: & \ p_1 = p_2 = p_3 = p_4 = p\\
-%     & \ 0 \leq p \leq 1. 
-% \end{aligned}
-% \end{equation}
+Best responses of purely random strategies were given by Lemma~\ref{lemma:purely_optimisation}
+as presented in Section~\ref{section:purely_analytical}. Based on the results
+Algorithm~\ref{algo:purely} is constructed to perform a number of numerical experiments
+for pairwise and multi agent interactions.
 
-% The utility for a random player is now a function of a signle unknown. For the
-% random player in an \(N\) interactions enviroment the folliwing algorithm allow us to
-% retrieve the exact best responose.
+\begin{algorithm}
+    \setstretch{1.35}
+    \caption{Best response algorithm for purely random strategies}\label{algo:purely}
+    \begin{algorithmic}[1]
+    \Procedure{Purely random search}{}
+    \State $N \gets \text{number of opponets}$ 
+    \State $S_q \gets \{0, 1\}$ 
+    \State $u' \gets \frac{d\sum\limits_{i=1} ^ {N}u}{d\bar{p}}$ 
+    \State $\frac{u_N}{u_D} \gets u'$ 
+    \State $C(u_N) \gets \text{companion matrix of } u_N$
+    \BState \emph{loop} $i=1 \text{ to } 2N$:
+    \State $\lambda_i \gets \text{eigenvalue of } C(u_N)$
+    \If {$u_D(\lambda_i) \neq 0$}
+    \State $S_q \cup \lambda_i $.
+    \EndIf
+    \State \textbf{goto} \emph{loop}.
+    \State \textbf{close};
+    \State $p^* \gets \text{argmax}(\sum\limits_{i=1} ^ {N} u_{q^{(i)}} (p)), p \in S_q $.
+    \EndProcedure
+    \end{algorithmic}
+    \end{algorithm}
 
-% \begin{algorithm}
-%     \setstretch{1.35}
-%     \caption{Best response algorithm for purely random strategies}\label{algo:purely}
-%     \begin{algorithmic}[1]
-%     \Procedure{Purely random search}{}
-%     \State $N \gets \text{number of opponets}$ 
-%     \State $S_q \gets \{0, 1\}$ 
-%     \BState \emph{loop} $i=1 \text{ to } 2N$:
-%     \State $S_q \cup \bar{p}_{i} \text{ for } \frac{du}{d\bar{p}_{i}} = 0$.
-%     \State $i \gets i + 1$.
-%     \State \textbf{goto} \emph{loop}.
-%     \State \textbf{close};
-%     \State $p^* \gets \text{argmax}(u_q (p)), p \in S_q $.
-%     \EndProcedure
-%     \end{algorithmic}
-%     \end{algorithm}
+The results of pairwise interactions are given by Figure~\ref{fig:purely_random_pairwise_results}.
+There is it evident that the optimal behaviour has been captured by our search algorithm.
+Moreover, the algorithm is also validated for tournament interactions, as shown
+by Figure~\ref{fig:purely_random_tournament_results}.
 
-% Numerical experiments are perform and they suggest that algorithm~\ref{algo:purely}
-% has managed to caputer the optimal behaviour. The results of the numerical experiments
-% are given by Figure~\ref{fig:purely_random_results}.
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=.95\textwidth]{img/purely_random_match_one.pdf}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=.95\textwidth]{img/purely_random_match_two.pdf}
+    \end{subfigure}
+    \caption{Numerical experiments for Algorithm~\ref{algo:purely} for \(N=1\).}
+    \label{fig:purely_random_pairwise_results}
+\end{figure}
 
-% \begin{figure}
-%     \centering
-%     \begin{subfigure}{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=.95\textwidth]{img/match_random}
-%     \end{subfigure}
-%     \begin{subfigure}{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=.85\textwidth]{img/tournament_random}
-%     \end{subfigure}
-%     \caption{Numerical experiments for algorthim~\ref{algo:purely}.}
-%     \label{fig:purely_random_results}
-% \end{figure}
-
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=.95\textwidth]{img/purely_random_tournament_one.pdf}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=.95\textwidth]{img/purely_random_tournament_two.pdf}
+    \end{subfigure}
+    \caption{Numerical experiments for Algorithm~\ref{algo:purely} for \(N>1\).}
+    \label{fig:purely_random_tournament_results}
+\end{figure}
 
 % Reactive strategies are a set of memory one strategies where they only take into
 % account the opponents's previous moves. The optimisation problem of (\ref{eq:mo_optimisation})
