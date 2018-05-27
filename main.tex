@@ -28,6 +28,7 @@
                 quotes, calc, er, positioning}
 
 \newtheorem{lemma}[theorem]{Lemma}
+\def\arraystretch{1.5}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Memory size in the Prisoner's Dilemma}
 \author{Nikoleta E. Glynatsi \and Vincent Knight}
@@ -100,7 +101,7 @@ The winning strategy of both tournaments was a strategy called Tit for Tat. Tit 
 is a strategy which starts by cooperating and then mimics the last move of
 it's opponent. This is a strategy which makes use of the previous move of the opponent
 only and it's called a reactive strategy. Reactive strategies have been used
-to explore best behavior in the IPD and a framework for studying such strategies
+to explore best behaviour in the IPD and a framework for studying such strategies
 was introduced in~\cite{Nowak1989}. This was later used to introduce other
 reactive strategies such as Generous Tit For Tat~\cite{Nowak1990}.
 
@@ -624,135 +625,106 @@ solved using an exact method. Note that for pairwise interactions the maximum de
 of the polynomials is equal to \(2N\), however the degree increases as opponents
 are introduced.
 
-% \subsection{Stability of defection}
+\subsection{Stability of defection}
 
-% Defection is known to ve the optimal action in the one shot game. Moreover,
-% was can be observed in nature~\cite{} humans tend to defect more because
-% of the assumption that defetion provides a player with the maximum payfoo.
-% And defection can be proven to me an optimal solution for given enviroments.
+The final theoretical result explored is the stability of defection. Defection is
+the dominant strategy in the one shot game and it can be proven to be an optimal
+strategy in given environments. 
 
-% However can be provide a compact and exact condition to when is defection
-% the best response. Let us consider euqation~\ref{} again. We know will
-% consider the case where \(p = (0, 0, 0, 0)\), now for that point to be 
-% the best response the the sign of the derivate at tha given point mu be 
-% negative. Thus the utility function will onky be decreasing ater entering the
-% area of feasible solutions at point 0, 0, 0, 0.
-
-% It has been shown that in order for the derivative to be zero then.
-% Lemma. Substituting p = (0, 0, 0, 0) the following condition is retrieved.
-
-% So we can assume that defection is stable as long as, given by lemma.
+In this manuscript we try to provide a condition for when defection is the
+best response. This will be done by considering equation~(\ref{eq:derivative_of_quadratic}).
+Let equation~(\ref{eq:derivative_of_quadratic}) for \(p_0 = (0, 0, 0, 0)\) given by,
 
 
-% That holds true for pairwise interactions. It can then expand to mutly
-% interaction folloing equation.
+\begin{equation}\label{eq:derivative_of_quadratic_zero}
+    \begin{aligned}
+     \frac{du}{dp_0} & = && \frac{c \bar{a} - \bar{c}a}
+      {\bar{a}^2} .\\
+    \end{aligned}
+\end{equation}
 
-% It be more exact we can consider tha case where your opponent is indeed
-% a rective player.
+The numerator \(\bar{c}a - c\bar{a}\) is given by,
 
-% Now that the condition for \(p^*\) has been defined in this sub section Lemma
-% \ref{lemma:memone_best_response} is used to inspect the stability of a defector.
-% For defection to be best response against a given opponent the point of \(p=(0, 0, 0,0)\)
-% should be the only optimal solution within our area of feasible solutions.
-% Thus the utility after the given point should be decreasing, this requires that
-% the derivative at the given point should be negative.
+\[\input{tex/defection_matrix.txt}\]
 
-% Consider the condition of Lemma~\ref{lemma:memone_best_response}. We substitute
-% vector \(p\) to be \(p=(0, 0, 0,0)\), the left hand size falls to zero and the
-% right hand sign remains \(\bar{c}^Ta - c^T\bar{a}\). Thus the signed of
-% the derivative is now given by rows:
+and \(\bar{a} ^ 2 = (-q_2 + q_4 + 1) ^ 2\) which is always positive. In order
+for defection to be the best response the derivative must have a negative
+sign at the point \(p_0\). That means that the utility is only
+decreasing after \(p_0\) and the points before are outside our feasible
+space.
 
-% \[\left[\begin{matrix}- q_{4} \left(4 q_{1} q_{2} - 3 q_{2}^{2} - 4 q_{2} q_{3} +
-%     3 q_{2} q_{4} + 4 q_{3} 5 q_{4} - 1\right),\\
-%     \left(q_{2} - 1\right) \left(4 q_{1} q_{4} - 3 q_{2} q_{4} + q_{2} - 4 q_{3} q_{4}
-%     + 4 q_{3} + 3 q_{4}^{2} - 6 q_{4} - 1\right)\end{matrix}\right]
-% \]
+The sign of the derivative is given by the numerator, thus \(\bar{c}a - c\bar{a}\).
+More specifically from equations,
 
-% Both the first terms of the rows are known to be negative, thus the sign
-% of the rows is down to expressions:
+\begin{equation}\label{eq:defection_condition_one}
+    \input{tex/defection_condition_one.txt}
+\end{equation}
+\begin{equation}\label{eq:defection_condition_two}
+    \input{tex/defection_condition_two.txt}
+\end{equation}
 
-% \begin{subequations}
-% \begin{align}
-% \left(4 q_{1} q_{2} - 3 q_{2}^{2} - 4 q_{2} q_{3} + 3 q_{2} q_{4} + 4 q_{3} 5 q_{4} - 1\right)
-% \label{eq:derivative_sign_one} \\
-% \left(4 q_{1} q_{4} - 3 q_{2} q_{4} + q_{2} - 4 q_{3} q_{4}
-%     + 4 q_{3} + 3 q_{4}^{2} - 6 q_{4} - 1\right)\label{eq:derivative_sign_two}
-% \end{align}
-% \end{subequations}
+Both signs of the partial derivatives must be negative in order for the overall
+function to be decreasing, thus defection being the best response.
+The signs of equations (\ref{eq:defection_condition_one}) and (\ref{eq:defection_condition_two})
+vary. There are cases that they have the same sign and cases that they do not,
+this is shown by numerical example summarized in Table~\ref{table:sign_of_derivative}.
 
-% The signs of equations (\ref{eq:derivative_sign_one}) and (\ref{eq:derivative_sign_two})
-% vary. There are cases that they have the same sign and cases that they do not,
-% this is shown by numerical example summarized in Table~\ref{table:sign_of_derivative}.
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{cllllcc}
+    \toprule
+    {}& {} & {}& {}& {}&  equation(\ref{eq:defection_condition_one}) &  equation(\ref{eq:defection_condition_two}) \\
+    \midrule
+1 & \(q_1=\frac{3}{10}\),   & \(q_2=\frac{3}{20}\),  & \(q_3=\frac{13}{20}\), & \(q_4=\frac{7}{100}\)
+&  + & + \\
+2 & \(q_1=\frac{11}{25}\),  & \(q_2=\frac{3}{10}\),  & \(q_3=\frac{9}{10}\),  & \(q_4=\frac{1}{2}\)
+&  - & - \\
+3 & \(q_1=\frac{17}{20}\),  & \(q_2=\frac{3}{4}\),   & \(q_3=\frac{2}{5}\),   & \(q_4=\frac{1}{4}\)
+&  - & + \\
+4 & \(q_1=\frac{13}{88}\),  & \(q_2=\frac{21}{92}\),  & \(q_3=\frac{21}{26}\),  & \(q_4=\frac{20}{67}\)
+&  + & - \\
+    \bottomrule
+\end{tabular}
+\end{center}
+\caption{Numerical examples of the derivative's sign.}
+\label{table:sign_of_derivative}
+\end{table}
 
-% \begin{table}[htbp]
-% \begin{center}
-% \begin{tabular}{llllcc}
-%     \toprule
-%     {} & {}& {}& {}&  equation(\ref{eq:derivative_sign_one}) &  equation(\ref{eq:derivative_sign_two}) \\
-%     \midrule
-% \(q_1=\frac{3}{10}\),   & \(q_2=\frac{3}{20}\),  & \(q_3=\frac{13}{20}\), & \(q_4=\frac{7}{100}\)
-% &  + & + \\
-% \(q_1=\frac{17}{20}\),  & \(q_2=\frac{3}{4}\),   & \(q_3=\frac{2}{5}\),   & \(q_4=\frac{1}{4}\)
-% &  - & - \\
-% \(q_1=\frac{13}{100}\), & \(q_2=\frac{17}{20}\), & \(q_3=\frac{3}{4}\),   & \(q_4=\frac{1}{4}\)
-% &  - & + \\
-% \(q_1=\frac{11}{25}\),  & \(q_2=\frac{3}{10}\),  & \(q_3=\frac{9}{10}\),  & \(q_4=\frac{1}{2}\)
-% &  + & - \\
-%     \bottomrule
-% \end{tabular}
-% \end{center}
-% \caption{Numerical examples of the derivative's sign.}
-% \label{table:sign_of_derivative}
-% \end{table}
+Lets us consider a constrained version of the problem once again. Lets us
+assume that the opponent is the  a reactive player \(q=(q_1, q_2, q_1, q_2)\).
+By substituting \(q_3=q_1\) and \(q_4=q_2\) equations (\ref{eq:defection_condition_one})
+and (\ref{eq:defection_condition_two}) are know re written as follow,
 
-% Defection is said to be stable if and only if both equation as negative, which
-% leads to the following lemma,
+\[\left[\begin{matrix}- q_{2} \left(4 q_{1} - 5 q_{2} - 1\right)\\
+\left(q_{2} - 1\right) \left(4 q_{1} - 5 q_{2} - 1\right)\end{matrix}\right]\]
 
-% \begin{lemma}
-% Against a given opponent \(q\) defection is said to be the best response and if
-% and only if for the given opponent (\ref{eq:derivative_sign_one}) and
-% (\ref{eq:derivative_sign_two}) are negative.
-% \end{lemma}
+The sign of both equations is now based on the same term,\(\left(4 q_{1} - 5 q_{2} - 1\right)\),
+which is a term that can have both negative and positive values. This is shown
+by Figure~\ref{fig:sign_against_reactive}. Following this the following result is retrieved,
 
-% Lets us consider a constrained version of the problem once again. Lets us
-% assume that the opponent is the  a reactive player \(q=(q_1, q_2, q_1, q_2)\).
-% By substituting \(q_3=q_1\) and \(q_4=q_2\) equations (\ref{eq:derivative_sign_one})
-% and (\ref{eq:derivative_sign_two}) are know re written as follow,
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.45\linewidth]{img/sign_against_reactive.pdf}
+      \caption{Sign of \(\left(4 q_{1} - 5 q_{2} - 1\right)\).}
+      \label{fig:sign_against_reactive}
+  \end{figure}
 
-% \[\left[\begin{matrix}- q_{2} \left(4 q_{1} - 5 q_{2} - 1\right)\\
-% \left(q_{2} - 1\right) \left(4 q_{1} - 5 q_{2} - 1\right)\end{matrix}\right]\]
+\begin{lemma}
+Against a given reactive opponent \(q=(q_1, q_2, q_1, q_2)\) defection is said
+to be stationary if and only if \(\left(4 q_{1} - 5 q_{2} - 1\right)\) is negative.
+\end{lemma}
 
-% The sign of both equations is now based on the same term,\(\left(4 q_{1} - 5 q_{2} - 1\right)\),
-% which is a term that can have both negative and positive values. This is shown
-% by Figure~\ref{fig:sign_against_reactive}.
-
-% \begin{figure}[htbp]
-%     \centering
-%     \includegraphics[width=0.45\linewidth]{img/sign_against_reactive.pdf}
-%       \caption{Sign of \(\left(4 q_{1} - 5 q_{2} - 1\right)\).}
-%       \label{fig:sign_against_reactive}
-%   \end{figure}
-
-% Following this the following result is retrieved,
-
-% \begin{lemma}
-% Against a given reactive opponent \(q=(q_1, q_2, q_1, q_2)\) defection is said
-% to be stationary if and only if \(\left(4 q_{1} - 5 q_{2} - 1\right)\) is negative.
-% \end{lemma}
-
-% % Notebook A.0.9.3
-
-% In tournaments the derivative~\ref{} when we substitute \(p=(0, 0, 0, 0)\) the
-% equation is given by:
+In tournaments the derivative~\ref{eq:derivative_of_quadratic} when we substitute
+for \(p_0\) the equation is given by:
  
-% \begin{equation}
-% \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})
-% \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2
-% \end{equation}
+\begin{equation}
+\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})
+\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2
+\end{equation}
 
-% The product is know to be positive thus in order for defection to be stable
-% in a tournament falls down to a similar case the match one. Now the sum of
-% columns must be negative.
+The product is know to be positive thus in order for defection to be stable
+in a tournament falls down to a similar case the match one. Now the sum of
+columns must be negative.
 
 \section{Numerical Experiments}
 
