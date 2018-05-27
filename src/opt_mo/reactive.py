@@ -2,13 +2,19 @@
 A script from identifying best responses of reactive strategies
 """
 
+import itertools
+import sys
+import time
+
+import axelrod as axl
 import numpy as np
+import pandas as pd
 import sympy as sym
+from scipy.optimize import fsolve
+from sympy.polys import subresultants_qq_zz
+
 import opt_mo
 
-from sympy.polys import subresultants_qq_zz
-from scipy.optimize import fsolve
-import itertools
 
 def round_matrix_expressions(matrix, num_digits, variable):
     """
@@ -93,5 +99,55 @@ def reactive_set(opponents):
 def argmax(opponents, solution_set):
            
     solutions = [(p_1, p_2, -opt_mo.tournament_utility((p_1, p_2, p_1, p_2), opponents))
-                 for p_1, p_2 in itertools.combinations(solution_set, 2)]
+                 for p_1, p_2 in itertools.product(solution_set, repeat=2)]
     return max(solutions, key=lambda item:item[-1])
+
+
+def get_columns():
+    cols = ['index', '$q_1$', '$q_2$', '$q_3$', '$q_4$', 'p_1^*', 'p_2^*', '$u_q$',
+            'Optimisation time', r'$\bar{q}_1$', r'$\bar{q}_2$', r'$\bar{q}_3$',
+            r'$\bar{q}_4$', 'p_1^*T', 'p_2^*T', '$u_q$', 'Optimisation time']
+    return cols
+
+if __name__ == '__main__':
+    index = int(sys.argv[1])
+
+    location = '~/rsc/Memory-size-in-the-prisoners-dilemma/data/random_numerical_experiments/'
+
+    i = (index - 1) * 100
+    while i <= index:
+        axl.seed(i)
+        filename =  location + 'reactive/{}.csv'.format(i)
+
+        row = [index]
+        main_op = [np.random.random(4)]
+        row += [q for q in main_op[0]]
+
+        # match
+        start_optimisation = time.clock()
+
+        solution_set = reactive_set(main_op)
+        p_1, p_2, utility = opt_mo.argmax(main_op, solution_set)
+
+        row.append(p_1), row.append(p_2), row.append(utility)
+        row.append(time.clock() - start_optimisation)
+        print('Finish match')
+        print('------------')
+
+        # tournament
+        axl.seed(i + 10000)
+        other = [np.random.random(4)]
+        row += [q for q in other[0]]
+        opponents = main_op + other
+
+        print('Start Tournament')
+        start_optimisation = time.clock()
+        solution_set = reactive_set(opponents)
+        p_1, p_2, u = opt_mo.argmax(opponents, solution_set)
+
+        row.append(p_1), row.append(p_2), row.append(u)
+        end_match = time.clock() - start_optimisation
+
+        df = pd.DataFrame([row], columns=get_columns())
+        df.to_csv(filename)
+        i += 1

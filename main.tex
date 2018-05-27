@@ -859,13 +859,56 @@ response behaviour is captured by our algorithm.
     \label{fig:reactive_pairwise_results}
 \end{figure}
 
-\subsection{Memory one strategies}
+\subsection{Memory one strategies}\label{section:mo_numerical}
 
-As discussed in section memory one strategies are explored numerically.
+As discussed in Section the best response in memory one strategies will be captured
+using a numerical method. In this subsection the reasons for choosing our method
+as well as the parameters are presented.
+
+Moreover, a parameter sweep has been performed and here we wil discuss the results.
 The algorithm used in order to maximise problem is bayesian optimisation.
+
+Bayesian optimisation is ...
 
 \section{Limitation of memory}
 
+Best response behaviour of memory one strategies has been successfully captured
+as discuss in Section~\ref{section:mo_numerical}. The second part of this manuscript
+is focused on test the limitations of those very best responses. 
+
+This is achieved by comparing their performance with more complex strategies. In
+this section the methodology is covered as well as the results.
+
+\subsection{Methodology}
+
+In order to compare memory one strategies with complex strategies we perform
+the following steps. Tournaments of size \(N=3\) are considered, as those are
+the smallest possible tournaments. For a number of tournaments using 
+the results of Section, we identify the best memory one strategy and it's
+utility for the given environment.
+
+Afterwards, the memory on strategy is removed from the tournament and it is
+replaced with a more complex strategy. A more complex strategy is a strategy
+with a memory greater than one. The utility of that strategy is calculated
+adn then compared to that of the memory one strategy. The procedure is also
+described in Figure.
+
+Though several more complex strategies could be used for comparison an 'archetype'
+was chosen here able to be trained. Several representation and training archetypes
+are described in~\cite{Harper2017}. We selected an archetype as it can be trained for 
+the given environments similar to optimisation a memory one strategies for the given
+environments. From the archetypes described in~\cite{Harper2017} the chosen one 
+called gambler and it is an archetypes that. Note that several different parameters
+have been used from different instances
+
+of the gambler, so the strategies are almost generic. For training gambler
+the same method such as was used, the Bayesian optimisation.
+
+The results of a big parameter sweep are discussed in the following section.
+
+\subsection{Limitation Results}
+
+Results, results, results.
 
 \section{Discussion}
 

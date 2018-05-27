@@ -26,5 +26,5 @@ class TestEliminatorMethod(unittest.TestCase):
         g = x ** 2 + 3.0 * x - y ** 2 + 2.0 * y - 1.0
         system = [f, g]
 
-        roots_for_x = opt_mo.get_roots_eliminator_method(system, x, 'x', y)
+        roots_for_x = opt_mo.get_roots_eliminator_method(system, x, y)
         self.assertEqual(roots_for_x, [0.9999999999999998,0.0])
