@@ -53,6 +53,10 @@ def get_roots_of_second_unknown(system, variable, roots, other_variable):
         a = sym.lambdify(variable, system[0].subs({other_variable: root}))
         b = sym.lambdify(variable, system[1].subs({other_variable: root}))
         p_two_roots.append(fsolve(equations, x0=[0, 0], args=[a, b])[0])
+
+    for root in p_two_roots:
+        if root > 1 or root < 0:
+            p_two_roots = p_two_roots.remove(root)
     return p_two_roots
 
 def equations(p, args):
@@ -78,10 +82,13 @@ def reactive_set(opponents):
     p_one_roots = get_roots_eliminator_method(num, p_1, p_2)
     
     # roots for p_2
-    p_two_roots = get_roots_of_second_unknown(num, p_2, p_one_roots, p_1)
+    if p_one_roots is not None:
+        solution_set = set(p_one_roots)
+        p_two_roots = get_roots_of_second_unknown(num, p_2, p_one_roots, p_1)
     
-    solution_set = set(p_one_roots) | set(p_two_roots) | set((0, 1))
-    return solution_set
+    if p_two_roots is not None:
+        solution_set |= set(p_two_roots)
+    return solution_set | set((0, 1))
 
 def argmax(opponents, solution_set):
            
