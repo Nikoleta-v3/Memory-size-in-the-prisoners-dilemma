@@ -556,26 +556,73 @@ and they are respective to the actions of the opponent.
     q_{4} - 1) = 0\).
 \end{lemma}
 
-% \subsection{Reactive Strategies}
+Figure~\ref{fig:purely_lemmas} illustrates that conditions given by Lemma
+\ref{lemma:constant} and~\ref{lemma:linear} capture the behaviour as described.
 
-% Reactive strategies are a set of memory one strategies where they only take into
-% account the opponents's previous moves. The optimisation problem of (\ref{eq:mo_optimisation})
-% now has an extra constraint and is re written as,
+\begin{figure}[!htbp]
+    \begin{center}
+        \begin{subfigure}{0.45\textwidth}
+            \includegraphics[width=\linewidth]{img/constant}
+        \end{subfigure}
+        \begin{subfigure}{0.45\textwidth}
+            \includegraphics[width=\linewidth]{img/linear}
+        \end{subfigure}
+    \end{center}
+    \caption{Proof of concept for Lemmas~\ref{lemma:constant},~\ref{lemma:linear}.}
+    \label{fig:purely_lemmas}
+\end{figure}
 
-% \begin{equation}\label{eq:random_optimisation}
-% \begin{aligned}
-% \max_p: & \ u_q(p)
-% \\
-% \text{such that}: & \ p_1 = p_3 \text{ and } p_2 = p_4\\
-%     & \ 0 \leq p_1, p_2 \leq 1.
-% \end{aligned}
-% \end{equation}
 
-% Such as tit for tat descirbed in Section Introduction. Reactive strageties
-% allow us to look at \(u_p\) as a function of two unknow. Thus the partial
-% derivates are 2 over 2 variables. This system can be solve analytically usin various
-% methods. The method discribed in this work which has be choosen to be appropitate
-% is the resultant theory. An example of this is given in lter sections, section\ref{}.
+\subsection{Reactive Strategies}
+
+The next constrained case considered here is that of the reactive strategies.
+Reactive strategies are a set of memory one strategies where they only take into
+account the opponent's previous moves. As described in Section~\ref{section:introduction}
+Tit for Tat is a reactive strategy. The optimisation problem of (\ref{eq:mo_optimisation})
+now has an extra constraint and is re written as,
+
+\begin{equation}\label{eq:random_optimisation}
+\begin{aligned}
+\max_p: & \ u_q(p)
+\\
+\text{such that}: & \ p_1 = p_3 \text{ and } p_2 = p_4\\
+    & \ 0 \leq p_1, p_2 \leq 1.
+\end{aligned}
+\end{equation}
+
+Reactive strategies allow us to study \(u_p\) as a function of two variables
+\(p_1, p_2\). The candidate solution set can be constructed as follows:
+
+\begin{itemize}
+    \item \(p_1, p_2\) are \(\in \{0, 1\} ^ 2\)
+    \item the rest or all of \(p_1, p_2\) are given by the roots of \(\frac{du}{dp}\).
+\end{itemize}
+
+Note that now,
+
+\[\frac{du}{dp} = 0 \]
+
+is now a system of 2 polynomials over 2 variables. Each polynomial is equivalent
+to a partial derivative over \(p_1\) and \(p_2\). There are many methods that allow
+us to solve that analytical. In this work we will be using resultant theory to
+extract the roots.
+
+The resultant is a symmetric function of the roots of the polynomials of a system
+and it can be expressed as a polynomial in the coefficients of the polynomials.
+The resultant will equal zero if and only if the system has at least one common
+root. Thus, the resultant becomes very useful in identifying whether common roots exist.
+
+In this work the Sylvester's resultant~\cite{Akritas1991} denoted as (\(R_S\))
+is considered. The Sylvester's resultant is used to solve system of a single
+variable. However, for a system of two variables we solve over one variable and
+the second is kept as a coefficient. Thus we can find the roots of the equations
+and that is why the resultant is often refereed to as the eliminator.
+
+Thus the best response of a reactive strategy is given in very similar approach
+as that described in Lemma~\ref{eq:mo_optimisation}. However now the partial derivatives can be
+solved using an exact method. Note that for pairwise interactions the maximum degree
+of the polynomials is equal to \(2N\), however the degree increases as opponents
+are introduced.
 
 % \subsection{Stability of defection}
 
@@ -786,6 +833,34 @@ by Figure~\ref{fig:purely_random_tournament_results}.
     \label{fig:purely_random_tournament_results}
 \end{figure}
 
+\subsection{Reactive Strategies}
+
+% Best responses of purely random strategies were given by Lemma~\ref{lemma:purely_optimisation}
+% as presented in Section~\ref{section:purely_analytical}. Based on the results
+% Algorithm~\ref{algo:purely} is constructed to perform a number of numerical experiments
+% for pairwise and multi agent interactions.
+
+% \begin{algorithm}
+%     \setstretch{1.35}
+%     \caption{Best response algorithm for purely random strategies}\label{algo:purely}
+%     \begin{algorithmic}[1]
+%     \Procedure{Purely random search}{}
+%     \State $N \gets \text{number of opponets}$ 
+%     \State $S_q \gets \{0, 1\}$ 
+%     \State $u' \gets \frac{d\sum\limits_{i=1} ^ {N}u}{d\bar{p}}$ 
+%     \State $\frac{u_N}{u_D} \gets u'$ 
+%     \State $C(u_N) \gets \text{companion matrix of } u_N$
+%     \BState \emph{loop} $i=1 \text{ to } 2N$:
+%     \State $\lambda_i \gets \text{eigenvalue of } C(u_N)$
+%     \If {$u_D(\lambda_i) \neq 0$}
+%     \State $S_q \cup \lambda_i $.
+%     \EndIf
+%     \State \textbf{goto} \emph{loop}.
+%     \State \textbf{close};
+%     \State $p^* \gets \text{argmax}(\sum\limits_{i=1} ^ {N} u_{q^{(i)}} (p)), p \in S_q $.
+%     \EndProcedure
+%     \end{algorithmic}
+%     \end{algorithm}
 % Reactive strategies are a set of memory one strategies where they only take into
 % account the opponents's previous moves. The optimisation problem of (\ref{eq:mo_optimisation})
 % now has an extra constraint and is re written as,
@@ -811,7 +886,15 @@ by Figure~\ref{fig:purely_random_tournament_results}.
 % The numerical methods
 % results.
 
-% \section{Limitation of memory}
+\subsection{Memory one strategies}
+
+As discussed in section memory one strategies are explored numerically.
+The algorithm used in order to maximise problem is bayesian optimisation.
+
+\section{Limitation of memory}
+
+
+\section{Discussion}
 
 % Bibliography
 \bibliographystyle{plain}
