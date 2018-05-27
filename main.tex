@@ -573,7 +573,7 @@ Figure~\ref{fig:purely_lemmas} illustrates that conditions given by Lemma
 \end{figure}
 
 
-\subsection{Reactive Strategies}
+\subsection{Reactive Strategies}\label{section:reactive_analytical}
 
 The next constrained case considered here is that of the reactive strategies.
 Reactive strategies are a set of memory one strategies where they only take into
@@ -835,51 +835,39 @@ by Figure~\ref{fig:purely_random_tournament_results}.
 
 \subsection{Reactive Strategies}
 
-% Best responses of purely random strategies were given by Lemma~\ref{lemma:purely_optimisation}
-% as presented in Section~\ref{section:purely_analytical}. Based on the results
-% Algorithm~\ref{algo:purely} is constructed to perform a number of numerical experiments
-% for pairwise and multi agent interactions.
+Best responses of reactive strategies have been discussed in Section~\ref{section:reactive_analytical}.
+There it was stated that the field of resultant theory would be used to solve the
+partial derivatives of the utility. As reminder, best responses in reactive
+build upon Lemma~\ref{lemma:memone_best_response} however now condition
+(\ref{eq:derivative_numerator_condition}) is a 2 polynomial system of 2 variables.
 
-% \begin{algorithm}
-%     \setstretch{1.35}
-%     \caption{Best response algorithm for purely random strategies}\label{algo:purely}
-%     \begin{algorithmic}[1]
-%     \Procedure{Purely random search}{}
-%     \State $N \gets \text{number of opponets}$ 
-%     \State $S_q \gets \{0, 1\}$ 
-%     \State $u' \gets \frac{d\sum\limits_{i=1} ^ {N}u}{d\bar{p}}$ 
-%     \State $\frac{u_N}{u_D} \gets u'$ 
-%     \State $C(u_N) \gets \text{companion matrix of } u_N$
-%     \BState \emph{loop} $i=1 \text{ to } 2N$:
-%     \State $\lambda_i \gets \text{eigenvalue of } C(u_N)$
-%     \If {$u_D(\lambda_i) \neq 0$}
-%     \State $S_q \cup \lambda_i $.
-%     \EndIf
-%     \State \textbf{goto} \emph{loop}.
-%     \State \textbf{close};
-%     \State $p^* \gets \text{argmax}(\sum\limits_{i=1} ^ {N} u_{q^{(i)}} (p)), p \in S_q $.
-%     \EndProcedure
-%     \end{algorithmic}
-%     \end{algorithm}
-% Reactive strategies are a set of memory one strategies where they only take into
-% account the opponents's previous moves. The optimisation problem of (\ref{eq:mo_optimisation})
-% now has an extra constraint and is re written as,
+Based on the results Algorithm~\ref{algo:purely} is constructed to perform a number
+of numerical experiments for pairwise and multi agent interactions.
 
-% \begin{equation}\label{eq:random_optimisation}
-% \begin{aligned}
-% \max_p: & \ u_q(p)
-% \\
-% \text{such that}: & \ p_1 = p_3 \text{ and } p_2 = p_4\\
-%     & \ 0 \leq p_1, p_2 \leq 1.
-% \end{aligned}
-% \end{equation}
-
-% The following algorithm is used.
-
-% Note that resultant theory is a field of algebraic geometry and Sylvester's formulation
-% is a common resultant used for systems of 2 equations.
-% We suggested that several other resultant can be used here but Sylberster; has been used for simplisiti and 
-% speed reasons.
+\begin{algorithm}
+    \setstretch{1.35}
+    \caption{Best response algorithm for reactive strategies}\label{algo:reactive}
+    \begin{algorithmic}[1]
+    \Procedure{Reactive search}{}
+    \State $N \gets \text{number of opponets}$ 
+    \State $S_q \gets \{0, 1\} ^ 2$ 
+    \State $u' \gets \frac{d\sum\limits_{i=1} ^ {N}u}{d\bar{p}}$ 
+    \State $\frac{u_N}{u_D} \gets u'$ 
+    \State $S(u_N, p_2) \gets \text{Sylvester's matrix for} p_2. \text{Coefficients are polynomials of } p_1$
+    \State $R_S(S) \gets det(S)$
+    \State $\text{roots}_{p_1} \gets p_1 \text{ for } det(M)_{p_1} = 0$
+    \BState \emph{loop} $\text{root in roots}_{p_1}$:
+    \State $\text{ system}(p_2) \gets u_N (root)$
+    \State $\text{root}_{p_2} \cup {p_2} \text{ for } \text{system}(p_2) = 0$
+    \If {$u_D((\text{root}, \text{root}_{p_2})) \neq 0$}
+    \State $S_q \cup \{(\text{root}, \text{root}_{p_2})\}$
+    \EndIf
+    \State \textbf{goto} \emph{loop}.
+    \State \textbf{close};
+    \State $p^* \gets \text{argmax}(\sum\limits_{i=1} ^ {N} u_{q^{(i)}} (p)), p \in S_q$.
+    \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
 
 % A numerical experiment suggests that the best response behvaiour is captured by our algorithm.
 
