@@ -119,7 +119,7 @@ if __name__ == '__main__':
         axl.seed(i)
         filename =  location + 'reactive/{}.csv'.format(i)
 
-        row = [index]
+        row = [i]
         main_op = [np.random.random(4)]
         row += [q for q in main_op[0]]
 

@@ -40,11 +40,11 @@
 
 \begin{abstract}
 
-In this manuscript we build upon a framework provided in 1989 for the study of
-these strategies and identify the best responses of memory one players. The aim
-of this work is to show the limitations of memory one strategies in multi-opponent
-interactions. A number of theoretic results are presented.
-%TODO: Expand when we get results
+In this manuscript we build upon a framework provided in 1989 to study best
+responses in the well known memory one strategies of the Iterated Prisoner's
+Dilemma. The aim of this work is to construct a compact way of identifying best
+responses of short memory strategies and to show their limitations in multi-opponent
+interactions. A number of theoretic results are presented. %TODO: Expand when we get results
 \end{abstract}
 
 \section{Introduction}\label{section:introduction}
@@ -91,18 +91,17 @@ In~\cite{Axelrod1980a} and~\cite{Axelrod1980b}, the first well known computer
 tournaments of the IPD were performed. A total of 13 and 63 strategies were submitted
 in computer code and competed against each other in a round robin tournament.
 All contestants competed against each other, themselves and random strategy and the
-winner was decided on the average score a strategy achieved and not in the number of wins.
+winner was decided on the average score a strategy achieved and not it's total the number of wins.
 The strategies were allowed access to the full history of each match. The history
-included the previous moves of both the player and the opponent. How many turns of history
+included the previous moves of both the player's and the opponent's. How many turns of history
 that a strategy would use, the memory size, was left to the creator of the strategy to
 decide.
 
 The winning strategy of both tournaments was a strategy called Tit for Tat. Tit for Tat
 is a strategy which starts by cooperating and then mimics the last move of
 it's opponent. This is a strategy which makes use of the previous move of the opponent
-only and it's called a reactive strategy. Reactive strategies have been used
-to explore best behaviour in the IPD and a framework for studying such strategies
-was introduced in~\cite{Nowak1989}. This was later used to introduce other
+only and it's called a reactive strategy. In~\cite{Nowak1989} a framework for
+studying such strategies was introduced. This was later used to introduce well known
 reactive strategies such as Generous Tit For Tat~\cite{Nowak1990}.
 
 Reactive strategies are a subset of memory one strategies. Memory one strategies
@@ -110,12 +109,12 @@ similarly are only concern with the previous turn. However, they take into consi
 both players' recent moves to decide on an action. Several successful memory one
 strategies are found in literature, for example Pavlov~\cite{Nowak1993}.
 
-A well known set of memory on strategies were introduced in~\cite{Press2012}
-called zero determinant (ZD) strategies. The ZD strategies, manage to force a linear
-relationship between the score of the strategy and the opponent. The authors showed
-that ZD strategies were a set of strategies that could dominate any evolutionary
-opponent, in pairwise interactions. ZD strategies were dominating using a single
-size memory and authors questioned the usefulness of memory in the IPD.
+A well known set of memory on strategies was introduced in~\cite{Press2012}, and
+these were called zero determinant (ZD) strategies. The ZD strategies manage to force a linear
+relationship between the score of the strategy and the opponent. According to the
+authors the ZD strategies can dominate any evolutionary opponent in pairwise
+interactions by using a single slot of memory. Thus the usefulness of memory in
+the IPD was questioned.
 
 The ZD strategies tracked a lot of attention. It was stated that
 ``Press and Dyson have fundamentally changed the viewpoint on the Prisoner's
@@ -143,14 +142,13 @@ In the second part of this manuscript we explore the limitation of these best re
 strategies. This is achieved by comparing the performance of an optimal
 memory one strategy, for a given environment, with the performance of a more complex
 strategy. The type of complex strategy used is described in depth in the
-following Sections. Keep in mind, that the complex strategies used here has a memory
-greater than one and it keeps track of the initial move.
+following sections.
 
 \section{Methodology}
 
 In~\cite{Nowak1989} a framework was introduced to study the interactions of memory
-one strategies modelled as a stochastic process. The work~\cite{Press2012} of is
-also build upon at manuscript. There it is stated that if a strategy
+one strategies modelled as a stochastic process, the work~\cite{Press2012} of is
+also build upon it. In this manuscript it is stated that if a strategy
 is concerned with only the outcome of a single turn then there are four possible `states'
 the strategy could be in. These are \(CC, CD, DC,CC\). A memory one strategy is denoted
 by the probabilities of cooperating after each of these states,
@@ -174,18 +172,18 @@ such strategy is given in Figure~\ref{fig:diagram_mem_one}.
 \end{figure}
 
 Moreover, if two players are moving from state to state using the transition
-probabilities, this can be modelled as a Markov process of four states, shown by
-Figure~\ref{fig:markov_chain}. The transition matrix \(M\) of Figure~\ref{fig:markov_chain}
-is defined as,
+probabilities, it can be modelled as a Markov process of four states. The Markov 
+chain is shown in Figure~\ref{fig:markov_chain}. The transition matrix \(M\) of
+Figure~\ref{fig:markov_chain} is defined as,
 
 \begin{equation}\label{eq:m_matrix}
     \input{tex/m_matrix.tex}.
 \end{equation}
 
-where the vector of the stationary probabilities of is \(v\)(given in the Appendix). %TODO include Appendix
-Combining the stationary vector \(v\) with the payoff matrices\ref{equ:pd_definition}
+where the vector of the stationary probabilities of is \(v\) (given in the Appendix). %TODO include Appendix
+Combining the stationary vector \(v\) with the payoff matrices of equation~(\ref{equ:pd_definition})
 allow us to retrieve the expected outcome for each player. Thus, the utility for
-player \(p\) against \(q\), denoted as \(u_q(p)\), can defined by,
+player \(p\) against \(q\), denoted as \(u_q(p)\), is defined by,
 
 \begin{equation}\label{eq:press_dyson_utility}
     u_q(p) = v \times S_p.
@@ -194,12 +192,12 @@ player \(p\) against \(q\), denoted as \(u_q(p)\), can defined by,
 The analytical formulation gives the advantage of time. That is because the 
 payoffs of a match between two opponents are now retrievable without 
 simulating the actual match itself. This analytical formulation will be used
-hereupon and it will will allow us to study best responses in an analytical way.
+hereupon and it will allow us to study best responses in an analytical way.
 
-Though this formulation, which was described in 1989~\cite{Nowak1989}, have been
-used in several different works not many insights have been given for form of \(u_q(p)\).
-Here we present one of our first results which concerns the form \(u_q(p)\). That is
-that \(u_q(p)\) is given by a ratio of two quadratic forms, as presented
+Though this formulation, which was introduced in 1989, have been
+used in several different works not many insights have been given about the form of \(u_q(p)\).
+Here we present the first theoretical result which concerns the form of \(u_q(p)\).
+That is that \(u_q(p)\) is given by a ratio of two quadratic forms, as presented
 by Theorem~\ref{theorem:quadratic_form_u}.
 
 \begin{theorem}\label{theorem:quadratic_form_u}
@@ -268,8 +266,8 @@ with~\cite{axelrodproject}.
 \label{fig:analytical_simulated}
 \end{figure}
 
-Now that the analytical formulation has been validated in the following Sections
-is used to explore bests responses in memory one strategies. Moreover, the new
+Now that the analytical formulation has been validated in the following sections
+it is used to explore best responses in memory one strategies. Moreover, the new
 formulation of Theorem~\ref{theorem:quadratic_form_u} allow us to retrieve a number
 of theoretical results. These are also discussed in the next sections.
 
@@ -279,7 +277,7 @@ In the introduction a question was raised: which memory one strategy is the \tex
 against another memory one? This will be considered as an optimisation problem,
 where a memory one strategy \(p\) wants to optimise it's utility \(u_q(p)\)
 against an opponent \(q\). The decision variable is the vector \(p\) and the
-solitary constrains \(p \in \R^4_{[0, 1]} \). The optimisation problem is
+solitary constrain is that \(p \in \R^4_{[0, 1]} \). The optimisation problem is
 given by~(\ref{eq:mo_optimisation}).
 
 \begin{equation}\label{eq:mo_optimisation}
@@ -322,11 +320,12 @@ this it is known that the candidate solutions will exist either at the boundarie
 of the feasible solution space, either within that space. The method of Lagrange
 Multipliers and Karush-Kuhn-Tucker conditions also agrees with this conclusion. %TODO add reference.
 The Karush-Kuhn-Tucker conditions are used because our constrains are inequalities.
+The proof is given in the Appendix.
 
 Thus the candidate solution set is constructed as follows:
 
 \begin{itemize}
-    \item any or all of \(p_1, p_2, p_3, p_4\) are \(\in {0, 1}\)
+    \item any or all of \(p_1, p_2, p_3, p_4\) are \(\in \{0, 1\}\)
     \item the rest or all of \(p_1, p_2, p_3, p_4\) are given by the roots of \(\frac{du}{dp}\).
 \end{itemize}
 
@@ -365,15 +364,15 @@ response of a memory one strategy in match is given by Lemma~\ref{lemma:memone_b
     
     {\small
     \begin{equation}\label{eq:derivative_numerator_condition}
-        (pQ + c) ( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a}) 
-        - (p\bar{Q} + \bar{c})( \frac{1}{2} p  Q  p^T + c p + a) = 0
+        (\bar{p}Q + c) ( \frac{1}{2} \bar{p}  \bar{Q}  \bar{p}^T + \bar{c}  \bar{p} + \bar{a}) 
+        - (\bar{p}\bar{Q} + \bar{c})( \frac{1}{2} \bar{p}  Q  \bar{p}^T + c \bar{p} + a) = 0
     \end{equation}}
 
     and
 
     {\small
     \begin{equation}
-        \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a} \neq 0
+        \frac{1}{2} \bar{p}  \bar{Q}  \bar{p}^T + \bar{c}  \bar{p} + \bar{a} \neq 0
     \end{equation}}
 
     Note that equation~\ref{eq:derivative_numerator_condition}  is a \(4-\)
@@ -414,7 +413,7 @@ opponent. Thus,
       u_{\frac {1}{N} \sum\limits_{i=1} ^ N q^{(i)}}(p).
 \end{equation}
 
-A number of numerical experiments have been performed for cases where \(p=(p, p, p, p\)
+A number of numerical experiments have been performed for cases where \(p=(p, p, p, p)\)
 and \(p= (p_1, p_2, p_1, p_2)\). This was done in order to compare the right hand
 side of equation~(\ref{eq:tournament_hypothesis}) to the left. The fact that
 equation~(\ref{eq:tournament_hypothesis}) holds is evident by Figure~\ref{fig:hypothesis}.
@@ -428,12 +427,13 @@ equation~(\ref{eq:tournament_hypothesis}) holds is evident by Figure~\ref{fig:hy
             \includegraphics[width=\linewidth]{img/mean_vs_average_two.png}
         \end{subfigure}
     \end{center}
-    \caption{Hypothesis.}
+    \caption{Numerical proof of equation~\ref{eq:tournament_hypothesis} for \(p=(p, p, p, p)\)
+    and \(p= (p_1, p_2, p_1, p_2)\).}
     \label{fig:hypothesis}
 \end{figure}
 
-A similar approach to the one considered for problem~\ref{eq:mo_optimisation} needs
-to be used for problem~\ref{eq:mo_tournament_optimisation} as well. The candidate
+For  problem~\ref{eq:mo_tournament_optimisation} a similar approach used for 
+problem~\ref{eq:mo_optimisation} is used. The candidate
 solutions set would be constructed by considering the bounds of the feasible space
 and the roots of the derivative \(\frac{d}{dp} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)\).
 The derivative is given by,
@@ -468,9 +468,9 @@ is gradually increasing every time an extra opponent is taken into account.
 Because of that no further analytical consideration is given to problems~\ref{eq:mo_optimisation}
 and~\ref{eq:mo_tournament_optimisation}. Instead both best responses of memory one
 strategies, pairwise and in multi interactions, will be solved using numerical
-methods. The methods are their results are discussed in the following Section.
+methods. The methods and their results are discussed again in Section~\ref{section:mo_numerical}.
 
-Though best responses can no longer be explored in an exact analytical way
+Though best responses can no longer be explored in an analytical way
 there are still many advantages by the formulation of Theorem~\ref{theorem:quadratic_form_u}.
 In the following subsections several theoretical results and exact ways of identifying
 best responses in constrained versions of problem~\ref{eq:mo_tournament_optimisation} are presented.
@@ -480,7 +480,7 @@ Moreover, the robustness of defection in specific interactions is investigated.
 
 The first constrained problem to be explored is that of the purely random strategies.
 Purely random strategies are a set of memory one strategies where the transition
-probabilities of each state are the same. The optimisation problem of (\ref{eq:mo_optimisation})
+probabilities of each state are the same. The optimisation problem of (\ref{eq:mo_tournament_optimisation})
 now has an extra constraint and is re written as,
 
 \begin{equation}\label{eq:random_optimisation}
@@ -503,7 +503,7 @@ solutions a similar approach as the one described in previous sections is used. 
 
 The roots of the derivative are given by nullifying the numerator of the derivative.
 It has been proved, Appendix, that the degree of the numerator does not exceed
-\(2 N\) where \(N\) is the number of opponents. Thus there are \(2N\) possible
+\(2 N\) where \(N\) is the number of opponents. Thus there are maximum \(2N\) possible
 roots in the feasible space. These results are summarized by Lemma~\ref{lemma:purely_optimisation}.
 
 \begin{lemma}[Optimisation of purely random player in a tournament]
@@ -524,24 +524,26 @@ roots in the feasible space. These results are summarized by Lemma~\ref{lemma:pu
     and \(\lambda_i\) are such that the denominator is not nullified.
     \end{lemma}
 
-To compute the roots of the polynomial the algorithm used is that of computing the
-eigenvalues of the corresponding companion matrix. The algorithm is presented
-and discussed in~\cite{Edelman1995}.
+The roots of the polynomial \(\frac{d \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)}{dp}\)
+are computed using the eigenvalues of the corresponding companion matrix. This is
+an algorithm resented and discussed in~\cite{Edelman1995}.
 
 Furthermore, for the case of the purely random players two more theoretical results
-are discussed. These are the cases where:
-
-\begin{itemize}
-    \item the opponent has manage to make a random player indifferent
-    \item the best behaviour is a pure strategy.
-\end{itemize}
+are discussed. These are the cases where the opponent has manage to make a random
+player indifferent and the case where a purely random player is better of playing
+a pure strategy.
 
 There is importance in both results. Initially, being indifferent refers to our
-actions no having any effects on the match. Thus our behaviour can not be optimised.
-Secondly, by a pure strategy we are referring to the edge cases, behaving as a
-defector or a cooperator. In in those case it is know that \(p^*\) is \(\in {0, 1}\).
+actions no having any effects on the match. Thus there is not optimal behaviour
+for player \(p\).
+
+Secondly, by a pure strategy we are referring to the \(p=0\) and \(p=1\).
+In this case it is know that \(p^*\) is \(\in {0, 1}\) without testing the roots
+of the derivative. The optimisation problem crumbles to a binary problem.
+
 The results are given equivalently by Lemmas~\ref{lemma:constant} and~\ref{lemma:linear}
-and they are respective to the actions of the opponent.
+and they are respective to the actions of the opponent. Figure~\ref{fig:purely_lemmas}
+illustrates examples for both lemmas.
 
 \begin{lemma}\label{lemma:constant}
     A given memory one player, \((q_1, q_2, q_3, q_4)\), makes a \textbf{purely
@@ -556,9 +558,6 @@ and they are respective to the actions of the opponent.
     \((q_{1}q_{4} - q_{2} q_{3} + q_{3} - q_{4}) (4 q_{1} - 3 q_{2} - 4 q_{3} + 3 
     q_{4} - 1) = 0\).
 \end{lemma}
-
-Figure~\ref{fig:purely_lemmas} illustrates that conditions given by Lemma
-\ref{lemma:constant} and~\ref{lemma:linear} capture the behaviour as described.
 
 \begin{figure}[!htbp]
     \begin{center}
@@ -603,10 +602,10 @@ Note that now,
 
 \[\frac{du}{dp} = 0 \]
 
-is now a system of 2 polynomials over 2 variables. Each polynomial is equivalent
+is a system of 2 polynomials over 2 variables. Each polynomial is equivalent
 to a partial derivative over \(p_1\) and \(p_2\). There are many methods that allow
 us to solve that analytical. In this work we will be using resultant theory to
-extract the roots.
+extract the roots from the partial derivatives.
 
 The resultant is a symmetric function of the roots of the polynomials of a system
 and it can be expressed as a polynomial in the coefficients of the polynomials.
@@ -650,8 +649,8 @@ The numerator \(\bar{c}a - c\bar{a}\) is given by,
 and \(\bar{a} ^ 2 = (-q_2 + q_4 + 1) ^ 2\) which is always positive. In order
 for defection to be the best response the derivative must have a negative
 sign at the point \(p_0\). That means that the utility is only
-decreasing after \(p_0\) and the points before are outside our feasible
-space.
+decreasing after \(p_0\). The point \(p_0\) is by the edge of the feasible solution
+, thus points before that are not taken into acount.
 
 The sign of the derivative is given by the numerator, thus \(\bar{c}a - c\bar{a}\).
 More specifically from equations,
@@ -710,34 +709,20 @@ by Figure~\ref{fig:sign_against_reactive}. Following this the following result i
   \end{figure}
 
 \begin{lemma}
-Against a given reactive opponent \(q=(q_1, q_2, q_1, q_2)\) defection is said
-to be stationary if and only if \(\left(4 q_{1} - 5 q_{2} - 1\right)\) is negative.
+Defection is the best responses of a memory one player \(p\) against a reactive
+player \(q\) if the transition probabilities of the opponent satisfy the
+condition:
+
+\[(\left(4 q_{1} - 5 q_{2} - 1\right)\]
 \end{lemma}
-
-In tournaments the derivative~\ref{eq:derivative_of_quadratic} when we substitute
-for \(p_0\) the equation is given by:
- 
-\begin{equation}
-\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})
-\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2
-\end{equation}
-
-The product is know to be positive thus in order for defection to be stable
-in a tournament falls down to a similar case the match one. Now the sum of
-columns must be negative.
 
 \section{Numerical Experiments}
 
 In this section several analytical results of Section~\ref{section:analytical_results}
-are validated using numerical experiments. Both methods and results are discussed.
+are validated using numerical experiments.
 Initially, numerical methods for best responses in the constrained versions of
-the problem are presented. These further constrained problems taken into account
-in this work were:
-
-\begin{itemize}
-    \item purely random strategies
-    \item reactive strategies.
-\end{itemize}
+the problem are presented. We explore the case of purely random strategies
+and reactive strategies.
 
 Moreover the answer to the questions discussed in Section~\ref{section:memory_one_analytical}
 are answered via numerical algorithms. The question risen was identifying the best
@@ -745,9 +730,9 @@ response memory one strategy.
 
 \subsection{Purely Random Strategies}
 
-Best responses of purely random strategies were given by Lemma~\ref{lemma:purely_optimisation}
+Best responses of purely random strategies are given by Lemma~\ref{lemma:purely_optimisation},
 as presented in Section~\ref{section:purely_analytical}. Based on the results
-Algorithm~\ref{algo:purely} is constructed to perform a number of numerical experiments
+Algorithm~\ref{algo:purely} is constructed to carry out several numerical experiments
 for pairwise and multi agent interactions.
 
 \begin{algorithm}
@@ -807,14 +792,16 @@ by Figure~\ref{fig:purely_random_tournament_results}.
 
 \subsection{Reactive Strategies}
 
-Best responses of reactive strategies have been discussed in Section~\ref{section:reactive_analytical}.
+Best responses of reactive strategies were discussed in Section~\ref{section:reactive_analytical}.
 There it was stated that the field of resultant theory would be used to solve the
-partial derivatives of the utility. As reminder, best responses in reactive
+partial derivatives of the utility. As a reminder, best responses in reactive
 build upon Lemma~\ref{lemma:memone_best_response} however now condition
 (\ref{eq:derivative_numerator_condition}) is a 2 polynomial system of 2 variables.
 
-Based on the results Algorithm~\ref{algo:purely} is constructed to perform a number
-of numerical experiments for pairwise and multi agent interactions.
+Based on the results Algorithm~\ref{algo:reactive} is constructed and several
+examples are performed. Illustrated by Figure~\ref{fig:reactive_pairwise_results}
+are the results of these examples. The results suggest that the best
+response behaviour is captured by our algorithm.
 
 \begin{algorithm}
     \setstretch{1.35}
@@ -841,10 +828,6 @@ of numerical experiments for pairwise and multi agent interactions.
     \end{algorithmic}
 \end{algorithm}
 
-Illustrated by Figure~\ref{fig:reactive_pairwise_results} are the results of the
-numerical experiments for pairwise interactions. The results suggest that the best
-response behaviour is captured by our algorithm.
-
 \begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
@@ -861,48 +844,68 @@ response behaviour is captured by our algorithm.
 
 \subsection{Memory one strategies}\label{section:mo_numerical}
 
-As discussed in Section the best response in memory one strategies will be captured
-using a numerical method. In this subsection the reasons for choosing our method
-as well as the parameters are presented.
+As discussed in Section~\ref{section:memory_one_analytical} best responses in memory
+one strategies will be captured using a numerical method. In this
+subsection we discuss the reasons for choosing the specific method and parameters.
 
 Moreover, a parameter sweep has been performed and here we wil discuss the results.
-The algorithm used in order to maximise problem is bayesian optimisation.
 
 Bayesian optimisation is ...
 
 \section{Limitation of memory}
 
-Best response behaviour of memory one strategies has been successfully captured
-as discuss in Section~\ref{section:mo_numerical}. The second part of this manuscript
-is focused on test the limitations of those very best responses. 
+The second part of this paper focuses on the limitation of memory size.
+The aim is to show that memory one strategies suffer for multi agent interactions
+whilst they outperform any strategy in pairwise interactions. This is achieved by
+comparing the performance of an optimised short memory one strategies to a trained
+longer memory strategies in tournaments of size 3.
 
-This is achieved by comparing their performance with more complex strategies. In
-this section the methodology is covered as well as the results.
+The complex strategy is trained using the same optimisation algorithm
+as the one described in Section~\ref{section:mo_numerical}, the bayesian
+optimisation. The trained strategy used is a strategy called Gambler.
+Gambler is introduced and discussed in~\cite{Harper2017}.
 
-\subsection{Methodology}
+\subsection{Gambler}
 
-In order to compare memory one strategies with complex strategies we perform
-the following steps. Tournaments of size \(N=3\) are considered, as those are
-the smallest possible tournaments. For a number of tournaments using 
-the results of Section, we identify the best memory one strategy and it's
-utility for the given environment.
+Several means of representing strategies have been used over the years for
+IPD strategies. In~\cite{Harper2017} several of those `archetypes' are presented
+and used to train different successful strategies. One of the archetypes firstly
+introduced in that paper is the Gambler.
 
-Afterwards, the memory on strategy is removed from the tournament and it is
-replaced with a more complex strategy. A more complex strategy is a strategy
-with a memory greater than one. The utility of that strategy is calculated
-adn then compared to that of the memory one strategy. The procedure is also
-described in Figure.
+Gambler is based on a lookup table and encodes a probability of cooperating
+based on the opponent's first \(n_1\) moves, the opponent's last \(m_1\) moves,
+and the players last \(m_2\) moves.
 
-Though several more complex strategies could be used for comparison an 'archetype'
-was chosen here able to be trained. Several representation and training archetypes
-are described in~\cite{Harper2017}. We selected an archetype as it can be trained for 
-the given environments similar to optimisation a memory one strategies for the given
-environments. From the archetypes described in~\cite{Harper2017} the chosen one 
-called gambler and it is an archetypes that. Note that several different parameters
-have been used from different instances
+Several variants of Gambler have been trained for this work, a summary is given
+by Table. In essence Gambler can represent any generic strategy and that is
+why it has been chosen.
 
-of the gambler, so the strategies are almost generic. For training gambler
-the same method such as was used, the Bayesian optimisation.
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{clllll}
+    \toprule
+    {}&  \(n_1\) & \(m_1\) & \(m_2\)\\
+    \midrule
+    1 & 1 & 1 & 2\\
+    2 & 2 & 2 & 0\\
+    3 & 2 & 2 & 1\\
+    4 & 2 & 2 & 2\\
+    5 & 4 & 4 & 4\\
+    \bottomrule
+\end{tabular}
+\end{center}
+\caption{Variants of Gambler used.}
+\label{table:gambler}
+\end{table}
+
+\subsection{Procedure}
+
+For a number of tournaments, where \(N=3\), using the results of Section, we 
+find the optimal best memory one strategy and it's utility. Afterwards, the memory
+on strategy is removed from the tournament and it is replaced with a variant of Gambler
+which is then trained for that environment as well.
+
+The performance of those two strategies is compared.
 
 The results of a big parameter sweep are discussed in the following section.
 
@@ -917,3 +920,4 @@ Results, results, results.
 \bibliography{bibliography.bib}
 
 \end{document}
+
