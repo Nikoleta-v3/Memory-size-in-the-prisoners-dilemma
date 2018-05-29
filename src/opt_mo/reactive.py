@@ -27,8 +27,10 @@ def round_matrix_expressions(matrix, num_digits, variable):
 
 def get_roots_of_first_unknown(system, variable, other_variable):
     """
-    For solving a 2 polynomial system of 2 unknowns. Calculates the roots of
-    the first unknown using Sylvester's resultant or the eliminator.
+    For solving a 2 polynomial system of 2 unknowns. Calculates the real roots
+    of the first unknown using Sylvester's resultant or the eliminator.
+
+    Note that there is a constrain that the roots must be between 0 and 1.
 
     Attributes
     ----------
@@ -60,12 +62,14 @@ def get_roots_of_first_unknown(system, variable, other_variable):
             if den.subs({variable: root}) == 0:
                 feasible_roots.remove(root)
 
-    return feasible_roots
+    return set(feasible_roots) | set([0, 1])
 
-def get_roots_of_second_unknown(system, variable, roots, other_variable):
+def get_roots_of_second_unknown(system, variable, other_roots, other_variable):
     """
     Solving the system for the second unknown once the roots of the first one
     have been calculated.
+
+    Note that there is a constrain that the roots must be between 0 and 1.
 
     Attributes
     ----------
@@ -73,26 +77,28 @@ def get_roots_of_second_unknown(system, variable, roots, other_variable):
         A list of size 2 with the polynomials
     variable: symbol
         The variable for which we are returning the roots
-    roots: list
+    other_roots: list
         A list with the roots of the first unknown
     other_variable: symbol
         The first unknown. The one that the roots have been calculated
     """
-    p_two_roots = []
+    roots = []
+    for root in other_roots:
+        first_poly = sym.lambdify(variable, system[0].subs({other_variable: root}))
+        second_poly = sym.lambdify(variable, system[1].subs({other_variable: root}))
+        roots.append(fsolve(equations, x0=[0, 0], args=[first_poly, second_poly])[0])
+
+    feasible_roots = []
     for root in roots:
-        a = sym.lambdify(variable, system[0].subs({other_variable: root}))
-        b = sym.lambdify(variable, system[1].subs({other_variable: root}))
-        p_two_roots.append(fsolve(equations, x0=[0, 0], args=[a, b])[0])
+        if not np.iscomplex(root):
+            if root >= 0 and root <= 1:
+                feasible_roots.append(root)
+    return feasible_roots
 
-    for root in p_two_roots:
-        if root > 1 or root < 0:
-            p_two_roots = p_two_roots.remove(root)
-    return p_two_roots
-
-def equations(p, args):
-    a, b = args
-    v, _ = p
-    return (a(v), b(v))
+def equations(solution, args):
+    polynomial_one, polynomial_two = args
+    value, _ = solution
+    return (polynomial_one(value), polynomial_two(value))
 
 def reactive_set(opponents):
     p_1, p_2 = sym.symbols('p_1, p_2')
@@ -106,19 +112,18 @@ def reactive_set(opponents):
     fractions = [sym.fraction(expr) for expr in derivatives]
     num = [expr[0] for expr in fractions]
     den = [expr[1] for expr in fractions]
-    
 
     # roots for p_1
-    p_one_roots = get_roots_eliminator_method(num, p_1, p_2)
+    p_one_roots = get_roots_of_first_unknown(num, p_1, p_2)
     
     # roots for p_2
     if p_one_roots is not None:
-        solution_set = set(p_one_roots)
+        solution_set = p_one_roots
         p_two_roots = get_roots_of_second_unknown(num, p_2, p_one_roots, p_1)
     
     if p_two_roots is not None:
         solution_set |= set(p_two_roots)
-    return solution_set | set((0, 1))
+    return solution_set
 
 def argmax(opponents, solution_set):
            
