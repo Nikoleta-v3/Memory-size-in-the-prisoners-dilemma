@@ -17,7 +17,7 @@ from sympy.polys import subresultants_qq_zz
 
 import opt_mo
 
-main = imp.load_source('main', '/home/nikoleta/rsc/Memory-size-in-the-prisoners-dilemma/main.py')
+main = imp.load_source('main', '../main.py')
 
 def round_matrix_expressions(matrix, num_digits, variable):
     """
