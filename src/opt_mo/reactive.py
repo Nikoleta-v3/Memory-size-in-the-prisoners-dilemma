@@ -25,11 +25,21 @@ def round_matrix_expressions(matrix, num_digits, variable):
                              for n in sym.Poly(element, variable).all_coeffs()})
     return matrix
 
-def get_roots_eliminator_method(system, variable, other):
+def get_roots_of_first_unknown(system, variable, other_variable):
     """
-    Uses eliminator to solve 2-variable system for a given variable.
+    For solving a 2 polynomial system of 2 unknowns. Calculates the roots of
+    the first unknown using Sylvester's resultant or the eliminator.
+
+    Attributes
+    ----------
+    system: list
+        A list of size 2 with the polynomials
+    variable: symbol
+        The variable for which we are returning the roots
+    other_variable: symbol
+        The second variable of the system
     """
-    matrix = subresultants_qq_zz.sylvester(system[0], system[1], other)
+    matrix = subresultants_qq_zz.sylvester(system[0], system[1], other_variable)
     matrix = round_matrix_expressions(matrix, 8, variable)
 
     resultant = matrix.det()
@@ -53,7 +63,21 @@ def get_roots_eliminator_method(system, variable, other):
     return feasible_roots
 
 def get_roots_of_second_unknown(system, variable, roots, other_variable):
-    
+    """
+    Solving the system for the second unknown once the roots of the first one
+    have been calculated.
+
+    Attributes
+    ----------
+    system: list
+        A list of size 2 with the polynomials
+    variable: symbol
+        The variable for which we are returning the roots
+    roots: list
+        A list with the roots of the first unknown
+    other_variable: symbol
+        The first unknown. The one that the roots have been calculated
+    """
     p_two_roots = []
     for root in roots:
         a = sym.lambdify(variable, system[0].subs({other_variable: root}))

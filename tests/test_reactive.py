@@ -19,12 +19,12 @@ class TestMatrixExpressions(unittest.TestCase):
 
 class TestEliminatorMethod(unittest.TestCase):
 
-    def test_get_roots_eliminator_method(self):
+    def test_get_roots_of_first_unknown(self):
         x, y = sym.symbols('x, y')
 
         f = x ** 2 + x * y + 2.0 * x + y -1.0
         g = x ** 2 + 3.0 * x - y ** 2 + 2.0 * y - 1.0
         system = [f, g]
 
-        roots_for_x = opt_mo.get_roots_eliminator_method(system, x, y)
+        roots_for_x = opt_mo.get_roots_of_first_unknown(system, x, y)
         self.assertEqual(roots_for_x, [0.9999999999999998,0.0])
