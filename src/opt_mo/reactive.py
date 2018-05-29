@@ -156,7 +156,7 @@ if __name__ == '__main__':
     params = [num_plays, num_op_plays, num_op_start_plays]
 
     i = (index - 1) * 100
-    while i <= index:
+    while i <= index * 100:
         axl.seed(i)
         filename =  location + '/bayesian_{}_Gambler_{}_{}_{}.csv'.format(i, *params)
         main_op = [np.random.random(4)]
@@ -167,17 +167,24 @@ if __name__ == '__main__':
                     method_params = {'n_random_starts' : starts, 'n_calls': calls}
                     cols = get_columns(params, method_params)
                     row = [i]
+                    row += [q for q in main_op[0]]
                     if types == 'matches':
                         cols = cols[:4] + cols[8:]
-                        row += [q for q in main_op[0]]
                         list_opponents = main_op
 
-                        start_optimisation = time.clock()
-                        solution_set = reactive_set(main_op)
-                        p_1, p_2, utility = opt_mo.argmax(main_op, solution_set)
+                    if types == 'tournaments':
+                        axl.seed(i + 10000)
+                        other = [np.random.random(4)]
+                        row += [q for q in other[0]]
 
-                        row.append(p_1), row.append(p_2), row.append(utility)
-                        row.append(time.clock() - start_optimisation)
+                        list_opponents = main_op + other
+
+                    start_optimisation = time.clock()
+                    solution_set = reactive_set(list_opponents)
+                    p_1, p_2, utility = opt_mo.argmax(list_opponents, solution_set)
+
+                    row.append(p_1), row.append(p_2), row.append(utility)
+                    row.append(time.clock() - start_optimisation)
 
                     start_training = time.clock()
                     opt_gambler, utility = main.train_gambler(method='bayesian',
@@ -198,16 +205,3 @@ if __name__ == '__main__':
         df = pd.concat(dfs, ignore_index=True)
         df.to_csv(filename)
         i += 1
-        # # tournament
-        # axl.seed(i + 10000)
-        # other = [np.random.random(4)]
-        # row += [q for q in other[0]]
-        # opponents = main_op + other
-
-        # print('Start Tournament')
-        # start_optimisation = time.clock()
-        # solution_set = reactive_set(opponents)
-        # p_1, p_2, u = opt_mo.argmax(opponents, solution_set)
-
-        # row.append(p_1), row.append(p_2), row.append(u)
-        # end_match = time.clock() - start_optimisation

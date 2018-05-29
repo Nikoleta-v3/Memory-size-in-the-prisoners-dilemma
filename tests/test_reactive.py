@@ -23,7 +23,7 @@ class TestMatrixExpressions(unittest.TestCase):
 class TestEliminatorMethod(unittest.TestCase):
     x, y = sym.symbols('x, y')
 
-    f = x ** 2 + x * y + 2.0 * x + y -1.0
+    f = x ** 2 + x * y + 2.0 * x + y - 1.0
     g = x ** 2 + 3.0 * x - y ** 2 + 2.0 * y - 1.0
     system = [f, g]
 
