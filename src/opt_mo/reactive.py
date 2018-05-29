@@ -205,3 +205,16 @@ if __name__ == '__main__':
         df = pd.concat(dfs, ignore_index=True)
         df.to_csv(filename)
         i += 1
+        # # tournament
+        # axl.seed(i + 10000)
+        # other = [np.random.random(4)]
+        # row += [q for q in other[0]]
+        # opponents = main_op + other
+
+        # print('Start Tournament')
+        # start_optimisation = time.clock()
+        # solution_set = reactive_set(opponents)
+        # p_1, p_2, u = opt_mo.argmax(opponents, solution_set)
+
+        # row.append(p_1), row.append(p_2), row.append(u)
+        # end_match = time.clock() - start_optimisation
