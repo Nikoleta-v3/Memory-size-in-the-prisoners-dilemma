@@ -6,18 +6,28 @@ import imp
 import itertools
 import sys
 import time
+from functools import partial
 
 import axelrod as axl
 import numpy as np
 import pandas as pd
+import skopt
 import sympy as sym
-from axelrod.action import Action
 from scipy.optimize import fsolve
 from sympy.polys import subresultants_qq_zz
 
 import opt_mo
 
-main = imp.load_source('main', '../main.py')
+
+def prepare_objective_optimisation(opponents):
+    objective = partial(reactive_utility, opponents=opponents)
+    return objective
+
+def reactive_utility(p, opponents):
+    p_1, p_2 = p
+    utility = opt_mo.tournament_utility((p_1, p_2, p_1, p_2), opponents)
+
+    return utility
 
 def round_matrix_expressions(matrix, num_digits, variable):
     """
@@ -134,74 +144,65 @@ def argmax(opponents, solution_set):
                  for p_1, p_2 in itertools.product(solution_set, repeat=2)]
     return max(solutions, key=lambda item:item[-1])
 
-def get_columns(params, method_params):
+def get_columns(method_params):
     cols = ['index', '$q_1$', '$q_2$', '$q_3$', '$q_4$', r'$\bar{q}_1$', r'$\bar{q}_2$',
             r'$\bar{q}_3$', r'$\bar{q}_4$', '$p_1 ^ *$', '$p_2 ^ *$', '$u_q$',
-             'Optimisation time', '$U_G$', 'Training time']
-    size = main.pattern_size(params)
-    gambler_cols = ['Gambler {} key'.format(i) for i in range(size + 1)]
+             'Optimisation time', '$U_G$', 'Training time', r'$\bar{p}_1 ^ *$',
+             r'$\bar{p}_2 ^ *$']
+
     method_cols = ['{}'.format(key) for key in method_params.keys()]
 
-    return cols + gambler_cols + method_cols
+    return cols + method_cols
 
 if __name__ == '__main__':
     index = int(sys.argv[1])
-    num_plays = int(sys.argv[2])
-    num_op_plays = int(sys.argv[3])
-    num_op_start_plays = int(sys.argv[4])
-    types = sys.argv[5]
+    types = sys.argv[2]
 
-    num_turns = 200
     location = '~/rsc/Memory-size-in-the-prisoners-dilemma/data/reactive/' + types
-    params = [num_plays, num_op_plays, num_op_start_plays]
 
     i = (index - 1) * 100
     while i <= index * 100:
         axl.seed(i)
-        filename =  location + '/bayesian_{}_Gambler_{}_{}_{}.csv'.format(i, *params)
+        filename =  location + '/bayesian_{}.csv'.format(i)
         main_op = [np.random.random(4)]
 
         dfs = []
-        for num_repetitions in [5, 20, 50]:
-                for starts, calls in [(10, 20), (20, 30), (20, 40), (20, 45), (20, 50)]:
-                    method_params = {'n_random_starts' : starts, 'n_calls': calls}
-                    cols = get_columns(params, method_params)
-                    row = [i]
-                    row += [q for q in main_op[0]]
-                    if types == 'matches':
-                        cols = cols[:4] + cols[8:]
-                        list_opponents = main_op
+        for starts, calls in [(10, 20), (20, 30), (20, 40), (20, 45), (20, 50)]:
+            method_params = {'n_random_starts' : starts, 'n_calls': calls}
+            cols = get_columns(method_params)
+            row = [i]
+            row += [q for q in main_op[0]]
+            if types == 'matches':
+                cols = cols[:5] + cols[9:]
+                list_opponents = main_op
 
-                    if types == 'tournaments':
-                        axl.seed(i + 10000)
-                        other = [np.random.random(4)]
-                        row += [q for q in other[0]]
+            if types == 'tournaments':
+                axl.seed(i + 10000)
+                other = [np.random.random(4)]
+                row += [q for q in other[0]]
 
-                        list_opponents = main_op + other
+                list_opponents = main_op + other
 
-                    start_optimisation = time.clock()
-                    solution_set = reactive_set(list_opponents)
-                    p_1, p_2, utility = opt_mo.argmax(list_opponents, solution_set)
+            start_optimisation = time.clock()
+            solution_set = reactive_set(list_opponents)
+            p_1, p_2, utility = opt_mo.argmax(list_opponents, solution_set)
 
-                    row.append(p_1), row.append(p_2), row.append(utility)
-                    row.append(time.clock() - start_optimisation)
+            row.append(p_1), row.append(p_2), row.append(utility)
+            row.append(time.clock() - start_optimisation)
 
-                    start_training = time.clock()
-                    opt_gambler, utility = main.train_gambler(method='bayesian',
-                                                              opponents=list_opponents,
-                                                              turns=num_turns,
-                                                              repetitions=num_repetitions,
-                                                              params=params,
-                                                              method_params=method_params)
+            start_training = time.clock()
+            objective = prepare_objective_optimisation(opponents=list_opponents)
+            result = skopt.gp_minimize(func=objective, dimensions=[(0, .99999), (0, .99999)],
+                                    acq_func="EI", random_state=0, **method_params)
 
-                    row.append(utility), row.append(time.clock() - start_training)
-                    for vector in opt_gambler:
-                        row.append(vector)
+            row.append(-result.fun), row.append(time.clock() - start_training)
+            for vector in result.x:
+                row.append(vector)
 
-                    for value in method_params.values():
-                        row.append(value)
+            for value in method_params.values():
+                row.append(value)
 
-                    dfs.append(pd.DataFrame([row], columns=cols))
+            dfs.append(pd.DataFrame([row], columns=cols))
         df = pd.concat(dfs, ignore_index=True)
         df.to_csv(filename)
         i += 1
