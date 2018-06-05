@@ -17,8 +17,6 @@ from sympy.polys import subresultants_qq_zz
 
 import opt_mo
 
-main = imp.load_source('main', '../main.py')
-
 def round_matrix_expressions(matrix, num_digits, variable):
     """
     Rounds matrix elements. The elements are polynomials of a given variable.
@@ -138,7 +136,7 @@ def get_columns(params, method_params):
     cols = ['index', '$q_1$', '$q_2$', '$q_3$', '$q_4$', r'$\bar{q}_1$', r'$\bar{q}_2$',
             r'$\bar{q}_3$', r'$\bar{q}_4$', '$p_1 ^ *$', '$p_2 ^ *$', '$u_q$',
              'Optimisation time', '$U_G$', 'Training time']
-    size = main.pattern_size(params)
+    size = opt_mo.pattern_size(params)
     gambler_cols = ['Gambler {} key'.format(i) for i in range(size + 1)]
     method_cols = ['{}'.format(key) for key in method_params.keys()]
 
