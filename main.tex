@@ -66,13 +66,13 @@ The normal form representation of the game is given by:
         \end{pmatrix}
 \end{equation}
 
-where \(S_p\) represents the utilities of the first player and \(S_q\) the utilities
-of the second player. The payoffs, \((R, P, S, T)\), are constrained by equations
-(\ref{eq:pd_constrain_one}) and~(\ref{eq:pd_constrain_two}). Constrain
+where \(S_p\) represents the utilities of the row player and \(S_q\) the utilities
+of the column player. The payoffs, \((R, P, S, T)\) (the most common values used in the
+literature are \((3, 1, 0, 5)\)~\cite{Axelrod1981}), are constrained by equations
+(\ref{eq:pd_constrain_one}) and~(\ref{eq:pd_constrain_two}). Constraint
 (\ref{eq:pd_constrain_one}) ensures that defection dominates cooperation and
-constrain (\ref{eq:pd_constrain_two}) ensures that there is a dilemma. Because
-the sum of the utilities for both players is better when both choose cooperation.
-The most common values used in the literature are \((3, 1, 0, 5)\)~\cite{Axelrod1981}.
+constraint (\ref{eq:pd_constrain_two}) ensures that there is a dilemma; the sum of the
+utilities for both players is better when both choose to cooperate.
 
 \begin{equation}\label{eq:pd_constrain_one}
     T > R > P > S 
@@ -83,7 +83,7 @@ The most common values used in the literature are \((3, 1, 0, 5)\)~\cite{Axelrod
 \end{equation}
 
 The PD is a one shot game, however it is commonly studied in a manner where the
-history of the interactions matters. The repeated form of the game is called the
+history of the interactions matter. The repeated form of the game is called the
 Iterated Prisoner's Dilemma (IPD) and in the 1980s following the work of
 \cite{Axelrod1980a, Axelrod1980b} it attracted the attention of the scientific
 community.
@@ -91,12 +91,10 @@ community.
 In~\cite{Axelrod1980a} and~\cite{Axelrod1980b}, the first well known computer
 tournaments of the IPD were performed. A total of 13 and 63 strategies were submitted
 in computer code and competed against each other in a round robin tournament.
-All contestants competed against each other, themselves and random strategy and the
-winner was decided on the average score a strategy achieved and not it's total the number of wins.
-The strategies were allowed access to the full history of each match. The history
-included the previous moves of both the player's and the opponent's. How many turns of history
-that a strategy would use, the memory size, was left to the creator of the strategy to
-decide.
+All contestants competed against each other, a copy of themselves and a random strategy.
+The winner was decided on the average score a strategy achieved and not the total number
+of wins. How many turns of history that a strategy would use, the memory size, was left
+to the creator of the strategy to decide.
 
 The winning strategy of both tournaments was a strategy called Tit for Tat. Tit for Tat
 is a strategy which starts by cooperating and then mimics the last move of
