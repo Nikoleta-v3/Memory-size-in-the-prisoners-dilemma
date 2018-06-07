@@ -66,13 +66,13 @@ The normal form representation of the game is given by:
         \end{pmatrix}
 \end{equation}
 
-where \(S_p\) represents the utilities of the first player and \(S_q\) the utilities
-of the second player. The payoffs, \((R, P, S, T)\), are constrained by equations
-(\ref{eq:pd_constrain_one}) and~(\ref{eq:pd_constrain_two}). Constrain
+where \(S_p\) represents the utilities of the row player and \(S_q\) the utilities
+of the column player. The payoffs, \((R, P, S, T)\) (the most common values used in the
+literature are \((3, 1, 0, 5)\)~\cite{Axelrod1981}), are constrained by equations
+(\ref{eq:pd_constrain_one}) and~(\ref{eq:pd_constrain_two}). Constraint
 (\ref{eq:pd_constrain_one}) ensures that defection dominates cooperation and
-constrain (\ref{eq:pd_constrain_two}) ensures that there is a dilemma. Because
-the sum of the utilities for both players is better when both choose cooperation.
-The most common values used in the literature are \((3, 1, 0, 5)\)~\cite{Axelrod1981}.
+constraint (\ref{eq:pd_constrain_two}) ensures that there is a dilemma; the sum of the
+utilities for both players is better when both choose to cooperate.
 
 \begin{equation}\label{eq:pd_constrain_one}
     T > R > P > S 
@@ -83,7 +83,7 @@ The most common values used in the literature are \((3, 1, 0, 5)\)~\cite{Axelrod
 \end{equation}
 
 The PD is a one shot game, however it is commonly studied in a manner where the
-history of the interactions matters. The repeated form of the game is called the
+history of the interactions matter. The repeated form of the game is called the
 Iterated Prisoner's Dilemma (IPD) and in the 1980s following the work of
 \cite{Axelrod1980a, Axelrod1980b} it attracted the attention of the scientific
 community.
@@ -91,59 +91,54 @@ community.
 In~\cite{Axelrod1980a} and~\cite{Axelrod1980b}, the first well known computer
 tournaments of the IPD were performed. A total of 13 and 63 strategies were submitted
 in computer code and competed against each other in a round robin tournament.
-All contestants competed against each other, themselves and random strategy and the
-winner was decided on the average score a strategy achieved and not it's total the number of wins.
-The strategies were allowed access to the full history of each match. The history
-included the previous moves of both the player's and the opponent's. How many turns of history
-that a strategy would use, the memory size, was left to the creator of the strategy to
-decide.
+All contestants competed against each other, a copy of themselves and a random strategy.
+The winner was decided on the average score a strategy achieved and not the total number
+of wins. How many turns of history of a given match that each strategy would use
+referred to as the memory size, was left to the creator of the strategy to decide.
 
 The winning strategy of both tournaments was a strategy called Tit for Tat. Tit for Tat
 is a strategy which starts by cooperating and then mimics the last move of
 it's opponent. This is a strategy which makes use of the previous move of the opponent
-only and it's called a reactive strategy. In~\cite{Nowak1989} a framework for
+only and a reactive strategy. In~\cite{Nowak1989} a framework for
 studying such strategies was introduced. This was later used to introduce well known
 reactive strategies such as Generous Tit For Tat~\cite{Nowak1990}.
 
 Reactive strategies are a subset of memory one strategies. Memory one strategies
-similarly are only concern with the previous turn. However, they take into consideration
+similarly are only concerned with the previous turn. However, they take into consideration
 both players' recent moves to decide on an action. Several successful memory one
-strategies are found in literature, for example Pavlov~\cite{Nowak1993}.
+strategies are found in the literature, for example Pavlov~\cite{Nowak1993}.
 
-A well known set of memory on strategies was introduced in~\cite{Press2012}, and
+A well known set of memory on strategies was introduced in~\cite{Press2012},
 these were called zero determinant (ZD) strategies. The ZD strategies manage to force a linear
-relationship between the score of the strategy and the opponent. According to the
-authors the ZD strategies can dominate any evolutionary opponent in pairwise
+relationship between the score of the strategy and the opponent. According to~\cite{Press2012}
+the ZD strategies can dominate any evolutionary opponent in pairwise
 interactions by using a single slot of memory. Thus the usefulness of memory in
 the IPD was questioned.
 
-The ZD strategies tracked a lot of attention. It was stated that
+The ZD strategies attracted a lot of attention. It was stated that
 ``Press and Dyson have fundamentally changed the viewpoint on the Prisoner's
-Dilemma''~\cite{Stewart2012}. In~\cite{Stewart2012}, the Axelrod's
-tournament have been re-run including ZD strategies and a new set of ZD
-strategies the Generous ZD.
+Dilemma''~\cite{Stewart2012}. In~\cite{Stewart2012} a very similar tournament to Axelrod's
+tournament is run including ZD strategies and a new set of ZD strategies the Generous
+ZD. One specific advantage of memory one strategies is their mathematical tractability.
+As described in Section~\ref{} %TODO fill this
+they can be represented completely as an element of \(\R^{4}\).
 
 Even so, ZD and memory one strategies have also received criticism. In~\cite{Harper2015},
 the `memory of a strategy does not matter' statement was questioned. A set of more
 complex strategies, strategies that take in account the entire history set of the
-game, were trained and proven to be more robust than ZD strategies.
-
-\subsection{The Problem}
-
-In this manuscript we explore the size of memory for strategies of IPD.%TODO: expand when we know the results
+game, were trained and proven to be more robust against multiple opponents.
 
 The purpose of this work is to consider a given memory one strategy 
 in a similar fashion to~\cite{Press2012}. However whilst~\cite{Press2012} found
-a way for a player to manipulate an opponent, this work will consider an
-optimisation approach to identify the best response to that opponent.
-In essence the aim is to produce a compact method of identifying the best memory
-one strategy against a given opponent.
+a way for a player to manipulate a given opponent, this work will consider a multidimensional
+optimisation approach to identify the best response to a group of opponents. In
+essence the aim is to produce a compact method of identifying the best memory one
+strategy against a given opponent.
 
 In the second part of this manuscript we explore the limitation of these best response
 strategies. This is achieved by comparing the performance of an optimal
 memory one strategy, for a given environment, with the performance of a more complex
-strategy. The type of complex strategy used is described in depth in the
-following sections.
+strategy that has a larger memory.
 
 \section{Methodology}
 
