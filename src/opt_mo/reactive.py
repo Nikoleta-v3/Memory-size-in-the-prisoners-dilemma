@@ -18,7 +18,6 @@ from sympy.polys import subresultants_qq_zz
 
 import opt_mo
 
-
 def prepare_objective_optimisation(opponents):
     objective = partial(reactive_utility, opponents=opponents)
     return objective
@@ -38,7 +37,7 @@ def round_matrix_expressions(matrix, num_digits, variable):
                              for n in sym.Poly(element, variable).all_coeffs()})
     return matrix
 
-def get_roots_of_first_unknown(system, variable, other_variable):
+def eliminator_method(system, variable, other_variable):
     """
     For solving a 2 polynomial system of 2 unknowns. Calculates the real roots
     of the first unknown using Sylvester's resultant or the eliminator.
@@ -62,22 +61,22 @@ def get_roots_of_first_unknown(system, variable, other_variable):
     
     # candidate roots
     coeffs = sym.Poly(num, variable).all_coeffs()
-    roots = list(np.roots(coeffs))
+    roots = np.roots(coeffs)
     
-    feasible_roots = []
+    feasible_roots = set()
     for root in roots:
         if not np.iscomplex(root):
             if root >= 0 and root <= 1:
-                feasible_roots.append(root)
+                feasible_roots.add(root)
     
     if den != 1:
         for root in feasible_roots:
             if den.subs({variable: root}) == 0:
                 feasible_roots.remove(root)
 
-    return set(feasible_roots) | set([0, 1])
+    return feasible_roots
 
-def get_roots_of_second_unknown(system, variable, other_roots, other_variable):
+def solve_system(system, variable, other_roots, other_variable):
     """
     Solving the system for the second unknown once the roots of the first one
     have been calculated.
@@ -95,23 +94,34 @@ def get_roots_of_second_unknown(system, variable, other_roots, other_variable):
     other_variable: symbol
         The first unknown. The one that the roots have been calculated
     """
-    roots = []
+    roots = set()
     for root in other_roots:
-        first_poly = sym.lambdify(variable, system[0].subs({other_variable: root}))
-        second_poly = sym.lambdify(variable, system[1].subs({other_variable: root}))
-        roots.append(fsolve(equations, x0=[0, 0], args=[first_poly, second_poly])[0])
+        first_poly_coeffs = sym.Poly(system[0].subs({other_variable: root}), 
+                                     variable).all_coeffs()
+        first_poly_roots = set(np.roots(first_poly_coeffs))
 
-    feasible_roots = []
+        second_poly_coeffs = sym.Poly(system[1].subs({other_variable: root}), 
+                                     variable).all_coeffs()
+        second_poly_roots = set(np.roots(second_poly_coeffs))
+
+        roots.update(first_poly_roots.intersection(second_poly_roots))
+
+    feasible_roots = set()
     for root in roots:
         if not np.iscomplex(root):
             if root >= 0 and root <= 1:
-                feasible_roots.append(root)
+                feasible_roots.add(root)
     return feasible_roots
 
-def equations(solution, args):
-    polynomial_one, polynomial_two = args
-    value, _ = solution
-    return (polynomial_one(value), polynomial_two(value))
+def feasible_roots(coeffs):
+    roots = set(np.roots(coeffs))
+
+    feasible_roots = set()
+    for root in roots:
+        if not np.iscomplex(root):
+            if root >= 0 and root <= 1:
+                feasible_roots.add(root)
+    return feasible_roots
 
 def reactive_set(opponents):
     p_1, p_2 = sym.symbols('p_1, p_2')
@@ -126,16 +136,20 @@ def reactive_set(opponents):
     num = [expr[0] for expr in fractions]
     den = [expr[1] for expr in fractions]
 
-    # roots for p_1
-    p_one_roots = get_roots_of_first_unknown(num, p_1, p_2)
-    
-    # roots for p_2
-    if p_one_roots is not None:
-        solution_set = p_one_roots
-        p_two_roots = get_roots_of_second_unknown(num, p_2, p_one_roots, p_1)
-    
-    if p_two_roots is not None:
-        solution_set |= set(p_two_roots)
+    # roots p_1 for derivative
+    p_one_roots = eliminator_method(num, p_1, p_2)
+
+    p_two_roots = set()
+    if p_one_roots:
+        p_two_roots.update(solve_system(num, p_2, p_one_roots, p_1))
+
+    # roots of p_2 for edges
+    for p_one_edge in [0, 1]:
+        coeffs = sym.Poly(num[1].subs({p_1: p_one_edge}), p_2).all_coeffs()
+        roots = feasible_roots(coeffs)
+        p_two_roots.update(roots)
+
+    solution_set = p_one_roots | p_two_roots | set([0, 1])
     return solution_set
 
 def argmax(opponents, solution_set):

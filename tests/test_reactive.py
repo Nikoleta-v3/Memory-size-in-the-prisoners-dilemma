@@ -27,19 +27,16 @@ class TestEliminatorMethod(unittest.TestCase):
     g = x ** 2 + 3.0 * x - y ** 2 + 2.0 * y - 1.0
     system = [f, g]
 
-    def test_get_roots_of_first_unknown(self):
-        roots_for_x = opt_mo.get_roots_of_first_unknown(system=self.system,
-                                                        variable=self.x, 
-                                                        other_variable=self.y)
-        self.assertEqual(roots_for_x, set([0.9999999999999998, 0.0, 1]))
+    def test_eliminator_method(self):
+        roots_for_x = opt_mo.eliminator_method(system=self.system, variable=self.x,
+                                               other_variable=self.y)
+        self.assertEqual(roots_for_x, set([0.9999999999999998, 0.0]))
 
-    def test_get_roots_of_second_unknown(self):
+    def test_solve_system(self):
         other_roots = [0.9999999999999998, 0.0]
-        roots_for_y = opt_mo.get_roots_of_second_unknown(system=self.system,
-                                                         variable=self.y,
-                                                         other_roots=other_roots,
-                                                          other_variable=self.x)
-        self.assertEqual(roots_for_y, [1])
+        roots_for_y = opt_mo.solve_system(system=self.system, variable=self.y,
+                                          other_roots=other_roots, other_variable=self.x)
+        self.assertEqual(roots_for_y, set([1]))
 
 class TestReactiveSet(unittest.TestCase):
 
@@ -58,5 +55,16 @@ class TestReactiveSet(unittest.TestCase):
         opponent = [np.random.random(4)]
 
         solution_set = opt_mo.reactive_set(opponent)
-        self.assertEqual(solution_set, set([0, 0.2977534327198158,
-                                            0.44568095634061794, 1]))
+        self.assertEqual(solution_set, set([0, 0.4450664548206672, 0.31493358733410926, 1]))
+
+class TestPlayerForNumericalExperiment(unittest.TestCase):
+
+    def test_result_from_numerical_experiments(self):
+        axl.seed(2933)
+        opponents = [np.random.random(4) for _ in range(1)]
+
+        solution_set =  opt_mo.reactive_set(opponents)
+        solution = opt_mo.argmax(opponents, solution_set)
+
+        self.assertEqual(solution_set, set([0, .13036776235395534, 0.4267968584197452, 1]))
+        self.assertEqual(solution, (0, 0.4267968584197452, 2.6546912335393573))
