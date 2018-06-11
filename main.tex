@@ -93,66 +93,71 @@ tournaments of the IPD were performed. A total of 13 and 63 strategies were subm
 in computer code and competed against each other in a round robin tournament.
 All contestants competed against each other, a copy of themselves and a random strategy.
 The winner was decided on the average score a strategy achieved and not the total number
+<<<<<<< HEAD
 of wins. How many turns of history that a strategy would use, the memory size, was left
 to the creator of the strategy to decide.
+=======
+of wins. How many turns of history of a given match that each strategy would use
+referred to as the memory size, was left to the creator of the strategy to decide.
+>>>>>>> 6c109e271d554b079b584e4505642377bb01b2eb
 
 The winning strategy of both tournaments was a strategy called Tit for Tat. Tit for Tat
 is a strategy which starts by cooperating and then mimics the last move of
 it's opponent. This is a strategy which makes use of the previous move of the opponent
-only and it's called a reactive strategy. In~\cite{Nowak1989} a framework for
+only and a reactive strategy. In~\cite{Nowak1989} a framework for
 studying such strategies was introduced. This was later used to introduce well known
 reactive strategies such as Generous Tit For Tat~\cite{Nowak1990}.
 
 Reactive strategies are a subset of memory one strategies. Memory one strategies
-similarly are only concern with the previous turn. However, they take into consideration
+similarly are only concerned with the previous turn. However, they take into consideration
 both players' recent moves to decide on an action. Several successful memory one
-strategies are found in literature, for example Pavlov~\cite{Nowak1993}.
+strategies are found in the literature, for example Pavlov~\cite{Nowak1993}.
 
-A well known set of memory on strategies was introduced in~\cite{Press2012}, and
+A well known set of memory on strategies was introduced in~\cite{Press2012},
 these were called zero determinant (ZD) strategies. The ZD strategies manage to force a linear
-relationship between the score of the strategy and the opponent. According to the
-authors the ZD strategies can dominate any evolutionary opponent in pairwise
+relationship between the score of the strategy and the opponent. According to~\cite{Press2012}
+the ZD strategies can dominate any evolutionary opponent in pairwise
 interactions by using a single slot of memory. Thus the usefulness of memory in
 the IPD was questioned.
 
-The ZD strategies tracked a lot of attention. It was stated that
+The ZD strategies attracted a lot of attention. It was stated that
 ``Press and Dyson have fundamentally changed the viewpoint on the Prisoner's
-Dilemma''~\cite{Stewart2012}. In~\cite{Stewart2012}, the Axelrod's
-tournament have been re-run including ZD strategies and a new set of ZD
-strategies the Generous ZD.
+Dilemma''~\cite{Stewart2012}. In~\cite{Stewart2012} a very similar tournament to Axelrod's
+tournament is run including ZD strategies and a new set of ZD strategies the Generous
+ZD. One specific advantage of memory one strategies is their mathematical tractability.
+As described in Section~\ref{section:utility_against_mem_one}
+they can be represented completely as an element of \(\R^{4}\).
 
 Even so, ZD and memory one strategies have also received criticism. In~\cite{Harper2015},
 the `memory of a strategy does not matter' statement was questioned. A set of more
 complex strategies, strategies that take in account the entire history set of the
-game, were trained and proven to be more robust than ZD strategies.
-
-\subsection{The Problem}
-
-In this manuscript we explore the size of memory for strategies of IPD.%TODO: expand when we know the results
+game, were trained and proven to be more robust against multiple opponents.
 
 The purpose of this work is to consider a given memory one strategy 
 in a similar fashion to~\cite{Press2012}. However whilst~\cite{Press2012} found
-a way for a player to manipulate an opponent, this work will consider an
-optimisation approach to identify the best response to that opponent.
-In essence the aim is to produce a compact method of identifying the best memory
-one strategy against a given opponent.
+a way for a player to manipulate a given opponent, this work will consider a multidimensional
+optimisation approach to identify the best response to a group of opponents. In
+essence the aim is to produce a compact method of identifying the best memory one
+strategy against a given opponent.
 
 In the second part of this manuscript we explore the limitation of these best response
 strategies. This is achieved by comparing the performance of an optimal
 memory one strategy, for a given environment, with the performance of a more complex
-strategy. The type of complex strategy used is described in depth in the
-following sections.
+strategy that has a larger memory.
 
-\section{Methodology}
+One particular benefit of this analysis is the identification of conditions for
+which defection is a best response. Thus, laos identifying environments for which
+cooperation can not occur.
 
-In~\cite{Nowak1989} a framework was introduced to study the interactions of memory
-one strategies modelled as a stochastic process, the work~\cite{Press2012} of is
-also build upon it. In this manuscript it is stated that if a strategy
-is concerned with only the outcome of a single turn then there are four possible `states'
-the strategy could be in. These are \(CC, CD, DC,CC\). A memory one strategy is denoted
-by the probabilities of cooperating after each of these states,
-\(p=(p_1, p_2, p_3, p_4) \in \R_{[0,1]} ^ 4\). A diagrammatic representation of
-such strategy is given in Figure~\ref{fig:diagram_mem_one}.
+\section{The utility against memory one players}\label{section:utility_against_mem_one}
+
+In~\cite{Press2012} a framework is described to sufficient study the interactions
+of memory one strategies modelled as a stochastic process. In this manuscript it
+is stated that if a strategy is concerned with only the outcome of a single turn
+then there are four possible `states' the strategy could be in. These are
+\(CC, CD, DC,CC\). A memory one strategy is denoted by the probabilities of
+cooperating after each of these states, \(p=(p_1, p_2, p_3, p_4) \in \R_{[0,1]} ^ 4\).
+A diagrammatic representation of such strategy is given in Figure~\ref{fig:diagram_mem_one}.
 
 \begin{figure}
     \centering
@@ -170,31 +175,25 @@ such strategy is given in Figure~\ref{fig:diagram_mem_one}.
     \end{subfigure}
 \end{figure}
 
-Moreover, if two players are moving from state to state using the transition
-probabilities, it can be modelled as a Markov process of four states. The Markov 
-chain is shown in Figure~\ref{fig:markov_chain}. The transition matrix \(M\) of
-Figure~\ref{fig:markov_chain} is defined as,
+Moreover, if two players are moving from state to state following a general
+memory one strategy this can be modelled as a Markov process. A diagrammatic
+representation of the Markov chain is shown in Figure~\ref{fig:markov_chain}.
+The corresponding transition matrix \(M\) given by:
 
 \begin{equation}\label{eq:m_matrix}
     \input{tex/m_matrix.tex}.
 \end{equation}
 
-where the vector of the stationary probabilities of is \(v\) (given in the Appendix). %TODO include Appendix
+The long run steady state probability \(v\) is the solution to \(\bigtriangledown M = \bigtriangledown\)
+(given in the Appendix). %TODO include Appendix
 Combining the stationary vector \(v\) with the payoff matrices of equation~(\ref{equ:pd_definition})
-allow us to retrieve the expected outcome for each player. Thus, the utility for
+allow us to retrieve the expected payoffs for each player. Thus, the utility for
 player \(p\) against \(q\), denoted as \(u_q(p)\), is defined by,
 
 \begin{equation}\label{eq:press_dyson_utility}
-    u_q(p) = v \times S_p.
+    u_q(p) = v \times (R, P, S, T).
 \end{equation}
 
-The analytical formulation gives the advantage of time. That is because the 
-payoffs of a match between two opponents are now retrievable without 
-simulating the actual match itself. This analytical formulation will be used
-hereupon and it will allow us to study best responses in an analytical way.
-
-Though this formulation, which was introduced in 1989, have been
-used in several different works not many insights have been given about the form of \(u_q(p)\).
 Here we present the first theoretical result which concerns the form of \(u_q(p)\).
 That is that \(u_q(p)\) is given by a ratio of two quadratic forms, as presented
 by Theorem~\ref{theorem:quadratic_form_u}.
@@ -208,7 +207,7 @@ by Theorem~\ref{theorem:quadratic_form_u}.
     u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
                 {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}}, 
     \end{equation}
-    where \(Q, \bar{Q}\) \(4 \times 4\) matrices defined by the transition
+    where \(Q, \bar{Q}\) \(\in \R^{4\times4}\) matrices defined by the transition
     probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
     
     \begin{center}
@@ -224,7 +223,7 @@ by Theorem~\ref{theorem:quadratic_form_u}.
     \end{equation}
     \end{center}
     
-    \(c \text{ and } \bar{c}\), are \(4 \times 1\) vectors defined by:
+    \(c \text{ and } \bar{c}\) \(\in \R^{4 \times 1}\) defined by:
     
     \begin{equation}\label{eq:q_matrix_numerator}
     \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
@@ -236,15 +235,15 @@ by Theorem~\ref{theorem:quadratic_form_u}.
     }
     \end{equation}
     
-    Finally, \(a = \input{tex/numerator_constant}\) and 
+    and \(a = \input{tex/numerator_constant}\) and 
     \(\bar{a} = \input{tex/denominator_constant}\).
     \end{theorem}
 
-The formulation of \(u_q(p)\) has been validated using numerical experiments.
-Several memory one players were matched against 20 opponents and their theoretical
-utility \(u_q(p)\) was compared to a simulated one. Figure~\ref{fig:analytical_simulated}
-indicates that the  formulation of \(u_q(p)\) as a quadratic ratio successfully 
-captures the simulated behaviour.
+Proof: The proof is given in Appendix. %TODO write proof
+
+Figure~\ref{fig:analytical_simulated} indicates that the  formulation of \(u_q(p)\)
+as a quadratic ratio successfully captures the simulated behaviour. A data set
+offering further validation is available at. %TODO archive data
 
 The simulated utility, denoted
 as \(U_q(p)\) has been calculated using~\cite{axelrodproject}. It is an open research
@@ -265,18 +264,30 @@ with~\cite{axelrodproject}.
 \label{fig:analytical_simulated}
 \end{figure}
 
-Now that the analytical formulation has been validated in the following sections
-it is used to explore best responses in memory one strategies. Moreover, the new
-formulation of Theorem~\ref{theorem:quadratic_form_u} allow us to retrieve a number
-of theoretical results. These are also discussed in the next sections.
+\begin{theorem}\label{theorem:tournament utility}
+    The expected utility of a memory one strategy \(p\in\mathbb{R}_{[0,1]}^4\)
+    against a group of opponents \(q^{(1)}, q^{(2)}, \dots, q^{(N)}\), denoted
+    as \(\frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)\) is given by:
+    \begin{equation}\label{eq:tournament_utility}
+        \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) = \frac{1}{N}
+        \frac{\sum\limits_{i=1} ^ {N} (\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)})
+        \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ 
+        N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}
+        {\prod\limits_{i=1} ^ N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}.
+    \end{equation}
+\end{theorem}
 
-\section{Analytically Results}\label{section:analytical_results}
+The analytical formulation of Theorem~\ref{theorem:tournament utility} will be
+used in the following sections to explore the best response to memory one
+strategies.
+
+\section{Best responses to memory one players}\label{section:best_response_mem_one}
 
 In the introduction a question was raised: which memory one strategy is the \textbf{best response}
-against another memory one? This will be considered as an optimisation problem,
+to a group of memory one strategies? This will be considered as an optimisation problem,
 where a memory one strategy \(p\) wants to optimise it's utility \(u_q(p)\)
 against an opponent \(q\). The decision variable is the vector \(p\) and the
-solitary constrain is that \(p \in \R^4_{[0, 1]} \). The optimisation problem is
+solitary constraint is that \(p \in \R^4_{[0, 1]} \). The optimisation problem is
 given by~(\ref{eq:mo_optimisation}).
 
 \begin{equation}\label{eq:mo_optimisation}
@@ -287,8 +298,6 @@ given by~(\ref{eq:mo_optimisation}).
 & \text{such that}: && \ p \in \R^4_{[0, 1]}.
 \end{aligned}
 \end{equation}
-
-\subsection{Convexity}
 
 This work is concerned with a fractional optimisation problem of quadratic forms.
 Initially, the convexity, whether or not \(u_{q}(p)\) is concave~\cite{Gradshteyn2007},
