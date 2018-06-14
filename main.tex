@@ -190,8 +190,8 @@ player \(p\) against \(q\), denoted as \(u_q(p)\), is defined by,
 \end{equation}
 
 Here we present the first theoretical result which concerns the form of \(u_q(p)\).
-That is that \(u_q(p)\) is given by a ratio of two quadratic forms, as presented
-by Theorem~\ref{theorem:quadratic_form_u}.
+That is that \(u_q(p)\) is given by a ratio of two quadratic forms~\cite{kepner2011},
+as presented by Theorem~\ref{theorem:quadratic_form_u}.
 
 \begin{theorem}\label{theorem:quadratic_form_u}
     The expected utility of a memory one strategy \(p\in\mathbb{R}_{[0,1]}^4\)
@@ -255,11 +255,18 @@ with~\cite{axelrodproject}.
         \includegraphics[width=\linewidth]{img/validation_img_three.png}
     \end{subfigure}
 \end{center}
-\caption{Differences between simulated and analytical results.}
+\caption{Differences between simulated and analytical results for
+\(q = (\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, q_4)\).}
 \label{fig:analytical_simulated}
 \end{figure}
 
-\begin{theorem}\label{theorem:tournament utility}
+Moreover Theorem~\ref{theorem:quadratic_form_u} can be expanded to multi opponent
+interactions. The IPD is commonly studied in tournaments where a strategy interacts
+with a number of opponents. There the payoff of a player is given by the average
+payoffs the player achieved. More specifically the expected utility of a memory one strategy
+against a \(N\) number of opponents is given by Theorem~\ref{theorem:tournament_utility}.
+
+\begin{theorem}\label{theorem:tournament_utility}
     The expected utility of a memory one strategy \(p\in\mathbb{R}_{[0,1]}^4\)
     against a group of opponents \(q^{(1)}, q^{(2)}, \dots, q^{(N)}\), denoted
     as \(\frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)\) is given by:
@@ -272,7 +279,15 @@ with~\cite{axelrodproject}.
     \end{equation}
 \end{theorem}
 
-The analytical formulation of Theorem~\ref{theorem:tournament utility} will be
+To validate the formulation of Theorem~\ref{theorem:tournament_utility} we calculate
+the simulated and the theoretical payoffs of several memory one strategies against
+a set of 10 opponents. The opponents used are the memory one strategies for the tournament
+conducted in~\cite{Stewart2012}. The names and a small explanation of the strategic rules is
+given in the Appendix~\ref{appendix:tables}. Both values \(u\) and \(U\) appear to match,
+shown in Table, thus we conclude that the formulation of Theorem~\ref{theorem:tournament_utility}
+is correct.
+
+The analytical formulation of Theorem~\ref{theorem:tournament_utility} will be
 used in the following sections to explore the best response to memory one
 strategies.
 
@@ -943,6 +958,8 @@ Results, results, results.
 
 \section{Discussion}
 
+\appendix
+\input{tex/appendix_tables}
 % Bibliography
 \bibliographystyle{plain}
 \bibliography{bibliography.bib}
