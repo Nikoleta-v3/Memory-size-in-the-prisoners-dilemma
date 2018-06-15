@@ -283,9 +283,17 @@ To validate the formulation of Theorem~\ref{theorem:tournament_utility} we calcu
 the simulated and the theoretical payoffs of several memory one strategies against
 a set of 10 opponents. The opponents used are the memory one strategies for the tournament
 conducted in~\cite{Stewart2012}. The names and a small explanation of the strategic rules is
-given in the Appendix~\ref{appendix:tables}. Both values \(u\) and \(U\) appear to match,
-shown in Table, thus we conclude that the formulation of Theorem~\ref{theorem:tournament_utility}
-is correct.
+given in the Appendix~\ref{appendix:tables}. Both values \(\frac{1}{N} \sum u\) and \( \frac{1}{N} \sum U\)
+appear to match, shown in Table~\ref{table:list_stewart_plotkin}, thus we conclude that
+the formulation of Theorem~\ref{theorem:tournament_utility} is correct.
+
+\begin{table}[htbp]
+    \begin{center}
+    \input{tex/stewart_results.txt}
+    \end{center}
+    \caption{Results of memeory one strategies against the strategies in Table~\ref{table:list_stewart_plotkin}.}
+    \label{table:list_stewart_plotkin}
+\end{table}
 
 The analytical formulation of Theorem~\ref{theorem:tournament_utility} will be
 used in the following sections to explore the best response to memory one
@@ -302,8 +310,8 @@ given by~(\ref{eq:mo_optimisation}).
 
 \begin{equation}\label{eq:mo_optimisation}
 \begin{aligned}
-& \max_p: && \frac{\frac{1}{2}  p  Q  p^T + c^T p + a} 
-                  {\frac{1}{2}  p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a}}
+& \max_p: && u_q(p) = \frac{\frac{1}{2}  p  Q  p^T + c^T p + a} 
+                      {\frac{1}{2}  p  \bar{Q}  p^T + \bar{c}^T  p + \bar{a}}
 \\
 & \text{such that}: && \ p \in \R^4_{[0, 1]}.
 \end{aligned}
