@@ -834,8 +834,8 @@ emergence of cooperation. In this manuscript we try to provide a condition for w
 defection is the best response in the IPD, thus when it is known that cooperation can
 not occur.
 
-This will be done by considering equation~(\ref{eq:mo_tournament_derivative}).
-Let equation~(\ref{eq:mo_tournament_derivative}) for \(p = (0, 0, 0, 0)\),
+Initially, let's consider equation~(\ref{eq:mo_derivative}) and let
+equation~(\ref{eq:mo_derivative}) for \(p = (0, 0, 0, 0)\),
 
 \begin{equation}\label{eq:derivative_of_quadratic_zero}
     \begin{aligned}
@@ -890,7 +890,8 @@ this is shown by numerical example summarized in Table~\ref{table:sign_of_deriva
 \label{table:sign_of_derivative}
 \end{table}
 
-For a tournament setting we substitute \(p_0\) in equation~(\ref{eq:mo_tournament_derivative}):
+For a tournament setting we substitute \(p = (0, 0, 0, 0)\) in
+equation~(\ref{eq:mo_tournament_derivative}) which laid out:
 
 \begin{equation}
 \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})
@@ -902,10 +903,10 @@ is known to always be positive. However the sign of the sum term
 \(\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\) can vary based
 on the transition probabilities of the opponents, as discussed above. A condition that
 must hold in order for defection to be stable in a tournament is that the sum term
-must be negative. The results are summarised by Lemma~\ref{}.
+must be negative. The results are exhibited in Lemma~\ref{lemma:stability_of_defection}.
 
-\begin{lemma}
-    In a tournament of \(N\) players where \(q^(i) = (q_{1}^(i), q_{2}^(i), q_{3}^(i), q_{4}^(i))\)
+\begin{lemma}\label{lemma:stability_of_defection}
+    In a tournament of \(N\) players where \(q^{(i)} = (q_{1}^{(i)}, q_{2}^{(i)}, q_{3}^{(i)}, q_{4}^{(i)})\)
     defection is known to be a best response if the transition probabilities of the
     opponents satisfy the condition:
 
