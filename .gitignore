@@ -29,3 +29,4 @@ data/*
 # images
 img/mean_average/*
 img/reactive/*
+img/convexity/*

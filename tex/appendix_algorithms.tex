@@ -1,0 +1,49 @@
+
+\section{Appendix Algorithms}
+
+\begin{algorithm}
+    \setstretch{1.35}
+    \caption{Best response algorithm for reactive strategies}\label{algo:reactive}
+    \begin{algorithmic}[1]
+    \Procedure{Reactive search}{}
+    \State $N \gets \text{number of opponets}$ 
+    \State $S_q \gets \{0, 1\} ^ 2$ 
+    \State $u' \gets \frac{d\sum\limits_{i=1} ^ {N}u}{d\bar{p}}$ 
+    \State $\frac{u_N}{u_D} \gets u'$ 
+    \State $S(u_N, p_2) \gets \text{Sylvester's matrix for} p_2. \text{Coefficients are polynomials of } p_1$
+    \State $R_S(S) \gets det(S)$
+    \State $\text{roots}_{p_1} \gets p_1 \text{ for } det(M)_{p_1} = 0$
+    \BState \emph{loop} $\text{root in roots}_{p_1}$:
+    \State $\text{ system}(p_2) \gets u_N (root)$
+    \State $\text{root}_{p_2} \cup {p_2} \text{ for } \text{system}(p_2) = 0$
+    \If {$u_D((\text{root}, \text{root}_{p_2})) \neq 0$}
+    \State $S_q \cup \{(\text{root}, \text{root}_{p_2})\}$
+    \EndIf
+    \State \textbf{goto} \emph{loop}.
+    \State \textbf{close};
+    \State $p^* \gets \text{argmax}(\sum\limits_{i=1} ^ {N} u_{q^{(i)}} (p)), p \in S_q$.
+    \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+    \setstretch{1.35}
+    \caption{Best response algorithm for purely random strategies}\label{algo:purely}
+    \begin{algorithmic}[1]
+    \Procedure{Purely random search}{}
+    \State $N \gets \text{number of opponets}$ 
+    \State $S_q \gets \{0, 1\}$ 
+    \State $u' \gets \frac{d\sum\limits_{i=1} ^ {N}u}{d\bar{p}}$ 
+    \State $\frac{u_N}{u_D} \gets u'$ 
+    \State $C(u_N) \gets \text{companion matrix of } u_N$
+    \BState \emph{loop} $i=1 \text{ to } 2N$:
+    \State $\lambda_i \gets \text{eigenvalue of } C(u_N)$
+    \If {$u_D(\lambda_i) \neq 0$}
+    \State $S_q \cup \lambda_i $.
+    \EndIf
+    \State \textbf{goto} \emph{loop}.
+    \State \textbf{close};
+    \State $p^* \gets \text{argmax}(\sum\limits_{i=1} ^ {N} u_{q^{(i)}} (p)), p \in S_q $.
+    \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
