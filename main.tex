@@ -944,7 +944,79 @@ condition:
 \end{equation}
 \end{lemma}
 
-% \subsection{Memory one strategies}\label{section:mo_numerical}
+\section{Optimisation against memory one strategies}\label{section:optimisation_memone}
+
+The main aim of this work is to capture best response memory one strategies.
+Though an analytical approach can not be applied further than discussed in
+Section~\ref{section:best_response_mem_one} an empirical approach is considered here.
+
+More specially, the optimisation problem of (\ref{eq:mo_tournament_optimisation})
+is maximized using bayesian optimisation. Bayesian optimisation is a
+global optimisation algorithm in~\cite{Mokus1978} which has proven to outperform many other
+global optimisation algorithms~\cite{Jones2001}.
+
+As many other algorithms Bayesian optimisation is used to find the maximum of a
+function \(f\) on some bounded set. Bayesian optimization constructs a probabilistic
+model for \(f\) and then exploits this model to make decisions about where in the
+bounded set to next evaluate the function. Bayesian relays on the previous
+of \(f\) and not simply rely on local gradient and Hessian approximations.
+
+This allows the algorithm to optimise a non concave function with relatively few
+evaluations, at the cost of performing more computation to determine the next point
+to try~\cite{snoek2012}.
+
+The open source package~\cite{Head2018} is used in this paper to compute a large
+number of best memory one responses against random memory one strategies. The
+implementation of Bayesian in~\cite{Head2018} allow us to perform the algorithm
+for a different combination of parameters. The parameters explored here were:
+
+\begin{itemize}
+    \item Number of calls, maximum number of calls to the objective function.
+    \item Number of random starts, number of evaluations of the objective function
+    with random points before approximating it.
+\end{itemize}
+
+The different parameters' combinations and their respective values are laid out in
+Table~\ref{table:ba_opt}.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+    \toprule
+    {} &  number of calls & number of random starts\\
+    \midrule
+    1 & 20 & 10 \\
+    2 & 30 & 20 \\
+    3 & 40 & 20 \\
+    4 & 45 & 20 \\
+    5 & 50 & 20 \\
+    \bottomrule
+\end{tabular}
+\end{center}
+\caption{Bayesian optimisation parameters' values.}
+\label{table:ba_opt}
+\end{table}
+
+The combination that was chosen to carry out the empirical trials is that
+of 50 number of calls and 20 number of random starts. This set of parameters
+picked after it was checked for the reactive case. A total of 9900 different
+opponents were randomly generated and bayesian optimisation was used to find the optimal
+reactive strategy. The results were compared to that of Lemma~\ref{lemma:reactive_best_response}
+which we know give us the best reactive response.
+
+The parameter set of 50 number of calls and 20 number of random starts was the
+set with the smallest difference
+
+Note that another global optimization algorithm called differential evolution~\cite{Storn1997}
+was also reviewed for the purpose of this paper. Bayesian optimization was
+chosen over differential evolution due to a high computational cost.
+
+In this section we introduced bayesian optimisation which we now know that
+allow us to capture best memory one behaviour.
+
+% TODO: add ZD after our paper is on pre-print?!
+
+\section{Limitation of memory}
 
 % As discussed in Section~\ref{section:memory_one_analytical} best responses in memory
 % one strategies will be captured using a numerical method. In this
@@ -954,7 +1026,7 @@ condition:
 
 % Bayesian optimisation is ...
 
-% \section{Limitation of memory}
+
 
 % The second part of this paper focuses on the limitation of memory size.
 % The aim is to show that memory one strategies suffer for multi agent interactions
