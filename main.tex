@@ -799,123 +799,124 @@ illustrates examples for both lemmas.
     \label{fig:purely_lemmas}
 \end{figure}
 
+\section{Stability of defection}
 
-% \subsection{Stability of defection}
+In this section the stability of defection is explored. Defection is
+known to be the dominant action in the PD and it can be proven to be the dominant
+strategy for the IPD for given environments. Even so, several works have proven
+that cooperation emerges in the IPD many studies around the game focus on the
+emergence of cooperation. In this manuscript we try to provide a condition for when
+defection is the best response in the IPD, thus when it is known that cooperation can
+not occur.
 
-% The final theoretical result explored is the stability of defection. Defection is
-% known to be the dominant action in the PD and it can be proven to be the dominant
-% strategy for the IPD for given environments. In this manuscript we try to provide a
-% condition for when defection is the best response in the IPD.
+This will be done by considering equation~(\ref{eq:mo_tournament_derivative}).
+Let equation~(\ref{eq:mo_tournament_derivative}) for \(p = (0, 0, 0, 0)\),
 
-% This will be done by considering equation~(\ref{eq:derivative_of_quadratic}).
-% Let equation~(\ref{eq:derivative_of_quadratic}) for \(p_0 = (0, 0, 0, 0)\),
+\begin{equation}\label{eq:derivative_of_quadratic_zero}
+    \begin{aligned}
+     \frac{du}{dp_{| p=(0, 0, 0, 0)}} & = && \frac{c \bar{a} - \bar{c}a}
+      {\bar{a}^2} .\\
+    \end{aligned}
+\end{equation}
 
-% \begin{equation}\label{eq:derivative_of_quadratic_zero}
-%     \begin{aligned}
-%      \frac{du}{dp_0} & = && \frac{c \bar{a} - \bar{c}a}
-%       {\bar{a}^2} .\\
-%     \end{aligned}
-% \end{equation}
+The numerator \(\bar{c}a - c\bar{a}\) is given by,
 
-% The numerator \(\bar{c}a - c\bar{a}\) is given by,
+\[\input{tex/defection_matrix.txt}\]
 
-% \[\input{tex/defection_matrix.txt}\]
+and the denominator \(\bar{a} ^ 2 = (-q_2 + q_4 + 1) ^ 2\), which is always positive. In order
+for defection to be the best response the derivative must have a negative
+sign at the point \(p = (0, 0, 0, 0)\). That means that the utility is only
+decreasing after \(p = (0, 0, 0, 0)\).
 
-% and the denominator \(\bar{a} ^ 2 = (-q_2 + q_4 + 1) ^ 2\), which is always positive. In order
-% for defection to be the best response the derivative must have a negative
-% sign at the point \(p_0\). That means that the utility is only
-% decreasing after \(p_0\). The point \(p_0\) is by the edge of the feasible solution space
-% thus points before that are not taken into account.
+Because \(\bar{a} ^ 2\) is always positive the sign of the derivative is given by \(\bar{c}a - c\bar{a}\).
+More specifically from equations,
 
-% Because \(\bar{a} ^ 2\) is always positive the sign of the derivative is given by \(\bar{c}a - c\bar{a}\).
-% More specifically from equations,
+\begin{equation}\label{eq:defection_condition_one}
+    \input{tex/defection_condition_one.txt}
+\end{equation}
+\begin{equation}\label{eq:defection_condition_two}
+    \input{tex/defection_condition_two.txt}
+\end{equation}
 
-% \begin{equation}\label{eq:defection_condition_one}
-%     \input{tex/defection_condition_one.txt}
-% \end{equation}
-% \begin{equation}\label{eq:defection_condition_two}
-%     \input{tex/defection_condition_two.txt}
-% \end{equation}
+Both signs of the partial derivatives must be negative in order for the overall
+function to be decreasing, thus defection being the best response.
+The signs of equations (\ref{eq:defection_condition_one}) and (\ref{eq:defection_condition_two})
+vary. There are cases that they have the same sign and cases that they do not,
+this is shown by numerical example summarized in Table~\ref{table:sign_of_derivative}.
 
-% Both signs of the partial derivatives must be negative in order for the overall
-% function to be decreasing, thus defection being the best response.
-% The signs of equations (\ref{eq:defection_condition_one}) and (\ref{eq:defection_condition_two})
-% vary. There are cases that they have the same sign and cases that they do not,
-% this is shown by numerical example summarized in Table~\ref{table:sign_of_derivative}.
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{cllllcc}
+    \toprule
+    {}& {} & {}& {}& {}&  equation(\ref{eq:defection_condition_one}) &  equation(\ref{eq:defection_condition_two}) \\
+    \midrule
+1 & \(q_1=\frac{3}{10}\),   & \(q_2=\frac{3}{20}\),  & \(q_3=\frac{13}{20}\), & \(q_4=\frac{7}{100}\)
+&  + & + \\
+2 & \(q_1=\frac{11}{25}\),  & \(q_2=\frac{3}{10}\),  & \(q_3=\frac{9}{10}\),  & \(q_4=\frac{1}{2}\)
+&  - & - \\
+3 & \(q_1=\frac{17}{20}\),  & \(q_2=\frac{3}{4}\),   & \(q_3=\frac{2}{5}\),   & \(q_4=\frac{1}{4}\)
+&  - & + \\
+4 & \(q_1=\frac{13}{88}\),  & \(q_2=\frac{21}{92}\),  & \(q_3=\frac{21}{26}\),  & \(q_4=\frac{20}{67}\)
+&  + & - \\
+    \bottomrule
+\end{tabular}
+\end{center}
+\caption{Numerical examples of the derivative's sign.}
+\label{table:sign_of_derivative}
+\end{table}
 
-% \begin{table}[htbp]
-% \begin{center}
-% \begin{tabular}{cllllcc}
-%     \toprule
-%     {}& {} & {}& {}& {}&  equation(\ref{eq:defection_condition_one}) &  equation(\ref{eq:defection_condition_two}) \\
-%     \midrule
-% 1 & \(q_1=\frac{3}{10}\),   & \(q_2=\frac{3}{20}\),  & \(q_3=\frac{13}{20}\), & \(q_4=\frac{7}{100}\)
-% &  + & + \\
-% 2 & \(q_1=\frac{11}{25}\),  & \(q_2=\frac{3}{10}\),  & \(q_3=\frac{9}{10}\),  & \(q_4=\frac{1}{2}\)
-% &  - & - \\
-% 3 & \(q_1=\frac{17}{20}\),  & \(q_2=\frac{3}{4}\),   & \(q_3=\frac{2}{5}\),   & \(q_4=\frac{1}{4}\)
-% &  - & + \\
-% 4 & \(q_1=\frac{13}{88}\),  & \(q_2=\frac{21}{92}\),  & \(q_3=\frac{21}{26}\),  & \(q_4=\frac{20}{67}\)
-% &  + & - \\
-%     \bottomrule
-% \end{tabular}
-% \end{center}
-% \caption{Numerical examples of the derivative's sign.}
-% \label{table:sign_of_derivative}
-% \end{table}
+For a tournament setting we substitute \(p_0\) in equation~(\ref{eq:mo_tournament_derivative}):
 
-% For a tournament setting we substitute \(p_0\) in equation~(\ref{eq:mo_tournament_derivative}):
+\begin{equation}
+\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})
+\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2
+\end{equation}
 
-% \begin{equation}
-% \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})
-% \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2
-% \end{equation}
+The product term \(\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2\)
+is known to always be positive. However the sign of the sum term 
+\(\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\) can vary based
+on the transition probabilities of the opponents, as discussed above. A condition that
+must hold in order for defection to be stable in a tournament is that the sum term
+must be negative. The results are summarised by Lemma~\ref{}.
 
-% The product term \(\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2\)
-% is known to always be positive. However the sign of the sum term 
-% \(\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\) can vary based
-% on the transition probabilities of the opponents, as discussed above. A condition that
-% must hold in order for defection to be stable in a tournament is that the sum term
-% must be negative. The results are summarised by Lemma~\ref{}.
+\begin{lemma}
+    In a tournament of \(N\) players where \(q^(i) = (q_{1}^(i), q_{2}^(i), q_{3}^(i), q_{4}^(i))\)
+    defection is known to be a best response if the transition probabilities of the
+    opponents satisfy the condition:
 
-% \begin{lemma}
-%     In a tournament of \(N\) players where \(q^(i) = (q_{1}^(i), q_{2}^(i), q_{3}^(i), q_{4}^(i))\)
-%     defection is known to be a best response if the transition probabilities of the
-%     opponents satisfy the condition:
+    \begin{equation}
+        \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) <= 0.
+    \end{equation}
+\end{lemma}
 
-%     \begin{equation}
-%         \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) <= 0.
-%     \end{equation}
-% \end{lemma}
+Moreover lets us consider a constrained version of the problem once again. Lets us
+assume that in an pairwise interaction the opponent is a reactive player \(q=(q_1, q_2, q_1, q_2)\).
+By substituting \(q_3=q_1\) and \(q_4=q_2\) equations (\ref{eq:defection_condition_one})
+and (\ref{eq:defection_condition_two}) are now re written as follow,
 
-% Moreover lets us consider a constrained version of the problem once again. Lets us
-% assume that in an pairwise interaction the opponent is a reactive player \(q=(q_1, q_2, q_1, q_2)\).
-% By substituting \(q_3=q_1\) and \(q_4=q_2\) equations (\ref{eq:defection_condition_one})
-% and (\ref{eq:defection_condition_two}) are now re written as follow,
+\[\left[\begin{matrix}- q_{2} \left(4 q_{1} - 5 q_{2} - 1\right)\\
+\left(q_{2} - 1\right) \left(4 q_{1} - 5 q_{2} - 1\right)\end{matrix}\right]\]
 
-% \[\left[\begin{matrix}- q_{2} \left(4 q_{1} - 5 q_{2} - 1\right)\\
-% \left(q_{2} - 1\right) \left(4 q_{1} - 5 q_{2} - 1\right)\end{matrix}\right]\]
+The sign of both equations is now based on the same term,\(\left(4 q_{1} - 5 q_{2} - 1\right)\),
+which is a term that can have both negative and positive values. This is shown
+by Figure~\ref{fig:sign_against_reactive}. Following this the following result is retrieved,
 
-% The sign of both equations is now based on the same term,\(\left(4 q_{1} - 5 q_{2} - 1\right)\),
-% which is a term that can have both negative and positive values. This is shown
-% by Figure~\ref{fig:sign_against_reactive}. Following this the following result is retrieved,
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.45\linewidth]{img/sign_against_reactive.pdf}
+      \caption{Sign of \(\left(4 q_{1} - 5 q_{2} - 1\right)\).}
+      \label{fig:sign_against_reactive}
+  \end{figure}
 
-% \begin{figure}[htbp]
-%     \centering
-%     \includegraphics[width=0.45\linewidth]{img/sign_against_reactive.pdf}
-%       \caption{Sign of \(\left(4 q_{1} - 5 q_{2} - 1\right)\).}
-%       \label{fig:sign_against_reactive}
-%   \end{figure}
+\begin{lemma}
+Defection is the best responses of a memory one player \(p\) against a reactive
+player \(q\) if the transition probabilities of the opponent satisfy the
+condition:
 
-% \begin{lemma}
-% Defection is the best responses of a memory one player \(p\) against a reactive
-% player \(q\) if the transition probabilities of the opponent satisfy the
-% condition:
-
-% \begin{equation}
-%     4 q_{1} - 5 q_{2} - 1 > 0
-% \end{equation}
-% \end{lemma}
+\begin{equation}
+    4 q_{1} - 5 q_{2} - 1 > 0
+\end{equation}
+\end{lemma}
 
 % \subsection{Memory one strategies}\label{section:mo_numerical}
 
