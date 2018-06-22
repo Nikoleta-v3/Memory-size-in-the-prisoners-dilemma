@@ -435,10 +435,10 @@ presents the best memory one response to a group of opponents.
     
     where \(\bar{p_i}\) satisfies one of the following cases:
 
-    \begin{equation}\label{eq:cases_mem_one}\resizebox{.7\hsize}{!}{$
+    \begin{equation}\label{eq:cases_mem_one}\resizebox{.8\hsize}{!}{$
         \left\{\begin{array}{lr}
-        \frac{d\sum u}{dp} (p^*) = 0, & \text{for } p^* \in \{\bar{p}_i\} ^ 4, \\
-        \frac{d\sum u}{dp_j} (p^*) = 0, & \text{for } p^* \in \{0, \bar{p}_i, 1\} ^ 4
+        \frac{d\sum u}{dp_{|p=p^*}} = 0, & \text{for } p^* \in \{\bar{p}_i\} ^ 4, \\
+        \frac{d\sum u}{dp_{j_{|p_j=p_j^*}}} = 0, & \text{for } p^* \in \{0, \bar{p}_i, 1\} ^ 4
         \text{ where } p_j ^ * \in \{\bar{p}_i\} \text{ for } j \in [1, 4].\\
         \end{array}\right.$}
     \end{equation}
@@ -537,6 +537,31 @@ by Lemma~\ref{lemma:memone_best_response}.
     \end{equation}}
 \end{lemma}
 
+\begin{proof} The best response of a memory one strategy against another memory
+    one strategy can captured by a candidate set of behaviours. This candidate
+    set is constructed by considering behaviours where any or all of \(p_1, p_2, p_3, p_4\)
+    are \(\in \{0, 1\}\) and the rest or all of \(p_1, p_2, p_3, p_4\) are given by
+    roots of the partial derivatives.
+
+    Note that for \(p_i \in \{0, 1\}\) we consider the roots of the partial derivatives
+    for \(p_j \neq p_i\) for \(i,j \in [1, 4]\).
+
+    The derivatives, \(\frac{du}{dp}\), are given by,
+
+    \begin{equation}\label{eq:mo_derivative}
+        \frac{du_q (p)}{dp}  = \frac{(pQ + c) ( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a}) 
+        - (p\bar{Q} + \bar{c})( \frac{1}{2} p  Q  p^T + c p + a)}
+          {( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a})^2} \\
+    \end{equation}
+    
+
+    For equation~\ref{eq:mo_tournament_derivative} to be zero, the numerator must fall
+    to zero and the denominator can not nullified.
+
+    One the candidate set is constructed each point is evaluated using equation
+    (\ref{eq:tournament_utility}). The point with the maximum utility is selected.
+\end{proof}
+
 Equations (\ref{eq:group_derivative_numerator_condition}) and (\ref{eq:derivative_numerator_condition})
 are systems of maximum \(4\) polynomials and the degree of the polynomials is gradually increasing
 every time an extra opponent is taken into account. Solving system of polynomials corresponds
@@ -583,10 +608,10 @@ Reactive strategies allow us to study \(u_p\) as a function of two variables
 
     \begin{equation}\label{eq:cases_reactive}
         \left\{\begin{array}{lr}
-        \frac{\sum u}{dp} (p^*) = 0, & \text{for } p^* \in \{\bar{p}_i\} ^ 4, \\
-        \frac{\sum u}{dp_1} (p^*) = 0, & \text{for } p_1^* \in \{\bar{p}_i\}
+        \frac{\sum u}{dp_{|p=p^*}} = 0, & \text{for } p^* \in \{\bar{p}_i\} ^ 4, \\
+        \frac{\sum u}{dp_{1_{|p_1=p_1^*}}} = 0, & \text{for } p_1^* \in \{\bar{p}_i\}
         \text{ while } p_2 ^ * \in \{0, 1\},\\
-        \frac{\sum u}{dp_2} (p^*) = 0, & \text{for } p_2^* \in \{\bar{p}_i\}
+        \frac{\sum u}{dp_{2_{|p_2=p_2^*}}} = 0, & \text{for } p_2^* \in \{\bar{p}_i\}
         \text{ while } p_1 ^ * \in \{0, 1\}.
         \end{array}\right.
     \end{equation}
