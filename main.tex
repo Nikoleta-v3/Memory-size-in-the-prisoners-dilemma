@@ -31,9 +31,9 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \def\arraystretch{1.5}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Stability of defection, optimisation pf strategy and the limits of memory in
+\title{Stability of defection, optimisation of strategies and the limits of memory in
 the Prisoner's Dilemma.}
-\author{Nikoleta E. Glynatsi \and Vincent Knight}
+\author{Nikoleta E. Glynatsi \and Vincent A. Knight}
 \date{}
 
 \begin{document}
@@ -949,26 +949,25 @@ condition:
 The main aim of this work is to capture best response memory one strategies.
 Though an analytical approach can not be applied further than discussed in
 Section~\ref{section:best_response_mem_one} an empirical approach is considered here.
-
 More specially, the optimisation problem of (\ref{eq:mo_tournament_optimisation})
 is maximized using bayesian optimisation. Bayesian optimisation is a
-global optimisation algorithm in~\cite{Mokus1978} which has proven to outperform many other
-global optimisation algorithms~\cite{Jones2001}.
+global optimisation algorithm, introduced in~\cite{Mokus1978}, which has proven to
+outperform many other popular algorithms~\cite{Jones2001}.
 
 As many other algorithms Bayesian optimisation is used to find the maximum of a
-function \(f\) on some bounded set. Bayesian optimization constructs a probabilistic
+function \(f\) on some bounded set. Bayesian constructs a probabilistic
 model for \(f\) and then exploits this model to make decisions about where in the
-bounded set to next evaluate the function. Bayesian relays on the previous
+bounded set to next evaluate the function. It relays on the previous
 of \(f\) and not simply rely on local gradient and Hessian approximations.
-
 This allows the algorithm to optimise a non concave function with relatively few
 evaluations, at the cost of performing more computation to determine the next point
 to try~\cite{snoek2012}.
 
-The open source package~\cite{Head2018} is used in this paper to compute a large
-number of best memory one responses against random memory one strategies. The
-implementation of Bayesian in~\cite{Head2018} allow us to perform the algorithm
-for a different combination of parameters. The parameters explored here were:
+The open source package~\cite{Head2018} offers an implementation of bayesian optimisation
+and is used in this paper to compute a large number of best memory one responses against
+sets of random memory one strategies. The implementation of Bayesian in~\cite{Head2018}
+allows us to perform the algorithm for a different combination of parameters.
+The parameters explored here are:
 
 \begin{itemize}
     \item Number of calls, maximum number of calls to the objective function.
@@ -993,101 +992,184 @@ Table~\ref{table:ba_opt}.
     \bottomrule
 \end{tabular}
 \end{center}
-\caption{Bayesian optimisation parameters' values.}
+\caption{Bayesian optimisation sets of parameters' values.}
 \label{table:ba_opt}
 \end{table}
-
-The combination that was chosen to carry out the empirical trials is that
-of 50 number of calls and 20 number of random starts. This set of parameters
-picked after it was checked for the reactive case. A total of 9900 different
-opponents were randomly generated and bayesian optimisation was used to find the optimal
-reactive strategy. The results were compared to that of Lemma~\ref{lemma:reactive_best_response}
-which we know give us the best reactive response.
-
-The parameter set of 50 number of calls and 20 number of random starts was the
-set with the smallest difference
 
 Note that another global optimization algorithm called differential evolution~\cite{Storn1997}
 was also reviewed for the purpose of this paper. Bayesian optimization was
 chosen over differential evolution due to a high computational cost.
 
-In this section we introduced bayesian optimisation which we now know that
-allow us to capture best memory one behaviour.
+The combination that was chosen to carry out the empirical trials is that
+of 50 number of calls and 20 number of random starts. This set of parameters
+was determined to be the most efficient using best reactive responses as an experimental
+case.
 
+A total of 9900 different memory one opponents were randomly generated and bayesian optimisation
+was used to find the optimal reactive strategy. The results were compared to that of
+Lemma~\ref{lemma:reactive_best_response} which we know exhibits the best reactive response.
+The particular parameters' set was the set with
+the smallest difference between the two captured best behaviours.
+The results of this comparison are presented by Table~\ref{table:bayesian_excact_difference}.
+
+\begin{table}[htbp]
+    \begin{center}
+    \input{tex/bayesian_proof.txt}
+    \caption{Difference of \(u_q(p)\) for \(p \in \R_{[0, 1]} ^ 2\). The difference was
+    calculated as exact \(u_q(p ^ *)\) minus Bayesian \(u_q(\tilde{p} ^ *)\).}
+    \label{table:bayesian_excact_difference}
+    \end{center}
+\end{table}
+
+Thus it can be confirmed that bayesian optimisation manages to capture the optimal
+behaviour of reactive strategies. The very same set of parameters was used to optimise
+memory one strategies against single opponents and against
+sets of \(N=2\) opponents. \(N=2\) was chosen because is the smallest \(N\) for
+which there is a multi opponent interaction. For each \(N=1\) and \(N=2\) opponents a
+total of 1022 best responses of memory one strategies have been captured. This data has
+been archived in.
 % TODO: add ZD after our paper is on pre-print?!
 
 \section{Limitation of memory}
 
-% As discussed in Section~\ref{section:memory_one_analytical} best responses in memory
-% one strategies will be captured using a numerical method. In this
-% subsection we discuss the reasons for choosing the specific method and parameters.
+The third and final part of this paper focuses on proving that short memory strategies
+have limitations. Though it has been proven~\cite{Press2012} that there exists a set
+of memory one strategies that can outperform any opponent, this was done only for
+the case of \(N=1\). In this section we introduce several empirical results that
+show that more complex strategies can indeed perform better in cases of \(N=2\).
+This is achieved by comparing the performance of an optimised memory one strategy
+to that of a trained long memory one.
 
-% Moreover, a parameter sweep has been performed and here we wil discuss the results.
+The long memory strategies are trained using bayesian algorithm as the one described in
+Section~\ref{section:optimisation_memone}. The trained strategy used is a strategy called Gambler,
+introduced and discussed in~\cite{Harper2017}, and the objective function of a Gambler
+is the average performance in a tournament of 200 turns and 50 repetitions.
 
-% Bayesian optimisation is ...
+\subsection{Gambler}
 
+Several means of representing strategies have been used over the years for
+IPD strategies. In~\cite{Harper2017} several of those `archetypes' are presented
+and used to train different successful strategies. One of the archetypes firstly
+introduced in that paper is Gambler. Gambler is based on a lookup table and encodes
+a probability of cooperating based on the opponent's first \(n_1\) moves, the opponent's
+last \(m_1\) moves, and the players last \(m_2\) moves.
 
+Several variants of Gambler have been trained for this work, a summary is given
+by Table~\ref{table:gambler}. In essence Gambler can represent any generic strategy
+and that is why it has been chosen.
 
-% The second part of this paper focuses on the limitation of memory size.
-% The aim is to show that memory one strategies suffer for multi agent interactions
-% whilst they outperform any strategy in pairwise interactions. This is achieved by
-% comparing the performance of an optimised short memory one strategies to a trained
-% longer memory strategies in tournaments of size 3.
+\begin{table}[htbp]
+    \begin{center}
+    \begin{tabular}{clllll}
+        \toprule
+        {}&  \(n_1\) & \(m_1\) & \(m_2\)\\
+        \midrule
+        1 & 1 & 1 & 2\\
+        2 & 2 & 2 & 0\\
+        3 & 2 & 2 & 1\\
+        4 & 2 & 2 & 2\\
+        5 & 4 & 4 & 4\\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+    \caption{Variants of Gambler used.}
+    \label{table:gambler}
+\end{table}
 
-% The complex strategy is trained using the same optimisation algorithm
-% as the one described in Section~\ref{section:mo_numerical}, the bayesian
-% optimisation. The trained strategy used is a strategy called Gambler.
-% Gambler is introduced and discussed in~\cite{Harper2017}.
+\subsection{Empirical Results}
 
-% \subsection{Gambler}
+The performance of the two strategies are compared for cases of \(N=1\) and \(N=2\).
+The following steps are taken:
 
-% Several means of representing strategies have been used over the years for
-% IPD strategies. In~\cite{Harper2017} several of those `archetypes' are presented
-% and used to train different successful strategies. One of the archetypes firstly
-% introduced in that paper is the Gambler.
+\begin{enumerate}
+    \item An \(N\) number of random opponents are generated.
+    \item Using (\ref{eq:mo_tournament_optimisation}) \(p^*\) for that given environment is captured.
+    \item A Gambler type (each variant of Table~\ref{table:gambler}) is trained for the same environment.
+    \item Both utilities of the optimised and the trained strategy are reordered.
+\end{enumerate}
 
-% Gambler is based on a lookup table and encodes a probability of cooperating
-% based on the opponent's first \(n_1\) moves, the opponent's last \(m_1\) moves,
-% and the players last \(m_2\) moves.
+A large data set containing the opponents as well as the optimised/trained behaviours
+can be found in. %TODO archive
+The number of experimental cases for each Gambler are displayed in Table~\ref{table:number_of_trials_per_gambler}.
+Note that a number of 1022 trials corresponds to 1022 trials for \(N=1\) and 1022
+trials for \(N=2\).
 
-% Several variants of Gambler have been trained for this work, a summary is given
-% by Table. In essence Gambler can represent any generic strategy and that is
-% why it has been chosen.
+\begin{table}[htbp]
+    \begin{center}
+    \input{tex/gambler_number_of_trials.txt}
+    \caption{Number of trials, for \(N=1\) and \(N=2\), for each Gambler instance.}
+    \label{table:number_of_trials_per_gambler}
+    \end{center}
+\end{table}
 
-% \begin{table}[htbp]
-% \begin{center}
-% \begin{tabular}{clllll}
-%     \toprule
-%     {}&  \(n_1\) & \(m_1\) & \(m_2\)\\
-%     \midrule
-%     1 & 1 & 1 & 2\\
-%     2 & 2 & 2 & 0\\
-%     3 & 2 & 2 & 1\\
-%     4 & 2 & 2 & 2\\
-%     5 & 4 & 4 & 4\\
-%     \bottomrule
-% \end{tabular}
-% \end{center}
-% \caption{Variants of Gambler used.}
-% \label{table:gambler}
-% \end{table}
+The results are explored by studying the difference between 
+\(\frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p ^ *)\) and  \(\frac{1}{N} \sum\limits_{i=1} ^ {N} {U_q}^{(i)} G\) ,
+where \(U G\) represents the utility of a Gambler. The results are illustrated in
+Figure~\ref{fig:boxplots}. It is exhibited that for each Gambler instance memory
+one strategies perform better, which was anticipated.
 
-% \subsection{Procedure}
+However, the results indicate that for \(N=2\) a significant difference in
+the perform can occur. For example, cases of Gambler \(n_1=1, m_1=1, m_2=2\),
+\(n_1=2, m_1=2, m_2=0\) and \(n_1=2, m_1=2, m_2=1\) there is a difference in performance
+of nearly 0.5.
 
-% For a number of tournaments, where \(N=3\), using the results of Section, we 
-% find the optimal best memory one strategy and it's utility. Afterwards, the memory
-% on strategy is removed from the tournament and it is replaced with a variant of Gambler
-% which is then trained for that environment as well.
+For the rest of the Gambler's types they perform worst of the same. This could
+also be a result of the number of calls, which would need to be higher so such complex
+strategies. % Currently running more.
 
-% The performance of those two strategies is compared.
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{"img/Gambler 1_1_2_boxplot"}
+    \end{subfigure}
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{"img/Gambler 2_2_0_boxplot"}
+    \end{subfigure}
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{"img/Gambler 2_2_1_boxplot"}
+    \end{subfigure}
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{"img/Gambler 2_2_2_boxplot"}
+    \end{subfigure}
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{"img/Gambler 4_4_4_boxplot"}
+    \end{subfigure}
+    \caption{Difference between \(\frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p ^ *)\)
+    and  \(\frac{1}{N} \sum\limits_{i=1} ^ {N} {U_q}^{(i)} G\) for \(N=1\) and \(N=2\).}
+    \label{fig:boxplots}
+\end{figure}
 
-% The results of a big parameter sweep are discussed in the following section.
+\section{Discussion}
 
-% \subsection{Limitation Results}
+In this framework a specific set of strategies for the well known game the IPD have
+been discussed. This set of strategies are the memory one strategies, which are a
+set of strategies that utilize a single slot of memory to define their next action.
 
-% Results, results, results.
+The analytical approach for retrieving the payoffs of memory one strategies against
+memory one strategies was manipulated here. Though several works have done similar
+works, this manuscript is the first to show that the utility has a compact form and
+exploit it as an objective function to a non convex optimisation problem.
 
-% \section{Discussion}
+In essence, we used analytical approaches to establish best responses in the IPD.
+Initially, for reactive and purely random strategies it was proven, using algebraic
+approaches such as companion matrices and resultants, that best responses can
+be captured analytically.
+
+Secondly, the stability of defection was investigate. It was proven that environments
+for which cooperation will never emerge can be recognised immediately by the transitions
+of the opponents.
+
+Moreover, a large date set of bests memory one responses was generated for \(N=1\) and
+\(N=2\). The limitations of memory were tried to be shown by comparing the performance
+of best memory one strategies to that of more complex strategies. Though there are
+indications that complex strategies indeed perform better, the significant of the
+difference is in question. More experimental trials and exploration is hope to be
+carried out.
 
 \appendix
 \input{tex/appendix_tables}
