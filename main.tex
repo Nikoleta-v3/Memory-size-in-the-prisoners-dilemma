@@ -954,7 +954,7 @@ is maximized using bayesian optimisation. Bayesian optimisation is a
 global optimisation algorithm, introduced in~\cite{Mokus1978}, which has proven to
 outperform many other popular algorithms~\cite{Jones2001}.
 
-As many other algorithms Bayesian optimisation is used to find the maximum of a
+As many other algorithms bayesian optimisation is used to find the maximum of a
 function \(f\) on some bounded set. Bayesian constructs a probabilistic
 model for \(f\) and then exploits this model to make decisions about where in the
 bounded set to next evaluate the function. It relays on the previous
@@ -965,7 +965,7 @@ to try~\cite{snoek2012}.
 
 The open source package~\cite{Head2018} offers an implementation of bayesian optimisation
 and is used in this paper to compute a large number of best memory one responses against
-sets of random memory one strategies. The implementation of Bayesian in~\cite{Head2018}
+sets of random memory one strategies. The implementation of bayesian in~\cite{Head2018}
 allows us to perform the algorithm for a different combination of parameters.
 The parameters explored here are:
 
@@ -1047,15 +1047,15 @@ is the average performance in a tournament of 200 turns and 50 repetitions.
 
 \subsection{Gambler}
 
-Several means of representing strategies have been used over the years for
-IPD strategies. In~\cite{Harper2017} several of those `archetypes' are presented
+Several ways of representing IPD strategies have been used over the years.
+In~\cite{Harper2017} several of those `archetypes' are presented
 and used to train different successful strategies. One of the archetypes firstly
 introduced in that paper is Gambler. Gambler is based on a lookup table and encodes
 a probability of cooperating based on the opponent's first \(n_1\) moves, the opponent's
 last \(m_1\) moves, and the players last \(m_2\) moves.
 
-Several variants of Gambler have been trained for this work, a summary is given
-by Table~\ref{table:gambler}. In essence Gambler can represent any generic strategy
+Several variants of Gambler have been trained for this work (Table~\ref{table:gambler}).
+In essence Gambler can represent any generic strategy
 and that is why it has been chosen.
 
 \begin{table}[htbp]
@@ -1078,8 +1078,8 @@ and that is why it has been chosen.
 
 \subsection{Empirical Results}
 
-The performance of the two strategies are compared for cases of \(N=1\) and \(N=2\).
-The following steps are taken:
+The performance of the memory one and Gamblers strategies are compared for cases of
+\(N=1\) and \(N=2\). The following steps are taken:
 
 \begin{enumerate}
     \item An \(N\) number of random opponents are generated.
@@ -1103,19 +1103,44 @@ trials for \(N=2\).
 \end{table}
 
 The results are explored by studying the difference between 
-\(\frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p ^ *)\) and  \(\frac{1}{N} \sum\limits_{i=1} ^ {N} {U_q}^{(i)} G\) ,
-where \(U G\) represents the utility of a Gambler. The results are illustrated in
-Figure~\ref{fig:boxplots}. It is exhibited that for each Gambler instance memory
-one strategies perform better, which was anticipated.
+\(\frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p ^ *)\) and 
+\(\frac{1}{N} \sum\limits_{i=1} ^ {N} {U_q}^{(i)} (G)\) ,
+where \(U(G)\) represents the utility of a Gambler. The results are illustrated in
+Figure~\ref{fig:boxplots}.
 
-However, the results indicate that for \(N=2\) a significant difference in
-the perform can occur. For example, cases of Gambler \(n_1=1, m_1=1, m_2=2\),
-\(n_1=2, m_1=2, m_2=0\) and \(n_1=2, m_1=2, m_2=1\) there is a difference in performance
-of nearly 0.5.
+For the cases of Gambler \(n_1=1, m_1=1, m_2=2\), \(n_1=2, m_1=2, m_2=0\) and
+\(n_1=2, m_1=2, m_2=1\), though there are few edges cases, the difference distribution
+is congregated around zero. For the rest of the Gambler's types there nce is mainly worse.
+This could be a result of the Gamblers not being trained for long enough. Thus a larger
+number of calls should be used. % Currently running more.
 
-For the rest of the Gambler's types they perform worst of the same. This could
-also be a result of the number of calls, which would need to be higher so such complex
-strategies. % Currently running more.
+Furthermore, there is no significant difference between the distributions of
+\(N=1\) and \(N=2\). This was checked by performing \(T-\)test for the means of two
+samples. The calculated \(p-\) values are presented in Table~\ref{table:p_values}.
+
+\begin{table}
+    \begin{center}
+    \begin{tabular}{llr}
+        \toprule
+        {} &       Gamblers &  \(p-\) values \\
+        \midrule
+        0 &  Gambler 1\_1\_2 &              0.242 \\
+        1 &  Gambler 2\_2\_0 &              0.214 \\
+        2 &  Gambler 2\_2\_1 &              0.179 \\
+        3 &  Gambler 2\_2\_2 &              0.629 \\
+        4 &  Gambler 4\_4\_4 &              0.141 \\
+        \bottomrule
+    \end{tabular}
+    \caption{\(p-\) values for the means of \(N=1\) to \(N=2\) using \(T-\)tests.}
+    \label{table:p_values}
+    \end{center}
+\end{table}
+
+There appears to be no significant difference between complex and memory one strategies.
+The difference in performance is mainly congregated around zero, and that is true for both
+cases of \(N=1\) and \(N=2\). However, that there is indication that
+complex strategies can outperform memory one strategies for \(N=2\).There
+are cases that they have a difference in score of 0.5.
 
 \begin{figure}
     \centering
@@ -1146,29 +1171,26 @@ strategies. % Currently running more.
 
 \section{Discussion}
 
-In this framework a specific set of strategies for the well known game the IPD have
-been discussed. This set of strategies are the memory one strategies, which are a
-set of strategies that utilize a single slot of memory to define their next action.
+In this framework, memory one strategies for the well known game the IPD were
+studied. These are strategies that utilize a single slot of memory to define their
+next action. An analytical formulation for retrieving the payoffs of memory one
+strategies against memory one strategies was used here. Though the analytical
+formulation has been previously use, this manuscript is the first to prove that the payoff
+of a such a player \(p\) has a compact form and proved that is a non concave
+function. Furthermore, best memory one responses were exploit as an optimisation
+problem of a ratio of quadratic forms.
 
-The analytical approach for retrieving the payoffs of memory one strategies against
-memory one strategies was manipulated here. Though several works have done similar
-works, this manuscript is the first to show that the utility has a compact form and
-exploit it as an objective function to a non convex optimisation problem.
+We have managed to prove that for reactive and purely random strategies
+that best responses can be captured analytically. This was done using using algebraic
+approaches such as companion matrices and resultant theory. We investigated the
+stability of defection and proved that environments for which cooperation will
+never emerge can be recognised immediately by the transitions of the opponents.
 
-In essence, we used analytical approaches to establish best responses in the IPD.
-Initially, for reactive and purely random strategies it was proven, using algebraic
-approaches such as companion matrices and resultants, that best responses can
-be captured analytically.
-
-Secondly, the stability of defection was investigate. It was proven that environments
-for which cooperation will never emerge can be recognised immediately by the transitions
-of the opponents.
-
-Moreover, a large date set of bests memory one responses was generated for \(N=1\) and
+Finally,  we generated a large date set of bests memory one responses for \(N=1\) and
 \(N=2\). The limitations of memory were tried to be shown by comparing the performance
 of best memory one strategies to that of more complex strategies. Though there are
 indications that complex strategies indeed perform better, the significant of the
-difference is in question. More experimental trials and exploration is hope to be
+difference is in question. More experimental trials and exploration will be
 carried out.
 
 \appendix
