@@ -30,9 +30,11 @@
 
 \newtheorem{lemma}[theorem]{Lemma}
 \def\arraystretch{1.5}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Stability of defection, optimisation of strategies and the limits of memory in
-the Prisoner's Dilemma.}
+
+\title{Stability of defection, optimisation of strategies and the limits of
+       memory in the Prisoner's Dilemma.}
 \author{Nikoleta E. Glynatsi \and Vincent A. Knight}
 \date{}
 
@@ -41,42 +43,47 @@ the Prisoner's Dilemma.}
 \maketitle
 
 \begin{abstract}
-
-In this manuscript we build upon a framework provided in 1989 to study best
-responses in the well known memory one strategies of the Iterated Prisoner's
-Dilemma. The aim of this work is to construct a compact way of identifying best
-responses of short memory strategies and to show their limitations in multi-opponent
-interactions. A number of theoretic results are presented. %TODO: Expand when we get results
+    In this manuscript we build upon a framework provided in 1989 to study best
+    responses in the well known memory one strategies of the Iterated Prisoner's
+    Dilemma. The aim of this work is to construct a compact way of identifying
+    best responses of short memory strategies and to show their limitations in
+    multi-opponent interactions. A number of theoretic results are presented.
+    %TODO: Expand when we get results
 \end{abstract}
 
 \section{Introduction}\label{section:introduction}
 
-The Prisoner's Dilemma (PD) is a two player person game used in understanding the
-evolution of co-operative behaviour. Each player can choose between cooperation
-(C) and defection (D). The decisions are made simultaneously and independently.
+The Prisoner's Dilemma (PD) is a two player game used in understanding the
+evolution of co-operative behaviour. Each player has two options, to cooperate
+(C) or to defect (D). The decisions are made simultaneously and independently.
 The normal form representation of the game is given by:
 
 \begin{equation}\label{equ:pd_definition}
-    S_p = \begin{pmatrix}
-    R & S  \\
-    T & P
-    \end{pmatrix} \quad
-    S_q = \begin{pmatrix}
+    S_p =
+    \begin{pmatrix}
+        R & S  \\
+        T & P
+    \end{pmatrix}
+    \quad
+    S_q =
+    \begin{pmatrix}
         R & T  \\
         S & P
-        \end{pmatrix}
+    \end{pmatrix}
 \end{equation}
 
-where \(S_p\) represents the utilities of the row player and \(S_q\) the utilities
-of the column player. The payoffs, \((R, P, S, T)\) (the most common values used in the
-literature are \((3, 1, 0, 5)\)~\cite{Axelrod1981}), are constrained by equations
-(\ref{eq:pd_constrain_one}) and~(\ref{eq:pd_constrain_two}). Constraint
-(\ref{eq:pd_constrain_one}) ensures that defection dominates cooperation and
-constraint (\ref{eq:pd_constrain_two}) ensures that there is a dilemma; the sum of the
-utilities for both players is better when both choose to cooperate.
+where \(S_p\) represents the utilities of the row player and \(S_q\) the
+utilities of the column player. The payoffs, \((R, P, S, T)\), are constrained
+by equations (\ref{eq:pd_constrain_one}) and~(\ref{eq:pd_constrain_two}).
+Constraint (\ref{eq:pd_constrain_one}) ensures that
+defection dominates cooperation and constraint (\ref{eq:pd_constrain_two})
+ensures that there is a dilemma; the sum of the utilities for both players is
+better when both choose to cooperate. The
+most common values used in the literature are
+\((3, 1, 0, 5)\)~\cite{Axelrod1981}.
 
 \begin{equation}\label{eq:pd_constrain_one}
-    T > R > P > S 
+    T > R > P > S
 \end{equation}
 
 \begin{equation}\label{eq:pd_constrain_two}
@@ -85,56 +92,63 @@ utilities for both players is better when both choose to cooperate.
 
 The PD is a one shot game, however it is commonly studied in a manner where the
 history of the interactions matter. The repeated form of the game is called the
-Iterated Prisoner's Dilemma (IPD) and in the 1980s following the work of
+Iterated Prisoner's Dilemma (IPD) and in the 1980s, % TODO Add RAND reference
+following the work of
 \cite{Axelrod1980a, Axelrod1980b} it attracted the attention of the scientific
 community.
 
 In~\cite{Axelrod1980a} and~\cite{Axelrod1980b}, the first well known computer
-tournaments of the IPD were performed. A total of 13 and 63 strategies were submitted
-in computer code and competed against each other in a round robin tournament.
-All contestants competed against each other, a copy of themselves and a random strategy.
-The winner was decided on the average score a strategy achieved and not the total number
-of wins. How many turns of history that a strategy would use, the memory size, was left
-to the creator of the strategy to decide.
+tournaments of the IPD were performed. A total of 13 and 63 strategies were
+submitted in computer code and competed against each other in a round robin
+tournament. All contestants competed against each other, a copy of themselves
+and a random strategy. The winner was decided on the average score a strategy
+achieved and not the total number of wins. How many turns of history that a
+strategy would use, the memory size, was a result of the particular strategic
+decisions made by the author.
 
-The winning strategy of both tournaments was a strategy called Tit for Tat. Tit for Tat
-is a strategy which starts by cooperating and then mimics the last move of
-it's opponent. This is a strategy which makes use of the previous move of the opponent
-only and a reactive strategy. In~\cite{Nowak1989} a framework for
-studying such strategies was introduced. This was later used to introduce well known
-reactive strategies such as Generous Tit For Tat~\cite{Nowak1990}.
+The winning strategy of both tournaments was a strategy called Tit for Tat. Tit
+for Tat is a strategy which starts by cooperating and then mimics the last move
+of it's opponent. This is a strategy which makes use of the previous move of the
+opponent only, this type of strategy is called \textit{reactive}.
+In~\cite{Nowak1989} a framework for studying such strategies was introduced.
+This was later used to introduce well known reactive strategies such as Generous
+Tit For Tat~\cite{Nowak1990}.
 
-Reactive strategies are a subset of memory one strategies. Memory one strategies
-similarly are only concerned with the previous turn. However, they take into consideration
-both players' recent moves to decide on an action. Several successful memory one
-strategies are found in the literature, for example Pavlov~\cite{Nowak1993}.
+Reactive strategies are a subset of so called \textit{memory one} strategies.
+Memory one strategies similarly are only concerned with the previous turn.
+However, they take into consideration both players' recent moves to decide on an
+action. Several successful memory one strategies are found in the literature,
+for example Pavlov~\cite{Nowak1993}.
 
 A well known set of memory on strategies was introduced in~\cite{Press2012},
-these were called zero determinant (ZD) strategies. The ZD strategies manage to force a linear
-relationship between the score of the strategy and the opponent. According to~\cite{Press2012}
-the ZD strategies can dominate any evolutionary opponent in pairwise
-interactions by using a single slot of memory. Thus the usefulness of memory in
-the IPD was questioned.
+these were called zero determinant (ZD) strategies. The ZD strategies manage to
+force a linear relationship between the score of the strategy and the opponent.
+According to~\cite{Press2012} the ZD strategies can dominate any evolutionary
+opponent in pairwise interactions by using a single turn of memory. Thus, in a
+sense this work questioned the importance of memory and the sophistication
+required/necessary for evolutionary fixation.
 
-The ZD strategies attracted a lot of attention. It was stated that
-``Press and Dyson have fundamentally changed the viewpoint on the Prisoner's
-Dilemma''~\cite{Stewart2012}. In~\cite{Stewart2012} a very similar tournament to Axelrod's
-tournament is run including ZD strategies and a new set of ZD strategies the Generous
-ZD. One specific advantage of memory one strategies is their mathematical tractability.
-As described in Section~\ref{section:utility_against_mem_one}
-they can be represented completely as an element of \(\R^{4}\).
+These ZD strategies attracted a lot of attention. It was stated that ``Press and
+Dyson have fundamentally changed the viewpoint on the Prisoner's
+Dilemma''~\cite{Stewart2012}. In~\cite{Stewart2012} a very similar tournament to
+Axelrod's tournament is run including ZD strategies and a new set of ZD
+strategies. One specific advantage of memory one strategies is
+their mathematical tractability.  As described in
+Section~\ref{section:utility_against_mem_one} they can be represented completely
+as an vector of \(\R^{4}\).
 
-Even so, ZD and memory one strategies have also received criticism. In~\cite{Harper2015},
+Even so, ZD and memory one strategies have also received criticism.
+In~\cite{Harper2015},
 the `memory of a strategy does not matter' statement was questioned. A set of more
 complex strategies, strategies that take in account the entire history set of the
 game, were trained and proven to be more robust against multiple opponents.
 
-The purpose of this work is to consider a given memory one strategy 
-in a similar fashion to~\cite{Press2012}. However whilst~\cite{Press2012} found
-a way for a player to manipulate a given opponent, this work will consider a multidimensional
-optimisation approach to identify the best response to a group of opponents. In
-essence the aim is to produce a compact method of identifying the best memory one
-strategy against a given opponent.
+The purpose of this work is to consider a given memory one strategy in a similar
+fashion to~\cite{Press2012}. However whilst~\cite{Press2012} found a way for a
+player to manipulate a given opponent, this work will consider a
+multidimensional optimisation approach to identify the best response to a group
+of opponents. In essence the aim is to produce a compact method of identifying
+the best memory one strategy against a given opponent.
 
 In the second part of this manuscript we explore the limitation of these best response
 strategies. This is achieved by comparing the performance of an optimal
@@ -201,11 +215,11 @@ as presented by Theorem~\ref{theorem:quadratic_form_u}.
 
     \begin{equation}\label{eq:optimisation_quadratic}
     u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
-                {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}}, 
+                {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}},
     \end{equation}
     where \(Q, \bar{Q}\) \(\in \R^{4\times4}\) matrices defined by the transition
     probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
-    
+
     \begin{center}
     \begin{equation}
     \resizebox{0.9\linewidth}{!}{\arraycolsep=2.5pt%
@@ -218,9 +232,9 @@ as presented by Theorem~\ref{theorem:quadratic_form_u}.
     \bar{Q} =  \input{tex/q_denominator}\)}.
     \end{equation}
     \end{center}
-    
+
     \(c \text{ and } \bar{c}\) \(\in \R^{4 \times 1}\) defined by:
-    
+
     \begin{equation}\label{eq:q_matrix_numerator}
     \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
     \boldmath\(c = \input{tex/c_numerator}\),}
@@ -230,8 +244,8 @@ as presented by Theorem~\ref{theorem:quadratic_form_u}.
     \boldmath\(\bar{c} = \input{tex/c_denominator}\).
     }
     \end{equation}
-    
-    and \(a = \input{tex/numerator_constant}\) and 
+
+    and \(a = \input{tex/numerator_constant}\) and
     \(\bar{a} = \input{tex/denominator_constant}\).
 \end{theorem}
 
@@ -275,7 +289,7 @@ against a \(N\) number of opponents is given by Theorem~\ref{theorem:tournament_
     \begin{equation}\label{eq:tournament_utility}
         \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) = \frac{1}{N}
         \frac{\sum\limits_{i=1} ^ {N} (\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)})
-        \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ 
+        \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^
         N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}
         {\prod\limits_{i=1} ^ N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}.
     \end{equation}
@@ -308,7 +322,7 @@ strategies.
 In the introduction a question was raised: which memory one strategy is the \textbf{best response}
 to a group of memory one strategies? This will be considered as an optimisation problem,
 where a memory one strategy \(p\) wants to optimise it's average utility \( \frac{1}{N} \sum u_{q ^{(i)}} (p)\)
-against a set opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\). 
+against a set opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\).
 
 The decision variable is the vector \(p\) and the solitary constraint is that \(p \in \R^4_{[0, 1]} \).
 The optimisation problem is given by~(\ref{eq:mo_tournament_optimisation}). Note that
@@ -317,9 +331,9 @@ to the same thing.
 
 \begin{equation}\label{eq:mo_tournament_optimisation}
     \begin{aligned}
-    \max_p: & \ \sum_{i=1} ^ {N} {u_q}^{(i)} (p) 
+    \max_p: & \ \sum_{i=1} ^ {N} {u_q}^{(i)} (p)
     \\
-    \text{such that}: & \ p \in \R_{[0, 1]} 
+    \text{such that}: & \ p \in \R_{[0, 1]}
     \end{aligned}
 \end{equation}
 
@@ -329,7 +343,7 @@ least one point for which the definition of concavity does not hold.
 
 There is some work on the optimisation on non concave ratios of of quadratic forms
 \cite{Beck2009, Hongyan2014}. In these both the numerator and the denominator
-of the fractional problem were concave which is not true for our case. 
+of the fractional problem were concave which is not true for our case.
 These results are established in Theorem~\ref{theorem:concavity}.
 
 \begin{theorem}\label{theorem:concavity}
@@ -353,7 +367,7 @@ These results are established in Theorem~\ref{theorem:concavity}.
     Using numerical trials we have shown that there exists at least on point for which
     (\ref{eq:optimisation_quadratic}) is not concave. Let \(f\) be
     \(u_{(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, \frac{1}{3})}\) it can shown that
-    for \(x_1 = (\frac{1}{4}, \frac{1}{2}, \frac{1}{5} , \frac{1}{2}), 
+    for \(x_1 = (\frac{1}{4}, \frac{1}{2}, \frac{1}{5} , \frac{1}{2}),
     x_2 = (\frac{8}{10}, \frac{1}{2}, \frac{9}{10} , \frac{7}{10})\) and \(\lambda=\frac{1}{10}\)
     condition (\ref{def:convex}) does not hold as:
 
@@ -426,13 +440,13 @@ presents the best memory one response to a group of opponents.
     The optimal behaviour of a memory one strategy player \(p^* \in \R_{[0, 1]} ^ 4\)
     against a set of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
     for \(q^{(i)} \in \R_{[0, 1]} ^ 4\) is established by:
-    
+
     \[p^* = \textnormal{argmax}(\sum\limits_{i=1} ^ N  u_q(p)), \ p \in S_q,\]
-    
-    where the set \(S_q\) is defined as 
-    
+
+    where the set \(S_q\) is defined as
+
     \[S_q = \{0, \bar{p_i}, 1 \}^4 \text{ for } i \in \R,\]
-    
+
     where \(\bar{p_i}\) satisfies one of the following cases:
 
     \begin{equation}\label{eq:cases_mem_one}\resizebox{.8\hsize}{!}{$
@@ -452,7 +466,7 @@ presents the best memory one response to a group of opponents.
      + \sum\limits_{i=1} ^ {N} Q_{D}^{(i)'} \sum_{\substack{j=1 \\ j \neq i}} ^ {N} Q_{N}^{(i)}
     \prod_{\substack{j=1 \\ j \neq \{i, j\}}} ^ N Q_{D}^{(i)}) \times
     \prod\limits_{i=1} ^ N Q_{D}^{(i)} - (\sum\limits_{i=1} ^ {N} Q_{D}^{(i)'}
-    \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)}) \times 
+    \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)}) \times
     (\sum\limits_{i=1} ^ {N} Q_{N}^{(i)} \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)})
     \end{equation}
 
@@ -491,7 +505,7 @@ presents the best memory one response to a group of opponents.
         + \sum\limits_{i=1} ^ {N} Q_{D}^{(i)'} \sum_{\substack{j=1 \\ j \neq i}} ^ {N} Q_{N}^{(i)}
        \prod_{\substack{j=1 \\ j \neq \{i, j\}}} ^ N Q_{D}^{(i)}) \times
        \prod\limits_{i=1} ^ N Q_{D}^{(i)} - (\sum\limits_{i=1} ^ {N} Q_{D}^{(i)'}
-       \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)}) \times 
+       \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)}) \times
        (\sum\limits_{i=1} ^ {N} Q_{N}^{(i)} \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)})}
         {(\prod\limits_{i=1} ^ N Q_{D}^{(i)})^{2}}
     \end{align}
@@ -512,20 +526,20 @@ by Lemma~\ref{lemma:memone_best_response}.
 \begin{lemma}\label{lemma:memone_best_response}
     The optimal behaviour of a memory one strategy player \(p^* \in \R_{[0, 1]} ^ 4\)
     against a given opponent \(q \in \R_{[0, 1]} ^ 4\) is given by:
-    
+
     \[p^* = \textnormal{argmax}(u_q(p)), \ p \in S_q,\]
-    
-    where the set \(S_q\) is defined as 
-    
+
+    where the set \(S_q\) is defined as
+
     \[S_q = \{0, \bar{p}_i, 1 \}^4 \text{ for } i \in \R,\]
-    
+
     where any \(\bar{p}\) satisfy condition (\ref{eq:cases_mem_one}). Note that now
     the numerators of the partial derivatives, (\ref{eq:group_derivative_numerator_condition}),
     are given by
-    
+
     {\small
     \begin{equation}\label{eq:derivative_numerator_condition}
-        (pQ + c) ( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a}) 
+        (pQ + c) ( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a})
         - (p\bar{Q} + \bar{c})( \frac{1}{2} p  Q  p^T + c p + a)
     \end{equation}}
 
@@ -549,11 +563,11 @@ by Lemma~\ref{lemma:memone_best_response}.
     The derivatives, \(\frac{du}{dp}\), are given by,
 
     \begin{equation}\label{eq:mo_derivative}
-        \frac{du_q (p)}{dp}  = \frac{(pQ + c) ( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a}) 
+        \frac{du_q (p)}{dp}  = \frac{(pQ + c) ( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a})
         - (p\bar{Q} + \bar{c})( \frac{1}{2} p  Q  p^T + c p + a)}
           {( \frac{1}{2} p  \bar{Q}  p^T + \bar{c}  p + \bar{a})^2} \\
     \end{equation}
-    
+
 
     For equation~\ref{eq:mo_tournament_derivative} to be zero, the numerator must fall
     to zero and the denominator can not nullified.
@@ -595,15 +609,15 @@ Reactive strategies allow us to study \(u_p\) as a function of two variables
 
 \begin{lemma}\label{lemma:reactive_group_best_response}
     The optimal behaviour of a reactive player \(p^* \in \R_{[0, 1]} ^ 2\) against a set
-    of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\) for \(q^{(i)} \in 
+    of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\) for \(q^{(i)} \in
     \R_{[0, 1]} ^ 4\) is given by:
 
     \[p^* = \textnormal{argmax}(\sum\limits_{i=1} ^ N  u_q(p)), \ p \in S_q,\]
-    
-    where the set \(S_q\) is defined as 
-    
+
+    where the set \(S_q\) is defined as
+
     \[S_q = \{0, \bar{p_i}, 1 \} ^ 2 \text{ for } i \in \R,\]
-    
+
     where \(\bar{p_i}\) satisfies one of the following cases:
 
     \begin{equation}\label{eq:cases_reactive}
@@ -629,13 +643,13 @@ opponent is captured by Lemma~\ref{lemma:reactive_best_response}.
 \begin{lemma}\label{lemma:reactive_best_response}
     The optimal behaviour of a reactive player \(p^* \in \R_{[0, 1]} ^ 2\) against a given
     opponent \(q \in \R_{[0, 1]} ^ 4\) is given by:
-    
+
     \[p^* = \textnormal{argmax}(u_q(p)), \ p \in S_q,\]
-    
-    where the set \(S_q\) is defined as 
-    
+
+    where the set \(S_q\) is defined as
+
     \[S_q = \{0, \bar{p_i}, 1 \} ^ 2 \text{ for } i \in \R,\]
-    
+
     where \(\bar{p}_i\) satisfies any of (\ref{eq:cases_reactive}). Partial derivatives
     are now given by (\ref{eq:derivative_numerator_condition}) and
     (\ref{eq:derivative_denominator_condition}) must be true.
@@ -690,7 +704,7 @@ now has an extra constraint and is re written as,
 
 \begin{equation}\label{eq:random_optimisation}
 \begin{aligned}
-\max_p: & \ \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p) 
+\max_p: & \ \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p)
 \\
 \text{such that}: & p_1 = p_2 = p_3 = p_4 = p \\
                   & p \in \R_{[0, 1]} \\
@@ -705,11 +719,11 @@ Lemma~\ref{lemma:purely_optimisation}.
     The optimal behaviour of a \textbf{purely random} player \(p ^ * \in \R_{[0, 1]}\)
     in an \(N-\)memory one player tournament, \(\{q_{(1)}, q_{(2)} \dots,q_{(N)} \}
     \) for \(q_{(i)} \in \R_{[0, 1]} ^ 4\) is given by:
-    
+
     \[p^* = \textnormal{argmax}(\sum_{i=1} ^ {N} {u_q}^{(i)} (p) ), \ p \in S_{q(i)},\]
-    
+
     where the set \(S_{q}\) is defined as:
-    
+
     \[S_{q} = \{0, \lambda_i, 1\},\text{ for } i \in [1, 2N]\]
 
     where \(\lambda_i\) are the eigenvalues of the companion matrix corresponding
@@ -726,7 +740,7 @@ Lemma~\ref{lemma:purely_optimisation}.
 
     It is know that \(p ^ *\) will either be \(\in \{0, 1\}\) or \(p ^ *\) will because
     given by the roots of \(\frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)}(p)\).
-    The roots of  \(\frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)\) are the roots 
+    The roots of  \(\frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)\) are the roots
     only of the numerator, as the denominator can not be nullified.
 
     Studying equation (\ref{eq:optimisation_quadratic}) as a function of a single variable
@@ -799,15 +813,15 @@ illustrates examples for both lemmas.
 
 \begin{lemma}\label{lemma:constant}
     A given memory one player, \((q_1, q_2, q_3, q_4)\), makes a \textbf{purely
-    random} player, \((p, p, p, p)\), indifferent if and only if, 
-    \(-q_1 + q_2 + 2q_3 - 2q_4 = 0 \) and 
+    random} player, \((p, p, p, p)\), indifferent if and only if,
+    \(-q_1 + q_2 + 2q_3 - 2q_4 = 0 \) and
     \((q_2 - q_4 - 1)(q_1 - 2q_2 - 5q_3 + 7q_4 + 1) -(q_2 - 5q_4 - 1)(q_1 - q_2 - q_3 + q_4) = 0 \).
 \end{lemma}
 
 \begin{lemma}\label{lemma:linear}
     Against a memory one player, \((q_1, q_2, q_3, q_4)\), a \textbf{purely random}
     player would always play a pure strategy if and only if
-    \((q_{1}q_{4} - q_{2} q_{3} + q_{3} - q_{4}) (4 q_{1} - 3 q_{2} - 4 q_{3} + 3 
+    \((q_{1}q_{4} - q_{2} q_{3} + q_{3} - q_{4}) (4 q_{1} - 3 q_{2} - 4 q_{3} + 3
     q_{4} - 1) = 0\).
 \end{lemma}
 
@@ -899,7 +913,7 @@ equation~(\ref{eq:mo_tournament_derivative}) which laid out:
 \end{equation}
 
 The product term \(\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2\)
-is known to always be positive. However the sign of the sum term 
+is known to always be positive. However the sign of the sum term
 \(\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\) can vary based
 on the transition probabilities of the opponents, as discussed above. A condition that
 must hold in order for defection to be stable in a tournament is that the sum term
@@ -1102,8 +1116,8 @@ trials for \(N=2\).
     \end{center}
 \end{table}
 
-The results are explored by studying the difference between 
-\(\frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p ^ *)\) and 
+The results are explored by studying the difference between
+\(\frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p ^ *)\) and
 \(\frac{1}{N} \sum\limits_{i=1} ^ {N} {U_q}^{(i)} (G)\) ,
 where \(U(G)\) represents the utility of a Gambler. The results are illustrated in
 Figure~\ref{fig:boxplots}.
