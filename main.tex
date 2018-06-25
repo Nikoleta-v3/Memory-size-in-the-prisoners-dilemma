@@ -150,10 +150,10 @@ multidimensional optimisation approach to identify the best response to a group
 of opponents. In essence the aim is to produce a compact method of identifying
 the best memory one strategy against a given opponent.
 
-In the second part of this manuscript we explore the limitation of these best response
-strategies. This is achieved by comparing the performance of an optimal
-memory one strategy, for a given environment, with the performance of a more complex
-strategy that has a larger memory.
+In the second part of this manuscript we explore the limitation of these best
+response strategies. This is achieved by comparing the performance of an optimal
+memory one strategy, for a given environment, with the performance of a more
+complex strategy that has a larger memory.
 
 One particular benefit of this analysis is the identification of conditions for
 which defection is a best response. Thus, identifying environments for which
@@ -161,13 +161,14 @@ cooperation can not occur.
 
 \section{The utility against memory one players}\label{section:utility_against_mem_one}
 
-In~\cite{Press2012} a framework is described to sufficient study the interactions
-of memory one strategies modelled as a stochastic process. In this manuscript it
+In~\cite{Press2012} it
 is stated that if a strategy is concerned with only the outcome of a single turn
 then there are four possible `states' the strategy could be in. These are
 \(CC, CD, DC,CC\). A memory one strategy is denoted by the probabilities of
-cooperating after each of these states, \(p=(p_1, p_2, p_3, p_4) \in \R_{[0,1]} ^ 4\).
-A diagrammatic representation of such strategy is given in Figure~\ref{fig:diagram_mem_one}.
+cooperating after each of these states,
+\(p=(p_1, p_2, p_3, p_4) \in \R_{[0,1]} ^ 4\).
+A diagrammatic representation of such a strategy is given in
+Figure~\ref{fig:diagram_mem_one}.
 
 \begin{figure}
     \centering
@@ -185,8 +186,8 @@ A diagrammatic representation of such strategy is given in Figure~\ref{fig:diagr
     \end{subfigure}
 \end{figure}
 
-Moreover, if two players are moving from state to state following a general
-memory one strategy this can be modelled as a Markov process. A diagrammatic
+Moreover, if two memory one players are moving from state to state
+this can be modelled as a Markov process. A diagrammatic
 representation of the Markov chain is shown in Figure~\ref{fig:markov_chain}.
 The corresponding transition matrix \(M\) given by:
 
@@ -194,19 +195,23 @@ The corresponding transition matrix \(M\) given by:
     \input{tex/m_matrix.tex}.
 \end{equation}
 
-The long run steady state probability \(v\) is the solution to \(\bigtriangledown M = \bigtriangledown\)
-(given in the Appendix). %TODO include Appendix
-Combining the stationary vector \(v\) with the payoff matrices of equation~(\ref{equ:pd_definition})
-allow us to retrieve the expected payoffs for each player. Thus, the utility for
+The long run steady state probability \(v\) is the solution to
+\(v M = v\)
+This corresponds to finding the unit eigenvector of \(M\) and a closed form
+for \(v\) can be found (given in the Appendix). %TODO include Appendix
+Combining the stationary vector \(v\) with the payoff matrices of
+equation~(\ref{equ:pd_definition})
+allows us to retrieve the expected payoffs for each player. Thus, the utility for
 player \(p\) against \(q\), denoted as \(u_q(p)\), is defined by,
 
 \begin{equation}\label{eq:press_dyson_utility}
     u_q(p) = v \times (R, P, S, T).
 \end{equation}
 
-Here we present the first theoretical result which concerns the form of \(u_q(p)\).
-That is that \(u_q(p)\) is given by a ratio of two quadratic forms~\cite{kepner2011},
-as presented by Theorem~\ref{theorem:quadratic_form_u}.
+Here, to our knowledge, we present the first theoretical result which
+concerns the form of \(u_q(p)\). That is that \(u_q(p)\) is given by a ratio of
+two quadratic forms~\cite{kepner2011}, as presented by
+Theorem~\ref{theorem:quadratic_form_u}.
 
 \begin{theorem}\label{theorem:quadratic_form_u}
     The expected utility of a memory one strategy \(p\in\mathbb{R}_{[0,1]}^4\)
@@ -217,8 +222,8 @@ as presented by Theorem~\ref{theorem:quadratic_form_u}.
     u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
                 {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}},
     \end{equation}
-    where \(Q, \bar{Q}\) \(\in \R^{4\times4}\) matrices defined by the transition
-    probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
+    where \(Q, \bar{Q}\) \(\in \R^{4\times4}\) are matrices defined by the
+    transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
 
     \begin{center}
     \begin{equation}
@@ -233,7 +238,7 @@ as presented by Theorem~\ref{theorem:quadratic_form_u}.
     \end{equation}
     \end{center}
 
-    \(c \text{ and } \bar{c}\) \(\in \R^{4 \times 1}\) defined by:
+    \(c \text{ and } \bar{c}\) \(\in \R^{4 \times 1}\) are similarly defined by:
 
     \begin{equation}\label{eq:q_matrix_numerator}
     \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
@@ -251,12 +256,11 @@ as presented by Theorem~\ref{theorem:quadratic_form_u}.
 
 Proof: The proof is given in Appendix. %TODO write proof
 
-Figure~\ref{fig:analytical_simulated} indicates that the  formulation of \(u_q(p)\)
+Figure~\ref{fig:analytical_simulated} indicates that the formulation of \(u_q(p)\)
 as a quadratic ratio successfully captures the simulated behaviour. A data set
 offering further validation is available at. %TODO archive data
-
 The simulated utility, denoted
-as \(U_q(p)\) has been calculated using~\cite{axelrodproject}. It is an open research
+as \(U_q(p)\) has been calculated using~\cite{axelrodproject},  an open research
 framework for the study of the IPD and is described in~\cite{Knight2016}. Note that
 when referring to \(U_q(p)\) here onwards we mean the simulated utility calculated
 with~\cite{axelrodproject}.
@@ -275,10 +279,13 @@ with~\cite{axelrodproject}.
 \label{fig:analytical_simulated}
 \end{figure}
 
-Moreover Theorem~\ref{theorem:quadratic_form_u} can be expanded to multi opponent
-interactions. The IPD is commonly studied in tournaments where a strategy interacts
-with a number of opponents. There the payoff of a player is given by the average
-payoffs the player achieved. More specifically the expected utility of a memory one strategy
+Theorem~\ref{theorem:quadratic_form_u} can be extended to consider multiple
+opponents
+The IPD is commonly studied in tournaments and or Moran Processes where a
+strategy interacts
+with a number of opponents. The payoff of a player is then given by the average
+payoffs the against each opponent.
+More specifically the expected utility of a memory one strategy
 against a \(N\) number of opponents is given by Theorem~\ref{theorem:tournament_utility}.
 
 \begin{theorem}\label{theorem:tournament_utility}
@@ -293,17 +300,18 @@ against a \(N\) number of opponents is given by Theorem~\ref{theorem:tournament_
         N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}
         {\prod\limits_{i=1} ^ N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}.
     \end{equation}
-
 \end{theorem}
 
-To validate the formulation of Theorem~\ref{theorem:tournament_utility} we calculate
-the simulated and the theoretical payoffs of several memory one strategies against
-a set of 10 opponents. The opponents used are the memory one strategies for the tournament
-conducted in~\cite{Stewart2012}. The names and a small explanation of the strategic rules are
-given by Table~\ref{table:list_stewart_plotkin}, Appendix~\ref{appendix:tables}.
-The values of \(\frac{1}{10} \sum\limits_{i=1} ^ {10} u_{q ^{(i)}} (p)\) and
-\(\frac{1}{10} \sum\limits_{i=1} ^ {10} U_{q ^{(i)}} (p)\) match (Table~\ref{table:list_stewart_plotkin}),
-thus we conclude that the formulation of Theorem~\ref{theorem:tournament_utility} is correct.
+As an illustration, Theorem~\ref{theorem:tournament_utility} is used to calculate
+he theoretical payoffs of several memory one strategies against
+a set of 10 opponents. The opponents used are the memory one strategies for the 
+tournament
+conducted in~\cite{Stewart2012}. This tournament is also simulated as before
+The names and a small explanation of the strategic rules are
+given in Appendix~\ref{appendix:tables}.
+The values of \(\frac{1}{N} \sum\limits_{i=1} ^ {N} u_{q ^{(i)}} (p)\) and
+\(\frac{1}{N} \sum\limits_{i=1} ^ {N} U_{q ^{(i)}} (p)\) match (Table~\ref{table:list_stewart_plotkin}),
+% TODO I wonder if we drop the \frac{1}{N} (it's not really required)
 
 \begin{table}[htbp]
     \begin{center}
@@ -312,6 +320,10 @@ thus we conclude that the formulation of Theorem~\ref{theorem:tournament_utility
     \caption{Results of memory one strategies against the strategies in Table~\ref{table:list_stewart_plotkin}.}
     \label{table:list_stewart_plotkin}
 \end{table}
+
+% TODO This needs to be either a single number: the utility in the tournament
+% **OR** parametrize the strategies (change 0 <= p_1 <= 1) and get a 1
+% dimensional plot against one of those parameters.
 
 The analytical formulation of Theorem~\ref{theorem:tournament_utility} will be
 used in the following sections to explore the best response to memory one
