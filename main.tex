@@ -304,7 +304,7 @@ against a \(N\) number of opponents is given by Theorem~\ref{theorem:tournament_
 
 As an illustration, Theorem~\ref{theorem:tournament_utility} is used to calculate
 he theoretical payoffs of several memory one strategies against
-a set of 10 opponents. The opponents used are the memory one strategies for the 
+a set of 10 opponents. The opponents used are the memory one strategies for the
 tournament
 conducted in~\cite{Stewart2012}. This tournament is also simulated as before
 The names and a small explanation of the strategic rules are
@@ -325,21 +325,41 @@ The values of \(\frac{1}{N} \sum\limits_{i=1} ^ {N} u_{q ^{(i)}} (p)\) and
 % **OR** parametrize the strategies (change 0 <= p_1 <= 1) and get a 1
 % dimensional plot against one of those parameters.
 
+Note that the utility against a group of strategies can not be captured by
+the utility against the mean opponent.
+
+\begin{equation}\label{eq:tournament_hypothesis}
+    \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p) \neq
+      u_{\frac {1}{N} \sum\limits_{i=1} ^ N q^{(i)}}(p).
+\end{equation}
+
+This is illustrated in Figure~\ref{fig:hypothesis}.
+
+\begin{figure}[!htbp]
+    \begin{center}
+            \includegraphics[width=\linewidth]{img/mean_vs_average_two.png}
+    \end{center}
+    \caption{Plotting the difference of the average utility against ten
+    opponents versus the utility against the average of the ten strategies.}
+    \label{fig:hypothesis}
+\end{figure}
+
+
 The analytical formulation of Theorem~\ref{theorem:tournament_utility} will be
 used in the following sections to explore the best response to memory one
 strategies.
 
 \section{Best responses to memory one players}\label{section:best_response_mem_one}
 
-In the introduction a question was raised: which memory one strategy is the \textbf{best response}
-to a group of memory one strategies? This will be considered as an optimisation problem,
-where a memory one strategy \(p\) wants to optimise it's average utility \( \frac{1}{N} \sum u_{q ^{(i)}} (p)\)
-against a set opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\).
+Identifying the \textbf{best response} to a group of memory one strategies  will
+be considered as a multi dimensional optimisation problem, where a memory one
+strategy \(p\) aims to optimise
+\( \frac{1}{N} \sum u_{q ^{(i)}} (p)\) against a set opponents
+\(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\).
 
-The decision variable is the vector \(p\) and the solitary constraint is that \(p \in \R^4_{[0, 1]} \).
-The optimisation problem is given by~(\ref{eq:mo_tournament_optimisation}). Note that
-we will considering the sum and not the average utility as their optimisation corresponds
-to the same thing.
+The decision variable is the vector \(p\) and the solitary constraint is
+that \(p \in \R^4_{[0, 1]} \).
+The optimisation problem is given by~(\ref{eq:mo_tournament_optimisation}).
 
 \begin{equation}\label{eq:mo_tournament_optimisation}
     \begin{aligned}
@@ -349,13 +369,14 @@ to the same thing.
     \end{aligned}
 \end{equation}
 
-This work is concerned with an optimisation problem of a ratio of quadratic forms.
-It can be verified empirically for the case of a single opponent that there exist at
+Optimising this particular ratio of quadratic forms is not trivial.
+It can be verified empirically for the case of a single opponent that there
+exist at
 least one point for which the definition of concavity does not hold.
 
 There is some work on the optimisation on non concave ratios of of quadratic forms
-\cite{Beck2009, Hongyan2014}. In these both the numerator and the denominator
-of the fractional problem were concave which is not true for our case.
+\cite{Beck2009, Hongyan2014}, however in these both the numerator and the denominator
+of the fractional problem were concave which is not true for here.
 These results are established in Theorem~\ref{theorem:concavity}.
 
 \begin{theorem}\label{theorem:concavity}
@@ -376,17 +397,15 @@ These results are established in Theorem~\ref{theorem:concavity}.
     f (\lambda x_1 + (1 - \lambda )x_2 ) \leq \lambda f (x_1 ) + (1 - \lambda )f (x_2 ).
     \end{equation}
 
-    Using numerical trials we have shown that there exists at least on point for which
-    (\ref{eq:optimisation_quadratic}) is not concave. Let \(f\) be
-    \(u_{(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, \frac{1}{3})}\) it can shown that
+    Let \(f\) be
+    \(u_{(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, \frac{1}{3})}\) it can be shown
+    that
     for \(x_1 = (\frac{1}{4}, \frac{1}{2}, \frac{1}{5} , \frac{1}{2}),
-    x_2 = (\frac{8}{10}, \frac{1}{2}, \frac{9}{10} , \frac{7}{10})\) and \(\lambda=\frac{1}{10}\)
-    condition (\ref{def:convex}) does not hold as:
+    x_2 = (\frac{8}{10}, \frac{1}{2}, \frac{9}{10} , \frac{7}{10})\) and
+    \(\lambda=\frac{1}{10}\)
+    condition (\ref{def:convex}) does not hold as: \(1.49 \geq 1.48\).
 
-    \[1.49 \geq 1.48\]
-
-    Moreover, any potential benefits from the structure of the numerator and the denominator
-    are also investigated. In~\cite{Anton2014} it is stated that a quadratic form will
+    In~\cite{Anton2014} it is stated that a quadratic form will
     be concave if and only if it's symmetric matrix is negative semi definite.
     A matrix\(A\) is semi-negative definite if:
 
@@ -396,60 +415,37 @@ These results are established in Theorem~\ref{theorem:concavity}.
     \end{equation}
 
     For both \(Q\) and \(\bar{Q}\) it is exhibited that for \(i=2\) (odd):
+    % TODO What do you mean by "exhibited"?
 
     \[|Q|_2 = - \left(q_{1} - q_{3}\right)^{2} \left(q_{2} - 5 q_{4} - 1\right)^{2},\]
     \[|\bar{Q}|_2 =- \left(q_{1} - q_{3}\right)^{2} \left(q_{2} - q_{4} - 1\right)^{2}\]
 
-    both determinants are negative, thus the concavity condition (\ref{def:semi_negative})
+    both determinants are negative, thus the concavity condition
+    (\ref{def:semi_negative})
     fails for both quadratic forms.
 \end{proof}
 
-The non concavity of \(u(p)\) indicates multiple local optimal points. Thus we
-are not searching a single optimal point but a set of candidate optimal points.
-The aim is to introduce a compact way of constructing the candidate set. Once
-the set is defined the point that maximises (\ref{eq:tournament_utility}) corresponds to the best
-response strategy, thus any search over an infinitely sized continuous set can instead
-be replaced with a discrete set.
+The non concavity of \(u(p)\) indicates multiple local optimal points.
+The approach taken here is to introduce a compact way of constructing
+the candidate set of all local optimal points. Once
+the set is defined the point that maximises (\ref{eq:tournament_utility})
+corresponds to the best response strategy, this approach transforms the
+continuous optimisation problem in to a discrete problem.
 
-The problem considered is a bounded because \(p \in \R^4_{[0, 1]}\). It is known that
-the candidate solutions will exist either at the boundaries
+The problem considered is a bounded because \(p \in \R^4_{[0, 1]}\).
+The candidate solutions will exist either at the boundaries
 of the feasible solution space, or within that space. The method of Lagrange
-Multipliers~\cite{bertsekas2014} and Karush-Kuhn-Tucker conditions~\cite{Giorgi2016}
-are based on this. The Karush-Kuhn-Tucker conditions are used here because the constraints
-are inequalities.
-
-Note that the best response can not be captured by optimising against the mean
-opponent.
-
-\begin{equation}\label{eq:tournament_hypothesis}
-    \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p) \neq
-      u_{\frac {1}{N} \sum\limits_{i=1} ^ N q^{(i)}}(p).
-\end{equation}
-
-A number of numerical experiments have been performed for cases where \(p=(p, p, p, p)\)
-and \(p= (p_1, p_2, p_1, p_2)\). This was done in order to compare the right hand
-side of equation~(\ref{eq:tournament_hypothesis}) to the left. The fact that
-equation~(\ref{eq:tournament_hypothesis}) holds is evident by Figure~\ref{fig:hypothesis}.
-
-\begin{figure}[!htbp]
-    \begin{center}
-        \begin{subfigure}{0.44\textwidth}
-            \includegraphics[width=\linewidth]{img/mean_vs_average.png}
-        \end{subfigure}
-        \begin{subfigure}{0.45\textwidth}
-            \includegraphics[width=\linewidth]{img/mean_vs_average_two.png}
-        \end{subfigure}
-    \end{center}
-    \caption{An example confirming equation~(\ref{eq:tournament_hypothesis}) for \(p=(p, p, p, p)\)
-    and \(p= (p_1, p_2, p_1, p_2)\).}
-    \label{fig:hypothesis}
-\end{figure}
+Multipliers~\cite{bertsekas2014} and Karush-Kuhn-Tucker
+conditions~\cite{Giorgi2016} are based on this. The Karush-Kuhn-Tucker
+conditions are used here because the constraints are inequalities.
 
 The above discussion leads to Lemma~\ref{lemma:memone_group_best_response} which
-presents the best memory one response to a group of opponents.
+presents the best response to a group of opponents.
 
 \begin{lemma}\label{lemma:memone_group_best_response}
-    The optimal behaviour of a memory one strategy player \(p^* \in \R_{[0, 1]} ^ 4\)
+
+    The optimal behaviour of a memory one strategy player
+    \(p^* \in \R_{[0, 1]} ^ 4\)
     against a set of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
     for \(q^{(i)} \in \R_{[0, 1]} ^ 4\) is established by:
 
@@ -457,24 +453,23 @@ presents the best memory one response to a group of opponents.
 
     where the set \(S_q\) is defined as
 
-    \[S_q = \{0, \bar{p_i}, 1 \}^4 \text{ for } i \in \R,\]
+    \[
+        S_q =
+        \left\{p \in \mathbb{R} ^ 4\;|\;
+            \begin{array}{c}
+                p_i \in{0, 1}\text{ or }F_i(p_i) = 0\\
+                \prod\limits_{i=1} ^ N Q_{D}^{(i)} \neq 0
+            \end{array}
+            % TODO We should definitely talk this one over.
+            \text{ for all } i\in\{1, 2, 3, 4\}
+        \right\}
+    \]
 
-    where \(\bar{p_i}\) satisfies one of the following cases:
 
-    \begin{equation}\label{eq:cases_mem_one}\resizebox{.8\hsize}{!}{$
-        \left\{\begin{array}{lr}
-        \frac{d\sum u}{dp_{|p=p^*}} = 0, & \text{for } p^* \in \{\bar{p}_i\} ^ 4, \\
-        \frac{d\sum u}{dp_{j_{|p_j=p_j^*}}} = 0, & \text{for } p^* \in \{0, \bar{p}_i, 1\} ^ 4
-        \text{ where } p_j ^ * \in \{\bar{p}_i\} \text{ for } j \in [1, 4].\\
-        \end{array}\right.$}
-    \end{equation}
-
-    Equations~(\ref{eq:cases_mem_one}) corresponds to the partial derivatives of the
-    utility. For the partial derivatives to be zero, the numerator must fall
-    to zero. The numerator of the partial derivatives is given by,
-
+    where,
+    % TODO I am not sure if F is a good choice
     \begin{equation}\label{eq:group_derivative_numerator_condition}
-    (\sum\limits_{i=1} ^ {N} Q_{N}^{(i)'} \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)}
+    F=(\sum\limits_{i=1} ^ {N} Q_{N}^{(i)'} \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)}
      + \sum\limits_{i=1} ^ {N} Q_{D}^{(i)'} \sum_{\substack{j=1 \\ j \neq i}} ^ {N} Q_{N}^{(i)}
     \prod_{\substack{j=1 \\ j \neq \{i, j\}}} ^ N Q_{D}^{(i)}) \times
     \prod\limits_{i=1} ^ N Q_{D}^{(i)} - (\sum\limits_{i=1} ^ {N} Q_{D}^{(i)'}
@@ -482,13 +477,7 @@ presents the best memory one response to a group of opponents.
     (\sum\limits_{i=1} ^ {N} Q_{N}^{(i)} \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)})
     \end{equation}
 
-    and the denominator can not nullified, thus:
-
-    \begin{equation}\label{eq:group_derivative_denominator_condition}
-        \prod\limits_{i=1} ^ N Q_{D}^{(i)} \neq 0
-    \end{equation}
-
-    where,
+    and,
 
     \begin{align*}
         Q_{N}^{(i) } & = \frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}, \\
@@ -498,7 +487,8 @@ presents the best memory one response to a group of opponents.
     \end{align*}
 \end{lemma}
 
-\begin{proof} The best response of a memory one strategy against a group of memory
+\begin{proof}
+    The best response of a memory one strategy against a group of memory
     one strategies can captured by a candidate set of behaviours. This candidate
     set is constructed by considering behaviours where any or all of \(p_1, p_2, p_3, p_4\)
     are \(\in \{0, 1\}\) and the rest or all of \(p_1, p_2, p_3, p_4\) are given by
@@ -582,18 +572,21 @@ by Lemma~\ref{lemma:memone_best_response}.
 
 
     For equation~\ref{eq:mo_tournament_derivative} to be zero, the numerator must fall
-    to zero and the denominator can not nullified.
-
-    One the candidate set is constructed each point is evaluated using equation
-    (\ref{eq:tournament_utility}). The point with the maximum utility is selected.
+    to zero and the denominator can not be zero.
 \end{proof}
 
-Equations (\ref{eq:group_derivative_numerator_condition}) and (\ref{eq:derivative_numerator_condition})
-are systems of maximum \(4\) polynomials and the degree of the polynomials is gradually increasing
+Equations (\ref{eq:group_derivative_numerator_condition}) and
+(\ref{eq:derivative_numerator_condition})
+are systems of at most \(4\) polynomials and the degree of the polynomials is gradually increasing
 every time an extra opponent is taken into account. Solving system of polynomials corresponds
 to the calculation of a resultant and for large systems these quickly become intractable.
+% TODO Add a reference here about resultants.
 Because of that no further analytical consideration is given to problems described
 here.
+
+Theorems~\ref{} can also be used to identify if a strategy is a best response.
+% TODO Add an example where we check if `extort-2` is a best response to the
+% tournament of S&P.
 
 Lemma~\ref{lemma:memone_group_best_response} and Theorem~\ref{theorem:tournament_utility}
 will now be used to give a list of particular best response results.
