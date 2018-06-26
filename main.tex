@@ -850,13 +850,13 @@ illustrates examples for both lemmas.
 In this section the stability of defection is explored. Defection is
 known to be the dominant action in the PD and it can be proven to be the dominant
 strategy for the IPD for given environments. Even so, several works have proven
-that cooperation emerges in the IPD many studies around the game focus on the
+that cooperation emerges in the IPD and many studies focus on the
 emergence of cooperation. In this manuscript we try to provide a condition for when
-defection is the best response in the IPD, thus when it is known that cooperation can
-not occur.
+defection is the best response in the IPD, thus when it is known that
+cooperation is not dominant.
 
-Initially, let's consider equation~(\ref{eq:mo_derivative}) and let
-equation~(\ref{eq:mo_derivative}) for \(p = (0, 0, 0, 0)\),
+Initially, let us consider equation~(\ref{eq:mo_derivative}) for \(p = (0, 0, 0,
+0)\),
 
 \begin{equation}\label{eq:derivative_of_quadratic_zero}
     \begin{aligned}
@@ -885,54 +885,33 @@ More specifically from equations,
 \end{equation}
 
 Both signs of the partial derivatives must be negative in order for the overall
-function to be decreasing, thus defection being the best response.
+function to be decreasing ensuring defection is a best response.
 The signs of equations (\ref{eq:defection_condition_one}) and (\ref{eq:defection_condition_two})
 vary. There are cases that they have the same sign and cases that they do not,
-this is shown by numerical example summarized in Table~\ref{table:sign_of_derivative}.
-
-\begin{table}[htbp]
-\begin{center}
-\begin{tabular}{cllllcc}
-    \toprule
-    {}& {} & {}& {}& {}&  equation(\ref{eq:defection_condition_one}) &  equation(\ref{eq:defection_condition_two}) \\
-    \midrule
-1 & \(q_1=\frac{3}{10}\),   & \(q_2=\frac{3}{20}\),  & \(q_3=\frac{13}{20}\), & \(q_4=\frac{7}{100}\)
-&  + & + \\
-2 & \(q_1=\frac{11}{25}\),  & \(q_2=\frac{3}{10}\),  & \(q_3=\frac{9}{10}\),  & \(q_4=\frac{1}{2}\)
-&  - & - \\
-3 & \(q_1=\frac{17}{20}\),  & \(q_2=\frac{3}{4}\),   & \(q_3=\frac{2}{5}\),   & \(q_4=\frac{1}{4}\)
-&  - & + \\
-4 & \(q_1=\frac{13}{88}\),  & \(q_2=\frac{21}{92}\),  & \(q_3=\frac{21}{26}\),  & \(q_4=\frac{20}{67}\)
-&  + & - \\
-    \bottomrule
-\end{tabular}
-\end{center}
-\caption{Numerical examples of the derivative's sign.}
-\label{table:sign_of_derivative}
-\end{table}
 
 For a tournament setting we substitute \(p = (0, 0, 0, 0)\) in
-equation~(\ref{eq:mo_tournament_derivative}) which laid out:
+equation~(\ref{eq:mo_tournament_derivative}) which gives:
 
 \begin{equation}
 \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})
 \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2
 \end{equation}
 
-The product term \(\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2\)
-is known to always be positive. However the sign of the sum term
-\(\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\) can vary based
-on the transition probabilities of the opponents, as discussed above. A condition that
-must hold in order for defection to be stable in a tournament is that the sum term
-must be negative. The results are exhibited in Lemma~\ref{lemma:stability_of_defection}.
+The second term \(\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i
+\end{array}} ^ N (\bar{a}^{(i)})^2\) is always positive. However the sign of the
+first term \(\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\)
+can vary based on the transition probabilities of the opponents, as discussed
+above. A condition that must hold in order for defection to be stable in a
+tournament is that each term of the sum must be negative. The results are
+exhibited in Lemma~\ref{lemma:stability_of_defection}.
 
 \begin{lemma}\label{lemma:stability_of_defection}
     In a tournament of \(N\) players where \(q^{(i)} = (q_{1}^{(i)}, q_{2}^{(i)}, q_{3}^{(i)}, q_{4}^{(i)})\)
-    defection is known to be a best response if the transition probabilities of the
+    defection is a best response if the transition probabilities of the
     opponents satisfy the condition:
 
     \begin{equation}
-        \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) <= 0.
+        \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
     \end{equation}
 \end{lemma}
 
@@ -944,16 +923,6 @@ and (\ref{eq:defection_condition_two}) are now re written as follow,
 \[\left[\begin{matrix}- q_{2} \left(4 q_{1} - 5 q_{2} - 1\right)\\
 \left(q_{2} - 1\right) \left(4 q_{1} - 5 q_{2} - 1\right)\end{matrix}\right]\]
 
-The sign of both equations is now based on the same term,\(\left(4 q_{1} - 5 q_{2} - 1\right)\),
-which is a term that can have both negative and positive values. This is shown
-by Figure~\ref{fig:sign_against_reactive}. Following this the following result is retrieved,
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.45\linewidth]{img/sign_against_reactive.pdf}
-      \caption{Sign of \(\left(4 q_{1} - 5 q_{2} - 1\right)\).}
-      \label{fig:sign_against_reactive}
-  \end{figure}
 
 \begin{lemma}
 Defection is the best responses of a memory one player \(p\) against a reactive
@@ -967,28 +936,26 @@ condition:
 
 \section{Optimisation against memory one strategies}\label{section:optimisation_memone}
 
-The main aim of this work is to capture best response memory one strategies.
-Though an analytical approach can not be applied further than discussed in
-Section~\ref{section:best_response_mem_one} an empirical approach is considered here.
-More specially, the optimisation problem of (\ref{eq:mo_tournament_optimisation})
-is maximized using bayesian optimisation. Bayesian optimisation is a
+The results of the previous section allow for the quick characterisation of a
+strategy and indeed a Nash equilibria.
+Here the optimisation problem of (\ref{eq:mo_tournament_optimisation})
+is maximized using Bayesian optimisation. Bayesian optimisation is a
 global optimisation algorithm, introduced in~\cite{Mokus1978}, which has proven to
 outperform many other popular algorithms~\cite{Jones2001}.
 
-As many other algorithms bayesian optimisation is used to find the maximum of a
-function \(f\) on some bounded set. Bayesian constructs a probabilistic
+Bayesian optimisation constructs a probabilistic
 model for \(f\) and then exploits this model to make decisions about where in the
-bounded set to next evaluate the function. It relays on the previous
-of \(f\) and not simply rely on local gradient and Hessian approximations.
+bounded set to next evaluate the function. It relies on the prior information
+and does not simply rely on local gradient and Hessian approximations.
 This allows the algorithm to optimise a non concave function with relatively few
 evaluations, at the cost of performing more computation to determine the next point
 to try~\cite{snoek2012}.
 
-The open source package~\cite{Head2018} offers an implementation of bayesian optimisation
-and is used in this paper to compute a large number of best memory one responses against
-sets of random memory one strategies. The implementation of bayesian in~\cite{Head2018}
-allows us to perform the algorithm for a different combination of parameters.
-The parameters explored here are:
+The open source package~\cite{Head2018} offers an implementation of bayesian
+optimisation and is used in this paper to compute a large number of best memory
+one responses against sets of random memory one strategies. The implementation
+of bayesian in~\cite{Head2018} allows us to perform the algorithm for a
+different combination of parameters.  The parameters explored here are:
 
 \begin{itemize}
     \item Number of calls, maximum number of calls to the objective function.
@@ -1017,24 +984,15 @@ Table~\ref{table:ba_opt}.
 \label{table:ba_opt}
 \end{table}
 
-Note that another global optimization algorithm called differential evolution~\cite{Storn1997}
-was also reviewed for the purpose of this paper. Bayesian optimization was
-chosen over differential evolution due to a high computational cost.
-
-The combination that was chosen to carry out the empirical trials is that
-of 50 number of calls and 20 number of random starts. This set of parameters
-was determined to be the most efficient using best reactive responses as an experimental
-case.
-
-A total of 9900 different memory one opponents were randomly generated and bayesian optimisation
-was used to find the optimal reactive strategy. The results were compared to that of
-Lemma~\ref{lemma:reactive_best_response} which we know exhibits the best reactive response.
-The particular parameters' set was the set with
-the smallest difference between the two captured best behaviours.
-The results of this comparison are presented by Table~\ref{table:bayesian_excact_difference}.
+A total of 9900 different memory one opponents were randomly generated and
+Bayesian optimisation was used to find the optimal reactive strategy. The
+results were compared to that of Lemma~\ref{lemma:reactive_best_response} which
+is used to obtain the exact optimal.  The results of this comparison are
+presented by Table~\ref{table:bayesian_excact_difference}.
 
 \begin{table}[htbp]
     \begin{center}
+        % TODO Fix the column names "Parameters"
     \input{tex/bayesian_proof.txt}
     \caption{Difference of \(u_q(p)\) for \(p \in \R_{[0, 1]} ^ 2\). The difference was
     calculated as exact \(u_q(p ^ *)\) minus Bayesian \(u_q(\tilde{p} ^ *)\).}
@@ -1042,14 +1000,27 @@ The results of this comparison are presented by Table~\ref{table:bayesian_excact
     \end{center}
 \end{table}
 
-Thus it can be confirmed that bayesian optimisation manages to capture the optimal
-behaviour of reactive strategies. The very same set of parameters was used to optimise
+The combination that was chosen to carry out the empirical trials is that
+of 50 number of calls and 20 number of random starts. This set of parameters
+was determined to be the most efficient using best reactive responses as an experimental
+case.
+
+% TODO Perhaps include a training plot as an example?
+
+Bayesian optimisation finds the optimal
+behaviour of reactive strategies. The very same set of parameters will now be
+used to optimise
 memory one strategies against single opponents and against
 sets of \(N=2\) opponents. \(N=2\) was chosen because is the smallest \(N\) for
 which there is a multi opponent interaction. For each \(N=1\) and \(N=2\) opponents a
 total of 1022 best responses of memory one strategies have been captured. This data has
 been archived in.
 % TODO: add ZD after our paper is on pre-print?!
+
+Note that another global optimization algorithm called differential evolution~\cite{Storn1997}
+was also evaluated. Bayesian optimization was
+chosen over differential evolution due to a lower computational cost and
+comparable results.
 
 \section{Limitation of memory}
 
