@@ -1032,23 +1032,26 @@ show that more complex strategies can indeed perform better in cases of \(N=2\).
 This is achieved by comparing the performance of an optimised memory one strategy
 to that of a trained long memory one.
 
-The long memory strategies are trained using bayesian algorithm as the one described in
-Section~\ref{section:optimisation_memone}. The trained strategy used is a strategy called Gambler,
-introduced and discussed in~\cite{Harper2017}, and the objective function of a Gambler
+The long memory strategies are trained using reinforcement learning through
+Bayesian optimisation similarly to Section~\ref{section:optimisation_memone}.
+The trained strategy used is a strategy called Gambler,
+introduced and discussed in~\cite{Harper2017}, and the objective function
 is the average performance in a tournament of 200 turns and 50 repetitions.
+Thus, the player learns by playing a number of players, building a Bayesian
+landscape of it's parameters and updating them accordingly.
 
 \subsection{Gambler}
 
 Several ways of representing IPD strategies have been used over the years.
 In~\cite{Harper2017} several of those `archetypes' are presented
 and used to train different successful strategies. One of the archetypes firstly
-introduced in that paper is Gambler. Gambler is based on a lookup table and encodes
-a probability of cooperating based on the opponent's first \(n_1\) moves, the opponent's
-last \(m_1\) moves, and the players last \(m_2\) moves.
+introduced in that paper is Gambler. Gambler is based on a lookup table and maps
+the opponent's first \(n_1\) moves, the opponent's
+last \(m_1\) moves, and the players last \(m_2\) moves to a probability of
+cooperation.
 
-Several variants of Gambler have been trained for this work (Table~\ref{table:gambler}).
-In essence Gambler can represent any generic strategy
-and that is why it has been chosen.
+Several variants of Gambler have been trained for this work
+(Table~\ref{table:gambler}).
 
 \begin{table}[htbp]
     \begin{center}
@@ -1074,10 +1077,12 @@ The performance of the memory one and Gamblers strategies are compared for cases
 \(N=1\) and \(N=2\). The following steps are taken:
 
 \begin{enumerate}
-    \item An \(N\) number of random opponents are generated.
-    \item Using (\ref{eq:mo_tournament_optimisation}) \(p^*\) for that given environment is captured.
+    \item An \(N\) number of random opponents are generated: this gives the
+        environment.
+    \item Using (\ref{eq:mo_tournament_optimisation}) and Bayesian optimisation \(p^*\) 
+s obtained for the environment.
     \item A Gambler type (each variant of Table~\ref{table:gambler}) is trained for the same environment.
-    \item Both utilities of the optimised and the trained strategy are reordered.
+    \item Both utilities are compared.
 \end{enumerate}
 
 A large data set containing the opponents as well as the optimised/trained behaviours
@@ -1097,7 +1102,7 @@ trials for \(N=2\).
 The results are explored by studying the difference between
 \(\frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p ^ *)\) and
 \(\frac{1}{N} \sum\limits_{i=1} ^ {N} {U_q}^{(i)} (G)\) ,
-where \(U(G)\) represents the utility of a Gambler. The results are illustrated in
+where \(U(G)\) represents the utility of a Gambler. The results are shown in
 Figure~\ref{fig:boxplots}.
 
 For the cases of Gambler \(n_1=1, m_1=1, m_2=2\), \(n_1=2, m_1=2, m_2=0\) and
@@ -1160,6 +1165,8 @@ are cases that they have a difference in score of 0.5.
     and  \(\frac{1}{N} \sum\limits_{i=1} ^ {N} {U_q}^{(i)} G\) for \(N=1\) and \(N=2\).}
     \label{fig:boxplots}
 \end{figure}
+
+% TODO Let us talk about this.
 
 \section{Discussion}
 
