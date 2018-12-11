@@ -1,0 +1,11 @@
+\begin{tabular}{cc}
+\toprule
+Difference &                        Labels \\
+\midrule
+0.026991 &  calls: 20, random starts: 10 \\
+0.018916 &  calls: 30, random starts: 20 \\
+0.007298 &  calls: 40, random starts: 20 \\
+0.005552 &  calls: 45, random starts: 20 \\
+0.005114 &  calls: 50, random starts: 20 \\
+\bottomrule
+\end{tabular}
