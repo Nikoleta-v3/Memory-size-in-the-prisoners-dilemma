@@ -31,8 +31,6 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \def\arraystretch{1.5}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \title{Stability of defection, optimisation of strategies and the limits of
        memory in the Prisoner's Dilemma.}
 \author{Nikoleta E. Glynatsi \and Vincent A. Knight}
@@ -43,6 +41,7 @@
 \maketitle
 
 \begin{abstract}
+
     In this manuscript we build upon a framework provided in 1989 to study best
     responses in the well known memory one strategies of the Iterated Prisoner's
     Dilemma. The aim of this work is to construct a compact way of identifying
@@ -82,6 +81,7 @@ better when both choose to cooperate. The
 most common values used in the literature are
 \((3, 1, 0, 5)\)~\cite{Axelrod1981}.
 
+
 \begin{equation}\label{eq:pd_constrain_one}
     T > R > P > S
 \end{equation}
@@ -94,10 +94,12 @@ The PD is a one shot game, however it is commonly studied in a manner where the
 history of the interactions matter. The repeated form of the game is called the
 Iterated Prisoner's Dilemma (IPD) and in the 1980s, % TODO Add RAND reference
 following the work of
+
 \cite{Axelrod1980a, Axelrod1980b} it attracted the attention of the scientific
 community.
 
 In~\cite{Axelrod1980a} and~\cite{Axelrod1980b}, the first well known computer
+
 tournaments of the IPD were performed. A total of 13 and 63 strategies were
 submitted in computer code and competed against each other in a round robin
 tournament. All contestants competed against each other, a copy of themselves
@@ -154,7 +156,6 @@ In the second part of this manuscript we explore the limitation of these best
 response strategies. This is achieved by comparing the performance of an optimal
 memory one strategy, for a given environment, with the performance of a more
 complex strategy that has a larger memory.
-
 One particular benefit of this analysis is the identification of conditions for
 which defection is a best response. Thus, identifying environments for which
 cooperation can not occur.
@@ -249,7 +250,6 @@ Theorem~\ref{theorem:quadratic_form_u}.
     \boldmath\(\bar{c} = \input{tex/c_denominator}\).
     }
     \end{equation}
-
     and \(a = \input{tex/numerator_constant}\) and
     \(\bar{a} = \input{tex/denominator_constant}\).
 \end{theorem}
@@ -343,7 +343,6 @@ This is illustrated in Figure~\ref{fig:hypothesis}.
     opponents versus the utility against the average of the ten strategies.}
     \label{fig:hypothesis}
 \end{figure}
-
 
 The analytical formulation of Theorem~\ref{theorem:tournament_utility} will be
 used in the following sections to explore the best response to memory one
@@ -478,7 +477,6 @@ presents the best response to a group of opponents.
     \end{equation}
 
     and,
-
     \begin{align*}
         Q_{N}^{(i) } & = \frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}, \\
         Q_{N}^{(i)'} & =  pQ^{(i)} + c^{(i)}, \\
@@ -506,7 +504,7 @@ presents the best response to a group of opponents.
         (\sum\limits_{i=1} ^ {N} Q_{N}^{(i)'} \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)}
         + \sum\limits_{i=1} ^ {N} Q_{D}^{(i)'} \sum_{\substack{j=1 \\ j \neq i}} ^ {N} Q_{N}^{(i)}
        \prod_{\substack{j=1 \\ j \neq \{i, j\}}} ^ N Q_{D}^{(i)}) \times
-       \prod\limits_{i=1} ^ N Q_{D}^{(i)} - (\sum\limits_{i=1} ^ {N} Q_{D}^{(i)'}
+       \prod\limits_{i=1} ^ N Q_{D}^{(i)} - (\sum\limits_{i=1} ^ {N} Q_{D}^{(i)'}y-vk
        \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)}) \times
        (\sum\limits_{i=1} ^ {N} Q_{N}^{(i)} \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)})}
         {(\prod\limits_{i=1} ^ N Q_{D}^{(i)})^{2}}
@@ -733,7 +731,6 @@ Lemma~\ref{lemma:purely_optimisation}.
     \[p^* = \textnormal{argmax}(\sum_{i=1} ^ {N} {u_q}^{(i)} (p) ), \ p \in S_{q(i)},\]
 
     where the set \(S_{q}\) is defined as:
-
     \[S_{q} = \{0, \lambda_i, 1\},\text{ for } i \in [1, 2N]\]
 
     where \(\lambda_i\) are the eigenvalues of the companion matrix corresponding
@@ -925,7 +922,6 @@ and (\ref{eq:defection_condition_two}) are now re written as follow,
 
 \[\left[\begin{matrix}- q_{2} \left(4 q_{1} - 5 q_{2} - 1\right)\\
 \left(q_{2} - 1\right) \left(4 q_{1} - 5 q_{2} - 1\right)\end{matrix}\right]\]
-
 
 \begin{lemma}
 Defection is the best responses of a memory one player \(p\) against a reactive
@@ -1170,7 +1166,6 @@ are cases that they have a difference in score of 0.5.
 \end{figure}
 
 % TODO Let us talk about this.
-
 \section{Discussion}
 
 In this framework, memory one strategies for the well known game the IPD were
