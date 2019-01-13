@@ -19,11 +19,11 @@ import opt_mo
 warnings.filterwarnings("ignore")
 
 
-def get_filename(location, params, index, method):
+def get_filename(location, params, index):
     filename = location + "gambler{}_{}_{}/".format(
         params[0], params[1], params[2]
     )
-    filename += "{}_{}.csv".format(method, index)
+    filename += "{}.csv".format(index)
     return filename
 
 
@@ -53,7 +53,7 @@ def get_columns(params, method_params):
     ]
     size = opt_mo.pattern_size(params)
     gambler_cols = ["Gambler {} key".format(i) for i in range(size)]
-    method_cols = ["method"] + [
+    method_cols = [
         "{}".format(key) for key in method_params.keys()
     ]
 
@@ -61,7 +61,7 @@ def get_columns(params, method_params):
 
 
 def write_results(
-    index, method, list_opponents, params, turns, repetitions, method_params
+    index, list_opponents, params, turns, repetitions, method_params
 ):
 
     cols = get_columns(params, method_params)
@@ -76,7 +76,6 @@ def write_results(
 
     start_optimisation = time.clock()
     best_response, theoretical, simulated = opt_mo.optimal_memory_one(
-        method,
         opponents=list_opponents,
         turns=turns,
         repetitions=repetitions,
@@ -88,7 +87,6 @@ def write_results(
 
     start_training = time.clock()
     opt_gambler, utility = opt_mo.train_gambler(
-        method,
         opponents=list_opponents,
         turns=turns,
         repetitions=repetitions,
@@ -100,7 +98,6 @@ def write_results(
     for vector in opt_gambler:
         row.append(vector)
 
-    row.append(method)
     for value in method_params.values():
         row.append(value)
     frame = frame.append([row])
@@ -116,7 +113,6 @@ if __name__ == "__main__":
     num_plays = int(sys.argv[2])
     num_op_plays = int(sys.argv[3])
     num_op_start_plays = int(sys.argv[4])
-    method = sys.argv[5]
 
     location = "data/random_numerical_experiments/"
     params = [num_plays, num_op_plays, num_op_start_plays]
@@ -129,94 +125,64 @@ if __name__ == "__main__":
         for num_repetitions in [5, 20, 50]:
 
             filename = get_filename(
-                location=location, params=params, index=i, method=method
+                location=location, params=params, index=i,
             )
 
-            if method == "bayesian":
-                for starts, calls in [
-                    (10, 20),
-                    (20, 30),
-                    (20, 40),
-                    (20, 45),
-                    (20, 50),
-                ]:
-                    method_params = {
-                        "n_random_starts": starts,
-                        "n_calls": calls,
-                    }
+            for starts, calls in [
+                (10, 20),
+                (20, 30),
+                (20, 40),
+                (20, 45),
+                (20, 50),
+            ]:
+                method_params = {
+                    "n_random_starts": starts,
+                    "n_calls": calls,
+                }
 
-                    # match
-                    dfs.append(
-                        write_results(
-                            index=i,
-                            method=method,
-                            list_opponents=main_op,
-                            params=params,
-                            turns=num_turns,
-                            repetitions=num_repetitions,
-                            method_params=method_params,
-                        )
+                # match
+                dfs.append(
+                    write_results(
+                        index=i,
+                        list_opponents=main_op,
+                        params=params,
+                        turns=num_turns,
+                        repetitions=num_repetitions,
+                        method_params=method_params,
                     )
+                )
 
-                    # tournament
-                    axl.seed(i + 10000)
-                    other = [np.random.random(4)]
+                # tournament
+                axl.seed(i + 10000)
+                other = [np.random.random(4)]
 
-                    opponents = main_op + other
-                    dfs.append(
-                        write_results(
-                            index=i,
-                            method=method,
-                            list_opponents=opponents,
-                            params=params,
-                            turns=num_turns,
-                            repetitions=num_repetitions,
-                            method_params=method_params,
-                        )
+                opponents = main_op + other
+                dfs.append(
+                    write_results(
+                        index=i,
+                        list_opponents=opponents,
+                        params=params,
+                        turns=num_turns,
+                        repetitions=num_repetitions,
+                        method_params=method_params,
                     )
+                )
 
-            if method == "differential":
-                for popsize, mutation_rate in [
-                    (5, 0.1),
-                    (10, .2),
-                    (15, .2),
-                    (20, .3),
-                    (25, 0.4),
-                ]:
-                    method_params = {
-                        "popsize": popsize,
-                        "mutation": mutation_rate,
-                    }
+                # tournament
+                axl.seed(i + 10000)
+                other = [np.random.random(4)]
 
-                    # match
-                    dfs.append(
-                        write_results(
-                            index=i,
-                            method=method,
-                            list_opponents=main_op,
-                            params=params,
-                            turns=num_turns,
-                            repetitions=num_repetitions,
-                            method_params=method_params,
-                        )
+                opponents = main_op + other
+                dfs.append(
+                    write_results(
+                        index=i,
+                        list_opponents=opponents,
+                        params=params,
+                        turns=num_turns,
+                        repetitions=num_repetitions,
+                        method_params=method_params,
                     )
-
-                    # tournament
-                    axl.seed(i + 10000)
-                    other = [np.random.random(4)]
-
-                    opponents = main_op + other
-                    dfs.append(
-                        write_results(
-                            index=i,
-                            method=method,
-                            list_opponents=opponents,
-                            params=params,
-                            turns=num_turns,
-                            repetitions=num_repetitions,
-                            method_params=method_params,
-                        )
-                    )
+                )
 
         df = pd.concat(dfs, ignore_index=True)
         df.to_csv(filename)

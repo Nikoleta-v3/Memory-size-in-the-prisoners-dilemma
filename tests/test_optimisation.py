@@ -92,7 +92,6 @@ def test_bayesian_gambler():
     turns, repetitions = 10, 2
     axl.seed(0)
     x, fun = opt_mo.train_gambler(
-        method="bayesian",
         opponents=opponents,
         turns=turns,
         repetitions=repetitions,
@@ -104,46 +103,11 @@ def test_bayesian_gambler():
     assert np.isclose(fun, 2.9, atol=10 ** -1)
 
 
-def test_differential_gambler():
-    opponents = [[0, 0, 0, 0], [1, 1, 1, 1]]
-    turns, repetitions = 10, 2
-    axl.seed(0)
-    x, fun = opt_mo.train_gambler(
-        method="differential",
-        opponents=opponents,
-        turns=turns,
-        repetitions=repetitions,
-        params=[0, 0, 1],
-        method_params={"popsize": 5},
-    )
-
-    assert len(x) == opt_mo.pattern_size([0, 0, 1]) + 1
-    assert np.isclose(fun, 3.2, atol=10 ** -1)
-
-
 def test_bayesian_mem_one():
     opponents = [[0, 0, 0, 0], [1, 1, 1, 1]]
     turns, repetitions = 200, 5
     axl.seed(0)
     x, theor, simul = opt_mo.optimal_memory_one(
-        method="differential",
-        opponents=opponents,
-        turns=turns,
-        repetitions=repetitions,
-        method_params={"popsize": 100},
-    )
-
-    assert len(x) == 4
-    assert np.isclose(theor, 3.0, atol=10 ** -2)
-    assert np.isclose(simul, theor, atol=10 ** -2)
-
-
-def test_differential_mem_one():
-    opponents = [[0, 0, 0, 0], [1, 1, 1, 1]]
-    turns, repetitions = 200, 5
-    axl.seed(0)
-    x, theor, simul = opt_mo.optimal_memory_one(
-        method="bayesian",
         opponents=opponents,
         turns=turns,
         repetitions=repetitions,

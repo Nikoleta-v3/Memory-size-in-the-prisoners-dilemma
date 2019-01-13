@@ -71,7 +71,7 @@ def objective_score(pattern, turns, repetitions, opponents, params):
     return -np.mean(results.normalised_scores[-1])
 
 
-def optimal_memory_one(method, opponents, turns, repetitions, method_params):
+def optimal_memory_one(opponents, turns, repetitions, method_params):
     """
     Approximates the best memory one strategy for the given environment.
     Returns the strategy, the utility u and U.
@@ -79,23 +79,13 @@ def optimal_memory_one(method, opponents, turns, repetitions, method_params):
     bounds = [(0, 0.9999) for _ in range(4)]
     objective = prepare_objective_optimisation(opponents=opponents)
 
-    if method == "bayesian":
-        result = skopt.gp_minimize(
-            func=objective,
-            dimensions=bounds,
-            acq_func="EI",
-            random_state=0,
-            **method_params
-        )
-    if method == "differential":
-        print("start")
-        result = scipy.optimize.differential_evolution(
-            func=objective,
-            bounds=bounds,
-            strategy="best1bin",
-            seed=0,
-            **method_params
-        )
+    result = skopt.gp_minimize(
+        func=objective,
+        dimensions=bounds,
+        acq_func="EI",
+        random_state=0,
+        **method_params
+    )
 
     best_response = list(result.x)
 
@@ -114,7 +104,7 @@ def optimal_memory_one(method, opponents, turns, repetitions, method_params):
     return best_response, -result.fun, score
 
 
-def train_gambler(method, opponents, turns, repetitions, params, method_params):
+def train_gambler(opponents, turns, repetitions, params, method_params):
     """
     Approximates the best gambler for the given environment.
     Returns the strategy and it's utility.
@@ -125,21 +115,12 @@ def train_gambler(method, opponents, turns, repetitions, params, method_params):
         turns=turns, repetitions=repetitions, opponents=opponents, params=params
     )
 
-    if method == "bayesian":
-        result = skopt.gp_minimize(
-            func=objective,
-            dimensions=bounds,
-            acq_func="EI",
-            random_state=0,
-            **method_params
-        )
-    if method == "differential":
-        print("start")
-        result = scipy.optimize.differential_evolution(
-            func=objective,
-            bounds=bounds,
-            strategy="best1bin",
-            seed=0,
-            **method_params
-        )
+    result = skopt.gp_minimize(
+        func=objective,
+        dimensions=bounds,
+        acq_func="EI",
+        random_state=0,
+        **method_params
+    )
+
     return result.x, -result.fun
