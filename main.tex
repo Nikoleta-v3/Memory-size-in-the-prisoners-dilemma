@@ -53,9 +53,10 @@
 \section{Introduction}\label{section:introduction}
 
 The Prisoner's Dilemma (PD) is a two player game used in understanding the
-evolution of co-operative behaviour. Each player has two options, to cooperate
-(C) or to defect (D). The decisions are made simultaneously and independently.
-The normal form representation of the game is given by:
+evolution of co-operative behaviour, formally introduced in~\cite{Flood1958}.
+Each player has two options, to cooperate (C) or to defect (D). The decisions
+are made simultaneously and independently. The normal form representation of the
+game is given by:
 
 \begin{equation}\label{equ:pd_definition}
     S_p =
@@ -93,21 +94,15 @@ most common values used in the literature are
 The PD is a one shot game, however it is commonly studied in a manner where the
 history of the interactions matter. The repeated form of the game is called the
 Iterated Prisoner's Dilemma (IPD) and in the 1980s, % TODO Add RAND reference
-following the work of
-
-\cite{Axelrod1980a, Axelrod1980b} it attracted the attention of the scientific
-community.
-
-In~\cite{Axelrod1980a} and~\cite{Axelrod1980b}, the first well known computer
-
-tournaments of the IPD were performed. A total of 13 and 63 strategies were
-submitted in computer code and competed against each other in a round robin
-tournament. All contestants competed against each other, a copy of themselves
-and a random strategy. The winner was decided on the average score a strategy
-achieved and not the total number of wins. How many turns of history that a
-strategy would use, the memory size, was a result of the particular strategic
-decisions made by the author.
-
+following the work of\cite{Axelrod1980a, Axelrod1980b} it attracted the
+attention of the scientific community. In~\cite{Axelrod1980a}
+and~\cite{Axelrod1980b}, the first well known computer tournaments of the IPD
+were performed. A total of 13 and 63 strategies were submitted in computer code
+and competed against each other in a round robin tournament. All contestants
+competed against each other, a copy of themselves and a random strategy. The
+winner was decided on the average score a strategy achieved and not the total
+number of wins. How many turns of history that a strategy would use, the memory
+size, was a result of the particular strategic decisions made by the author.
 The winning strategy of both tournaments was a strategy called Tit for Tat. Tit
 for Tat is a strategy which starts by cooperating and then mimics the last move
 of it's opponent. This is a strategy which makes use of the previous move of the
@@ -160,16 +155,14 @@ One particular benefit of this analysis is the identification of conditions for
 which defection is a best response. Thus, identifying environments for which
 cooperation can not occur.
 
-\section{The utility against memory one players}\label{section:utility_against_mem_one}
+\section{The utility}\label{section:utility_against_mem_one}
 
-In~\cite{Press2012} it
-is stated that if a strategy is concerned with only the outcome of a single turn
-then there are four possible `states' the strategy could be in. These are
-\(CC, CD, DC,CC\). A memory one strategy is denoted by the probabilities of
-cooperating after each of these states,
-\(p=(p_1, p_2, p_3, p_4) \in \R_{[0,1]} ^ 4\).
-A diagrammatic representation of such a strategy is given in
-Figure~\ref{fig:diagram_mem_one}.
+In~\cite{Press2012} it is stated that if a strategy is concerned with only the
+outcome of a single turn then there are four possible `states' the strategy
+could be in. These are \(CC, CD, DC,CC\). A memory one strategy is denoted by
+the probabilities of cooperating after each of these states, \(p=(p_1, p_2, p_3,
+p_4) \in \R_{[0,1]} ^ 4\). A diagrammatic representation of such a strategy is
+given in Figure~\ref{fig:diagram_mem_one}.
 
 \begin{figure}
     \centering
@@ -593,258 +586,6 @@ Lemma~\ref{lemma:memone_group_best_response} and
 Theorem~\ref{theorem:tournament_utility}
 will now be used to give a list of particular best response results.
 
-\subsection{Reactive Strategies}\label{section:reactive_analytical}
-% TODO Reword all results using the same approach as above.
-
-The first constrained case considered here is that of the reactive strategies.
-Reactive strategies are a set of memory one strategies where they only take into
-account the opponent's previous moves. As described in Section~\ref{section:introduction}
-Tit for Tat is a reactive strategy. The optimisation problem of (\ref{eq:mo_tournament_optimisation})
-now has an extra constraint and is re written as,
-
-\begin{equation}\label{eq:reactive_tournament_optimisation}
-\begin{aligned}
-\max_p: & \ \sum_{i=1} ^ N u_q(p)
-\\
-\text{such that}: & \ p_1 = p_3 \text{ and } p_2 = p_4\\
-    & \ p_1, p_2 \in \R_{[0, 1]}.
-\end{aligned}
-\end{equation}
-
-Reactive strategies allow us to study \(u_p\) as a function of two variables
-\(p_1, p_2\) and the best reactive response against a group of opponents is captured by Lemma
-\ref{lemma:reactive_group_best_response}.
-
-\begin{lemma}\label{lemma:reactive_group_best_response}
-    The optimal behaviour of a reactive player \(p^* \in \R_{[0, 1]} ^ 2\) against a set
-    of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\) for \(q^{(i)} \in
-    \R_{[0, 1]} ^ 4\) is given by:
-
-    \[p^* = \textnormal{argmax}(\sum\limits_{i=1} ^ N  u_q(p)), \ p \in S_q,\]
-
-    where the set \(S_q\) is defined as
-
-    \[S_q = \{0, \bar{p_i}, 1 \} ^ 2 \text{ for } i \in \R,\]
-
-    where \(\bar{p_i}\) satisfies one of the following cases:
-
-    \begin{equation}\label{eq:cases_reactive}
-        \left\{\begin{array}{lr}
-        \frac{\sum u}{dp_{|p=p^*}} = 0, & \text{for } p^* \in \{\bar{p}_i\} ^ 4, \\
-        \frac{\sum u}{dp_{1_{|p_1=p_1^*}}} = 0, & \text{for } p_1^* \in \{\bar{p}_i\}
-        \text{ while } p_2 ^ * \in \{0, 1\},\\
-        \frac{\sum u}{dp_{2_{|p_2=p_2^*}}} = 0, & \text{for } p_2^* \in \{\bar{p}_i\}
-        \text{ while } p_1 ^ * \in \{0, 1\}.
-        \end{array}\right.
-    \end{equation}
-
-    For cases (\ref{eq:cases_reactive}) to be true the numerator of the partial
-    derivatives, given by (\ref{eq:group_derivative_numerator_condition}), must equal
-    to zero and condition (\ref{eq:group_derivative_denominator_condition}) must hold.
-\end{lemma}
-
-Similarly to the memory one approach a special case for \(N=1\), against a single
-memory one strategy, is applied to
-Lemma~\ref{lemma:reactive_group_best_response}. The best response against a single
-opponent is captured by Lemma~\ref{lemma:reactive_best_response}.
-
-\begin{lemma}\label{lemma:reactive_best_response}
-    The optimal behaviour of a reactive player \(p^* \in \R_{[0, 1]} ^ 2\) against a given
-    opponent \(q \in \R_{[0, 1]} ^ 4\) is given by:
-
-    \[p^* = \textnormal{argmax}(u_q(p)), \ p \in S_q,\]
-
-    where the set \(S_q\) is defined as
-
-    \[S_q = \{0, \bar{p_i}, 1 \} ^ 2 \text{ for } i \in \R,\]
-
-    where \(\bar{p}_i\) satisfies any of (\ref{eq:cases_reactive}). Partial derivatives
-    are now given by (\ref{eq:derivative_numerator_condition}) and
-    (\ref{eq:derivative_denominator_condition}) must be true.
-\end{lemma}
-
-Note that now equation (\ref{eq:group_derivative_numerator_condition}) and (\ref{eq:derivative_numerator_condition})
-correspond to systems of maximum 2 polynomials over 2 variables. Each polynomial is equivalent
-to a partial derivative over \(p_1\) and \(p_2\). Several methods exist that allow
-for the \(2\) polynomial systems to be solved analytically. In this work the results theory
-is used to extract the roots from the partial derivatives.
-
-Note that for pairwise interactions the maximum degree
-of the polynomials is equal to \(2N\), however the degree increases as opponents
-are introduced.
-
-The resultant is a symmetric function of the roots of the polynomials of a system
-and it can be expressed as a polynomial in the coefficients of the polynomials.
-The resultant will equal zero if and only if the system has at least one common
-root. Thus, the resultant becomes very useful in identifying whether common roots exist.
-
-In this work the Sylvester's resultant~\cite{Akritas1991} denoted as (\(R_S\))
-is considered. The Sylvester's resultant is used to solve system of a single
-variable. However, for a system of two variables we solve over one variable and
-the second is kept as a coefficient. Thus we can find the roots of the equations
-and that is why the resultant is often refereed to as the eliminator.
-
-In Appendix Algorithm~\ref{algo:reactive} describes the process and based on the
-Algorithm several examples are performed. Illustrated by Figure~\ref{fig:reactive_pairwise_results}
-are the results of these examples. The results suggest that the best response behaviour
-is captured by our algorithm.
-
-\begin{figure}
-    \centering
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=.95\textwidth]{img/reactive_pairwise_one.pdf}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=.95\textwidth]{img/reactive_pairwise_two.pdf}
-    \end{subfigure}
-    \caption{Numerical experiments for Algorithm~\ref{algo:reactive} for \(N=1\).}
-    \label{fig:reactive_pairwise_results}
-\end{figure}
-
-\subsection{Purely random}\label{section:purely_analytical}
-
-The next constrained problem to be explored is that of the purely random strategies.
-Purely random strategies are a set of memory one strategies where the transition
-probabilities of each state are the same. The optimisation problem of (\ref{eq:mo_tournament_optimisation})
-now has an extra constraint and is re written as,
-
-\begin{equation}\label{eq:random_optimisation}
-\begin{aligned}
-\max_p: & \ \frac{1}{N} \sum_{i=1} ^ {N} {u_q}^{(i)} (p)
-\\
-\text{such that}: & p_1 = p_2 = p_3 = p_4 = p \\
-                  & p \in \R_{[0, 1]} \\
-\end{aligned}
-\end{equation}
-
-and the exact optimal behaviour of purely random strategies is described in
-Lemma~\ref{lemma:purely_optimisation}.
-
-\begin{lemma}
-    \label{lemma:purely_optimisation}
-    The optimal behaviour of a \textbf{purely random} player \(p ^ * \in \R_{[0, 1]}\)
-    in an \(N-\)memory one player tournament, \(\{q_{(1)}, q_{(2)} \dots,q_{(N)} \}
-    \) for \(q_{(i)} \in \R_{[0, 1]} ^ 4\) is given by:
-
-    \[p^* = \textnormal{argmax}(\sum_{i=1} ^ {N} {u_q}^{(i)} (p) ), \ p \in S_{q(i)},\]
-
-    where the set \(S_{q}\) is defined as:
-    \[S_{q} = \{0, \lambda_i, 1\},\text{ for } i \in [1, 2N]\]
-
-    where \(\lambda_i\) are the eigenvalues of the companion matrix corresponding
-    to the numerator of \[\frac{d}{dp} \sum_{i=1} ^ {N} {u_q}^{(i)} (p)\]
-
-    for which
-    \[\frac{d}{dp} \sum_{i=1} ^ {N} {u_q}^{(i)} (\lambda_j) = 0,\text{ for } j \in [1, 2N].\]
-\end{lemma}
-
-\begin{proof}
-    The best behaviour of a purely random strategy against a set of opponents is
-    captured by a set of potential best behaviours. For constructing this a set
-    a similar as the ones described in previous sections is used.
-
-    It is know that \(p ^ *\) will either be \(\in \{0, 1\}\) or \(p ^ *\) will because
-    given by the roots of \(\frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)}(p)\).
-    The roots of  \(\frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)\) are the roots
-    only of the numerator, as the denominator can not be nullified.
-
-    Studying equation (\ref{eq:optimisation_quadratic}) as a function of a single variable
-    \(p\) it can be verified that the degree of the numerator is equal to\(2N\).
-    Thus, the size of roots of the numerator is equal to \(2N\).
-
-    The roots on the polynomial in this work will be calculated using a companion
-    matrix method~\cite{Edelman1995}. This method allows the roots of the polynomial to
-    be computed by calculating the eigenvalues of the corresponding companion
-    matrix.
-
-    The eigenvalues and the bounds compose the candidate set of solutions. The
-    best response of a purely random player corresponds to the point that maximises
-    (\ref{eq:optimisation_quadratic}).
-\end{proof}
-
-Lemma~\ref{lemma:purely_optimisation} can be further expanded to the case where \(N=1\).
-Algorithm~\ref{algo:purely} describes the process of best purely random responses and it is
-used for a number of empirical trials.
-The results of these trials are illustrated in Figures~\ref{fig:purely_random_pairwise_results}
-and \ref{fig:purely_random_tournament_results}. Figure~\ref{fig:purely_random_pairwise_results}
-demonstrates Lemma~\ref{lemma:purely_optimisation} for \(N=1\) and
-Figure~\ref{fig:purely_random_tournament_results} cases were \(N>1\).
-It is evident that the optimal behaviour has been captured by our search algorithm.
-
-\begin{figure}
-    \centering
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=.95\textwidth]{img/purely_random_match_one.pdf}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=.95\textwidth]{img/purely_random_match_two.pdf}
-    \end{subfigure}
-    \caption{Numerical experiments for Algorithm~\ref{algo:purely} for \(N=1\).}
-    \label{fig:purely_random_pairwise_results}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=.95\textwidth]{img/purely_random_tournament_one.pdf}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=.95\textwidth]{img/purely_random_tournament_two.pdf}
-    \end{subfigure}
-    \caption{Numerical experiments for Algorithm~\ref{algo:purely} for \(N>1\).}
-    \label{fig:purely_random_tournament_results}
-\end{figure}
-
-Furthermore, for the case of the purely random players two more theoretical results
-are discussed. These are the cases where the opponent has managed to make a random
-player indifferent and the case where a purely random player is better than playing
-a pure strategy.
-
-There is importance in both results. Initially, being indifferent refers to our
-actions no having any effects on the match. Thus there is not optimal behaviour
-for player \(p\). % TODO I am not sure what this is trying to say.
-
-Secondly, by a pure strategy we are referring to the \(p=0\) and \(p=1\).
-In this case it is known that \(p^*\) is \(\in {0, 1}\) without testing the roots
-of the derivative. The optimisation problem crumbles to a binary problem.
-
-The results are given equivalently by Lemmas~\ref{lemma:constant} and~\ref{lemma:linear}
-and they are respective to the actions of the opponent. Figure~\ref{fig:purely_lemmas}
-illustrates examples for both lemmas.
-
-\begin{lemma}\label{lemma:constant}
-    A given memory one player, \((q_1, q_2, q_3, q_4)\), makes a \textbf{purely
-    random} player, \((p, p, p, p)\), indifferent if and only if,
-    \(-q_1 + q_2 + 2q_3 - 2q_4 = 0 \) and
-    \((q_2 - q_4 - 1)(q_1 - 2q_2 - 5q_3 + 7q_4 + 1) -(q_2 - 5q_4 - 1)(q_1 - q_2 - q_3 + q_4) = 0 \).
-\end{lemma}
-
-\begin{lemma}\label{lemma:linear}
-    Against a memory one player, \((q_1, q_2, q_3, q_4)\), a \textbf{purely random}
-    player would always play a pure strategy if and only if
-    \((q_{1}q_{4} - q_{2} q_{3} + q_{3} - q_{4}) (4 q_{1} - 3 q_{2} - 4 q_{3} + 3
-    q_{4} - 1) = 0\).
-\end{lemma}
-
-\begin{figure}[!htbp]
-    \begin{center}
-        \begin{subfigure}{0.45\textwidth}
-            \includegraphics[width=\linewidth]{img/constant}
-        \end{subfigure}
-        \begin{subfigure}{0.45\textwidth}
-            \includegraphics[width=\linewidth]{img/linear}
-        \end{subfigure}
-    \end{center}
-    \caption{Proof of concept for Lemmas~\ref{lemma:constant},~\ref{lemma:linear}.}
-    \label{fig:purely_lemmas}
-\end{figure}
-
 \section{Stability of defection}
 
 In this section the stability of defection is explored. Defection is
@@ -1192,7 +933,6 @@ carried out.
 
 \appendix
 \input{tex/appendix_tables}
-\input{tex/appendix_algorithms}
 
 % Bibliography
 \bibliographystyle{plain}
