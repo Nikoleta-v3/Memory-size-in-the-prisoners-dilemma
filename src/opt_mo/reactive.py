@@ -6,6 +6,7 @@ import itertools
 from functools import partial
 
 import axelrod as axl
+import matplotlib.pyplot as plt
 import numpy as np
 import sympy as sym
 from sympy.polys import subresultants_qq_zz
@@ -134,11 +135,9 @@ def reactive_set(opponents):
     p_1, p_2 = sym.symbols("p_1, p_2")
     utility = -opt_mo.tournament_utility((p_1, p_2, p_1, p_2), opponents)
 
-    # derivatives
     derivatives = [sym.diff(utility, i) for i in [p_1, p_2]]
-    derivatives = [expr.simplify() for expr in derivatives]
+    derivatives = [expr.factor() for expr in derivatives]
 
-    # numerator
     fractions = [sym.fraction(expr) for expr in derivatives]
     num = [expr[0] for expr in fractions]
     den = [expr[1] for expr in fractions]
@@ -193,3 +192,26 @@ def get_columns(method_params):
     method_cols = ["{}".format(key) for key in method_params.keys()]
 
     return cols + method_cols
+
+
+def plot_argmax(opponents, solution, filename=False):
+    p_1, p_2 = sym.symbols('p_1, p_2')
+    p = (p_1, p_2, p_1, p_2)
+    
+    p_one, p_two = np.linspace(0, 1, 50), np.linspace(0, 1, 50)
+    utility = -opt_mo.tournament_utility(p, opponents)
+    
+    expr = sym.lambdify((p_1, p_2), utility.simplify())
+    
+    plt.figure()
+    X, Y = np.meshgrid(p_one, p_two)
+    Z = expr(X, Y)
+    
+    plot = plt.contourf(X, Y, Z), plt.colorbar();
+    plt.plot(solution[0], solution[1], marker='x', color='r', markersize=20, markeredgewidth=5)
+    plt.ylabel(r'$p_2$'), plt.xlabel(r'$p_1$')
+
+    if filename:
+        plt.savefig(filename, bbox_inches='tight');
+
+    return plot

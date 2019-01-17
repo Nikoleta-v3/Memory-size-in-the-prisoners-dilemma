@@ -53,9 +53,7 @@ def get_columns(params, method_params):
     ]
     size = opt_mo.pattern_size(params)
     gambler_cols = ["Gambler {} key".format(i) for i in range(size)]
-    method_cols = [
-        "{}".format(key) for key in method_params.keys()
-    ]
+    method_cols = ["{}".format(key) for key in method_params.keys()]
 
     return cols + gambler_cols + method_cols
 
@@ -124,9 +122,7 @@ if __name__ == "__main__":
         dfs = []
         for num_repetitions in [5, 20, 50]:
 
-            filename = get_filename(
-                location=location, params=params, index=i,
-            )
+            filename = get_filename(location=location, params=params, index=i)
 
             for starts, calls in [
                 (10, 20),
@@ -135,10 +131,7 @@ if __name__ == "__main__":
                 (20, 45),
                 (20, 50),
             ]:
-                method_params = {
-                    "n_random_starts": starts,
-                    "n_calls": calls,
-                }
+                method_params = {"n_random_starts": starts, "n_calls": calls}
 
                 # match
                 dfs.append(

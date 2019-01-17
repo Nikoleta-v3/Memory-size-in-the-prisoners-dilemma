@@ -29,3 +29,14 @@ def test_simulate_match_with_cooperator():
         1.5,
         atol=10 ** -2,
     )
+
+
+def test_simulate_spatial_tournament():
+    opponents = [(1, 1, 1, 1), (0, 0, 0, 0), (1, 0, 1, 0), (1, 0, 0, 0)]
+    player = (1, 0, 1, 0)
+
+    score = opt_mo.simulate_spatial_tournament(
+        player, opponents, turns=200, repetitions=5
+    )
+
+    assert np.isclose(score, 2.5, atol=10 ** -2)

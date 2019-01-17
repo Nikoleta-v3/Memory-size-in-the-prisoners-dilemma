@@ -257,7 +257,7 @@ def tournament_utility(player, opponents):
     The tournament utility of a player is the sum of utilities against each
     opponent and against itself.
     """
-    obj = 0  # utility(player, player)
+    obj = 0
     for opponent in opponents:
         obj += utility(player, opponent)
     return -obj / (len(opponents))
