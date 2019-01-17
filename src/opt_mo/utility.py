@@ -1,3 +1,4 @@
+import axelrod as axl
 import numpy as np
 
 
@@ -230,7 +231,7 @@ def mem_constant_denominator(opponent):
     return constant
 
 
-def utility(player, opponent):
+def match_utility(player, opponent):
     """
     Returns the utility of a player for a given opponent.
     """
@@ -259,5 +260,38 @@ def tournament_utility(player, opponents):
     """
     obj = 0
     for opponent in opponents:
-        obj += utility(player, opponent)
+        obj += match_utility(player, opponent)
     return -obj / (len(opponents))
+
+
+def simulate_match_utility(player, opponent, turns=500, repetitions=200):
+    """
+    Returns the simulated utility of a memory one player against a single opponent.
+    """
+    total = 0
+    players = [axl.MemoryOnePlayer(i) for i in [player, opponent]]
+    for rep in range(repetitions):
+        match = axl.Match(players=players, turns=turns)
+        _ = match.play()
+
+        total += match.final_score_per_turn()[0]
+
+    return total / repetitions
+
+
+def simulate_tournament_utility(player, opponents, turns=500, repetitions=200):
+    """
+    Returns the simulated utility of a memory one strategy in a tournament.
+    """
+
+    strategies = [axl.MemoryOnePlayer(p) for p in opponents] + [
+        axl.MemoryOnePlayer(player)
+    ]
+    number_of_players = len(strategies)
+    edges = [(i, number_of_players - 1) for i in range(number_of_players - 1)]
+    tournament = axl.Tournament(
+        players=strategies, turns=turns, repetitions=repetitions, edges=edges
+    )
+    results = tournament.play(progress_bar=False)
+
+    return np.mean(results.normalised_scores[-1])
