@@ -4,6 +4,7 @@ retrieving the best responses.
 """
 from functools import partial
 
+import numpy as np
 import skopt
 
 import opt_mo
@@ -14,7 +15,9 @@ def prepare_objective_optimisation(opponents):
     return objective
 
 
-def memory_one_best_response(opponents, turns, repetitions, method_params):
+def memory_one_best_response(
+    opponents, method_params={"n_random_starts": 20, "n_calls": 40}
+):
     """
     Approximates the best response memory one strategy using bayesian optimisation.
     """
@@ -29,4 +32,4 @@ def memory_one_best_response(opponents, turns, repetitions, method_params):
         **method_params
     )
 
-    return list(result.x)
+    return list(result.x), -result.fun

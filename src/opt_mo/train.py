@@ -62,7 +62,13 @@ def tournament_score_gambler(pattern, turns, repetitions, opponents, params):
     return -np.mean(results.normalised_scores[-1])
 
 
-def train_gambler(opponents, turns, repetitions, params, method_params):
+def train_gambler(
+    opponents,
+    turns,
+    repetitions,
+    params,
+    method_params={"n_random_starts": 20, "n_calls": 40},
+):
     """
     Approximates the best gambler for the given environment.
     Returns the strategy and it's utility.

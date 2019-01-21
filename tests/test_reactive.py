@@ -65,6 +65,7 @@ def test_reactive_best_response_against_cooperator():
 
     assert np.array_equal(best_response, [0, 0, 0, 0])
 
+
 def test_reactive_best_response_against_defector():
     opponent = [(0, 0, 0, 0)]
     best_response = opt_mo.reactive_best_response(opponent)
