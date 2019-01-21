@@ -7,4 +7,5 @@ from .utility import (
     simulate_match_utility,
     simulate_tournament_utility,
 )
+from .train import tournament_score_gambler, train_gambler
 from .version import __version__
