@@ -14,18 +14,6 @@ from sympy.polys import subresultants_qq_zz
 import opt_mo
 
 
-def prepare_objective_optimisation(opponents):
-    objective = partial(reactive_utility, opponents=opponents)
-    return objective
-
-
-def reactive_utility(player, opponents):
-    p_1, p_2 = player
-    utility = opt_mo.tournament_utility((p_1, p_2, p_1, p_2), opponents)
-
-    return utility
-
-
 def round_matrix_expressions(matrix, num_digits, variable):
     """
     Rounds matrix elements. The elements are polynomials of a given variable.
@@ -121,6 +109,10 @@ def solve_system(system, variable, other_roots, other_variable):
 
 
 def feasible_roots(coeffs):
+    """
+    Checks if the roots are feasible. In this work only solutions in [0, 1] are
+    feasible.
+    """
     roots = set(np.roots(coeffs))
 
     feasible_roots = set()
@@ -132,6 +124,9 @@ def feasible_roots(coeffs):
 
 
 def reactive_set(opponents):
+    """
+    Creates a set of possible optimal solutions.
+    """
     p_1, p_2 = sym.symbols("p_1, p_2")
     utility = -opt_mo.tournament_utility((p_1, p_2, p_1, p_2), opponents)
 
@@ -160,7 +155,6 @@ def reactive_set(opponents):
 
 
 def argmax(opponents, solution_set):
-
     solutions = [
         (p_1, p_2, -opt_mo.tournament_utility((p_1, p_2, p_1, p_2), opponents))
         for p_1, p_2 in itertools.product(solution_set, repeat=2)
@@ -168,50 +162,44 @@ def argmax(opponents, solution_set):
     return max(solutions, key=lambda item: item[-1])
 
 
-def get_columns(method_params):
-    cols = [
-        "index",
-        "$q_1$",
-        "$q_2$",
-        "$q_3$",
-        "$q_4$",
-        r"$\bar{q}_1$",
-        r"$\bar{q}_2$",
-        r"$\bar{q}_3$",
-        r"$\bar{q}_4$",
-        "$p_1 ^ *$",
-        "$p_2 ^ *$",
-        "$u_q$",
-        "Optimisation time",
-        "$U_G$",
-        "Training time",
-        r"$\bar{p}_1 ^ *$",
-        r"$\bar{p}_2 ^ *$",
-    ]
+def reactive_best_response(opponents):
+    """
+    Calculates the best response reactive strategy using resultant theory.
+    """
+    solution_set = reactive_set(opponents)
+    solution = argmax(opponents=opponents, solution_set=solution_set)
 
-    method_cols = ["{}".format(key) for key in method_params.keys()]
-
-    return cols + method_cols
+    return (solution[0], solution[1], solution[0], solution[1])
 
 
-def plot_argmax(opponents, solution, filename=False):
-    p_1, p_2 = sym.symbols('p_1, p_2')
+def plot_reactive_utility(
+    opponents, best_response_player=False, filename=False
+):
+    p_1, p_2 = sym.symbols("p_1, p_2")
     p = (p_1, p_2, p_1, p_2)
-    
+
     p_one, p_two = np.linspace(0, 1, 50), np.linspace(0, 1, 50)
     utility = -opt_mo.tournament_utility(p, opponents)
-    
+
     expr = sym.lambdify((p_1, p_2), utility.simplify())
-    
+
     plt.figure()
     X, Y = np.meshgrid(p_one, p_two)
     Z = expr(X, Y)
-    
-    plot = plt.contourf(X, Y, Z), plt.colorbar();
-    plt.plot(solution[0], solution[1], marker='x', color='r', markersize=20, markeredgewidth=5)
-    plt.ylabel(r'$p_2$'), plt.xlabel(r'$p_1$')
+
+    plot = plt.contourf(X, Y, Z), plt.colorbar()
+    if best_response_player:
+        plt.plot(
+            best_response_player[0],
+            best_response_player[1],
+            marker="x",
+            color="r",
+            markersize=20,
+            markeredgewidth=5,
+        )
+    plt.ylabel(r"$p_2$"), plt.xlabel(r"$p_1$")
 
     if filename:
-        plt.savefig(filename, bbox_inches='tight');
+        plt.savefig(filename, bbox_inches="tight")
 
     return plot
