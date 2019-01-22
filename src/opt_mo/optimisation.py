@@ -33,3 +33,16 @@ def memory_one_best_response(
     )
 
     return list(result.x), -result.fun
+
+
+def find_evolutionary_best_response(opponents, best_response_function):
+    history = []
+    current = np.array([1, 1, 1, 1])
+
+    best_response, _ = best_response_function(opponents + [current])
+
+    while np.allclose(current, best_response) is False:
+        current = best_response
+        history.append(current)
+        best_response, _ = best_response_function(opponents + [current])
+    return best_response, history

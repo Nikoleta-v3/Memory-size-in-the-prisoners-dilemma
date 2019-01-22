@@ -1,4 +1,7 @@
-from .optimisation import memory_one_best_response
+from .optimisation import (
+    memory_one_best_response,
+    find_evolutionary_best_response,
+)
 from .reactive import reactive_best_response, plot_reactive_utility
 from .tools import make_B, mem_one_match_markov_chain, steady_states
 from .utility import (
