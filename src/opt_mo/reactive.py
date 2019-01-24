@@ -45,15 +45,14 @@ def eliminator_method(system, variable, other_variable):
         The second variable of the system
     """
     matrix = subresultants_qq_zz.sylvester(system[0], system[1], other_variable)
-    matrix = round_matrix_expressions(matrix, 8, variable)
+    matrix = round_matrix_expressions(matrix, 5, variable)
 
-    resultant = matrix.det()
+    resultant = matrix.det(method="berkowitz")
     num, den = sym.fraction(resultant.factor())
 
     # candidate roots
     coeffs = sym.Poly(num, variable).all_coeffs()
     roots = np.roots(coeffs)
-
     feasible_roots = set()
     for root in roots:
         if not np.iscomplex(root):
