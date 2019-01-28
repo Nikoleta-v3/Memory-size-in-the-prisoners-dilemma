@@ -14,21 +14,7 @@ from sympy.polys import subresultants_qq_zz
 import opt_mo
 
 
-def round_matrix_expressions(matrix, num_digits, variable):
-    """
-    Rounds matrix elements. The elements are polynomials of a given variable.
-    """
-    for i, element in enumerate(matrix):
-        matrix[i] = element.subs(
-            {
-                n: round(n, num_digits)
-                for n in sym.Poly(element, variable).all_coeffs()
-            }
-        )
-    return matrix
-
-
-def eliminator_method(system, variable, other_variable):
+def _roots_using_eliminator_method(system, variable, other_variable):
     """
     For solving a 2 polynomial system of 2 unknowns. Calculates the real roots
     of the first unknown using Sylvester's resultant or the eliminator.
@@ -45,7 +31,7 @@ def eliminator_method(system, variable, other_variable):
         The second variable of the system
     """
     matrix = subresultants_qq_zz.sylvester(system[0], system[1], other_variable)
-    matrix = round_matrix_expressions(matrix, 5, variable)
+    matrix = sym.N(matrix, 9)
 
     resultant = matrix.det(method="berkowitz")
     num, den = sym.fraction(resultant.factor())
@@ -67,7 +53,9 @@ def eliminator_method(system, variable, other_variable):
     return feasible_roots
 
 
-def solve_system(system, variable, other_roots, other_variable):
+def _roots_solving_system_of_singel_unknown(
+    system, variable, other_roots, other_variable
+):
     """
     Solving the system for the second unknown once the roots of the first one
     have been calculated.
@@ -107,7 +95,7 @@ def solve_system(system, variable, other_roots, other_variable):
     return feasible_roots
 
 
-def feasible_roots(coeffs):
+def _roots_in_bound(coeffs):
     """
     Checks if the roots are feasible. In this work only solutions in [0, 1] are
     feasible.
@@ -122,40 +110,41 @@ def feasible_roots(coeffs):
     return feasible_roots
 
 
-def reactive_set(opponents):
+def get_candinate_reactive_best_responses(opponents):
     """
     Creates a set of possible optimal solutions.
     """
     p_1, p_2 = sym.symbols("p_1, p_2")
-    utility = -opt_mo.tournament_utility((p_1, p_2, p_1, p_2), opponents)
+    utility = opt_mo.tournament_utility((p_1, p_2, p_1, p_2), opponents)
 
     derivatives = [sym.diff(utility, i) for i in [p_1, p_2]]
     derivatives = [expr.factor() for expr in derivatives]
 
     fractions = [sym.fraction(expr) for expr in derivatives]
-    num = [expr[0] for expr in fractions]
-    den = [expr[1] for expr in fractions]
+    num, den = [[expr for expr in fraction] for fraction in zip(*fractions)]
 
-    # roots p_1 for derivative
-    p_one_roots = eliminator_method(num, p_1, p_2)
+    candinate_roots_p_one = _roots_using_eliminator_method(num, p_1, p_2)
 
-    p_two_roots = set()
-    if p_one_roots:
-        p_two_roots.update(solve_system(num, p_2, p_one_roots, p_1))
+    candinate_roots_p_two = set()
+    if len(candinate_roots_p_one) > 0:
+        candinate_roots_p_two.update(
+            _roots_solving_system_of_singel_unknown(
+                num, p_2, candinate_roots_p_one, p_1
+            )
+        )
 
-    # roots of p_2 for edges
-    for p_one_edge in [0, 1]:
-        coeffs = sym.Poly(num[1].subs({p_1: p_one_edge}), p_2).all_coeffs()
-        roots = feasible_roots(coeffs)
-        p_two_roots.update(roots)
+    for p_one in [0, 1]:
+        coeffs = sym.Poly(num[1].subs({p_1: p_one}), p_2).all_coeffs()
+        roots = _roots_in_bound(coeffs)
+        candinate_roots_p_two.update(roots)
 
-    solution_set = p_one_roots | p_two_roots | set([0, 1])
-    return solution_set
+    candinate_set = candinate_roots_p_one | candinate_roots_p_two | set([0, 1])
+    return candinate_set
 
 
-def argmax(opponents, solution_set):
+def get_argmax(opponents, solution_set):
     solutions = [
-        (p_1, p_2, -opt_mo.tournament_utility((p_1, p_2, p_1, p_2), opponents))
+        (p_1, p_2, opt_mo.tournament_utility((p_1, p_2, p_1, p_2), opponents))
         for p_1, p_2 in itertools.product(solution_set, repeat=2)
     ]
     return max(solutions, key=lambda item: item[-1])
@@ -165,10 +154,10 @@ def reactive_best_response(opponents):
     """
     Calculates the best response reactive strategy using resultant theory.
     """
-    solution_set = reactive_set(opponents)
-    solution = argmax(opponents=opponents, solution_set=solution_set)
+    solution_set = get_candinate_reactive_best_responses(opponents)
+    solution = get_argmax(opponents=opponents, solution_set=solution_set)
 
-    return (solution[0], solution[1], solution[0], solution[1])
+    return np.array([solution[0], solution[1], solution[0], solution[1]])
 
 
 def plot_reactive_utility(
