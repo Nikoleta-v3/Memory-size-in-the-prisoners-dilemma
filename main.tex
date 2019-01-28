@@ -41,8 +41,7 @@
 \maketitle
 
 \begin{abstract}
-
-    In this manuscript we build upon a framework provided in 1989 to study best
+    This manuscript builds upon a framework provided in 1989 to study best
     responses in the well known memory one strategies of the Iterated Prisoner's
     Dilemma. The aim of this work is to construct a compact way of identifying
     best responses of short memory strategies and to show their limitations in
@@ -74,12 +73,11 @@ game is given by:
 
 where \(S_p\) represents the utilities of the row player and \(S_q\) the
 utilities of the column player. The payoffs, \((R, P, S, T)\), are constrained
-by equations (\ref{eq:pd_constrain_one}) and~(\ref{eq:pd_constrain_two}).
-Constraint (\ref{eq:pd_constrain_one}) ensures that
-defection dominates cooperation and constraint (\ref{eq:pd_constrain_two})
+by equations~(\ref{eq:pd_constrain_one}) and~(\ref{eq:pd_constrain_two}).
+Constraint~(\ref{eq:pd_constrain_one}) ensures that
+defection dominates cooperation and constraint~(\ref{eq:pd_constrain_two})
 ensures that there is a dilemma; the sum of the utilities for both players is
-better when both choose to cooperate. The
-most common values used in the literature are
+better when both choose to cooperate. The most common values used in the literature are
 \((3, 1, 0, 5)\)~\cite{Axelrod1981}.
 
 
@@ -93,123 +91,106 @@ most common values used in the literature are
 
 The PD is a one shot game, however it is commonly studied in a manner where the
 history of the interactions matter. The repeated form of the game is called the
-Iterated Prisoner's Dilemma (IPD) and in the 1980s, % TODO Add RAND reference
-following the work of\cite{Axelrod1980a, Axelrod1980b} it attracted the
-attention of the scientific community. In~\cite{Axelrod1980a}
-and~\cite{Axelrod1980b}, the first well known computer tournaments of the IPD
-were performed. A total of 13 and 63 strategies were submitted in computer code
-and competed against each other in a round robin tournament. All contestants
-competed against each other, a copy of themselves and a random strategy. The
-winner was decided on the average score a strategy achieved and not the total
-number of wins. How many turns of history that a strategy would use, the memory
+Iterated Prisoner's Dilemma (IPD) and in the 1980s, following the work
+of~\cite{Axelrod1980a, Axelrod1980b} it attracted the attention of the
+scientific community. In~\cite{Axelrod1980a} and~\cite{Axelrod1980b}, the first
+well known computer tournaments of the IPD were performed. A total of 13 and 63
+strategies were submitted, respectively, in the form of computer code and
+competed against each other in a round robin tournament. The contestant competed
+against each other, a copy of themselves and a random strategy and the winner
+was decided on the average score a strategy achieved (not the total number of
+wins). The contestants were given access to the entire history of a match,
+however, how many turns of history a strategy would incorporate, the memory
 size, was a result of the particular strategic decisions made by the author.
-The winning strategy of both tournaments was a strategy called Tit for Tat. Tit
-for Tat is a strategy which starts by cooperating and then mimics the last move
-of it's opponent. This is a strategy which makes use of the previous move of the
-opponent only, this type of strategy is called \textit{reactive}.
-In~\cite{Nowak1989} a framework for studying such strategies was introduced.
-This was later used to introduce well known reactive strategies such as Generous
-Tit For Tat~\cite{Nowak1990}.
 
-Reactive strategies are a subset of so called \textit{memory one} strategies.
-Memory one strategies similarly are only concerned with the previous turn.
-However, they take into consideration both players' recent moves to decide on an
-action. Several successful memory one strategies are found in the literature,
-for example Pavlov~\cite{Nowak1993}.
+The winning strategy of both tournaments was the strategy called Tit for Tat.
+Tit for Tat is a strategy which starts by cooperating and then mimics the last
+move of it's opponent, specifically, is a strategy that considers only the
+previous move of the opponent, these type of strategies are called
+\textit{reactive}~\cite{Nowak1989}. Reactive strategies are a subset of so
+called \textit{memory one} strategies. Memory one strategies similarly are only
+concerned with the previous turn, however, they incorporate both players' recent
+moves. Several successful memory one and reactive strategies are found in the
+literature, such as Pavlov~\cite{Nowak1993} and Generous Tit For
+Tat~\cite{Nowak1990}.
 
-A well known set of memory on strategies was introduced in~\cite{Press2012},
-these were called zero determinant (ZD) strategies. The ZD strategies manage to
-force a linear relationship between the score of the strategy and the opponent.
-According to~\cite{Press2012} the ZD strategies can dominate any evolutionary
-opponent in pairwise interactions by using a single turn of memory. Thus, in a
-sense this work questioned the importance of memory and the sophistication
-required/necessary for evolutionary fixation.
+In 2012, Press and Dyson published~\cite{Press2012} and created a small shock in
+the game theoretic community,~\cite{Stewart2012} stated that ``Press and Dyson
+have fundamentally changed the viewpoint on the Prisoner's Dilemma''. They
+introduced a set of memory one strategies that chose their actions so that a
+linear relationship is forced between their score and that of the opponent.
+These strategies are called zero determinate.
 
-These ZD strategies attracted a lot of attention. It was stated that ``Press and
-Dyson have fundamentally changed the viewpoint on the Prisoner's
-Dilemma''~\cite{Stewart2012}. In~\cite{Stewart2012} a very similar tournament to
-Axelrod's tournament is run including ZD strategies and a new set of ZD
-strategies. One specific advantage of memory one strategies is
-their mathematical tractability.  As described in
-Section~\ref{section:utility_against_mem_one} they can be represented completely
-as an vector of \(\R^{4}\).
+\begin{itemize}
+    \item One specific advantage
+    of memory one strategies is their mathematical tractability, as described in
+    Section~\ref{section:utility} they can be represented completely as an vector of
+    \(\R^{4}\)
+    \item They are robust when it comes to pairwise interactions
+    \item They are mathematically good.
+\end{itemize}
 
-Even so, ZD and memory one strategies have also received criticism.
-In~\cite{Harper2015},
-the `memory of a strategy does not matter' statement was questioned. A set of more
-complex strategies, strategies that take in account the entire history set of the
-game, were trained and proven to be more robust against multiple opponents.
+Several works have questioned the effectiveness of such strategies.
 
 The purpose of this work is to consider a given memory one strategy in a similar
-fashion to~\cite{Press2012}. However whilst~\cite{Press2012} found a way for a
+fashion to~\cite{Press2012}, however whilst~\cite{Press2012} found a way for a
 player to manipulate a given opponent, this work will consider a
 multidimensional optimisation approach to identify the best response to a group
-of opponents. In essence the aim is to produce a compact method of identifying
-the best memory one strategy against a given opponent.
+of opponents. The aim is to produce a compact method of identifying these best
+response memory one strategy against opponents. In later parts of the paper the
+best response strategies are compared to extortionate and complex ones.
 
-In the second part of this manuscript we explore the limitation of these best
-response strategies. This is achieved by comparing the performance of an optimal
-memory one strategy, for a given environment, with the performance of a more
-complex strategy that has a larger memory.
-One particular benefit of this analysis is the identification of conditions for
-which defection is a best response. Thus, identifying environments for which
-cooperation can not occur.
+These are achieved by comparing the performance of an optimal memory one
+strategy, for a given environment, with the performance of a more complex
+strategy that has a larger memory. One particular benefit of this analysis is
+the identification of conditions for which defection is a best response. Thus,
+identifying environments for which cooperation can not occur.
 
-\section{The utility}\label{section:utility_against_mem_one}
+\section{The utility}\label{section:utility}
 
-In~\cite{Press2012} it is stated that if a strategy is concerned with only the
+In~\cite{Nowak1989} it is stated that if a strategy is concerned with only the
 outcome of a single turn then there are four possible `states' the strategy
-could be in. These are \(CC, CD, DC,CC\). A memory one strategy is denoted by
-the probabilities of cooperating after each of these states, \(p=(p_1, p_2, p_3,
-p_4) \in \R_{[0,1]} ^ 4\). A diagrammatic representation of such a strategy is
-given in Figure~\ref{fig:diagram_mem_one}.
+could be in; \(CC, CD, DC,CC\). Therefore, a memory one strategy can denoted by
+the probability of vector of cooperating after each of these states; \(p=(p_1, p_2, p_3,
+p_4) \in \R_{[0,1]} ^ 4\).
+In an IPD match two memory one strategies are moving from state to state at each
+turn with a given probability. This exact behaviour can be modelled as a stochastic
+process, and more specifically as a Markov chain (Figure~\ref{fig:markov_chain}).
+The corresponding transition matrix \(M\) of Figure~\ref{fig:markov_chain} is
+given by:
 
 \begin{figure}
-    \centering
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includestandalone[width=.65\textwidth]{tex/states}
-        \subcaption{Diagrammatic representation of a memory one strategy.}
-        \label{fig:diagram_mem_one}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includestandalone[width=.88\textwidth]{tex/markov_chain}
-        \subcaption{Markov chain on a PD game.}
+    \begin{minipage}{0.35\textwidth}
+        \includestandalone[width=\textwidth]{tex/markov_chain}
+        \caption{markov}
         \label{fig:markov_chain}
-    \end{subfigure}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+    \begin{equation*}
+        \input{tex/m_matrix.tex}
+    \end{equation*}
+    \end{minipage}
 \end{figure}
 
-Moreover, if two memory one players are moving from state to state
-this can be modelled as a Markov process. A diagrammatic
-representation of the Markov chain is shown in Figure~\ref{fig:markov_chain}.
-The corresponding transition matrix \(M\) given by:
-
-\begin{equation}\label{eq:m_matrix}
-    \input{tex/m_matrix.tex}.
-\end{equation}
-
-The long run steady state probability \(v\) is the solution to
-\(v M = v\)
-This corresponds to finding the unit eigenvector of \(M\) and a closed form
-for \(v\) can be found (given in the Appendix). %TODO include Appendix
-Combining the stationary vector \(v\) with the payoff matrices of
-equation~(\ref{equ:pd_definition})
-allows us to retrieve the expected payoffs for each player. Thus, the utility for
-player \(p\) against \(q\), denoted as \(u_q(p)\), is defined by,
+The long run steady state probability \(v\) is the solution to \(v M = v\). The
+stationary vector \(v\) can be combined with the payoff matrices of
+equation~(\ref{equ:pd_definition}) and the expected payoffs for each player
+can be estimated without simulating the actual interactions. More
+specifically, the utility for a memory one strategy \(p\) against an opponent \(q\),
+denoted as \(u_q(p)\), is defined by,
 
 \begin{equation}\label{eq:press_dyson_utility}
     u_q(p) = v \times (R, P, S, T).
 \end{equation}
 
-Here, to our knowledge, we present the first theoretical result which
-concerns the form of \(u_q(p)\). That is that \(u_q(p)\) is given by a ratio of
-two quadratic forms~\cite{kepner2011}, as presented by
-Theorem~\ref{theorem:quadratic_form_u}.
+In Theorem~\ref{theorem:quadratic_form_u}, the first theoretical results of
+the manuscript is presented, that is that \(u_q(p)\) is given by a ratio of
+two quadratic forms~\cite{kepner2011}. To the authors knowledge this is the
+first work that has been done on the form of \(u_q(p)\).
 
 \begin{theorem}\label{theorem:quadratic_form_u}
     The expected utility of a memory one strategy \(p\in\mathbb{R}_{[0,1]}^4\)
-    against a memory one opponent strategy \(q\in\mathbb{R}_{[0,1]}^4\), denoted
+    against a memory one opponent \(q\in\mathbb{R}_{[0,1]}^4\), denoted
     as \(u_q(p)\), can be written as a ratio of two quadratic forms:
 
     \begin{equation}\label{eq:optimisation_quadratic}
@@ -247,39 +228,37 @@ Theorem~\ref{theorem:quadratic_form_u}.
     \(\bar{a} = \input{tex/denominator_constant}\).
 \end{theorem}
 
-Proof: The proof is given in Appendix. %TODO write proof
+The proof of Theorem~\ref{theorem:quadratic_form_u} is given in Appendix. %TODO write proof
 
-Figure~\ref{fig:analytical_simulated} indicates that the formulation of \(u_q(p)\)
-as a quadratic ratio successfully captures the simulated behaviour. A data set
-offering further validation is available at. %TODO archive data
-The simulated utility, denoted
-as \(U_q(p)\) has been calculated using~\cite{axelrodproject},  an open research
-framework for the study of the IPD and is described in~\cite{Knight2016}. Note that
-when referring to \(U_q(p)\) here onwards we mean the simulated utility calculated
-with~\cite{axelrodproject}.
+Numerical simulations have been carried out to validate the formulation of
+\(u_q(p)\) as a quadratic ratio, a data set is available at. Two examples are
+graphically represented in Figure~\ref{fig:analytical_simulated} and show that
+the formulation successfully captures the simulated behaviour. The simulated
+utility, which is denoted as \(U_q(p)\), has been calculated
+using~\cite{axelrodproject}, an open source research framework for the study of
+the IPD. The project is described in~\cite{Knight2016}.
 
 \begin{figure}[!htbp]
 \begin{center}
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[width=\linewidth]{img/validation_img_two.png}
+        \includegraphics[width=\linewidth]{img/validation_against_player_one.pdf}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[width=\linewidth]{img/validation_img_three.png}
+        \includegraphics[width=\linewidth]{img/validation_against_player_two.pdf}
     \end{subfigure}
 \end{center}
+
 \caption{Differences between simulated and analytical results for
-\(q = (\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, q_4)\).}
+         \(q = (\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, q_4)\).}
 \label{fig:analytical_simulated}
 \end{figure}
 
 Theorem~\ref{theorem:quadratic_form_u} can be extended to consider multiple
-opponents
-The IPD is commonly studied in tournaments and or Moran Processes where a
-strategy interacts
-with a number of opponents. The payoff of a player is then given by the average
-payoffs the against each opponent.
-More specifically the expected utility of a memory one strategy
-against a \(N\) number of opponents is given by Theorem~\ref{theorem:tournament_utility}.
+opponents. The IPD is commonly studied in tournaments and/or Moran Processes
+where a strategy interacts with a number of opponents. The payoff of a player is
+then given by the average payoffs the against each opponent. More specifically
+the expected utility of a memory one strategy against a \(N\) number of
+opponents is given by Theorem~\ref{theorem:tournament_utility}.
 
 \begin{theorem}\label{theorem:tournament_utility}
     The expected utility of a memory one strategy \(p\in\mathbb{R}_{[0,1]}^4\)
@@ -295,20 +274,22 @@ against a \(N\) number of opponents is given by Theorem~\ref{theorem:tournament_
     \end{equation}
 \end{theorem}
 
-As an illustration, Theorem~\ref{theorem:tournament_utility} is used to calculate
-he theoretical payoffs of several memory one strategies against
-a set of 10 opponents. The opponents used are the memory one strategies for the
-tournament
-conducted in~\cite{Stewart2012}. This tournament is also simulated as before
-The names and a small explanation of the strategic rules are
-given in Appendix~\ref{appendix:tables}.
-The values of \(\frac{1}{N} \sum\limits_{i=1} ^ {N} u_{q ^{(i)}} (p)\) and
-\(\frac{1}{N} \sum\limits_{i=1} ^ {N} U_{q ^{(i)}} (p)\) match (Table~\ref{table:list_stewart_plotkin}),
-% TODO I wonder if we drop the \frac{1}{N} (it's not really required)
+As an illustration, Theorem~\ref{theorem:tournament_utility} is used to
+calculate the theoretical payoffs of several memory one strategies against a set
+of 10 opponents. The opponents used are the memory one strategies for the
+tournament conducted in~\cite{Stewart2012}. This tournament is also simulated as
+before The names and a small explanation of the strategic rules are given in
+Appendix~\ref{appendix:tables}. The values of \(\sum\limits_{i=1} ^ {N} u_{q
+^{(i)}} (p)\) and \(\sum\limits_{i=1} ^ {N} U_{q ^{(i)}} (p)\) match
+(Table~\ref{table:list_stewart_plotkin}),
+
+\input{tex/stewart_plotkin_tournament_strategies_list.tex}
+
+
 
 \begin{table}[htbp]
     \begin{center}
-    \input{tex/stewart_results.txt}
+    \input{tex/stewart_plotkin_simulation.tex}
     \end{center}
     \caption{Results of memory one strategies against the strategies in Table~\ref{table:list_stewart_plotkin}.}
     \label{table:list_stewart_plotkin}
@@ -330,7 +311,7 @@ This is illustrated in Figure~\ref{fig:hypothesis}.
 
 \begin{figure}[!htbp]
     \begin{center}
-            \includegraphics[width=\linewidth]{img/mean_vs_average_two.png}
+            \includegraphics[width=\linewidth]{img/mean_vs_average_heatmap.pdf}
     \end{center}
     \caption{Plotting the difference of the average utility against ten
     opponents versus the utility against the average of the ten strategies.}
@@ -340,6 +321,103 @@ This is illustrated in Figure~\ref{fig:hypothesis}.
 The analytical formulation of Theorem~\ref{theorem:tournament_utility} will be
 used in the following sections to explore the best response to memory one
 strategies.
+
+Furthermore, the iterated prisoner's dilemma is commonly stydied in evolutioary
+settings~\cite{}. In such settings self interaction are taken into account. In
+tournaments as well, as described before, in axelrod tournament the straetgies
+compitected against a copy of themselves. However in evolutionary settings
+being good against your self can lead to evolutionary robystness. Thus utility
+can now be re written as.
+
+
+\section{Stability of defection}
+
+In this section the stability of defection is explored. Defection is
+known to be the dominant action in the PD and it can be proven to be the dominant
+strategy for the IPD for given environments. Even so, several works have proven
+that cooperation emerges in the IPD and many studies focus on the
+emergence of cooperation. In this manuscript we try to provide a condition for when
+defection is the best response in the IPD, thus when it is known that
+cooperation is not dominant.
+
+Initially, let us consider equation~(\ref{eq:mo_derivative}) for \(p = (0, 0, 0,
+0)\),
+
+\begin{equation}\label{eq:derivative_of_quadratic_zero}
+    \begin{aligned}
+     \frac{du}{dp_{| p=(0, 0, 0, 0)}} & = && \frac{c \bar{a} - \bar{c}a}
+      {\bar{a}^2} .\\
+    \end{aligned}
+\end{equation}
+
+The numerator \(\bar{c}a - c\bar{a}\) is given by,
+
+\[\input{tex/defection_matrix.txt}\]
+
+and the denominator \(\bar{a} ^ 2 = (-q_2 + q_4 + 1) ^ 2\), which is always positive. In order
+for defection to be the best response the derivative must have a negative
+sign at the point \(p = (0, 0, 0, 0)\). That means that the utility is only
+decreasing after \(p = (0, 0, 0, 0)\).
+
+Because \(\bar{a} ^ 2\) is always positive the sign of the derivative is given by \(\bar{c}a - c\bar{a}\).
+More specifically from equations,
+
+\begin{equation}\label{eq:defection_condition_one}
+    \input{tex/defection_condition_one.txt}
+\end{equation}
+\begin{equation}\label{eq:defection_condition_two}
+    \input{tex/defection_condition_two.txt}
+\end{equation}
+
+Both signs of the partial derivatives must be negative in order for the overall
+function to be decreasing ensuring defection is a best response.
+The signs of equations (\ref{eq:defection_condition_one}) and (\ref{eq:defection_condition_two})
+vary. There are cases that they have the same sign and cases that they do not,
+
+For a tournament setting we substitute \(p = (0, 0, 0, 0)\) in
+equation~(\ref{eq:mo_tournament_derivative}) which gives:
+
+\begin{equation}
+\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})
+\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2
+\end{equation}
+
+The second term \(\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i
+\end{array}} ^ N (\bar{a}^{(i)})^2\) is always positive. However the sign of the
+first term \(\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\)
+can vary based on the transition probabilities of the opponents, as discussed
+above. A condition that must hold in order for defection to be stable in a
+tournament is that each term of the sum must be negative. The results are
+exhibited in Lemma~\ref{lemma:stability_of_defection}.
+
+\begin{lemma}\label{lemma:stability_of_defection}
+    In a tournament of \(N\) players where \(q^{(i)} = (q_{1}^{(i)}, q_{2}^{(i)}, q_{3}^{(i)}, q_{4}^{(i)})\)
+    defection is a best response if the transition probabilities of the
+    opponents satisfy the condition:
+
+    \begin{equation}
+        \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
+    \end{equation}
+\end{lemma}
+
+Moreover lets us consider a constrained version of the problem once again. Lets us
+assume that in an pairwise interaction the opponent is a reactive player \(q=(q_1, q_2, q_1, q_2)\).
+By substituting \(q_3=q_1\) and \(q_4=q_2\) equations (\ref{eq:defection_condition_one})
+and (\ref{eq:defection_condition_two}) are now re written as follow,
+
+\[\left[\begin{matrix}- q_{2} \left(4 q_{1} - 5 q_{2} - 1\right)\\
+\left(q_{2} - 1\right) \left(4 q_{1} - 5 q_{2} - 1\right)\end{matrix}\right]\]
+
+\begin{lemma}
+Defection is the best responses of a memory one player \(p\) against a reactive
+player \(q\) if the transition probabilities of the opponent satisfy the
+condition:
+
+\begin{equation}
+    4 q_{1} - 5 q_{2} - 1 > 0
+\end{equation}
+\end{lemma}
+
 
 \section{Best responses to memory one players}\label{section:best_response_mem_one}
 
@@ -586,93 +664,6 @@ Lemma~\ref{lemma:memone_group_best_response} and
 Theorem~\ref{theorem:tournament_utility}
 will now be used to give a list of particular best response results.
 
-\section{Stability of defection}
-
-In this section the stability of defection is explored. Defection is
-known to be the dominant action in the PD and it can be proven to be the dominant
-strategy for the IPD for given environments. Even so, several works have proven
-that cooperation emerges in the IPD and many studies focus on the
-emergence of cooperation. In this manuscript we try to provide a condition for when
-defection is the best response in the IPD, thus when it is known that
-cooperation is not dominant.
-
-Initially, let us consider equation~(\ref{eq:mo_derivative}) for \(p = (0, 0, 0,
-0)\),
-
-\begin{equation}\label{eq:derivative_of_quadratic_zero}
-    \begin{aligned}
-     \frac{du}{dp_{| p=(0, 0, 0, 0)}} & = && \frac{c \bar{a} - \bar{c}a}
-      {\bar{a}^2} .\\
-    \end{aligned}
-\end{equation}
-
-The numerator \(\bar{c}a - c\bar{a}\) is given by,
-
-\[\input{tex/defection_matrix.txt}\]
-
-and the denominator \(\bar{a} ^ 2 = (-q_2 + q_4 + 1) ^ 2\), which is always positive. In order
-for defection to be the best response the derivative must have a negative
-sign at the point \(p = (0, 0, 0, 0)\). That means that the utility is only
-decreasing after \(p = (0, 0, 0, 0)\).
-
-Because \(\bar{a} ^ 2\) is always positive the sign of the derivative is given by \(\bar{c}a - c\bar{a}\).
-More specifically from equations,
-
-\begin{equation}\label{eq:defection_condition_one}
-    \input{tex/defection_condition_one.txt}
-\end{equation}
-\begin{equation}\label{eq:defection_condition_two}
-    \input{tex/defection_condition_two.txt}
-\end{equation}
-
-Both signs of the partial derivatives must be negative in order for the overall
-function to be decreasing ensuring defection is a best response.
-The signs of equations (\ref{eq:defection_condition_one}) and (\ref{eq:defection_condition_two})
-vary. There are cases that they have the same sign and cases that they do not,
-
-For a tournament setting we substitute \(p = (0, 0, 0, 0)\) in
-equation~(\ref{eq:mo_tournament_derivative}) which gives:
-
-\begin{equation}
-\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})
-\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2
-\end{equation}
-
-The second term \(\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i
-\end{array}} ^ N (\bar{a}^{(i)})^2\) is always positive. However the sign of the
-first term \(\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\)
-can vary based on the transition probabilities of the opponents, as discussed
-above. A condition that must hold in order for defection to be stable in a
-tournament is that each term of the sum must be negative. The results are
-exhibited in Lemma~\ref{lemma:stability_of_defection}.
-
-\begin{lemma}\label{lemma:stability_of_defection}
-    In a tournament of \(N\) players where \(q^{(i)} = (q_{1}^{(i)}, q_{2}^{(i)}, q_{3}^{(i)}, q_{4}^{(i)})\)
-    defection is a best response if the transition probabilities of the
-    opponents satisfy the condition:
-
-    \begin{equation}
-        \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
-    \end{equation}
-\end{lemma}
-
-Moreover lets us consider a constrained version of the problem once again. Lets us
-assume that in an pairwise interaction the opponent is a reactive player \(q=(q_1, q_2, q_1, q_2)\).
-By substituting \(q_3=q_1\) and \(q_4=q_2\) equations (\ref{eq:defection_condition_one})
-and (\ref{eq:defection_condition_two}) are now re written as follow,
-
-\[\left[\begin{matrix}- q_{2} \left(4 q_{1} - 5 q_{2} - 1\right)\\
-\left(q_{2} - 1\right) \left(4 q_{1} - 5 q_{2} - 1\right)\end{matrix}\right]\]
-
-\begin{lemma}
-Defection is the best responses of a memory one player \(p\) against a reactive
-player \(q\) if the transition probabilities of the opponent satisfy the
-condition:
-
-\begin{equation}
-    4 q_{1} - 5 q_{2} - 1 > 0
-\end{equation}
-\end{lemma}
 
 \section{Optimisation against memory one strategies}\label{section:optimisation_memone}
 
@@ -932,7 +923,7 @@ difference is in question. More experimental trials and exploration will be
 carried out.
 
 \appendix
-\input{tex/appendix_tables}
+%\input{tex/appendix_tables}
 
 % Bibliography
 \bibliographystyle{plain}
