@@ -2,7 +2,7 @@ import axelrod as axl
 import numpy as np
 
 
-def mem_quadratic_numerator(opponent):
+def quadratic_term_numerator(opponent):
     """
     Returns the matrix $Q$ for memory one strategies.
     """
@@ -67,7 +67,7 @@ def mem_quadratic_numerator(opponent):
     return matrix
 
 
-def mem_linear_numerator(opponent):
+def linear_term_numerator(opponent):
     """
     Returns the matrix $c$ for memory one strategies.
     """
@@ -97,7 +97,7 @@ def mem_linear_numerator(opponent):
     return matrix
 
 
-def mem_constant_numerator(opponent):
+def constant_term_numerator(opponent):
     """
     Returns the constant part $a$ for memory one strategies.
     """
@@ -106,7 +106,7 @@ def mem_constant_numerator(opponent):
     return constant
 
 
-def mem_quadratic_denominator(opponent):
+def quadratic_term_denominator(opponent):
     """
     Returns the matrix $\bar{Q}$ for memory one strategies.
     """
@@ -193,7 +193,7 @@ def mem_quadratic_denominator(opponent):
     return matrix
 
 
-def mem_linear_denominator(opponent):
+def linear_term_denominator(opponent):
     """
     Returns the matrix $\bar{c}$ for memory one strategies.
     """
@@ -222,7 +222,7 @@ def mem_linear_denominator(opponent):
     return matrix
 
 
-def mem_constant_denominator(opponent):
+def constant_term_denominator(opponent):
     """
     Returns the constant part $\bar{a}$ for memory one strategies.
     """
@@ -237,17 +237,17 @@ def match_utility(player, opponent):
     """
     x = np.array(player)
 
-    Q = mem_quadratic_numerator(opponent)
-    c = mem_linear_numerator(opponent)
-    a = mem_constant_numerator(opponent)
+    Q = quadratic_term_numerator(opponent)
+    c = linear_term_numerator(opponent)
+    a = constant_term_numerator(opponent)
 
     numerator = np.dot(x, Q.dot(x.T) * 1 / 2) + np.dot(c, x.T) + a
 
-    Q_d = mem_quadratic_denominator(opponent)
-    d = mem_linear_denominator(opponent)
-    b = mem_constant_denominator(opponent)
+    Q_bar = quadratic_term_denominator(opponent)
+    c_bar = linear_term_denominator(opponent)
+    a_bar = constant_term_denominator(opponent)
 
-    denominator = np.dot(x, Q_d.dot(x.T) * 1 / 2) + np.dot(d, x.T) + b
+    denominator = np.dot(x, Q_bar.dot(x.T) * 1 / 2) + np.dot(c_bar, x.T) + a_bar
 
     return numerator / denominator
 
@@ -259,9 +259,7 @@ def tournament_utility(player, opponents):
     opponent and against itself.
     """
     obj = 0
-    for opponent in opponents:
-        obj += match_utility(player, opponent)
-    return -obj / (len(opponents))
+    return np.mean([match_utility(player, opponent) for opponent in opponents])
 
 
 def simulate_match_utility(player, opponent, turns=500, repetitions=200):
@@ -269,7 +267,7 @@ def simulate_match_utility(player, opponent, turns=500, repetitions=200):
     Returns the simulated utility of a memory one player against a single opponent.
     """
     total = 0
-    players = [axl.MemoryOnePlayer(i) for i in [player, opponent]]
+    players = [axl.MemoryOnePlayer(vector) for vector in [player, opponent]]
     for rep in range(repetitions):
         match = axl.Match(players=players, turns=turns)
         _ = match.play()
