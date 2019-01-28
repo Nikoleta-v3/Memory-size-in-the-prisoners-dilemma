@@ -1,5 +1,5 @@
-from .optimisation (
-    memory_one_best_response,
+from .memory_one_best_response import (
+    get_memory_one_best_response,
     objective_is_converged,
 )
 from .reactive_best_response import (
