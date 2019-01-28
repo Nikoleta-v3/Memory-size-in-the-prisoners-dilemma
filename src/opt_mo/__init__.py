@@ -1,9 +1,11 @@
-from .optimisation import (
+from .optimisation (
     memory_one_best_response,
-    find_evolutionary_best_response,
-    find_repeat_in_history,
+    objective_is_converged,
 )
-from .reactive import reactive_best_response, plot_reactive_utility
+from .reactive_best_response import (
+    get_reactive_best_response,
+    plot_reactive_utility,
+)
 from .tools import make_B, mem_one_match_markov_chain, steady_states
 from .utility import (
     match_utility,

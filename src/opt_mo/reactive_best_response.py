@@ -150,7 +150,7 @@ def get_argmax(opponents, solution_set):
     return max(solutions, key=lambda item: item[-1])
 
 
-def reactive_best_response(opponents):
+def get_reactive_best_response(opponents):
     """
     Calculates the best response reactive strategy using resultant theory.
     """
