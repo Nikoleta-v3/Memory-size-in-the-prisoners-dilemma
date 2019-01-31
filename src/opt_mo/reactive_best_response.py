@@ -8,6 +8,7 @@ from functools import partial
 import axelrod as axl
 import matplotlib.pyplot as plt
 import numpy as np
+import skopt
 import sympy as sym
 from sympy.polys import subresultants_qq_zz
 
@@ -191,3 +192,44 @@ def plot_reactive_utility(
         plt.savefig(filename, bbox_inches="tight")
 
     return plot
+
+
+def prepare_reactive_objective_optimisation(opponents):
+    objective = partial(reactive_utility, opponents=opponents)
+    return lambda x: -objective(x)
+
+
+def reactive_utility(p, opponents):
+    utility = opt_mo.tournament_utility((p[0], p[1], p[0], p[1]), opponents)
+
+    return utility
+
+
+def get_reactive_best_response_with_bayesian(
+    opponents,
+    method_params={"n_random_starts": 40, "n_calls": 60},
+    tol=10 ** -5,
+):
+    """
+    Approximates the best response reactive strategy using bayesian optimisation.
+    """
+    bounds = [(0, 0.9999) for _ in range(2)]
+    objective = prepare_reactive_objective_optimisation(opponents=opponents)
+
+    default_calls = method_params["n_calls"]
+
+    while method_params[
+        "n_calls"
+    ] == default_calls or not opt_mo.objective_is_converged(values, tol=tol):
+        result = skopt.gp_minimize(
+            func=objective,
+            dimensions=bounds,
+            acq_func="EI",
+            random_state=0,
+            **method_params
+        )
+
+        values = result.func_vals
+        method_params["n_calls"] += 20
+
+    return np.array([result.x[0], result.x[1], result.x[0], result.x[1]])

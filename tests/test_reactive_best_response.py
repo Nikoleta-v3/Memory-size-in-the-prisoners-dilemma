@@ -6,6 +6,7 @@ import numpy as np
 import sympy as sym
 
 import opt_mo
+import random
 
 
 x, y = sym.symbols("x, y")
@@ -68,3 +69,13 @@ def test_reactive_best_response_against_defector():
     best_response = opt_mo.get_reactive_best_response(opponent)
 
     assert np.array_equal(best_response, [0, 0, 0, 0])
+
+
+def test_prepare_reactive_objective_optimisation():
+    players = [[random.random() for _ in range(4)] for _ in range(3)]
+    objective = opt_mo.memory_one_best_response.prepare_objective_optimisation(
+        opponents=players[:-1]
+    )
+
+    assert type(objective) == type(lambda x: x)
+    assert objective(players[-1]) <= 0

@@ -40,7 +40,7 @@ def get_memory_one_best_response(
         )
 
         values = result.func_vals
-        print(objective_is_converged(values, tol=tol))
+        print(objective_is_converged(values))
         method_params["n_calls"] += 20
 
     return np.array(result.x)
