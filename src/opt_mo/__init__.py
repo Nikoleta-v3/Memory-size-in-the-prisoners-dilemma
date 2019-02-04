@@ -8,7 +8,7 @@ from .utility import (
 from .reactive_best_response import (
     get_reactive_best_response,
     plot_reactive_utility,
-    get_reactive_best_response_with_bayesian
+    get_reactive_best_response_with_bayesian,
 )
 from .memory_one_best_response import (
     get_memory_one_best_response,

@@ -36,6 +36,7 @@ def get_evolutionary_best_response(
     while repeats_in_history(history, tol=tol) >= float("inf"):
 
         best_response = best_response_function(opponents + [history[-1]])
+        print('Next generation.')
         history.append(best_response)
 
     return best_response, history
