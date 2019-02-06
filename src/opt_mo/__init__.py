@@ -18,5 +18,9 @@ from .evolutionary_best_response import (
     repeats_in_history,
     get_evolutionary_best_response,
 )
-from .train import tournament_score_gambler, train_gambler
+from .gambler_best_response import (
+    tournament_score_gambler,
+    get_best_response_gambler,
+    get_lookup_table_size
+)
 from .version import __version__

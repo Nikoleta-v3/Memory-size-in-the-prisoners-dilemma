@@ -12,7 +12,7 @@ import opt_mo
 C, D = Action.C, Action.D
 
 
-def pattern_size(params):
+def get_lookup_table_size(params):
     """
     Calculates the size of the lookup table.
     """
@@ -38,7 +38,7 @@ def tournament_score_gambler(pattern, turns, repetitions, opponents, params):
     parameters = Plays(
         self_plays=params[0], op_plays=params[1], op_openings=params[2]
     )
-    size = pattern_size(params)
+    size = get_lookup_table_size(params)
 
     initial_action = [
         np.random.choice([C, D], p=[pattern[0], 1 - pattern[0]])
@@ -62,29 +62,37 @@ def tournament_score_gambler(pattern, turns, repetitions, opponents, params):
     return -np.mean(results.normalised_scores[-1])
 
 
-def train_gambler(
+def get_best_response_gambler(
     opponents,
     turns,
     repetitions,
     params,
     method_params={"n_random_starts": 20, "n_calls": 40},
+    tol=10 ** -5,
 ):
     """
-    Approximates the best gambler for the given environment.
-    Returns the strategy and it's utility.
+    Approximates the best response Gambler using bayesian optimisation.
     """
-    size = pattern_size(params)
-    bounds = [(0.0, .99999) for _ in range(size + 1)]
+    size = get_lookup_table_size(params)
+    bounds = [(0.0, 0.99999) for _ in range(size + 1)]
     objective = prepare_objective_training(
         turns=turns, repetitions=repetitions, opponents=opponents, params=params
     )
 
-    result = skopt.gp_minimize(
-        func=objective,
-        dimensions=bounds,
-        acq_func="EI",
-        random_state=0,
-        **method_params
-    )
+    default_calls = method_params["n_calls"]
 
-    return result.x, -result.fun
+    while method_params[
+        "n_calls"
+    ] == default_calls or not opt_mo.objective_is_converged(values, tol=tol):
+        result = skopt.gp_minimize(
+            func=objective,
+            dimensions=bounds,
+            acq_func="EI",
+            random_state=0,
+            **method_params
+        )
+
+        values = result.func_vals
+        method_params["n_calls"] += 20
+
+    return np.array(result.x)

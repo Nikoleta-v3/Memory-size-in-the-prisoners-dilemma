@@ -6,12 +6,12 @@ import opt_mo
 
 def test_params_size_example_one():
     params = [1, 1, 1]
-    assert opt_mo.train.pattern_size(params) == 8
+    assert opt_mo.gambler_best_response.get_lookup_table_size(params) == 8
 
 
 def test_params_size_example_two():
     params = [1, 1, 2]
-    assert opt_mo.train.pattern_size(params) == 16
+    assert opt_mo.gambler_best_response.get_lookup_table_size(params) == 16
 
 
 def test_tournament_score_gambler_against_defector():
@@ -90,7 +90,7 @@ def test_train_gambler():
     opponents = [[0, 0, 0, 0], [1, 1, 1, 1]]
     turns, repetitions = 10, 2
     axl.seed(0)
-    x, fun = opt_mo.train_gambler(
+    x = opt_mo.get_best_response_gambler(
         opponents=opponents,
         turns=turns,
         repetitions=repetitions,
@@ -98,5 +98,4 @@ def test_train_gambler():
         method_params={"n_random_starts": 10, "n_calls": 15},
     )
 
-    assert len(x) == opt_mo.train.pattern_size([1, 1, 2]) + 1
-    assert np.isclose(fun, 2.9, atol=10 ** -1)
+    assert len(x) == opt_mo.gambler_best_response.get_lookup_table_size([1, 1, 2]) + 1
