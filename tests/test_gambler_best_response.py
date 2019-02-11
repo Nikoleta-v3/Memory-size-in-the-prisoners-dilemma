@@ -98,4 +98,7 @@ def test_train_gambler():
         method_params={"n_random_starts": 10, "n_calls": 15},
     )
 
-    assert len(x) == opt_mo.gambler_best_response.get_lookup_table_size([1, 1, 2]) + 1
+    assert (
+        len(x)
+        == opt_mo.gambler_best_response.get_lookup_table_size([1, 1, 2]) + 1
+    )

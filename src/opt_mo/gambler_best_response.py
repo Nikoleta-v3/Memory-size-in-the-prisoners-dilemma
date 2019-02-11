@@ -74,7 +74,9 @@ def get_best_response_gambler(
     Approximates the best response Gambler using bayesian optimisation.
     """
     size = get_lookup_table_size(params)
-    bounds = [(0.0, 0.99999) for _ in range(size + 1)]
+    bounds = [
+        (0.0, 0.99999) for _ in range(size + 1)
+    ]  # convince that 1 is not needed, if there is do something like 1 - 10 ** -9
     objective = prepare_objective_training(
         turns=turns, repetitions=repetitions, opponents=opponents, params=params
     )
@@ -95,4 +97,4 @@ def get_best_response_gambler(
         values = result.func_vals
         method_params["n_calls"] += 20
 
-    return np.array(result.x)
+    return np.array(result.x), -result.fun
