@@ -15,12 +15,12 @@ from .memory_one_best_response import (
     objective_is_converged,
 )
 from .evolutionary_best_response import (
-    repeats_in_history,
+    get_repeat_length_in_history,
     get_evolutionary_best_response,
 )
 from .gambler_best_response import (
     tournament_score_gambler,
     get_best_response_gambler,
-    get_lookup_table_size
+    get_lookup_table_size,
 )
 from .version import __version__
