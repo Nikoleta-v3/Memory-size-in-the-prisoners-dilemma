@@ -26,7 +26,7 @@ def test_bayesian_mem_one():
     )
 
     assert len(best_response) == 4
-    assert np.allclose(best_response, [0.5452, 0.3667, 0.0, 0.0], atol=10 ** -2)
+    assert np.allclose(best_response, [1.0, 1.0, 0.0, 0.0], atol=10 ** -2)
 
 
 def test_objective_is_converge():

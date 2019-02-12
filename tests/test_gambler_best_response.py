@@ -90,7 +90,7 @@ def test_train_gambler():
     opponents = [[0, 0, 0, 0], [1, 1, 1, 1]]
     turns, repetitions = 10, 2
     axl.seed(0)
-    x = opt_mo.get_best_response_gambler(
+    x, score = opt_mo.get_best_response_gambler(
         opponents=opponents,
         turns=turns,
         repetitions=repetitions,
