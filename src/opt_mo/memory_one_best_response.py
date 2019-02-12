@@ -19,18 +19,20 @@ def get_memory_one_best_response(
     opponents,
     method_params={"n_random_starts": 40, "n_calls": 60},
     tol=10 ** -5,
+    convergence_switch=True,
 ):
     """
     Approximates the best response memory one strategy using bayesian optimisation.
     """
-    bounds = [(0, 0.9999) for _ in range(4)]
+    bounds = [(0, 1.0 - 1 * 10 ** -8) for _ in range(4)]
     objective = prepare_objective_optimisation(opponents=opponents)
 
     default_calls = method_params["n_calls"]
 
-    while method_params[
-        "n_calls"
-    ] == default_calls or not objective_is_converged(values, tol=tol):
+    while (
+        method_params["n_calls"] == default_calls
+        or not objective_is_converged(values, tol=tol)
+    ) and convergence_switch:
         result = skopt.gp_minimize(
             func=objective,
             dimensions=bounds,

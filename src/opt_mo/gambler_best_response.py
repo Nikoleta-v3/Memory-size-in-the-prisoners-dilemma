@@ -69,23 +69,23 @@ def get_best_response_gambler(
     params,
     method_params={"n_random_starts": 20, "n_calls": 40},
     tol=10 ** -5,
+    convergence_switch=True,
 ):
     """
     Approximates the best response Gambler using bayesian optimisation.
     """
     size = get_lookup_table_size(params)
-    bounds = [
-        (0.0, 0.99999) for _ in range(size + 1)
-    ]  # convince that 1 is not needed, if there is do something like 1 - 10 ** -9
+    bounds = [(0, 1.0 - 1 * 10 ** -8) for _ in range(size + 1)]
     objective = prepare_objective_training(
         turns=turns, repetitions=repetitions, opponents=opponents, params=params
     )
 
     default_calls = method_params["n_calls"]
 
-    while method_params[
-        "n_calls"
-    ] == default_calls or not opt_mo.objective_is_converged(values, tol=tol):
+    while (
+        method_params["n_calls"] == default_calls
+        or not opt_mo.objective_is_converged(values, tol=tol)
+    ) and convergence_switch:
         result = skopt.gp_minimize(
             func=objective,
             dimensions=bounds,
