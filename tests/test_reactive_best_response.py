@@ -85,8 +85,7 @@ def test_reactive_best_response_bayesian():
     opponents = [[0, 0, 0, 0], [1, 1, 1, 1]]
     axl.seed(0)
     best_response = opt_mo.get_reactive_best_response_with_bayesian(
-        opponents=opponents,
-        method_params={"n_random_starts": 20, "n_calls": 40},
+        opponents=opponents, n_random_starts=20, n_calls=40
     )
 
     assert len(best_response) == 4

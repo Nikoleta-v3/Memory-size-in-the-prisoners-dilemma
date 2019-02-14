@@ -207,7 +207,8 @@ def reactive_utility(p, opponents):
 
 def get_reactive_best_response_with_bayesian(
     opponents,
-    method_params={"n_random_starts": 40, "n_calls": 60},
+    n_random_starts=40,
+    n_calls=60,
     tol=10 ** -5,
     convergence_switch=True,
 ):
@@ -217,7 +218,8 @@ def get_reactive_best_response_with_bayesian(
     bounds = [(0, 1.0 - 1 * 10 ** -8) for _ in range(2)]
     objective = prepare_reactive_objective_optimisation(opponents=opponents)
 
-    default_calls = method_params["n_calls"]
+    method_params = {"n_random_starts": n_random_starts, "n_calls": n_calls}
+    default_calls = n_calls
 
     while (
         method_params["n_calls"] == default_calls

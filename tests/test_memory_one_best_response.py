@@ -21,8 +21,7 @@ def test_bayesian_mem_one():
     opponents = [[0, 0, 0, 0], [1, 1, 1, 1]]
     axl.seed(0)
     best_response = opt_mo.get_memory_one_best_response(
-        opponents=opponents,
-        method_params={"n_random_starts": 20, "n_calls": 40},
+        opponents=opponents, n_random_starts=20, n_calls=40
     )
 
     assert len(best_response) == 4

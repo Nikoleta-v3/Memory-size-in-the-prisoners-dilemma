@@ -17,7 +17,8 @@ def prepare_objective_optimisation(opponents):
 
 def get_memory_one_best_response(
     opponents,
-    method_params={"n_random_starts": 40, "n_calls": 60},
+    n_random_starts=40,
+    n_calls=60,
     tol=10 ** -5,
     convergence_switch=True,
 ):
@@ -27,7 +28,8 @@ def get_memory_one_best_response(
     bounds = [(0, 1.0 - 1 * 10 ** -8) for _ in range(4)]
     objective = prepare_objective_optimisation(opponents=opponents)
 
-    default_calls = method_params["n_calls"]
+    method_params = {"n_random_starts": n_random_starts, "n_calls": n_calls}
+    default_calls = n_calls
 
     while (
         method_params["n_calls"] == default_calls
