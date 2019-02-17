@@ -115,9 +115,9 @@ if __name__ == "__main__":
             dask.delayed(opt_mo.get_evolutionary_best_response)(
                 opponents, opt_mo.get_memory_one_best_response
             ),
-            dask.delayed(opt_mo.get_reactive_best_response)(opponents),
+            dask.delayed(opt_mo.get_reactive_best_response_with_bayesian)(opponents),
             dask.delayed(opt_mo.get_evolutionary_best_response)(
-                opponents, opt_mo.get_reactive_best_response
+                opponents, opt_mo.get_reactive_best_response_with_bayesian
             ),
         ]
 
