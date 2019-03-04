@@ -1,4 +1,6 @@
 import numpy as np
+import pandas as pd
+import sqlalchemy as sa
 import sympy as sym
 
 
@@ -67,3 +69,10 @@ def make_B(scores, player, opponent):
         ]
     )
     return B
+
+
+def read_sql_data_frame(path):
+    engine = sa.create_engine("sqlite:///%s" % path)
+    connection = engine.connect()
+
+    return pd.read_sql("experiments", connection)
