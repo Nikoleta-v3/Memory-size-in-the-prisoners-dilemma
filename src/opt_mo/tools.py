@@ -1,3 +1,4 @@
+import axelrod as axl
 import numpy as np
 import pandas as pd
 import sqlalchemy as sa
@@ -76,3 +77,60 @@ def read_sql_data_frame(path):
     connection = engine.connect()
 
     return pd.read_sql("experiments", connection)
+
+
+def is_ZD(vector, game=axl.game.Game()):
+    """
+    Check is a strategy p is ZD.
+    """
+    R, P, S, T = game.RPST()
+    tilde_vector = np.array(
+        [vector[0] - 1, vector[1] - 1, vector[2], vector[3]]
+    )
+
+    expected_tilde_vector1 = (
+        P * tilde_vector[1]
+        + P * tilde_vector[2]
+        - R * tilde_vector[1]
+        - R * tilde_vector[2]
+    ) / (2 * P - S - T)
+    chi = (
+        P * tilde_vector[1]
+        - P * tilde_vector[2]
+        + S * tilde_vector[2]
+        - T * tilde_vector[1]
+    ) / (
+        P * tilde_vector[1]
+        - P * tilde_vector[2]
+        - S * tilde_vector[1]
+        + T * tilde_vector[2]
+    )
+
+    return (
+        np.isclose(expected_tilde_vector1, tilde_vector[0])
+        and chi > 1
+        and vector[3] == 0
+    )
+
+
+def get_least_squares(vector, game=axl.game.Game()):
+    """
+    Obtain the least squares directly
+    
+    Returns:
+    
+    - xstar
+    - residual
+    """
+
+    R, P, S, T = game.RPST()
+
+    C = np.array([[R - P, R - P], [S - P, T - P], [T - P, S - P], [0, 0]])
+
+    tilde_p = np.array([vector[0] - 1, vector[1] - 1, vector[2], vector[3]])
+
+    xstar = np.linalg.inv(C.transpose() @ C) @ C.transpose() @ tilde_p
+
+    SSError = tilde_p.transpose() @ tilde_p - tilde_p @ C @ xstar
+
+    return SSError
