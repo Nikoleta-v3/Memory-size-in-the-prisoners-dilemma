@@ -16,7 +16,8 @@
 \usepackage{subcaption}
 \usepackage{standalone}
 \usepackage{booktabs}
-\usepackage{algorithm, setspace}
+\usepackage{setspace}
+\usepackage[]{algorithm2e}
 \usepackage[noend]{algpseudocode}
 
 \makeatletter
@@ -649,80 +650,127 @@ and (\ref{eq:defection_condition_two}) are now re written as follow,
 
 \end{proof}
 
-\section{Numerical experiments} \label{section:numerical_experiments}
+\section{Numerical experiments and Results} \label{section:numerical_experiments}
 
-As described in Section~\ref{section:best_response_mem_one}, the optimisation
-problem of (\ref{eq:mo_tournament_optimisation}).
-The results of the previous section allow for the quick characterisation of a
-strategy and indeed a Nash equilibria.
-Here the optimisation problem of (\ref{eq:mo_tournament_optimisation})
-is maximized using Bayesian optimisation. Bayesian optimisation is a
-global optimisation algorithm, introduced in~\cite{Mokus1978}, which has proven to
-outperform many other popular algorithms~\cite{Jones2001}.
+In this section best responses are explored numerically. Best responses are
+estimated using the Bayesian optimisation algorithm. Bayesian optimisation is a
+global optimisation algorithm, introduced in~\cite{Mokus1978}, which has proven
+to outperform many other popular algorithms~\cite{Jones2001}. Differential
+evolution had also been considered, however it was not chosen due to Bayesian
+being computationally faster.
 
-Bayesian optimisation constructs a probabilistic
-model for \(f\) and then exploits this model to make decisions about where in the
-bounded set to next evaluate the function. It relies on the prior information
-and does not simply rely on local gradient and Hessian approximations.
-This allows the algorithm to optimise a non concave function with relatively few
-evaluations, at the cost of performing more computation to determine the next point
-to try~\cite{snoek2012}.
+The algorithm can be used to solve the problem of
+(\ref{eq:mo_tournament_optimisation}). Consider an example
+where \(N=2\), for a given number of calls the algorithm tries to find \(p^*\)
+such that the utility is maximized. Figure~\ref{bayesian_example} illustrates
+the change of the utility function over number of calls.
 
-The open source package~\cite{Head2018} offers an implementation of bayesian
-optimisation and is used in this paper to compute a large number of best memory
-one responses against sets of random memory one strategies. The implementation
-of bayesian in~\cite{Head2018} allows us to perform the algorithm for a
-different combination of parameters.  The parameters explored here are:
+The default number of iterations that have been used in this work is 60. After
+the 60 calls the convergence of the utility is checked. If it is not then the
+calls are increased by 20, this step is then repeated until the utility reaches
+convergence.
+
+\begin{figure}[!htbp]
+    \begin{center}
+    \includegraphics[width=.5\linewidth]{img/bayesian_example.pdf}
+    \end{center}
+    \caption{Utility over time of calls using Bayesian optimisation. The
+    opponents are \(q^{(1)} = (\frac{1}{3}, \frac{1}{3}, \frac{1}{3},
+    \frac{1}{3})\) and \(q^{(2)} = (\frac{1}{3}, \frac{1}{3},
+    \frac{1}{3}, \frac{1}{3})\).}
+    \label{bayesian_example}
+\end{figure}
+
+A series of experiments are carried out and Bayesian optimisation is used to
+estimate the best responses for different settings. Such as:
 
 \begin{itemize}
-    \item Number of calls, maximum number of calls to the objective function.
-    \item Number of random starts, number of evaluations of the objective function
-    with random points before approximating it.
+    \item Memory one best responses to \(N=2\) opponents.
+    \item Memory one best responses in evolutionary dynamics.
+    \item Longer memory best responses.
 \end{itemize}
 
-A total of 9900 different memory one opponents were randomly generated and
-Bayesian optimisation was used to find the optimal reactive strategy. The
-results were compared to that of Lemma~\ref{lemma:reactive_best_response} which
-is used to obtain the exact optimal.  The results of this comparison are
-presented by Table~\ref{table:bayesian_excact_difference}.
+The details of the experiments and their results are presented in the following
+subsections.
 
-\begin{table}[htbp]
-    \begin{center}
-        % TODO Fix the column names "Parameters"
-    \input{tex/bayesian_proof.txt}
-    \caption{Difference of \(u_q(p)\) for \(p \in \R_{[0, 1]} ^ 2\). The difference was
-    calculated as exact \(u_q(p ^ *)\) minus Bayesian \(u_q(\tilde{p} ^ *)\).}
-    \label{table:bayesian_excact_difference}
-    \end{center}
-\end{table}
+\subsection{Memory one best responses for \(N=2\)}\label{subsection:best_response_n_2}
 
-The combination that was chosen to carry out the empirical trials is that
-of 50 number of calls and 20 number of random starts. This set of parameters
-was determined to be the most efficient using best reactive responses as an experimental
-case.
+The first experiment that has been carried out is estimating the memory one
+best responses in a tournament with two opponents. \(N=2\) has been chosen as it's
+the smallest size of a tournament. For each trial of the experiment a set of
+2 opponents is randomly generated, the memory one best response against them
+is calculated and it's behaviour is being recorded. A total of 1000 trials have
+been recorded. The data have archived and found at.
 
-% TODO Perhaps include a training plot as an example?
+Though the probabilities \(q_i\) of the opponents are randomly generated,
+Figure~\ref{fig:opponents_probabilities} shows that they are uniformly distributed.
+Thus, the space full space of possible opponents has been covered.
 
-Bayesian optimisation finds the optimal
-behaviour of reactive strategies. The very same set of parameters will now be
-used to optimise
-memory one strategies against single opponents and against
-sets of \(N=2\) opponents. \(N=2\) was chosen because is the smallest \(N\) for
-which there is a multi opponent interaction. For each \(N=1\) and \(N=2\) opponents a
-total of 1022 best responses of memory one strategies have been captured. This data has
-been archived in.
-% TODO: add ZD after our paper is on pre-print?!
+\begin{figure}[!htbp]
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/first_opponent_probabilities.pdf}
+        \subcaption{Distributions of opponents' probabilities.}
+        \label{fig:opponents_probabilities}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/second_opponent_probabilities.pdf}
+        \subcaption{Distributions of opponents' probabilities.}
+        \label{fig:opponents_probabilities}
+    \end{subfigure}
+\end{figure}
 
-Note that another global optimization algorithm called differential evolution~\cite{Storn1997}
-was also evaluated. Bayesian optimization was
-chosen over differential evolution due to a lower computational cost and
-comparable results.
+Section~\ref{section:introduction} discussed ZD strategies and their robustness
+against a single opponent. ZD strategies control their opponent's score and thus
+are able to always receive a higher payoff than them. In tournament settings,
+where more than 2 strategies interact, winning at each single interaction does
+not guaranty a strategy's overall win. This manuscript argues that ZD do not
+receive the most favoured payoff from their interactions and thus come sort in a
+tournament setting environment.
 
+Best responses are strategies that aim to gain the most of their entire opponent
+set. In [Knight 2019] a method of measuring the extortionate behaviour of a
+strategy, based on it's estimated probabilities, has been defined. The method
+allows to estimate the error of behaving as a ZD strategy, SSerror. The SSerror
+method is applied on the data set of this work. The distribution of the error is
+shown in Figure~\ref{fig:sserror_mem_one} and a statistics summary by
+Table~\ref{table:sserror_stats} (outliers have been removed).
 
-\section{Best response dynamics}
+The mean and median of the SSerror are estimated at 1.5. With a tolerance of 0.1,
+only 25 percent of the memory one best responses appear to be behaving in an
+extortionate way. Moreover, a positive measure of skewness \((=0.94)\), indicates
+that the distribution is skewed to the right. 
 
-As we briefly discussed in Section~\ref{section:utility}, the IPD is commonly
-studied in Moran Process, and generally in evolutionary processes. In
+\begin{figure}
+    \begin{minipage}{0.59\textwidth}
+            \begin{center}
+            \includegraphics[width=\linewidth]{img/best_respones_sserror_remove_outliers.pdf}
+            \end{center}
+            \caption{Distribution of sserrors for memory one best responses, when \(N=2\).}
+            \label{fig:sserror_mem_one}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.39\textwidth}
+        \centering
+        \captionsetup{type=table}
+        \resizebox{.4\columnwidth}{!}{%
+            \input{tex/sserror_table_no_outliers.tex}}
+            \caption{Summary statistics SSerror}
+            \label{table:sserror_stats}
+      \end{minipage}
+\end{figure}
+
+Overall only a very small percentage of the best responses seem to behaving in
+an extortionate way, confirming our original hypothesis. That ZD strategies do
+not gain the maximum outcome from their interactions. The following section the
+second experiment and the result of memory one best responses in evolutionary
+dynamics are presented.
+
+\subsection{Memory one best responses in evolutionary dynamics}
+
+As briefly discussed in Section~\ref{section:utility}, the IPD is commonly
+studied in Moran Processes, and generally in evolutionary processes. In
 evolutionary processes, a finite population is assumed where the strategies that
 compose the population can adapt and change their behaviour based on the
 outcomes of their interactions at each turn. A key in successfully being an
@@ -730,15 +778,16 @@ evolution stable strategy (ESS) is self interactions. An ESS must be a best
 response not only to the opponents in the population, but also it has to be a
 best response to it's self.
 
-Self interactions can easily be incorporated in the formulation that we have
-be used so far. The utility of a memory one strategy in an evolutionary setting
+Self interactions can easily be incorporated in the formulation that has been used
+in this paper. The utility of a memory one strategy in an evolutionary setting
 is given by,
 
 \begin{equation}
     \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + u_p(p).
 \end{equation}
 
-and respectively the optimisation problem is now re written as,
+and respectively the optimisation problem of (\ref{eq:mo_tournament_optimisation})
+is now re written as,
 
 \begin{equation}\label{eq:mo_evolutionary_optimisation}
     \begin{aligned}
@@ -764,7 +813,15 @@ Moreover, in the theory of potential games, best response dynamics
 refers to a way of finding a pure Nash equilibrium by computing the best response for
 every player~\cite{Nisan2007}. Here we defined a combination of the two methods.
 
-\input{tex/best_response_dynamics_algorithm}
+%\input{tex/best_response_dynamics_algorithm}
+
+\begin{algorithm}[H]
+    $p^{(t)}\leftarrow (1, 1, 1, 1)$\;
+    \While{$p^{(t)}$ not converged}{
+     $p^{(t + 1)} =  \text{argmax} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p + 1) + u_p(p + 1)$\;
+    }
+    \caption{Best response dynamics Algorithm}
+\end{algorithm}
 
 Numerical simulations have been carried out to visualise how the algorithm
 convergences after a few iterations. In Figure~\ref{fig:best_response_dynamics_results},
@@ -776,49 +833,83 @@ it is shown that the algorithm stops once the shame point has been evaluated.
 
 \begin{figure}
     \centering
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=.6\textwidth]{img/evolution_example_one.pdf}
-        \subcaption{Best response dynamics with \(N=2\). More specifically, for
-        \(q ^{(1)}=(0.9560,
-                   0.9478,
-                   0.0565,
-                   0.0848)\) and
-        \(q ^{(2)}=(0.8354,
-                    0.7359,
-                    0.6697,
-                    0.3081)\).}
-    \end{subfigure}
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=.6\textwidth]{img/evolution_example_two.pdf}
-        \subcaption{Best response dynamics with \(N=2\). More specifically, for
-        \(q ^{(1)}=(0.2360,
-                    0.1031,
-                    0.3960,
-                    0.1549)\) and
-        \(q ^{(2)}=(0.0665,
-                    0.4015,
-                    0.9179,
-                    0.8004)\).}
-    \end{subfigure}
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=.6\textwidth]{img/evolution_example_three.pdf}
-        \subcaption{Best response dynamics with \(N=2\). More specifically, for
-        \(q ^{(1)}=(0.4630 ,
-                    0.3733,
-                    0.1385,
-                    0.8665)\) and
-        \(q ^{(2)}=(0.0064,
-                    0.5027 ,
-                    0.8982, 
-                    0.0808)\).}
-    \end{subfigure}\caption{Best response dynamics numerical experiments.}
-    \label{fig:best_response_dynamics_results}
+    \includegraphics[width=.6\textwidth]{img/evolution_example_two.pdf}
+    \caption{Best response dynamics with \(N=2\). More specifically, for
+    \(q ^{(1)}=(0.2360,
+                0.1031,
+                0.3960,
+                0.1549)\) and
+    \(q ^{(2)}=(0.0665,
+                0.4015,
+                0.9179,
+                0.8004)\).}
+\label{fig:best_response_dynamics_results}
 \end{figure}
 
-\section{Limitation of memory}
+Using the same opponents space as described in Section~\ref{subsection:best_response_n_2},
+memory one best evolutionary responses have also been estimated for each trial.
+The SSerror for the EVOs is shown in figure~\ref{fig:sserror_mem_one} and
+a statistical summary is given by Table~\ref{table:sserror_stats} (outliers have been
+removed).
+
+The mean and median of the EVO SSerror are estimated at 1.5, same to the memory
+one best responses. It's confirm using a t\-test that there is no significant
+difference between the means (p-value \(=0\)). A higher value of skewness
+indicates a slightly bigger shift to the right.
+
+\begin{figure}
+    \begin{minipage}{0.59\textwidth}
+            \begin{center}
+            \includegraphics[width=\linewidth]{img/evo_sserror_remove_outliers.pdf}
+            \end{center}
+            \caption{Distribution of sserrors for memory one best responses, when \(N=2\)}
+            \label{fig:sserror_mem_one}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.39\textwidth}
+        \centering
+        \captionsetup{type=table}
+        \resizebox{.41\columnwidth}{!}{%
+            \input{tex/evo_sserror_table_no_outliers.tex}}
+            \caption{Summary statistics SSerror}
+            \label{table:sserror_stats}
+      \end{minipage}
+\end{figure}
+
+Similarly to the previous results EVOs do not appear to behave in an extortionate
+way. An overview of the difference in behaviour of best responses and EVOs
+can be studied by examining the vector probabilities. In Figure~\ref{} the
+distributions of each of the cooperating probabilities after each of the four
+states is given. The plot has also been evaluated for the 95\% percentile
+of the distributions.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/behaviour_violin_plots.pdf}
+\end{figure}
+
+\begin{table}
+    \input{tex/medians_tests.tex}
+\end{table}
+
+\begin{table}
+    \input{tex/skew_table.tex}
+\end{table}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/best_response_correlation.pdf}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/evo_correlation.pdf}
+\end{figure}
+
+The difference betwee the 
+
+\section{Longer memory best response}
 
 % The third and final part of this paper focuses on proving that short memory strategies
 % have limitations. Though it has been proven~\cite{Press2012} that there exists a set
@@ -987,6 +1078,7 @@ it is shown that the algorithm stops once the shame point has been evaluated.
 % difference is in question. More experimental trials and exploration will be
 % carried out.
 
+\section{Conclusion}
 \appendix
 %\input{tex/appendix_tables}
 
