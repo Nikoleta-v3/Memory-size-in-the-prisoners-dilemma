@@ -423,6 +423,15 @@ The derivate \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) is given by:
 \end{align}
 }
 
+where,
+{\scriptsize
+\begin{align*}
+    Q_{N}^{(i) } & = \frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}, \\
+    Q_{N}^{(i)'} & =  pQ^{(i)} + c^{(i)}, \\
+    Q_{D}^{(i) } & = \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}, \\
+    Q_{D}^{(i)'} & =  p\bar{Q}^{(i)} + \bar{c}^{(i)}. \\
+\end{align*}}
+
 For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
 
 {\scriptsize
@@ -703,7 +712,7 @@ Figure~\ref{fig:sserror_mem_one} and Table~\ref{table:sserror_stats}.
             \begin{center}
             \includegraphics[width=\linewidth]{img/evo_sserror.pdf}
             \end{center}
-            \caption{Distribution of sserrors for memory-one best responses, when \(N=2\)}
+            \caption{Distribution of SSerrors for memory-one best responses, when \(N=2\)}
             \label{fig:sserror_mem_one}
     \end{minipage}
     \begin{minipage}{0.24\textwidth}
@@ -840,33 +849,60 @@ Figure~\ref{fig:utilities_gambler_mem_one}.
     89 different pair of opponents.}\label{fig:utilities_gambler_mem_one}
 \end{figure}
 
-Though Gambler has an infinite memory (in order to remember the opponening
-moves of the opponent) the information the strategy considers is not significally
-larger than memory-one strategies. Even so, it is evident from Figure~\ref{fig:utilities_gambler_mem_one}
-that Gambler will always performs the same or betten than a best response memory
-one strategy, thus having a longer memory is beneficial.
+Though Gambler has an infinite memory (in order to remember the opening moves of
+the opponent) the information the strategy considers is not significantly larger
+than memory-one strategies. Even so, it is evident from
+Figure~\ref{fig:utilities_gambler_mem_one} that Gambler will always performs the
+same or better than a best response memory one strategy, thus having a longer
+memory is beneficial.
 
-\begin{figure}[!htbp]
-    \begin{minipage}{0.74\textwidth}
-            \begin{center}
-            \includegraphics[width=\linewidth]{img/gambler_sserror.pdf}
-            \end{center}
-            \caption{Distribution of sserrors for Gambler($n_1 = 2,
-            m_1 = 1, m_2 = 1$).}
-            \label{fig:sserror_gambler}
-    \end{minipage}
-    \begin{minipage}{0.24\textwidth}
-        \centering
-        \captionsetup{type=table}
-        \resizebox{.75\columnwidth}{!}{%
-            \input{tex/gambler_sserror_table.tex}}
-            \caption{Summary statistics SSerror}
-            \label{table:sserror_stats}
-      \end{minipage}
-\end{figure}
+% \begin{figure}[!htbp]
+%     \begin{minipage}{0.74\textwidth}
+%             \begin{center}
+%             \includegraphics[width=\linewidth]{img/gambler_sserror.pdf}
+%             \end{center}
+%             \caption{Distribution of sserrors for Gambler($n_1 = 2,
+%             m_1 = 1, m_2 = 1$).}
+%             \label{fig:sserror_gambler}
+%     \end{minipage}
+%     \begin{minipage}{0.24\textwidth}
+%         \centering
+%         \captionsetup{type=table}
+%         \resizebox{.75\columnwidth}{!}{%
+%             \input{tex/gambler_sserror_table.tex}}
+%             \caption{Summary statistics SSerror}
+%             \label{table:sserror_stats}
+%       \end{minipage}
+% \end{figure}
 
 \section{Conclusion}
 
+This manuscript considers a specific set of IPD strategies called memory-one.
+Several scientific works have explored the memory-one set and have introduced a
+series of interesting strategies, most notable the ZD strategies. Compared to
+these works this paper explores the best response memory-one strategies. In the
+earlier sections of this paper, we have studied the analytical formulation of
+best response memory-one strategies and have presented a series of theorems and
+lemmas. This included the conditions for which cooperation will not emerge
+amongst memory-one strategies.
+
+The later part of the paper focused on a series of numerical experiments that
+aimed to provided insights into memory-one strategies. Best response and
+evolutionary best response strategies demonstrated insensitive of extortionate
+behaviour, however using the method described in [Knight2019], it was confirmed
+that neither are ZD. Thus, the strategies that can gain the highest payoff from
+their environment are not the ZD strategies. Moreover, to further explore the
+limitations of memory, and subsequently the limitations of ZD strategies, a
+strategy which considers more information from the history of play has been
+trained. Gambler outperformed the best response strategy in the smallest
+possible tournament of 3 strategies. In the future, we are aiming to consider
+the performance in larger tournaments.
+
+As stated~\cite{Press2012}, ZD strategies are indeed capable of dominating a
+single one opponent, however we raise the question; Is winning in your
+interactions the most outstanding feature of a strategy? In a repeated game,
+where a strategy's reputation and overall score from it's interactions matters,
+such as the Iterated Prisoner's Dilemma, we argue that is not.
 
 \section{Acknowledgements}
 
