@@ -31,3 +31,6 @@ img/mean_average/*
 img/reactive/*
 img/convexity/*
 img/Fingerprints/*
+
+# coverage 
+.coverage*
