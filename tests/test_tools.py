@@ -75,3 +75,19 @@ def test_make_B():
     assert B.item(13) == q_4
     assert B.item(14) == q_4
     assert B.item(15) == 1
+
+
+def test_is_ZD():
+    tit_for_tat = (1, 0, 1, 0)
+    assert opt_mo.tools.is_ZD(tit_for_tat) == False
+
+    extort_two = (8 / 9, 1 / 2, 1 / 3, 0)
+    assert opt_mo.tools.is_ZD(extort_two) is True
+
+
+def test_get_least_squares():
+    vector = (1, 0, 0, 1)
+    assert np.isclose(opt_mo.tools.get_least_squares(vector), 1.23, 10 ** -2)
+
+    extort_two = (8 / 9, 1 / 2, 1 / 3, 0)
+    assert np.isclose(opt_mo.tools.get_least_squares(extort_two), 0)
