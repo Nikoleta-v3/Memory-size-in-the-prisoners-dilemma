@@ -25,6 +25,7 @@ __pycache__/*
 
 # data
 data/*
+*.DS_store
 
 # images
 img/mean_average/*

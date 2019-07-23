@@ -3,33 +3,5 @@
 The memory one strategies used in the computer tournament described in~\cite{Stewart2012}
 are given by Table~\ref{table:list_stewart_plotkin}.
 
-\begin{table}[htbp]
-    \begin{center}
-        \resizebox{\textwidth}{!}{\begin{tabular}{clclll}
-        \toprule
-        {}&  Name & Memory one representation & Explanation \\
-        \midrule
-        1  & Cooperator           & \((1, 1, 1, 1)\) & Always chooses \(C\).\\
-        2  & Defector             & \((0, 0, 0, 0)\) & Always chooses \(D\).\\
-        3  & Random               & \((\frac{1}{2}, \frac{1}{2}, \frac{1}{2}, \frac{1}{2})\) & 
-        Randomly chooses between \(C\) and \(D\) with a probability of 0.5.\\
-        4  & Tit for Tat          & \((1, 0, 1, 0)\) & Start with a \(C\) and then mimics
-        the opponent's last move.\\
-        5  & Grudger              & \((1, 0, 0, 0)\) & Starts by cooperating however
-        will defect if at any point the opponent has defected.\\
-        6  & Generous Tit for Tat & \((1, \frac{1}{3}, 1, \frac{1}{3})\) & A more generous
-        version of Tit for Tat.\\
-        7  & Win Stay Lose Shift  & \((1, 0, 0, 1)\) & Starts with a \(C\) and then
-        repeats it's previous move only if it was awarded with a payoff of \(R\) or \(T\).\\
-        8  & ZDGTFT2              & \((1, \frac{1}{8}, 1, \frac{1}{4})\) & A generous
-        zero determinant strategy introduced in~\cite{Stewart2012}\\
-        9  & ZDExtort2            & \((\frac{8}{9}, \frac{1}{2}, \frac{1}{3}, 0)\) & An
-        extortionate zero determinant strategy introduced in~\cite{Stewart2012}\\
-        10 & Hard Joss            & \((\frac{9}{10}, 0, \frac{9}{10}, 0)\) & Cooperates
-        with probability \(\frac{9}{10}\) when the opponent cooperates, otherwise emulates Tit for Tat.\\
-        \bottomrule
-    \end{tabular}}
-    \end{center}
-    \caption{The memory one strategies from~\cite{Stewart2012}.}
-    \label{table:list_stewart_plotkin}
-\end{table}
+
+\input{tex/stewart_plotkin_tournament_strategies_list.tex}

@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
     for index in range(start_index, max_index):
         axl.seed(index)
-        opponents = opponents = [
+        opponents = [
             [random.random() for _ in range(4)] for _ in range(num_of_opponents)
         ]
 

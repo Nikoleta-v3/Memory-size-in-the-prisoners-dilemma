@@ -12,7 +12,7 @@ import opt_mo
 
 def prepare_objective_optimisation(opponents):
     objective = partial(opt_mo.tournament_utility, opponents=opponents)
-    return lambda x: -objective(x)
+    return lambda x: -objective(x) if np.isnan(objective(x)) is False else 100
 
 
 def get_memory_one_best_response(
