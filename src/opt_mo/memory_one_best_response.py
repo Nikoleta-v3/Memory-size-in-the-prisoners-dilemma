@@ -12,7 +12,11 @@ import opt_mo
 
 def prepare_objective_optimisation(opponents):
     objective = partial(opt_mo.tournament_utility, opponents=opponents)
-    return lambda x: -objective(x) if np.isnan(objective(x)) is False else 100
+    return (
+        lambda x: -objective(x)
+        if (np.isnan(objective(x)) == False and np.isinf(objective(x)) == False)
+        else 100
+    )
 
 
 def get_memory_one_best_response(
@@ -25,7 +29,7 @@ def get_memory_one_best_response(
     """
     Approximates the best response memory one strategy using bayesian optimisation.
     """
-    bounds = [(0, 1.0 - 1 * 10 ** -8) for _ in range(4)]
+    bounds = [(0, 1.0) for _ in range(4)]
     objective = prepare_objective_optimisation(opponents=opponents)
 
     method_params = {"n_random_starts": n_random_starts, "n_calls": n_calls}

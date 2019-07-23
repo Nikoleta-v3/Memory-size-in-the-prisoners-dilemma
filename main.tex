@@ -44,16 +44,17 @@
 \maketitle
 
 \begin{abstract}
-    Memory-one strategies are a set of iterated prisoner’s dilemma strategies
-    that have been praised for their mathematical tractability and robustness.
-    This manuscript investigates \textit{best response} memory-one strategies
-    and studies them as a multidimensional optimisation problem. Though extortionate
-    memory-one strategies have gained much attention, we prove that best response
-    memory-one strategies do not behave in an extortionate way. For memory
-    one strategies to be evolutionary robust they need to be able to behave in a
-    forgiving way. We also provide evidence that memory-one strategies suffer
-    from the limitation of their memory and can be out performed in multi agent
-    interactions by longer memory strategies.
+    Memory-one strategies are a set of Iterated Prisoner's Dilemma strategies
+    that have been praised for their mathematical tractability and performance
+    against single opponents. This manuscript investigates \textit{best
+    response} memory-one strategies and studies them as a multidimensional
+    optimisation problem. Though extortionate memory-one strategies have gained
+    much attention, we prove that best response memory-one strategies do not
+    behave in an extortionate way, and moreover, for memory one strategies to be
+    evolutionary robust they need to be able to behave in a forgiving way. We
+    also provide evidence that memory-one strategies suffer from the limitation
+    of their memory and can be out performed in multi agent interactions by
+    longer memory strategies.
 \end{abstract}
 
 \section{Introduction}\label{section:introduction}
@@ -85,7 +86,7 @@ Constraint~(\ref{eq:pd_constrain_one}) ensures that
 defection dominates cooperation and constraint~(\ref{eq:pd_constrain_two})
 ensures that there is a dilemma; the sum of the utilities for both players is
 better when both choose to cooperate. The most common values used in the literature are
-\((3, 1, 0, 5)\)~\cite{Axelrod1981}.
+\((R, P, S, T) = (3, 1, 0, 5)\)~\cite{Axelrod1981}.
 
 
 \begin{equation}\label{eq:pd_constrain_one}
@@ -104,26 +105,25 @@ scientific community. In~\cite{Axelrod1980a} and~\cite{Axelrod1980b}, the first
 well known computer tournaments of the IPD were performed. A total of 13 and 63
 strategies were submitted respectively in the form of computer code. The
 contestants competed against each other, a copy of themselves and a random
-strategy, and the winner was then decided on the average score a strategy achieved (not
-the total number of wins). The contestants were given access to the entire
-history of a match, however, how many turns of history a strategy would
-incorporate, refereed to as the \textit{memory size} of a strategy, was a result
-of the particular strategic decisions made by the author.
-The winning strategy of both tournaments was the strategy called Tit for Tat
-and it's success, in both tournaments, came as a surprise. Tit for Tat was a
-simple, forgiving strategy that opened each interaction by cooperation,
-but it had managed to defeat far more complicated opponents. Tit for Tat provided
-evidence that being nice can be advantageous and became the major
-paradigm for reciprocal altruism.
+strategy, and the winner was then decided on the average score achieved (not the
+total number of wins). The contestants were given access to the entire history
+of a match, however, how many turns of history a strategy would incorporate,
+refereed to as the \textit{memory size} of a strategy, was a result of the
+particular strategic decisions made by the author. The winning strategy of both
+tournaments was the strategy called Tit for Tat and it's success, in both
+tournaments, came as a surprise. Tit for Tat was a simple, forgiving strategy
+that opened each interaction by cooperation, but it had managed to defeat far
+more complicated opponents. Tit for Tat provided evidence that being nice can be
+advantageous and became the major paradigm for reciprocal altruism.
 
-Another trait of the strategy is that it considers only the previous
-move of the opponent. These type of strategies are called \textit{reactive}
-\cite{Nowak1989} and are a subset of so called \textit{memory-one} strategies,
-which incorporate both players' recent moves. Reactive and memory-one strategies
-have been studied thoroughly in literature~\cite{Nowak1990, Nowak1993}.
-They have gained most of their attention when a curtain set of memory-one strategies
-was introduced in~\cite{Press2012}. \cite{Stewart2012} stated that ``Press and
-Dyson have fundamentally changed the viewpoint on the Prisoner's Dilemma''.
+Another trait of Tit for Tat is that it considers only the previous move of the
+opponent. These type of strategies are called \textit{reactive} \cite{Nowak1989}
+and are a subset of so called \textit{memory-one} strategies, which incorporate
+both players' latests moves. Reactive and memory-one strategies have been
+studied thoroughly in, for example~\cite{Nowak1990, Nowak1993}. They have gained
+most of their attention when a certain set of memory-one strategies was
+introduced in~\cite{Press2012}. \cite{Stewart2012} stated that ``Press and Dyson
+have fundamentally changed the viewpoint on the Prisoner's Dilemma''.
 
 Zero-determinant strategies (ZD) are a special case of memory-one and
 extortionate strategies. They chose their actions so that a linear relationship

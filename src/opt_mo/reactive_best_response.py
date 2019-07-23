@@ -196,7 +196,11 @@ def plot_reactive_utility(
 
 def prepare_reactive_objective_optimisation(opponents):
     objective = partial(reactive_utility, opponents=opponents)
-    return lambda x: -objective(x)
+    return (
+        lambda x: -objective(x)
+        if (np.isnan(objective(x)) == False and np.isinf(objective(x)) == False)
+        else 100
+    )
 
 
 def reactive_utility(p, opponents):
@@ -215,7 +219,7 @@ def get_reactive_best_response_with_bayesian(
     """
     Approximates the best response reactive strategy using bayesian optimisation.
     """
-    bounds = [(0, 1.0 - 1 * 10 ** -8) for _ in range(2)]
+    bounds = [(0, 1.0) for _ in range(2)]
     objective = prepare_reactive_objective_optimisation(opponents=opponents)
 
     method_params = {"n_random_starts": n_random_starts, "n_calls": n_calls}
