@@ -1,0 +1,32 @@
+\begin{proof} Utility \(u_q(p)\) can be written as a ratio of two quadratic forms.
+
+The utility of a memory-one player \(p\) against an opponent \(q\) its the product of the steady
+states and the PD payoffs,
+
+\[u_q(p) = v \cdot (R, S, T, P)\]
+
+where
+
+\[v = \left[\frac{v_1}{\bar{v_1}}, \frac{v_2}{\bar{v_2}}, \frac{v_3}{\bar{v_3}}, \frac{v_4}{\bar{v_4}}\right],\]
+
+where
+
+\scalebox{0.9}{\parbox{\linewidth}{%
+\begin{align*}
+    v_1 & = p_{2} p_{3} \left(q_{2} q_{4} - q_{3} q_{4}\right) + p_{2} p_{4} \left(q_{2} q_{3} - q_{2} q_{4} - q_{3} + q_{4}\right) + p_{3} p_{4} \left(- q_{2} q_{3} + q_{3} q_{4}\right) - p_{3} q_{2} q_{4} + p_{4} q_{2} q_{4} - p_{4} q_{4}\\
+    \bar{v_1} & = p_{1} p_{2} \left(q_{1} q_{2} - q_{1} q_{4} - q_{1} - q_{2} q_{3} + q_{3} q_{4} + q_{3}\right) +
+    p_{1} p_{3} \left(- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}\right)
+    + p_{1} p_{4} \left(- q_{1} q_{2} + q_{1} q_{3} + q_{1} + q_{2} q_{4} - q_{3} q_{4} - q_{4}\right)
+    \\
+    & \phantom{ {}= } - p_{1} \left(q_{1} q_{2} + q_{1} q_{4} + q_{1} \right) +
+     p_{2} p_{3} \left(- q_{1} q_{2} + q_{1} q_{3} + q_{2} q_{4} + q_{2} - q_{3} q_{4} - q_{3}\right)
+    + p_{2} p_{4} \left(- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}\right) \\
+    &\phantom{ {}= } + p_{2} \left(q_{2} q_{3} - q_{2} - q_{3} q_{4} - q_{3} + q_{4} + 1\right) + p_{3} p_{4} \left(q_{1} q_{2} - q_{1} q_{4} - q_{2} q_{3} - q_{2} + q_{3} q_{4} + q_{4}\right) \\
+    & \phantom{ {}= } + p_{3} \left(q_{1} q_{2} - q_{2} q_{3} - q_{2} + q_{3} - q_{4}\right) 
+    - p_{4} \left( q_{1} q_{4} + q_{2} + q_{3} q_{4} - q_{3} + q_{4} - 1\right) + q_{2} - q_{4} - 1
+\end{align*}
+}}
+
+\end{proof}
+
+%- p_{1}\left(q_{1} q_{2} + q_{1} q_{4} + q_{1}\right) +

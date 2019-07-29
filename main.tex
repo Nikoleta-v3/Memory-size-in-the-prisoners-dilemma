@@ -415,40 +415,25 @@ Proof is given in the Appendix.
 
 Note that there is no immediate way to find the zeros of \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\);
 
-{\scriptsize
+{\small
 \begin{align}\label{eq:mo_tournament_derivative}
     \frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) & = \nonumber \\
-    & =\frac{
-    \left( \displaystyle\sum\limits_{i=1} ^ {N} Q_{N}^{(i)'}(p) \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(j)} (p)
-     + \sum\limits_{i=1} ^ {N} Q_{N}^{(i)}(p) \sum_{\substack{j=1 \\ j \neq i}} ^ {N} Q_{D}^{(j)'} (p)
-     \prod_{\substack{k=1 \\ k \neq \{i, j\}}} ^ N Q_{D}^{(k)}(p)\right) \times
-   \prod\limits_{i=1} ^ N Q_{D}^{(i)} (p)
-  - \displaystyle \sum\limits_{i=1} ^ {N} Q_{N}^{(i)}(p) \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(j)} (p)
-   \sum\limits_{k=1} ^ {N} Q_{D}^{(k)'}(p) \prod_{\substack{l=1 \\ l \neq k}} ^ N Q_{D}^{(l)}(p)}
-    {\left(\prod\limits_{i=1} ^ N Q_{D}^{(i)}(p) \right)^{2}}
+    & =  \displaystyle\sum\limits_{i=1} ^ {N}
+    \frac{\left(pQ^{(i)} + c^{(i)}\right) \left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)
+    - \left(p\bar{Q}^{(i)} + \bar{c}^{(i)}\right) \left(\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}\right)}
+    {\left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)^ 2}
 \end{align}
 }
-
-where,
-{\scriptsize
-\begin{align*}
-    Q_{N}^{(i) }(p) & = \frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}, \\
-    Q_{N}^{(i)'}(p) & =  pQ^{(i)} + c^{(i)}, \\
-    Q_{D}^{(i) }(p) & = \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}, \\
-    Q_{D}^{(i)'}(p) & =  p\bar{Q}^{(i)} + \bar{c}^{(i)}. \\
-\end{align*}}
 
 For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
 
 {\scriptsize
 \begin{align}\label{eq:polynomials_roots}
-    \left( \displaystyle\sum\limits_{i=1} ^ {N} Q_{N}^{(i)'} \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)}
-    + \sum\limits_{i=1} ^ {N} Q_{N}^{(i)} \sum_{\substack{j=1 \\ j \neq i}} ^ {N} Q_{D}^{(i)'}
-    \prod_{\substack{k=1 \\ k \neq \{i, j\}}} ^ N Q_{D}^{(i)}\right) \times
-  \prod\limits_{i=1} ^ N Q_{D}^{(i)}
- - \displaystyle \sum\limits_{i=1} ^ {N} Q_{N}^{(i)} \prod_{\substack{j=1 \\ j \neq i}} ^ N Q_{D}^{(i)}
-  \sum\limits_{k=1} ^ {N} Q_{N}^{(i)'} \prod_{\substack{l=1 \\ l \neq k}} ^ N Q_{D}^{(i)} &= 0, \quad {while} \\
-   \left(\prod\limits_{i=1} ^ N Q_{D}^{(i)}\right)^{2} &\neq 0.
+    \displaystyle\sum\limits_{i=1} ^ {N} \left(
+    \left(pQ^{(i)} + c^{(i)}\right) \left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)
+    - \left(p\bar{Q}^{(i)} + \bar{c}^{(i)}\right) \left(\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}\right)\right)
+    &= 0, \quad {while} \\
+    \displaystyle\sum\limits_{i=1} ^ {N} \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)} &\neq 0.
 \end{align}}
 
 Constructing the subset \(S_q\) is analytically possible. The points for any or
@@ -498,8 +483,8 @@ The results are presented in Lemma~\ref{lemma:stability_of_defection}.
     equation~(\ref{eq:mo_tournament_derivative}) which gives:
 
     \begin{equation}
-    \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})
-    \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^ N (\bar{a}^{(i)})^2
+    \sum_{i=1} ^ N \frac{(c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})}
+    {(\bar{a}^{(i)})^2}
     \end{equation}
     
     The second term \(\prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i
@@ -509,6 +494,21 @@ The results are presented in Lemma~\ref{lemma:stability_of_defection}.
     sign of the derivative is negative if and only if
     \(\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0\).
 \end{proof}
+
+\begin{figure}[!htbp]
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/population_defection_takes_over.pdf}
+        \subcaption{.}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/population_defection_fails.pdf}
+        \subcaption{.}
+    \end{subfigure}
+\end{figure}
+
+
 
 \section{Numerical experiments} \label{section:numerical_experiments}
 
@@ -628,15 +628,11 @@ In the following section this analysis is extended to an evolutionary setting.
 \subsection{Memory-one best responses in evolutionary dynamics}
 
 As briefly discussed in Section~\ref{section:utility}, the IPD is commonly
-studied in Moran Processes, and generally in evolutionary processes. In
-evolutionary processes, a finite population is assumed where the strategies that
-compose the population can adapt and change their behaviour based on the
-outcomes of their interactions at each turn. A key in successfully being an
-evolution stable strategy (ESS) is self interactions. An ESS must be a best
-response not only to the opponents in the population, but also it has to be a
-best response to it's self.
+studied in evolutionary processes where the strategies that compose the
+population can adapt and change their behaviour based on the outcomes of their
+interactions at each generation. In these processes self interactions are key.
 
-Self interactions can easily be incorporated in the formulation that has been used
+Self interactions can be incorporated in the formulation that has been used
 in this paper. The utility of a memory-one strategy in an evolutionary setting
 is given by,
 
@@ -655,23 +651,19 @@ is now re written as,
     \end{aligned}
 \end{equation}
 
-We suggest an algorithmic approach for estimating the evolutionary best response memory
-one strategy (evo) called the algorithm \textit{best response dynamics}, given
-by Algorithm~\ref{algo:best_response_dynamics}.
+% Note that exact formulate are known for given evolutionary processes, however,
+% for simplicity 17 is given to optimisation.
 
-Note that best response dynamics are commonly used in evolutionary game theory. Best
-response dynamics represent a class of strategy updating rules, where players
-strategies in the next round are determined by their best responses to some
-subset of the population, whether this might be in a large population model
-such as Moran Processes~\cite{Knight2018} or in a spatial model~\cite{Nowak1992}.
-Moreover, in the theory of potential games, best response dynamics
-refers to a way of finding a pure Nash equilibrium by computing the best response for
-every player~\cite{Nisan2007}. Here we have defined a combination of the two methods.
+Solving this can done using  \textit{best response dynamics} at detailed in
+Algorithm~\ref{algo:best_response_dynamics}.Best response dynamics are commonly
+used in evolutionary game theory. Best response dynamics represent a class of
+strategy updating rules, where players strategies in the next round are
+determined by their best responses to some subset of the population.
 
 
 \begin{algorithm}[H]
     $p^{(t)}\leftarrow (1, 1, 1, 1)$\;
-    \While{$p^{(t)}$ not converged}{
+    \While{$p^{(t)} \neq p ^{(t -1)}$}{
      $p^{(t + 1)} =  \text{argmax} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)}
      (p^{(t + 1)}) + u_p^{(t)}(p^{(t + 1)})$\;
     }
@@ -679,18 +671,10 @@ every player~\cite{Nisan2007}. Here we have defined a combination of the two met
     \label{algo:best_response_dynamics}
 \end{algorithm}
 
-The algorithm starts by setting an initial solution \(p^{(1)}=(1, 1, 1, 1)\).
-Though a more optimal set of probabilities could be considered for an initial
-solution, it has been shown that the algorithm converges to same optimal
-solution even with more optimal starts. Once the initial solution is given then
-\(p^{(2)}\) is estimated as the best response memory-one to the \(N\) opponents
-plus to \((1, 1, 1, 1)\). The current solution then changes to be the new best
-response memory-one, \(p^{(2)}\). In the next step, \(p^{(3)}\) is the best
-response memory-one to the \(N\) opponents plus to \(p^{(2)}\). This is repeated
-until the same algorithms returns a solution that has already been evaluated.
-This is done in order to avoid cycles.
-Figure~\ref{fig:best_response_dynamics_results} illustrates a numerical example.
-The algorithm stops once it evaluates the same point again.
+The algorithm starts by setting an initial solution \(p^{(1)}=(1, 1, 1, 1)\)
+and repeatedly finds a strategy that maximises (\ref{eq:mo_evolutionary_optimisation})
+using the numerical approach described in Section~\ref{section:numerical_experiments}.
+A numerical example is given in Figure~\ref{fig:best_response_dynamics_results}.
 
 \begin{figure}[!htbp]
     \centering
@@ -707,19 +691,24 @@ The algorithm stops once it evaluates the same point again.
 \label{fig:best_response_dynamics_results}
 \end{figure}
 
-For each pair of opponents, from [ref], we have also recorder the evo
-strategy. Thus, a total of 1643 different evos have been estimated. Similarly,
-to previous results, the evo strategy does not behave as a ZD. A larger value
-of both the kurtosis and the skewness of the SSerror distribution indicate that
-evo is more variant, thus adaptable, than the equivalent best response,
-Figure~\ref{fig:sserror_mem_one} and Table~\ref{table:sserror_stats}.
+For each of the 1643 pairs of opponents, from Section~\ref{subsection:best_response_n_2},
+the best response in an evolutionary setting has been obtained, again using
+Bayesian optimisation. The distribution of SSerrors for the best response using
+evolutionary dynamics is given in Figure~\ref{fig:sserror_mem_one} and the
+statistical summary for the distribution in Table~\ref{table:sserror_stats}.
+
+Similarly to the results of Section~\ref{subsection:best_response_n_2}, the
+evolutionary best response strategy does not behave uniformly as ZD. A larger
+value of both the kurtosis and the skewness of the SSerror distribution indicate
+that evolutionary best response is more adaptable than the equivalent best
+response.
 
 \begin{figure}[!htbp]
     \begin{minipage}{0.74\textwidth}
             \begin{center}
             \includegraphics[width=\linewidth]{img/evo_sserror.pdf}
             \end{center}
-            \caption{Distribution of SSerrors for memory-one best responses, when \(N=2\)}
+            \caption{Distribution of SSerrors for evolutionary memory-one best responses, when \(N=2\)}
             \label{fig:sserror_mem_one}
     \end{minipage}
     \begin{minipage}{0.24\textwidth}
@@ -732,42 +721,12 @@ Figure~\ref{fig:sserror_mem_one} and Table~\ref{table:sserror_stats}.
       \end{minipage}
 \end{figure}
 
-To further understand the difference between the best response and evo
-memory-one strategy we consider the distributions of their respective transition
-probabilities \((p_1, p_2, p_3, p_4)\), Figure~\ref{fig:behaviour_violin_plots}.
-Though there is no significant difference between the medians of each
-distribution, Table~\ref{table:wilcoxon_tests}, it is evident from
-Figure~\ref{fig:behaviour_violin_plots} that there is variation in the
-behaviors. Except from the case of \(p_3\). If a strategy manages to get away
-with a defection, and receives a temptation payoff, the strategy will most
-certainly try another defection in the next round. That is true for both best
-response and evo memory-one.
-
-Regarding the cases of \(p_1, p_2\) and \(p_4\):
-
-\begin{itemize}
-    \item After the \(CC\) state where a mutual cooperation has occurred, the best
-    responses memory-one strategy will make a binomial choice cooperation and defection.
-    It is more likely however, that it will defect
-    break the cycle of cooperation. In comparison the evo strategy is more stochastic. The
-    two extreme peaks do not appear in the case of evo, and overall there is a
-    slightly bigger insensitive for cooperation in the next round.
-    \item Following the state of \(CD\), a state that a strategy has been tricked, a best
-    response memory-one strategy will very quickly punish it's opponent.
-    On the other hand, the evo strategy is slightly more likely
-    to cooperate again, to forgive it's opponent. This could be a result of
-    self interaction and evo avoiding to punish a copy of themselves.
-    \item Finally, in cases that a mutual defection has occur, the evo's probability
-    of cooperating again is practically zero. Evo is not a forgiving strategy after a mutual
-    defection, whereas a best response strategy is.
-\end{itemize}
-
-The difference of between the distributions of the transition probabilities has
-also been calculated to further confirm our results. This was done by
-subtracting the \(p\) of a best response memory one from the evo strategy. The
-differences are given in Figure~\ref{fig:distances}. An interested point is that
-the difference in \(p_2\) is following a normal distribution. \textit{This is
-interesting. Why?}
+Figure~\ref{fig:behaviour_violin_plots} compares the tournament and evolutionary
+best responses. Table~\ref{table:wilcoxon_tests} details that no statistically
+significant differences have been found. However, from Figure~\ref{fig:behaviour_violin_plots},
+it seems that evolutionary best response is less likely to forgive after mutual
+defection whilst it is more likely to forgive after being tricked (higher $p_2$
+median).
 
 \begin{figure}[!htbp]
     \centering
@@ -779,25 +738,13 @@ interesting. Why?}
 
 \begin{table}
     \centering
-    \resizebox{.61\columnwidth}{!}{%
+    \resizebox{.5\columnwidth}{!}{%
     \input{tex/medians_tests.tex}}
     \caption{A non parametric test, Wilcoxon Rank Sum, has been performed to
     tests the difference in the medians. A non parametric test is used because
-    is evident that out data are skewed.}\label{table:wilcoxon_tests}
+    is evident that the data are skewed.}\label{table:wilcoxon_tests}
 \end{table}
 
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=.8\textwidth]{img/distances.pdf}
-    \caption{Differences of \(p_{(i)}\) for \(i \in \{1, 2, 3, 4\}\) between evos
-    and best responses at each trial.}
-    \label{fig:distances}
-\end{figure}
-
-\begin{center}
-\resizebox{.41\columnwidth}{!}{%
-\input{tex/skew_table.tex}}
-\end{center}
 
 \subsection{Longer memory best response}
 
@@ -805,24 +752,22 @@ The third and final case considered in this paper focuses on proving that short
 memory strategies have limitations. In this section we present several empirical
 results that show that longer memories strategies can indeed perform better in
 cases of \(N=2\). This is achieved by comparing the performance of an optimised
-memory-one strategy to that of a trained long memory-one. The longer memory
-strategy selected is a strategy called \textit{Gambler}, introduced and
-discussed in~\cite{Harper2017}. A Gambler strategy makes probabilistic decisions
-based on the opponent's first moves \(n_1\), the opponent's last moves \(m_1\)
-and the player's last moves \(m_2\). This manuscript considers Gambler($n_1 = 2,
-m_1 = 1, m_2 = 1$). By considering the opponent's first two moves, the opponents
-last move and the player's last move, there are only 16 possible outcomes that
-can occur. Gambler also makes a probabilistic decision of cooperating in the
-first move. Combining these Gambler can then be written rigorously as:
+memory-one strategy to that of a trained long memory-one.
 
-\begin{equation}\label{eq:gambler}
-    F: \{\text{C, D}\}^{4 \cup 1} \rightarrow (0, 1)_{\R}
-\end{equation}
+The longer memory strategy selected is a strategy called \textit{Gambler},
+introduced and discussed in~\cite{Harper2017}. A Gambler strategy makes
+probabilistic decisions based on the opponent's \(n_1\) first moves, the
+opponent's \(m_1\) last moves and the player's \(m_2\) last moves. This
+manuscript considers $n_1 = 2, m_1 = 1$ and $m_2 = 1$. By considering the
+opponent's first two moves, the opponents last move and the player's last move,
+there are only 16 possible outcomes that can occur. Gambler also makes a
+probabilistic decision of cooperating in the first move. Combining these Gambler
+is a function \(f: \{\text{C, D}\}^{4 \cup 1} \rightarrow (0, 1)_{\R}\)
 
-So this can be hard coded as an element of \((0, 1)_{\R} ^ {16 + 1}\) one
-probability for each outcome plus the opening move. This is a 17 dimensional
-problem, which is solved numerically using Bayesian optimisation. The optimisation
-problem is given by:
+So this can be hard coded as an element of \([0, 1]_{\R} ^ {16 + 1}\) one
+probability for each outcome plus the opening move.Thus in comparison to (),
+finding and optimal Gambler is a 17 dimensional problem, which is solved
+numerically using Bayesian optimisation. The optimisation problem is given by:
 
 \begin{equation}\label{eq:gambler_optimisation}
     \begin{aligned}

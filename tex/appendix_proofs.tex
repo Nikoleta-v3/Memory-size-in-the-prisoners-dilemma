@@ -2,45 +2,7 @@
 
 \subsection{Theorem 3}
 
-\begin{proof}
-    A function \(f(x)\) is said to be concave on an interval \([a, b]\) if, for any
-    points \(x_1\) and \(x_2 \in [a, b]\), the function \(-f(x)\) is convex on that
-    interval.
 
-    A function \(f(x)\) is convex on an interval \([a, b]\) if for any two
-    points \(x_1\) and \(x_2\) in \([a, b]\) and any \(\lambda\) where \(0 < \lambda < 1\),
-
-    \begin{equation}\label{def:convex}
-    f (\lambda x_1 + (1 - \lambda )x_2 ) \leq \lambda f (x_1 ) + (1 - \lambda )f (x_2 ).
-    \end{equation}
-
-    Let \(f\) be
-    \(u_{(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, \frac{1}{3})}\) it can be shown
-    that
-    for \(x_1 = (\frac{1}{4}, \frac{1}{2}, \frac{1}{5} , \frac{1}{2}),
-    x_2 = (\frac{8}{10}, \frac{1}{2}, \frac{9}{10} , \frac{7}{10})\) and
-    \(\lambda=\frac{1}{10}\)
-    condition (\ref{def:convex}) does not hold as: \(1.49 \geq 1.48\).
-
-    In~\cite{Anton2014} it is stated that a quadratic form will
-    be concave if and only if it's symmetric matrix is negative semi definite.
-    A matrix\(A\) is semi-negative definite if:
-
-    \begin{equation}\label{def:semi_negative}
-    |A|_i \leq 0 \text{ for } i \text{ is odd and } |A|_i \geq 0  \text{ for } i
-    \text{ is even.}
-    \end{equation}
-
-    For both \(Q\) and \(\bar{Q}\) it is exhibited that for \(i=2\) (odd):
-    % TODO What do you mean by "exhibited"?
-
-    \[|Q|_2 = - \left(q_{1} - q_{3}\right)^{2} \left(q_{2} - 5 q_{4} - 1\right)^{2},\]
-    \[|\bar{Q}|_2 =- \left(q_{1} - q_{3}\right)^{2} \left(q_{2} - q_{4} - 1\right)^{2}\]
-
-    both determinants are negative, thus the concavity condition
-    (\ref{def:semi_negative})
-    fails for both quadratic forms.
-\end{proof}
 
 
 \subsection{Lemma 4}
