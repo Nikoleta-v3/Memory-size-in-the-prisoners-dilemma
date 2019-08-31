@@ -1,32 +1,102 @@
-\begin{proof} Utility \(u_q(p)\) can be written as a ratio of two quadratic forms.
+\begin{proof} The utility of a memory one player \(p\) against an opponent \(q\),
+\(u_q(p)\), can be written as a ratio of two quadratic forms on \(R^4\).
 
-The utility of a memory-one player \(p\) against an opponent \(q\) its the product of the steady
-states and the PD payoffs,
+In Section~\ref{section:utility}, it was discussed that \(u_q(p)\) its the product
+of the steady states \(v\) and the PD payoffs,
 
-\[u_q(p) = v \cdot (R, S, T, P)\]
+\[u_q(p) = v \cdot (R, S, T, P).\]
 
-where
+More specifically,
 
-\[v = \left[\frac{v_1}{\bar{v_1}}, \frac{v_2}{\bar{v_2}}, \frac{v_3}{\bar{v_3}}, \frac{v_4}{\bar{v_4}}\right],\]
+\begingroup
+\footnotesize
+\begin{equation}
+    u_q(p) =
+    \left(
+      \frac
+        {\parbox{6in}{$
+            p_{1} p_{2} (q_{1} q_{2} - 5 q_{1} q_{4} - q_{1} - q_{2} q_{3} + 5 q_{3} q_{4} + q_{3}) + p_{1} p_{3} (- q_{1} q_{3} + q_{2} q_{3}) + p_{1} p_{4} (5 q_{1} q_{3} - 5 q_{3} q_{4}) + p_{3} p_{4} (- 3 q_{2} q_{3} + 3 q_{3} q_{4}) +$ \\
+            \hspace*{1cm} $ p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3} + 3 q_{2} q_{4} + q_{2} - 3 q_{3} q_{4} - q_{3}) + p_{2} p_{4} (- 5 q_{1} q_{3} + 5 q_{1} q_{4} + 3 q_{2} q_{3} - 3 q_{2} q_{4} + 2 q_{3} - 2 q_{4}) + $ \\
+            \hspace*{1cm} $ p_{1} (- q_{1} q_{2} + 5 q_{1} q_{4} + q_{1}) + p_{2} (q_{2} q_{3} - q_{2} - 5 q_{3} q_{4} - q_{3} + 5 q_{4} + 1) + p_{3} (q_{1} q_{2} - q_{2} q_{3} - 3 q_{2} q_{4} - q_{2} + q_{3}) +$ \\
+            \hspace*{4cm} $ p_{4} (- 5 q_{1} q_{4} + 3 q_{2} q_{4} + 5 q_{3} q_{4} - 5 q_{3} + 2 q_{4}) + q_{2} - 5 q_{4} - 1$
+        }}
+        {\parbox{6in}{$
+        p_{1} p_{2} (q_{1} q_{2} - q_{1} q_{4} - q_{1} - q_{2} q_{3} + q_{3} q_{4} + q_{3}) + p_{1} p_{3} (- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}) + p_{1} p_{4} (- q_{1} q_{2} + q_{1} q_{3} + q_{1} + q_{2} q_{4} - q_{3} q_{4} - q_{4}) +$ \\
+        $ p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3} + q_{2} q_{4} + q_{2} - q_{3} q_{4} - q_{3}) + p_{2} p_{4} (- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}) + p_{3} p_{4} (q_{1} q_{2} - q_{1} q_{4} - q_{2} q_{3} - q_{2} + q_{3} q_{4} + q_{4}) + $ \\
+        $ p_{1} (- q_{1} q_{2} + q_{1} q_{4} + q_{1}) + p_{2} (q_{2} q_{3} - q_{2} - q_{3} q_{4} - q_{3} + q_{4} + 1) + p_{3} (q_{1} q_{2} - q_{2} q_{3} - q_{2} + q_{3} - q_{4}) + p_{4} (- q_{1} q_{4} + q_{2} + q_{3} q_{4} - q_{3} + q_{4} - 1) + $ \\
+        \hspace*{7cm} $q_{2} - q_{4} - 1$
+      }}
+    \right)
+\end{equation}
+\endgroup
 
-where
+Let's consider the numerator of the \(u_q(p)\). The cross product terms, \(p_ip_j\),
+are given by
 
-\scalebox{0.9}{\parbox{\linewidth}{%
+\begingroup
+\footnotesize
 \begin{align*}
-    v_1 & = p_{2} p_{3} \left(q_{2} q_{4} - q_{3} q_{4}\right) + p_{2} p_{4} \left(q_{2} q_{3} - q_{2} q_{4} - q_{3} + q_{4}\right) + p_{3} p_{4} \left(- q_{2} q_{3} + q_{3} q_{4}\right) - p_{3} q_{2} q_{4} + p_{4} q_{2} q_{4} - p_{4} q_{4}\\
-    \bar{v_1} & = p_{1} p_{2} \left(q_{1} q_{2} - q_{1} q_{4} - q_{1} - q_{2} q_{3} + q_{3} q_{4} + q_{3}\right) +
-    p_{1} p_{3} \left(- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}\right)
-    + p_{1} p_{4} \left(- q_{1} q_{2} + q_{1} q_{3} + q_{1} + q_{2} q_{4} - q_{3} q_{4} - q_{4}\right)
-    \\
-    & \phantom{ {}= } - p_{1} \left(q_{1} q_{2} + q_{1} q_{4} + q_{1} \right) +
-     p_{2} p_{3} \left(- q_{1} q_{2} + q_{1} q_{3} + q_{2} q_{4} + q_{2} - q_{3} q_{4} - q_{3}\right)
-    + p_{2} p_{4} \left(- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}\right) \\
-    &\phantom{ {}= } + p_{2} \left(q_{2} q_{3} - q_{2} - q_{3} q_{4} - q_{3} + q_{4} + 1\right) + p_{3} p_{4} \left(q_{1} q_{2} - q_{1} q_{4} - q_{2} q_{3} - q_{2} + q_{3} q_{4} + q_{4}\right) \\
-    & \phantom{ {}= } + p_{3} \left(q_{1} q_{2} - q_{2} q_{3} - q_{2} + q_{3} - q_{4}\right) 
-    - p_{4} \left( q_{1} q_{4} + q_{2} + q_{3} q_{4} - q_{3} + q_{4} - 1\right) + q_{2} - q_{4} - 1
+p_{1} p_{2} (q_{1} q_{2} - 5 q_{1} q_{4} - q_{1} - q_{2} q_{3} + 5 q_{3} q_{4}
++ q_{3}) + p_{1} p_{3} (- q_{1} q_{3} + q_{2} q_{3}) + p_{1} p_{4} (5 q_{1} q_{3} -
+5 q_{3} q_{4}) + p_{3} p_{4} (- 3 q_{2} q_{3} + 3 q_{3} q_{4}) +  \\
+p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3} + 3 q_{2} q_{4} + q_{2} - 3 q_{3} q_{4} - q_{3}) +
+p_{2} p_{4} (- 5 q_{1} q_{3} + 5 q_{1} q_{4} + 3 q_{2} q_{3} - 3 q_{2} q_{4} +
+2 q_{3} - 2 q_{4}).
 \end{align*}
-}}
+\endgroup
 
+The cross products' expression can be re written in a matrix format given by
+(\ref{eq:cross_product_coeffs}).
+
+\begin{equation}\label{eq:cross_product_coeffs}
+    \resizebox{0.8\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\( 
+    (p_1, p_2, p_3, p_4) \frac{1}{2} \input{tex/q_numerator} \begin{pmatrix} 
+    p_1 \\
+    p_2 \\
+    p_3 \\
+    p_4 \end{pmatrix}
+    \) }
+\end{equation}
+
+Note that the coefficients are multiplied by $\frac{1}{2}$ because they are
+added twice.
+
+Similarly, the linear terms,
+
+\begingroup
+\footnotesize
+\begin{align*}
+p_{1} (- q_{1} q_{2} + 5 q_{1} q_{4} + q_{1}) + p_{2} (q_{2} q_{3} - q_{2} - 5 q_{3} q_{4} - q_{3} + 5 q_{4} + 1) + p_{3} (q_{1} q_{2} - q_{2} q_{3} - 3 q_{2} q_{4} - q_{2} + q_{3}) + \\
+p_{4} (- 5 q_{1} q_{4} + 3 q_{2} q_{4} + 5 q_{3} q_{4} - 5 q_{3} + 2 q_{4}).
+\end{align*}
+\endgroup
+
+can be written using a matrix format, (\ref{eq:linear_coeffs}).
+
+\begin{equation}\label{eq:linear_coeffs}
+    \resizebox{0.38\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(
+    (p_1, p_2, p_3, p_4) \input{tex/c_numerator}\)}
+\end{equation}
+
+Finally the constant term of the numerator, which is obtained by substituting
+$p=(0, 0, 0, 0)$ is given by (\ref{eq:constant}).
+
+\begin{equation}\label{eq:constant}
+q_{2} - 5 q_{4} - 1
+\end{equation}
+
+Equations (\ref{eq:cross_product_coeffs}), (\ref{eq:linear_coeffs}) and (\ref{eq:constant})
+are combined and the numerator of can be written as,
+
+\begingroup
+\footnotesize
+\begin{align*}
+    \frac{1}{2}p & \input{tex/q_numerator} p^T +  \\
+    & \input{tex/q_numerator} p + q_{2} - 5 q_{4} - 1
+\end{align*}
+\endgroup
+
+The same process is done for the denominator.
 \end{proof}
-
-%- p_{1}\left(q_{1} q_{2} + q_{1} q_{4} + q_{1}\right) +
