@@ -91,12 +91,35 @@ Equations (\ref{eq:cross_product_coeffs}), (\ref{eq:linear_coeffs}) and (\ref{eq
 are combined and the numerator of can be written as,
 
 \begingroup
-\footnotesize
+\tiny\boldmath
 \begin{align*}
     \frac{1}{2}p & \input{tex/q_numerator} p^T +  \\
     & \input{tex/q_numerator} p + q_{2} - 5 q_{4} - 1
 \end{align*}
 \endgroup
+
+or as,
+
+\[\frac{1}{2}pQp^T + cp + a\]
+
+where \(Q\) \(\in \R^{4\times4}\) ia a square matrix whose
+diagonal elements are all equal to zero, and is defined by the
+transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
+
+\begin{equation*}
+    \resizebox{0.9\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(
+    Q = \input{tex/q_numerator}\)},
+\end{equation*}
+
+\(c\) \(\in \R^{4 \times 1}\) is similarly defined by:
+
+\begin{equation*}
+    \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(c = \input{tex/c_numerator}\),}
+\end{equation*}
+
+and \(a = \input{tex/numerator_constant}\).
 
 The same process is done for the denominator.
 \end{proof}
