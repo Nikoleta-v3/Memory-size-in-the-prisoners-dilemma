@@ -1,7 +1,7 @@
 \begin{proof} The utility of a memory one player \(p\) against an opponent \(q\),
 \(u_q(p)\), can be written as a ratio of two quadratic forms on \(R^4\).
 
-In Section~\ref{section:utility}, it was discussed that \(u_q(p)\) its the product
+In Section~\ref{section:utility}, it was discussed that \(u_q(p)\) it's the product
 of the steady states \(v\) and the PD payoffs,
 
 \[u_q(p) = v \cdot (R, S, T, P).\]
@@ -26,12 +26,12 @@ More specifically,
         $ p_{1} (- q_{1} q_{2} + q_{1} q_{4} + q_{1}) + p_{2} (q_{2} q_{3} - q_{2} - q_{3} q_{4} - q_{3} + q_{4} + 1) + p_{3} (q_{1} q_{2} - q_{2} q_{3} - q_{2} + q_{3} - q_{4}) + p_{4} (- q_{1} q_{4} + q_{2} + q_{3} q_{4} - q_{3} + q_{4} - 1) + $ \\
         \hspace*{7cm} $q_{2} - q_{4} - 1$
       }}
-    \right)
+    \right).
 \end{equation}
 \endgroup
 
-Let's consider the numerator of the \(u_q(p)\). The cross product terms, \(p_ip_j\),
-are given by
+Let's consider the numerator of the \(u_q(p)\). The cross product terms \(p_ip_j\)
+are given by,
 
 \begingroup
 \footnotesize
@@ -45,8 +45,7 @@ p_{2} p_{4} (- 5 q_{1} q_{3} + 5 q_{1} q_{4} + 3 q_{2} q_{3} - 3 q_{2} q_{4} +
 \end{align*}
 \endgroup
 
-The cross products' expression can be re written in a matrix format given by
-(\ref{eq:cross_product_coeffs}).
+This can be re written in a matrix format given by (\ref{eq:cross_product_coeffs}).
 
 \begin{equation}\label{eq:cross_product_coeffs}
     \resizebox{0.8\linewidth}{!}{\arraycolsep=2.5pt%
@@ -59,10 +58,7 @@ The cross products' expression can be re written in a matrix format given by
     \) }
 \end{equation}
 
-Note that the coefficients are multiplied by $\frac{1}{2}$ because they are
-added twice.
-
-Similarly, the linear terms,
+Similarly, the linear terms are given by,
 
 \begingroup
 \footnotesize
@@ -72,7 +68,7 @@ p_{4} (- 5 q_{1} q_{4} + 3 q_{2} q_{4} + 5 q_{3} q_{4} - 5 q_{3} + 2 q_{4}).
 \end{align*}
 \endgroup
 
-can be written using a matrix format, (\ref{eq:linear_coeffs}).
+and the expression can be written using a matrix format as (\ref{eq:linear_coeffs}).
 
 \begin{equation}\label{eq:linear_coeffs}
     \resizebox{0.38\linewidth}{!}{\arraycolsep=2.5pt%
@@ -80,15 +76,15 @@ can be written using a matrix format, (\ref{eq:linear_coeffs}).
     (p_1, p_2, p_3, p_4) \input{tex/c_numerator}\)}
 \end{equation}
 
-Finally the constant term of the numerator, which is obtained by substituting
-$p=(0, 0, 0, 0)$ is given by (\ref{eq:constant}).
+Finally, the constant term of the numerator, which is obtained by substituting
+$p=(0, 0, 0, 0)$, is given by (\ref{eq:constant}).
 
 \begin{equation}\label{eq:constant}
 q_{2} - 5 q_{4} - 1
 \end{equation}
 
-Equations (\ref{eq:cross_product_coeffs}), (\ref{eq:linear_coeffs}) and (\ref{eq:constant})
-are combined and the numerator of can be written as,
+Combining equations (\ref{eq:cross_product_coeffs}), (\ref{eq:linear_coeffs}) and (\ref{eq:constant})
+gives that the numerator of \(u_q(p)\) can be written as,
 
 \begingroup
 \tiny\boldmath
@@ -98,12 +94,11 @@ are combined and the numerator of can be written as,
 \end{align*}
 \endgroup
 
-or as,
+and equivalently as,
 
 \[\frac{1}{2}pQp^T + cp + a\]
 
-where \(Q\) \(\in \R^{4\times4}\) ia a square matrix whose
-diagonal elements are all equal to zero, and is defined by the
+where \(Q\) \(\in \R^{4\times4}\) is a square matrix defined by the
 transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
 
 \begin{equation*}

@@ -100,7 +100,7 @@ better when both choose to cooperate. The most common values used in the literat
     2R > T + S
 \end{equation}
 
-The PD is a one shot game, however it is commonly studied in a manner where the
+The PD is a one shot game, however, it is commonly studied in a manner where the
 history of the interactions matters. The repeated form of the game is called the
 Iterated Prisoner's Dilemma (IPD) and in the 1980s, following the work
 of~\cite{Axelrod1980a, Axelrod1980b} it attracted the attention of the
@@ -113,11 +113,12 @@ total number of wins). The contestants were given access to the entire history
 of a match, however, how many turns of history a strategy would incorporate,
 refereed to as the \textit{memory size} of a strategy, was a result of the
 particular strategic decisions made by the author. The winning strategy of both
-tournaments was the strategy called Tit for Tat and it's success, in both
-tournaments, came as a surprise. Tit for Tat was a simple, forgiving strategy
-that opened each interaction by cooperation, but it had managed to defeat far
-more complicated opponents. Tit for Tat provided evidence that being nice can be
-advantageous and became the major paradigm for reciprocal altruism.
+tournaments was the strategy called Tit for Tat and it's success in both
+tournaments came as a surprise. Tit for Tat was a simple, forgiving strategy
+that opened each interaction by cooperation, and had won the tournament even
+though it never scored higher than that it's opponent. Tit for Tat provided
+evidence that being nice can be advantageous and became the major paradigm for
+reciprocal altruism.
 
 Another trait of Tit for Tat is that it considers only the previous move of the
 opponent. These type of strategies are called \textit{reactive} \cite{Nowak1989}
@@ -128,11 +129,10 @@ most of their attention when a certain subset of memory-one strategies was
 introduced in~\cite{Press2012}, the zero-determinants. In~\cite{Stewart2012} it
 was stated that ``Press and Dyson have fundamentally changed the viewpoint on
 the Prisoner's Dilemma''.
-
 Zero-determinants are a special case of memory-one and extortionate
 strategies. They chose their actions so that a linear relationship is forced
 between the players' score ensuring that they will always
-receive at least as much as their opponents. Zero-determinant strategies are
+receive at least as much as their opponents. Zero-determinants are
 indeed mathematically unique and are proven to be robust in pairwise
 interactions, however, their true effectiveness in tournaments and
 evolutionary dynamics has been questioned~\cite{adami2013, Knight2018,
@@ -144,7 +144,7 @@ player to manipulate a given opponent, this work will consider a
 multidimensional optimisation approach to identify the best response to a given
 group of opponents. In particular, this work presents a compact method of
 identifying the best response memory-one strategy against a given set of
-opponents and evaluate whether it behaves extortionately, similar to
+opponents, and evaluates whether it behaves extortionately, similar to
 zero-determinants. Further theoretical and empirical results of this work
 include:
 
@@ -152,11 +152,11 @@ include:
     \item The factors that make a best response memory-one strategy evolutionary
     robust.
     \item A well designed framework that allows the comparison of an optimal
-          memory one strategy, and a more complex strategy that has a larger
+          memory one strategy and a more complex strategy which has a larger
           memory and was obtained through contemporary reinforcement learning
           techniques~\cite{Harper2017}.
-    \item An identification of conditions for which defection is known to be a
-    best response; thus identifying environments where cooperation will not
+    \item An identification of conditions for which defection is known to be
+    stable; thus identifying environments where cooperation will not
     occur.
 \end{enumerate}
 
@@ -166,15 +166,20 @@ One specific advantage of memory-one strategies is their mathematical
 tractability. They can be represented completely as an element of \(\R^{4}_{[0, 1]}\). This
 originates from~\cite{Nowak1989} where it is stated that if a strategy is
 concerned with only the outcome of a single turn then there are four possible
-`states' the strategy could be in; \(CC, CD, DC,CC\). Therefore, a memory-one
+`states' the strategy could be in; \(CC, CD, DC, DD\). Therefore, a memory-one
 strategy can be denoted by the probability vector of cooperating after each of
 these states; \(p=(p_1, p_2, p_3, p_4) \in \R_{[0,1]} ^ 4\).
 
 In~\cite{Nowak1989} it was shown that it is not necessary to simulate the play
 of a strategy $p$ against a memory-one opponent $q$. Rather this exact behaviour
 can be modeled as a stochastic process, and more specifically as a Markov chain
-(Figure~\ref{fig:markov_chain}) whose corresponding transition matrix \(M\)
-is given by (\ref{eq:transition_matrix}).
+(Figure~\ref{fig:markov_chain}) whose corresponding transition matrix \(M\) is
+given by (\ref{eq:transition_matrix}). The long run steady state probability
+vector \(v\), which is the solution to \(v M = v\), can be
+combined with the payoff matrices of (\ref{equ:pd_definition}) to give the expected
+payoffs for each player. More specifically, the utility for a memory-one
+strategy \(p\) against an opponent \(q\), denoted as \(u_q(p)\), is given by
+(\ref{eq:press_dyson_utility}).
 
 \begin{figure}
     \centering
@@ -187,19 +192,14 @@ is given by (\ref{eq:transition_matrix}).
     \input{tex/m_matrix.tex}
 \end{equation}
 
-The long run steady state probability vector \(v\) is the solution to \(v M =
-v\). The stationary vector \(v\) combined with the payoff matrices of
-(\ref{equ:pd_definition}) give the expected payoffs for each player. More
-specifically, the utility for a memory-one strategy \(p\) against an opponent
-\(q\), denoted as \(u_q(p)\), is defined by,
 
 \begin{equation}\label{eq:press_dyson_utility}
     u_q(p) = v \cdot (R, S, T, P).
 \end{equation}
 
-To the authors knowledge there has been no previous work which explored the form
-of \(u_q(p)\) any further. This manuscript proves that \(u_q(p)\) is given by a
-ratio of two quadratic forms~\cite{kepner2011}, as presented in
+This manuscript has explored the form of \(u_q(p)\), to the authors knowledge no
+previous work has done this, and it proves that \(u_q(p)\) is given by a ratio
+of two quadratic forms~\cite{kepner2011},
 Theorem~\ref{theorem:quadratic_form_u}.
 
 \begin{theorem}\label{theorem:quadratic_form_u}
@@ -211,8 +211,7 @@ Theorem~\ref{theorem:quadratic_form_u}.
     u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
                 {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}},
     \end{equation}
-    where \(Q, \bar{Q}\) \(\in \R^{4\times4}\) are square matrices whose
-    diagonal elements are all equal to zero, and are defined by the
+    where \(Q, \bar{Q}\) \(\in \R^{4\times4}\) are square matrices defined by the
     transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
 
     \begin{center}
@@ -248,9 +247,9 @@ The proof of Theorem~\ref{theorem:quadratic_form_u} is given in Appendix~\ref{ap
 Numerical simulations have been carried out to validate the formulation of
 \(u_q(p)\) as a quadratic ratio. The simulated utility, which is denoted as
 \(U_q(p)\), has been calculated using~\cite{axelrodproject} an open source
-research framework for the study of the IPD~\footnote{The project is described
-in~\cite{Knight2016}.}. For smoothing the simulated results the
-simulated utility has been estimated in a tournament of 500 turns and 200
+research framework for the study of the IPD (\cite{axelrodproject} is described
+in~\cite{Knight2016}). For smoothing the simulated results the
+utility has been estimated in a tournament of 500 turns and 200
 repetitions. Figure~\ref{fig:analytical_simulated} shows that the formulation
 of Theorem~\ref{theorem:quadratic_form_u} successfully
 captures the simulated behaviour.
@@ -270,7 +269,7 @@ and can be found at.
             \includegraphics[width=\linewidth]{img/validation_against_player_two.pdf}
         \end{subfigure}
     \end{center}
-    \caption{Simulated and analytically calculated utility for \(p = (0, 1, 0, 1)\)
+    \caption{Simulated and empirical utilities for \(p = (0, 1, 0, 1)\)
     and \(p = (0, \frac{2}{3}, \frac{1}{3}, 0)\) against \((\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, q_4)\) for
     \(q_4 \in \{0,  \frac{1}{19}, \frac{2}{19}, \dots, \frac{18}{19}, 1\}\).}
     \label{fig:analytical_simulated}
@@ -333,12 +332,13 @@ Figure~\ref{fig:hypothesis}.
     \end{center}
     \caption{The difference between the average utility against the opponents
     from~\cite{Stewart2012} and the utility against the average player of the
-    strategies in~\cite{Stewart2012}. A positive difference indicates that
-    condition (\ref{eq:condition}) does not hold.}
+    strategies in~\cite{Stewart2012} of a player \(p=(p_1, p_2, p_1, p_2)\). A
+    positive difference indicates that condition (\ref{eq:condition}) does not
+    hold.}
     \label{fig:hypothesis}
 \end{figure}
 
-In this section two theoretical results were presented. The formulation of
+Two theoretical results were presented in this section, the formulation of
 Theorem~\ref{theorem:tournament_utility} which allows for the utility of a
 memory-one strategy against any number of opponents to be estimated without
 simulating the interactions is the main result used in this manuscript. In
@@ -348,10 +348,10 @@ cooperation.
 
 \section{Best responses to memory-one players}\label{section:best_response_mem_one}
 
-This section focused on best responses and more specifically \textit{memory-one
+This section focuses on best responses and more specifically \textit{memory-one
 best response} strategies. A \textit{best response} is the strategy which
 corresponds to the most favorable outcome~\cite{Tadelis2013}, thus a memory-one
-best response corresponds to a strategy \(p^*\) for which
+best response to a set of opponents \(q^{(1)}, q^{(2)}, \dots, q^{(N)}\) corresponds to a strategy \(p^*\) for which
 (\ref{eq:tournament_utility}) is maximised. This is considered as a multi
 dimensional optimisation problem given by:
 
@@ -365,26 +365,29 @@ dimensional optimisation problem given by:
 
 Optimising this particular ratio of quadratic forms is not trivial. It can be
 verified empirically for the case of a single opponent that there exist at least
-one point for which the definition of concavity does not hold. Some results are
+one point for which the definition of concavity does not hold, see Appendix~\ref{appendix:non_concave}
+for example. Some results are
 known for non concave ratios of quadratic forms~\cite{Beck2009, Hongyan2014},
 however, in these works it's assumed that either both the numerator and the
 denominator of the fractional problem are concave or that the denominator is
-greater than zero. Both assumptions fail here as stated in Theorem~\ref{theorem:concavity}.
+greater than zero which in this case these assumptions are not true
+(as seen in Theorem~\ref{theorem:concavity}).
 
 \begin{theorem}\label{theorem:concavity}
     The utility of a player \(p\) against an opponent \(q\), \(u_q (p)\), given
     by (\ref{eq:optimisation_quadratic}), is not concave. Furthermore neither
     the numerator or the denominator of (\ref{eq:optimisation_quadratic}), are
-    concave or greater than zero.
+    concave or strictly greater than zero.
 \end{theorem}
 
 Proof is given in Appendix~\ref{appendix:proof_theorem_three}.
 
 The non concavity of \(u(p)\) indicates multiple local optimal points. The
 approach taken here is to introduce a compact way of constructing the candidate
-set of all local optimal points. Once the set is defined the point that
-maximises (\ref{eq:tournament_utility}) corresponds to the best response
-strategy. The problem considered is bounded because \(p \in \R^4_{[0, 1]}\).
+set of all local optimal points, and evaluating which corresponds to the best response
+strategy (maximises (\ref{eq:tournament_utility})).
+
+The problem considered is bounded because \(p \in \R^4_{[0, 1]}\).
 Therefore, the candidate solutions will exist either at the boundaries of the
 feasible solution space, or within that space (the methods of Lagrange
 Multipliers~\cite{bertsekas2014} and Karush-Kuhn-Tucker
@@ -399,7 +402,7 @@ following Lemma:
     against a set of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
     for \(q^{(i)} \in \R_{[0, 1]} ^ 4\) is established by:
 
-    \[p^* = \textnormal{argmax}\left(\sum\limits_{i=1} ^ N  u_q(p)\right), \ p \in S_q.\]
+    \[p^* = \textnormal{argmax}\sum\limits_{i=1} ^ N  u_q(p), \ p \in S_q.\]
 
     The set \(S_q\) is defined as all the possible combinations of:
 
@@ -460,14 +463,13 @@ Lemma~\ref{lemma:memone_group_best_response}.
 An immediate result from Lemma~\ref{lemma:memone_group_best_response} can be
 obtained by evaluating the sign of the derivative
 (\ref{eq:mo_tournament_derivative}) at \(p=(0, 0, 0, 0)\). If at that point the
-derivative is negative, then a player maximises their utility
-by playing as a defector, and their utility would only decrease if they were
-to change their behaviour. Thus, defection is the best response.
+derivative is negative, then the utility of a player only decreases if they were
+to change their behaviour, and thus defection at that point is stable.
 
 \begin{lemma}\label{lemma:stability_of_defection}
     In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
     for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
-    defection is a best response if the transition probabilities of the
+    defection is stable if the transition probabilities of the
     opponents satisfy conditions (\ref{eq:defection_condition_one}) and (\ref{eq:defection_condition_two}).
 
     \begin{equation}\label{eq:defection_condition_one}
@@ -482,7 +484,7 @@ to change their behaviour. Thus, defection is the best response.
 \end{lemma}
 
 \begin{proof}
-    For defection to be a best response the derivative of the utility
+    For defection to be stable the derivative of the utility
     at the point \(p = (0, 0, 0, 0)\) must be negative. This would indicate that
     the utility function is only declining from that point onwards.
 
@@ -501,15 +503,14 @@ to change their behaviour. Thus, defection is the best response.
     \( \displaystyle\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0\).
 \end{proof}
 
-In an environment where defection is the best response the average payoff of a
-defector is always higher than any other strategy can achieve. If a
-setting where in each the prevalence of each type of strategy was determined by
-that strategy's success in the previous round is considered, then in a population such that
-(\ref{eq:defection_condition_one}) and (\ref{eq:defection_condition_two}) hold,
-defection would prevail; thus cooperation would never occur.
-This is demonstrated in Figures~\ref{fig:stable_defection} and~\ref{fig:unstable_defection}.
-Lemma~\ref{lemma:stability_of_defection} is the last theoretical result presented
-in this manuscript. The following section focuses on numerical experiments.
+Consider a population for which defection is known to be stable. In that
+population all the members will over time adopt the same behaviour; thus in such
+population cooperation will never take over. This is demonstrated in
+Figures~\ref{fig:stable_defection} and~\ref{fig:unstable_defection}.
+
+Lemma~\ref{lemma:stability_of_defection} is the last theoretical result
+presented in this manuscript. The following section focuses on numerical
+experiments.
 
 \begin{figure}[!htb]
     \begin{subfigure}{0.49\textwidth}
@@ -547,7 +548,7 @@ algorithm that has proven to outperform many other popular
 algorithms~\cite{Jones2001}. The algorithm builds a bayesian understanding of
 the objective function which it is well suited to the multiple local optimas in
 the described search area of this work. Differential evolution~\cite{Storn1997}
-was also considered, however it was not selected due to Bayesian being
+was also considered, however, it was not selected due to Bayesian being
 computationally more efficient.
 
 As an example of the algorithm's usage let's consider the optimisation problem of
@@ -571,25 +572,26 @@ changed in the last 10\% iterations then a further 20 iterations are considered.
 The rest of the section is structured as follows. In
 Section~\ref{subsection:best_response_n_2}, Bayesian optimisation is used to
 generate a data set containing memory-one best responses against a number of
-random opponents. The extortionate behaviour of these best
-responses is then evaluated using a method introduced in~\cite{Knight2019}. In Section
-\ref{subsection:best_respnse_evolutionary_setting}, a similar data set and approach
-is discussed but this time the best responses are memory-one best responses
-to a number of opponents and a copy of themselves.
-Finally, Section~\ref{subsection:longer_memory_best_response} compares
-the performances of memory-one and longer-memory best responses against a number
-of opponents.
+random opponents. The extortionate behaviour of these best responses is then
+evaluated using a method introduced in~\cite{Knight2019}. In Section
+\ref{subsection:best_respnse_evolutionary_setting}, a similar data set and
+approach is discussed but this time the best responses are memory-one best
+responses in an evolutionary setting where they also incorporate self
+interactions. Finally, Section~\ref{subsection:longer_memory_best_response}
+compares the performances of memory-one and longer-memory best responses against
+a number of opponents.
 
 \subsection{Best response memory-one strategies for \(N=2\)}\label{subsection:best_response_n_2}
 
 As briefly discussed in Section~\ref{section:introduction}, zero-determinants
 have been praised for their robustness against a single opponent.
-Zero-determinants' extortionate behaviour reassures that the strategies will
-never lose a game. Though extortion works in pairwise interactions, this paper
+Zero-determinants' are evidence that extortion works in pairwise interactions,
+their behaviour reassures that the strategies will
+never lose a game. However, this paper
 argues that in multi opponent interactions, where the payoffs matter, strategies
-trying to exploit their opponents suffer.
+trying to exploit their opponents will suffer.
 
-Compared to zero-determinants, best response memory-one strategies, that
+Compared to zero-determinants, best response memory-one strategies which
 have a theory of mind of their opponents, utilise their behaviour in order to
 gain the most from their interactions. The question that arises then is whether
 best response strategies are the optimal because they behave in an extortionate
@@ -657,9 +659,9 @@ strategies. This analysis is extended to an evolutionary setting.
 \subsection{Memory-one best responses in evolutionary dynamics}\label{subsection:best_respnse_evolutionary_setting}
 
 As mentioned in Section~\ref{section:utility}, the IPD is commonly studied in
-Moran processes, and generally, in evolutionary processes. In these processes self
+Moran processes, and generally, in evolutionary processes. In these settings self
 interactions are key. This section extends the formulation of best responses
-to evolutionary settings, more specifically, the optimisation problem of
+in evolutionary dynamics, more specifically, the optimisation problem of
 (\ref{eq:mo_tournament_optimisation}) is extended to
 include self interactions.
 
@@ -667,7 +669,7 @@ Self interactions can be incorporated in the formulation
 that has been used so far. The utility is given by,
 
 \begin{equation}
-    \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + u_p(p).
+    \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + u_p(p)
 \end{equation}
 
 and the optimisation problem of (\ref{eq:mo_tournament_optimisation}) is re written as,
@@ -845,11 +847,12 @@ Figure~\ref{fig:utilities_gambler_mem_one}. Though Gambler has an infinite
 memory (in order to remember the opening moves of the opponent) the information
 the strategy considers is not significantly larger than memory-one strategies.
 Even so, it is evident from Figure~\ref{fig:utilities_gambler_mem_one} that
-Gambler will always performs the same or better. This seems to be at odd with the
+Gambler always performs as well as the best response memory-one or better. This seems to be at odd with the
 result of~\cite{Press2012} that against a memory-one opponent having a longer memory
 will not give a strategy any
-advantage. However, against two memory-one opponents Gambler performs better than
-the optimal memory-one strategy, thus having a shorter memory in this setting is limiting.
+advantage. However, against two memory-one opponents Gambler's performance is better than
+the optimal memory-one strategy. This is evidence that in the case of two opponents having a
+shorter memory is limiting.
 
 \begin{figure}[!htbp]
     \centering
@@ -864,8 +867,8 @@ This manuscript considers \textit{best response} strategies in the IPD game, and
 more specifically, \textit{memory-one best responses}. It has proven that there is
 a compact way of identifying a memory-one best response to a group of opponents,
 and moreover, that there exists a condition for which in an
-environment of memory-one opponents defection is the dominant and stable choice.
-The later parts of this paper focused on a series of empirical results where it
+environment of memory-one opponents defection is the stable choice.
+The later parts of this paper focused on a series of empirical results, where it
 was shown that the performance and the evolutionary stability of memory-one
 strategies rely not on extortion but on adaptability. Finally, it was shown that
 memory-one strategies' performance is limited by their memory in cases where
@@ -875,31 +878,31 @@ Following the work described in~\cite{Nowak1989}, where it was shown that the
 utility between two memory-one strategies can be estimated by a Markov
 stationary state, we proved that the utilities can be written as a ration of two
 quadratic forms in $R^4$, Theorem~\ref{theorem:quadratic_form_u}. This was
-extended to include multiple opponents as the IPD is commonly studied in such
+extended to include multiple opponents, as the IPD is commonly studied in such
 situations, Theorem~\ref{theorem:tournament_utility}.
-The formulation of Theorem~\ref{theorem:tournament_utility} and the result that
-the utility has a form allowed us to introduce an approach for identifying
+The formulation of Theorem~\ref{theorem:tournament_utility}, and the result that
+the utility has a form, allowed us to introduce an approach for identifying
 memory-one best responses to any number of opponents,
 Lemma~\ref{lemma:memone_group_best_response}. This does not only have game
 theoretic novelty, but also a mathematical novelty of solving quadratic ratio
 optimisation problem where the quadratics are non concave. The results of
 Lemma~\ref{lemma:memone_group_best_response} were also used to define a
-condition for which defection is known to be a best response.
+condition for which defection is known to be stable.
 
-This manuscript also presented empirical results. These results were mainly to
+This manuscript also presented experimental results. These results were mainly to
 investigate the behaviour of memory-one strategies and their limitations. In
 Sections~\ref{subsection:best_response_n_2}
 and~\ref{subsection:best_respnse_evolutionary_setting}, a large data set which
 contained best responses in tournaments and in evolutionary settings for $N=2$
-was generated. This allowed us to investigate their respective behaviours and
-whether it was extortionate acts that made them most favorable strategies.
+was generated. This allowed us to investigate their respective behaviours, and
+whether it was extortionate acts that made them the most favorable strategies.
 However, it was shown that it was not extortion but adaptability that allowed
 the strategies to gain the most from their interactions.
 In evolutionary settings it was specifically shown that being adaptable and being
 able to forgive after being tricked were key factors. In Section~\ref{subsection:longer_memory_best_response}, the performance of
 memory-one strategies was put against the performance of a longer memory
 strategy called Gambler. There were several cases where Gambler would outperform
-the memory-one strategy, however a memory-one strategy never managed to outperform
+the memory-one strategy, however, a memory-one strategy never managed to outperform
 a Gambler. This result occurred whilst considering a Gambler with a sufficiently
 larger memory but not a sufficiently larger amount of information regarding
 the game.
@@ -937,6 +940,11 @@ A variety of software libraries have been used in this work:
 
 \subsection{Proof of Lemma~\ref{lemma:memone_group_best_response}}\label{appendix:proof_lemma_four}
 \input{tex/proof_lemma_four}
+
+\section{Further Examples}\label{section:appendix_b}
+
+\subsection{Example of non concavity for \(u(p)\) }\label{appendix:non_concave}
+\input{tex/non_concave_example}
 
 \end{appendices}
 

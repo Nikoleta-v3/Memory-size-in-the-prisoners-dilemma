@@ -1,40 +1,13 @@
 \begin{proof} Utility \(u_q(p)\) is non concave and neither are it's numerator or
-denominator.
+denominator. Furthermore, the denominator is not always strictly positive.
 
-A function \(f(x)\) is concave on an interval \([a, b]\) if, for any two
-points \(x_1, x_2 \in [a, b]\) and any \(\lambda \in [0, 1]\), 
+Utility \(u_q(p)\) is non concave because the concavity condition fails for at
+least one point, Appendix~\ref{appendix:non_concave}.
 
-\begin{equation}\label{eq:concave}
-f (\lambda x_1 + (1 - \lambda )x_2 ) \geq \lambda f (x_1 ) + (1 - \lambda )f (x_2 ).
-\end{equation}
-
-Let \(f\) be \(u_{(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, \frac{1}{3})}\).
-For \(x_1 = (\frac{1}{4}, \frac{1}{2}, \frac{1}{5} , \frac{1}{2}),
-x_2 = (\frac{8}{10}, \frac{1}{2}, \frac{9}{10} , \frac{7}{10})\) and
-\(\lambda=0.1\), direct substitution in (\ref{eq:concave}) gives:
-
-\scalebox{0.85}{\parbox{\linewidth}{%
-\begin{align*}
-    u_{(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, \frac{1}{3})}
-    \left( 0.1 \left(\frac{1}{4}, \frac{1}{2}, \frac{1}{5} , \frac{1}{2}\right)
-    + 0.9 \left(\frac{8}{10}, \frac{1}{2}, \frac{9}{10} , \frac{7}{10}\right) \right) & \geq
-    0.1 \times u_{(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, \frac{1}{3})}
-    \left(\left(\frac{1}{4}, \frac{1}{2}, \frac{1}{5} , \frac{1}{2}\right) \right) 
-    + 0.9 \times u_{(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, \frac{1}{3})}
-    \left(\left(\frac{8}{10}, \frac{1}{2}, \frac{9}{10} , \frac{7}{10}\right) \right) \Rightarrow\\
-    1.485 & \geq 0.1 \times 1.790 + 0.9 \times 1.457 \Rightarrow \\
-    1.485 & \geq 1.490
-\end{align*}
-}}
-
-which can not hold. Thus \(u_{(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, \frac{1}{3})}\)
-is not concave. Because the concavity condition fails for at least one point of
-\(u_q(p)\), \(u_q(p)\) is not concave.
-
-Utility \(u_q(p)\) is given by (\ref{eq:optimisation_quadratic}). As stated
-in~\cite{Anton2014} a quadratic form will be concave if and only if it's
-symmetric matrix is negative semi definite. A matrix \(A\) is semi-negative
-definite if:
+Furthermore, regarding the numerator and denominator of \(u_q(p)\)
+in~\cite{Anton2014} it is stated that a quadratic form will be concave if and
+only if it's symmetric matrix is negative semi definite. A matrix \(A\) is
+semi-negative definite if:
 
 \begin{equation}\label{def:semi_negative}
 |A|_i \leq 0 \text{ for } i \text{ is odd and } |A|_i \geq 0  \text{ for } i
@@ -42,10 +15,19 @@ definite if:
 \end{equation}
 
 For (\ref{eq:optimisation_quadratic}), neither \(\frac{1}{2}pQp^T + cp + a\)
-or \(\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}\) are concave because:
+or \(\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}\) are concave because for an even \(i=2\):
 
 \[|Q|_2 = - \left(q_{1} - q_{3}\right)^{2} \left(q_{2} - 5 q_{4} - 1\right)^{2} \text{and}\]
 \[|\bar{Q}|_2 =- \left(q_{1} - q_{3}\right)^{2} \left(q_{2} - q_{4} - 1\right)^{2}\]
 
 are negative.
+
+Moreover, for a quadratic to be strictly positive it has to be positive definite.
+A quadratic form is positive definite iff every eigenvalue of is positive,
+however, \(\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}\) is not positive definite
+because:
+
+\[|\bar{Q}|_2 =- \left(q_{1} - q_{3}\right)^{2} \left(q_{2} - q_{4} - 1\right)^{2}\]
+
+is negative.
 \end{proof}
