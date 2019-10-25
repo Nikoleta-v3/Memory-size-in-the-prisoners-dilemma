@@ -1,13 +1,13 @@
 """
 Tests reactive.py
 """
-import axelrod as axl
+import random
+
 import numpy as np
 import sympy as sym
 
+import axelrod as axl
 import opt_mo
-import random
-
 
 x, y = sym.symbols("x, y")
 

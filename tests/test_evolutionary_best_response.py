@@ -119,7 +119,5 @@ def test_get_evolutionary_best_response():
         random_opponents, opt_mo.get_memory_one_best_response
     )
 
-    assert len(hist) == 4
-    assert history_length == 1
     assert type(best_ev_response) is np.ndarray
     assert len(best_ev_response) == 4
