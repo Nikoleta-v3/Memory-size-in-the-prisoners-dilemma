@@ -37,3 +37,7 @@ img/Fingerprints/*
 
 # coverage 
 .coverage*
+
+
+build/lib/opt_mo/*
+dist/*
