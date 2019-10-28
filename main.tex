@@ -48,9 +48,9 @@
 
 \begin{abstract}
     Memory-one strategies are a set of Iterated Prisoner's Dilemma strategies
-    that have been praised for their mathematical tractability and performance
+    that have been acclaimed for their mathematical tractability and performance
     against single opponents. This manuscript investigates \textit{best
-    response} memory-one strategies as a multidimensional
+    responses} to a collection of memory-one strategies as a multidimensional
     optimisation problem. Though extortionate memory-one strategies have gained
     much attention, we demonstrate that best response memory-one strategies do not
     behave in an extortionate way, and moreover, for memory one strategies to be
@@ -170,8 +170,8 @@ concerned with only the outcome of a single turn then there are four possible
 
 \begin{itemize}
     \item both players cooperated, denoted as \(CC\)
-    \item first players cooperated whilst the second player defected, denoted as \(CD\)
-    \item first players defected whilst the second player cooperated, denoted as \(DC\)
+    \item the first player cooperated whilst the second player defected, denoted as \(CD\)
+    \item the first player defected whilst the second player cooperated, denoted as \(DC\)
     \item both players defected, denoted as \(DD\)
 \end{itemize}
 
@@ -394,7 +394,11 @@ greater than zero which in this case are not true
 
 Proof is given in Appendix~\ref{appendix:proof_theorem_three}.
 
-The non concavity of \(u(p)\) indicates multiple local optimal points. The
+The non concavity of \(u(p)\) indicates multiple local optimal points. This
+is also intuitive. The best response against a cooperator, \(q=(1, 1, 1, 1)\), is
+a defector \(p^*=(0, 0, 0, 0)\). The strategies \(p=(\frac{1}{2}, 0,
+0, 0)\) and \(p=(\frac{1}{2}, 0, 0, \frac{1}{2})\) are also best responses.
+The
 approach taken here is to introduce a compact way of constructing the candidate
 set of all local optimal points, and evaluating which corresponds to the best response
 strategy (maximises (\ref{eq:tournament_utility})).
@@ -525,7 +529,7 @@ cannot occur and is the last theoretical result
 presented in this manuscript. The following section focuses on numerical
 experiments.
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
     \begin{subfigure}{0.49\textwidth}
         \centering
         \includegraphics[width=\linewidth]{img/population_defection_takes_over.pdf}
@@ -600,7 +604,7 @@ a number of opponents.
 \subsection{Best response memory-one strategies for \(N=2\)}\label{subsection:best_response_n_2}
 
 As briefly discussed in Section~\ref{section:introduction}, zero-determinants
-have been praised for their robustness against a single opponent.
+have been acclaimed for their robustness against a single opponent.
 Zero-determinants are evidence that extortion works in pairwise interactions,
 their behaviour ensures that the strategies will
 never lose a game. However, this paper
@@ -612,8 +616,38 @@ have a theory of mind of their opponents, utilise their behaviour in order to
 gain the most from their interactions. The question that arises then is whether
 best response strategies are optimal because they behave in an extortionate
 way. To estimate a strategy's extortionate
-behaviour the SSE method as described in~\cite{Knight2019} is used. SSE is
-defined as how far a strategy is from behaving extortionate, thus a high
+behaviour the SSE method as described in~\cite{Knight2019} is used. More
+specifically,
+in~\cite{Knight2019} a point \(x^*\), in the space of memory-one strategies, is
+defined as the nearest extortionate strategy to a given strategy \(p\). \(x^*\) is
+given by,
+
+\begin{equation}\label{eqn:x_star_formula}
+    x^* = {\left(C^{T}C\right)}^{-1}C^{T}\bar{p}
+\end{equation}
+
+where \(\bar{p}=(p_1 - 1, p_2 - 1, p_3, p_4)\) and
+
+\begin{equation}\label{eq:definition_of_C}
+    C =
+    \begin{bmatrix}
+        R - P & R- P \\
+        S - P & T- P \\
+        T - P & S- P \\
+        0     & 0 \\
+    \end{bmatrix}.
+\end{equation}
+
+The squared norm of the remaining error is referred to as sum of squared errors
+of prediction (SSE):
+
+\begin{equation}\label{eqn:x_SSError_formula}
+    \text{SSE} = {\bar{p}} ^ T \bar{p} -
+           \bar{p} C \left(C ^ T C \right) ^ {-1} C ^ T \bar{p}
+         = {\bar{p}} ^ T \bar{p} - \bar{p} C x ^ *
+\end{equation}
+
+Thus, SSE is defined as how far a strategy is from behaving as a ZD and thus a highand a high
 SSE implies a non extortionate behaviour.
 
 %TODO include explanation of SSE
@@ -653,7 +687,8 @@ strategy is not trying to extort its the opponents.
 
 So although the best response strategy can exhibit extortionate behaviour, its
 performance is maximised by behaving in a more adaptable way than zero-determinant
-strategies. This is confirms similar results such as~\cite{Knight2019}.
+strategies. This confirms similar results such as~\cite{Hilbe2013b,
+Hilbe2013, Hilbe2015, Knight2019}.
 This analysis will now be extended to an evolutionary setting.
 
 \begin{figure}[!htbp]
@@ -706,7 +741,7 @@ and the optimisation problem of (\ref{eq:mo_tournament_optimisation}) is modifie
 For determining the memory-one best response in an evolutionary setting,
 an algorithmic approach is considered, called \textit{best
 response dynamics}. Best response dynamics are commonly used in evolutionary
-game theory. They represent a class of strategy updating rules, where players in
+game theory~\cite{Matsui1992}. They represent a class of strategy updating rules, where players in
 the next round are determined by their best responses to some subset of the
 population. The best response dynamics approach used in this manuscript is given by
 Algorithm~\ref{algo:best_response_dynamics}.
@@ -763,7 +798,9 @@ Though, Table~\ref{table:wilcoxon_tests} details that no statistically
 significant differences has been found, from
 Figure~\ref{fig:behaviour_violin_plots}, it seems that evolutionary best
 response has a higher $p_2$ median. Thus, they more likely to forgive after
-being tricked.
+being tricked. This is due to the fact that they could be playing against
+themselves, and they need to be able to forgive so that future cooperation can
+occur.
 
 \begin{figure}[!htbp]
     \begin{minipage}{0.72\textwidth}
@@ -868,16 +905,15 @@ transition probabilities are given in Figures
 \end{figure}
 
 The utilities of both strategies are plotted against each other in
-Figure~\ref{fig:utilities_gambler_mem_one}. Although Gambler has an infinite
-memory (in order to remember the opening moves of the opponent) the information
-the strategy considers is not significantly larger than memory-one strategies.
-Even so, it is evident from Figure~\ref{fig:utilities_gambler_mem_one} that
+Figure~\ref{fig:utilities_gambler_mem_one}.
+It is evident from Figure~\ref{fig:utilities_gambler_mem_one} that
 Gambler always performs as well as the best response memory-one or better. This seems to be at odd with the
 result of~\cite{Press2012} that against a memory-one opponent having a longer memory
 will not give a strategy any
-advantage. However, against two memory-one opponents Gambler's performance is better than
+advantage. However, against two memory-one opponents, Gambler's performance is better than
 the optimal memory-one strategy. This is evidence that in the case of two opponents having a
-shorter memory is limiting.
+shorter memory is limiting and this is potentially another example of the advantages
+of adaptability.
 
 \begin{figure}[!htbp]
     \centering
@@ -913,7 +949,8 @@ optimisation problem where the quadratics are non concave. The results of
 Lemma~\ref{lemma:memone_group_best_response} were also used to define a
 condition for which defection is known to be stable.
 
-This manuscript presented several experimental results. These results were mainly to
+This manuscript presented several experimental results. All data for the results is archived in~\cite{glynatsi2019}.
+These results were mainly to
 investigate the behaviour of memory-one strategies and their limitations. In
 Sections~\ref{subsection:best_response_n_2}
 and~\ref{subsection:best_respnse_evolutionary_setting}, a large data set which
@@ -931,10 +968,12 @@ a Gambler. This result occurred whilst considering a Gambler with a sufficiently
 larger memory but not a sufficiently larger amount of information regarding
 the game.
 
-All the empirical results presented in this manuscript have been for the
-case of $N=2$. In future work we would consider larger values of $N$, however, we
-believe that for larger values of $N$ the results that have been presented here would
-only be more evident.
+All the empirical results presented in this manuscript have been for the case of
+$N=2$. In future work we would consider larger values of $N$, however, we
+believe that for larger values of $N$ the results that have been presented here
+would only be more evident. In addition, we would investigate potential
+theoretical results for the evolutionary best responses dynamics algorithm
+discussed in Section~\ref{subsection:best_respnse_evolutionary_setting}.
 
 \section{Acknowledgements}
 
