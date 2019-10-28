@@ -396,8 +396,8 @@ Proof is given in Appendix~\ref{appendix:proof_theorem_three}.
 
 The non concavity of \(u(p)\) indicates multiple local optimal points. This
 is also intuitive. The best response against a cooperator, \(q=(1, 1, 1, 1)\), is
-a defector \(p^*=(0, 0, 0, 0)\). But so are the strategies \(p=(\frac{1}{2}, 0,
-0, 0)\) and \(p=(\frac{1}{2}, 0, 0, \frac{1}{2})\).
+a defector \(p^*=(0, 0, 0, 0)\). The strategies \(p=(\frac{1}{2}, 0,
+0, 0)\) and \(p=(\frac{1}{2}, 0, 0, \frac{1}{2})\) are also best responses.
 The
 approach taken here is to introduce a compact way of constructing the candidate
 set of all local optimal points, and evaluating which corresponds to the best response
@@ -619,14 +619,14 @@ way. To estimate a strategy's extortionate
 behaviour the SSE method as described in~\cite{Knight2019} is used. More
 specifically,
 in~\cite{Knight2019} a point \(x^*\), in the space of memory-one strategies, is
-defined as the nearest extortionate strategy to a strategy \(p\). \(x^*\) is
+defined as the nearest extortionate strategy to a given strategy \(p\). \(x^*\) is
 given by,
 
 \begin{equation}\label{eqn:x_star_formula}
-    x^* = {\left(C^{T}C\right)}^{-1}C^{T}\tilde{p}
+    x^* = {\left(C^{T}C\right)}^{-1}C^{T}\bar{p}
 \end{equation}
 
-where \(\tilde{p}=(-p_1, -p_2, p_3, p_4)\) and
+where \(\bar{p}=(p_1 - 1, p_2 - 1, p_3, p_4)\) and
 
 \begin{equation}\label{eq:definition_of_C}
     C =
@@ -642,12 +642,12 @@ The squared norm of the remaining error is referred to as sum of squared errors
 of prediction (SSE):
 
 \begin{equation}\label{eqn:x_SSError_formula}
-    \text{SSE} = {p ^ *} ^ T p ^ * -
-           p ^ * C \left(C ^ T C \right) ^ {-1} C ^ T p ^ *
-         = {p ^ *} ^ T p ^ * - p ^ * C x ^ *
+    \text{SSE} = {\bar{p}} ^ T \bar{p} -
+           \bar{p} C \left(C ^ T C \right) ^ {-1} C ^ T \bar{p}
+         = {\bar{p}} ^ T \bar{p} - \bar{p} C x ^ *
 \end{equation}
 
-Thus, SSE is defined as how far a strategy is from behaving extortionate and a high
+Thus, SSE is defined as how far a strategy is from behaving as a ZD and thus a highand a high
 SSE implies a non extortionate behaviour.
 
 %TODO include explanation of SSE
@@ -910,7 +910,7 @@ It is evident from Figure~\ref{fig:utilities_gambler_mem_one} that
 Gambler always performs as well as the best response memory-one or better. This seems to be at odd with the
 result of~\cite{Press2012} that against a memory-one opponent having a longer memory
 will not give a strategy any
-advantage. However, against two memory-one opponents Gambler's performance is better than
+advantage. However, against two memory-one opponents, Gambler's performance is better than
 the optimal memory-one strategy. This is evidence that in the case of two opponents having a
 shorter memory is limiting and this is potentially another example of the advantages
 of adaptability.
@@ -972,7 +972,7 @@ All the empirical results presented in this manuscript have been for the case of
 $N=2$. In future work we would consider larger values of $N$, however, we
 believe that for larger values of $N$ the results that have been presented here
 would only be more evident. In addition, we would investigate potential
-theoretical results for the evolutionary best responses dynamics approach
+theoretical results for the evolutionary best responses dynamics algorithm
 discussed in Section~\ref{subsection:best_respnse_evolutionary_setting}.
 
 \section{Acknowledgements}
