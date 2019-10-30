@@ -115,7 +115,7 @@
 \RequirePackage{graphicx,xcolor}
 \RequirePackage{colortbl}
 \RequirePackage{booktabs}
-\RequirePackage{algorithm}
+\RequirePackage{algorithm2e}
 \RequirePackage[noend]{algpseudocode}
 \RequirePackage{changepage}
 \RequirePackage[twoside,%
