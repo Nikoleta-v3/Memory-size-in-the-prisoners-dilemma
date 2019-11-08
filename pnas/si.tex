@@ -1,0 +1,238 @@
+\documentclass[9pt,twoside,lineno]{pnas-new}
+% Use the lineno option to display guide line numbers if required.
+
+\templatetype{pnassupportinginfo}
+
+\usepackage{amsthm}
+\newcommand{\R}{\mathbb{R}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\title{Stability of defection, optimisation of strategies and the limits of
+memory in the Prisoner's Dilemma.}
+\author{Nikoleta E. Glynatsi and Vince A. Knight}
+\correspondingauthor{Nikoleta E. Glynatsi.\\E-mail: glynatsine@cardiff.ac.uk}
+
+\begin{document}
+
+\maketitle
+
+%% Adds the main heading for the SI text. Comment out this line if you do not have any supporting information text.
+\SItext
+
+\subsection*{Proof of Theorem 2}
+The utility of a memory one player \(p\) against an opponent \(q\),
+\(u_q(p)\), can be written as a ratio of two quadratic forms on \(R^4\).
+
+\begin{proof}
+
+It was discussed that \(u_q(p)\) it's the product of the steady states \(v\) and
+the PD payoffs,
+
+\[u_q(p) = v \cdot (R, S, T, P).\]
+
+More specifically, with \((R, P, S, T) = (3, 1, 0, 5)\)
+
+\begingroup
+\footnotesize
+\begin{equation}
+    u_q(p) =
+    \left(
+      \frac
+        {\parbox{6in}{$
+            p_{1} p_{2} (q_{1} q_{2} - 5 q_{1} q_{4} - q_{1} - q_{2} q_{3} + 5 q_{3} q_{4} + q_{3}) + p_{1} p_{3} (- q_{1} q_{3} + q_{2} q_{3}) + p_{1} p_{4} (5 q_{1} q_{3} - 5 q_{3} q_{4}) + p_{3} p_{4} (- 3 q_{2} q_{3} + 3 q_{3} q_{4}) +$ \\
+            \hspace*{1cm} $ p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3} + 3 q_{2} q_{4} + q_{2} - 3 q_{3} q_{4} - q_{3}) + p_{2} p_{4} (- 5 q_{1} q_{3} + 5 q_{1} q_{4} + 3 q_{2} q_{3} - 3 q_{2} q_{4} + 2 q_{3} - 2 q_{4}) + $ \\
+            \hspace*{1cm} $ p_{1} (- q_{1} q_{2} + 5 q_{1} q_{4} + q_{1}) + p_{2} (q_{2} q_{3} - q_{2} - 5 q_{3} q_{4} - q_{3} + 5 q_{4} + 1) + p_{3} (q_{1} q_{2} - q_{2} q_{3} - 3 q_{2} q_{4} - q_{2} + q_{3}) +$ \\
+            \hspace*{4cm} $ p_{4} (- 5 q_{1} q_{4} + 3 q_{2} q_{4} + 5 q_{3} q_{4} - 5 q_{3} + 2 q_{4}) + q_{2} - 5 q_{4} - 1$
+        }}
+        {\parbox{6in}{$
+        p_{1} p_{2} (q_{1} q_{2} - q_{1} q_{4} - q_{1} - q_{2} q_{3} + q_{3} q_{4} + q_{3}) + p_{1} p_{3} (- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}) + p_{1} p_{4} (- q_{1} q_{2} + q_{1} q_{3} + q_{1} + q_{2} q_{4} - q_{3} q_{4} - q_{4}) +$ \\
+        $ p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3} + q_{2} q_{4} + q_{2} - q_{3} q_{4} - q_{3}) + p_{2} p_{4} (- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}) + p_{3} p_{4} (q_{1} q_{2} - q_{1} q_{4} - q_{2} q_{3} - q_{2} + q_{3} q_{4} + q_{4}) + $ \\
+        $ p_{1} (- q_{1} q_{2} + q_{1} q_{4} + q_{1}) + p_{2} (q_{2} q_{3} - q_{2} - q_{3} q_{4} - q_{3} + q_{4} + 1) + p_{3} (q_{1} q_{2} - q_{2} q_{3} - q_{2} + q_{3} - q_{4}) + p_{4} (- q_{1} q_{4} + q_{2} + q_{3} q_{4} - q_{3} + q_{4} - 1) + $ \\
+        \hspace*{7cm} $q_{2} - q_{4} - 1$
+      }}
+    \right).
+\end{equation}
+\endgroup
+
+Let us consider the numerator of the \(u_q(p)\). The cross product terms \(p_ip_j\)
+are given by,
+
+\begingroup
+\footnotesize
+\begin{align*}
+p_{1} p_{2} (q_{1} q_{2} - 5 q_{1} q_{4} - q_{1} - q_{2} q_{3} + 5 q_{3} q_{4}
++ q_{3}) + p_{1} p_{3} (- q_{1} q_{3} + q_{2} q_{3}) + p_{1} p_{4} (5 q_{1} q_{3} -
+5 q_{3} q_{4}) + p_{3} p_{4} (- 3 q_{2} q_{3} + 3 q_{3} q_{4}) +  \\
+p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3} + 3 q_{2} q_{4} + q_{2} - 3 q_{3} q_{4} - q_{3}) +
+p_{2} p_{4} (- 5 q_{1} q_{3} + 5 q_{1} q_{4} + 3 q_{2} q_{3} - 3 q_{2} q_{4} +
+2 q_{3} - 2 q_{4}).
+\end{align*}
+\endgroup
+
+This can be re written in a matrix format given by Eq.~\ref{eq:cross_product_coeffs}.
+
+\begin{equation}\label{eq:cross_product_coeffs}
+    \resizebox{0.8\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\( 
+    (p_1, p_2, p_3, p_4) \frac{1}{2} \input{q_numerator} \begin{pmatrix} 
+    p_1 \\
+    p_2 \\
+    p_3 \\
+    p_4 \end{pmatrix}
+    \) }
+\end{equation}
+
+Similarly, the linear terms are given by,
+
+\begingroup
+\footnotesize
+\begin{align*}
+p_{1} (- q_{1} q_{2} + 5 q_{1} q_{4} + q_{1}) + p_{2} (q_{2} q_{3} - q_{2} - 5 q_{3} q_{4} - q_{3} + 5 q_{4} + 1) + p_{3} (q_{1} q_{2} - q_{2} q_{3} - 3 q_{2} q_{4} - q_{2} + q_{3}) + \\
+p_{4} (- 5 q_{1} q_{4} + 3 q_{2} q_{4} + 5 q_{3} q_{4} - 5 q_{3} + 2 q_{4}).
+\end{align*}
+\endgroup
+
+and the expression can be written using a matrix format as Eq.~\ref{eq:linear_coeffs}.
+
+\begin{equation}\label{eq:linear_coeffs}
+    \resizebox{0.38\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(
+    (p_1, p_2, p_3, p_4) \input{c_numerator}\)}
+\end{equation}
+
+Finally, the constant term of the numerator, which is obtained by substituting
+$p=(0, 0, 0, 0)$, is given by Eq.~\ref{eq:constant}.
+
+\begin{equation}\label{eq:constant}
+q_{2} - 5 q_{4} - 1
+\end{equation}
+
+Combining Eq.~\ref{eq:cross_product_coeffs}, Eq.~\ref{eq:linear_coeffs} and Eq.~\ref{eq:constant}
+gives that the numerator of \(u_q(p)\) can be written as,
+
+\begingroup
+\tiny\boldmath
+\begin{align*}
+    \frac{1}{2}p & \input{q_numerator} p^T +  \\
+    & \input{q_numerator} p + q_{2} - 5 q_{4} - 1
+\end{align*}
+\endgroup
+
+and equivalently as,
+
+\[\frac{1}{2}pQp^T + cp + a\]
+
+where \(Q\) \(\in \R^{4\times4}\) is a square matrix defined by the
+transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
+
+\begin{equation*}
+    \resizebox{0.9\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(
+    Q = \input{q_numerator}\)},
+\end{equation*}
+
+\(c\) \(\in \R^{4 \times 1}\) is similarly defined by:
+
+\begin{equation*}
+    \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(c = \input{c_numerator}\),}
+\end{equation*}
+
+and \(a = \input{numerator_constant}\).
+
+The same process is done for the denominator.
+\end{proof}
+
+\subsection*{Proof of Theorem 3}
+\begin{proof}
+    The optimal behaviour of a memory-one strategy player
+    \(p^* \in \R_{[0, 1]} ^ 4\)
+    against a set of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
+    for \(q^{(i)} \in \R_{[0, 1]} ^ 4\) is established by:
+    
+    \[p^* = \textnormal{argmax}\left(\sum\limits_{i=1} ^ N  u_q(p)\right), \ p \in S_q,\]
+    
+    where \(S_q\) is given by:
+    \begin{equation}\label{eq:s_q_set}
+        S_q =
+        \left\{p \in \mathbb{R} ^ 4 \left|
+            \begin{aligned}
+                \bullet\quad p_j \in \{0, 1\} & \quad \text{and} \quad \frac{d}{dp_k} 
+                \sum\limits_{i=1} ^ N  u_q^{(i)}(p) = 0 \\
+                & \quad \text{for all} \quad j \in J \quad \&  \quad k \in K  \quad \text{for all} \quad J, K \\
+                & \quad \text{where} \quad J \cap K = \O \quad
+                \text{and} \quad J \cup K = \{1, 2, 3, 4\}.\\
+                \bullet\quad  p \in \{0, 1\} ^ 4
+            \end{aligned}\right.
+        \right\}.
+    \end{equation}
+
+    The optimisation problem of Eq.~\ref{eq:mo_tournament_optimisation} 
+
+    \begin{equation}\label{eq:mo_tournament_optimisation}
+        \begin{aligned}
+        \max_p: & \ \sum_{i=1} ^ {N} {u_q}^{(i)} (p)
+        \\
+        \text{such that}: & \ p \in \R_{[0, 1]}
+        \end{aligned}
+    \end{equation}
+
+    can be written as:
+
+    \begin{equation}\label{eq:mo_tournament_optimisation_standard}
+        \begin{aligned}
+        \max_p: & \ \sum_{i=1} ^ {N} {u_q}^{(i)} (p)
+        \\
+        \text{such that}: p_i & \leq 1 \text{ for } \in \{1, 2, 3, 4\} \\
+        - p_i & \leq 0 \text{ for } \in \{1, 2, 3, 4\} \\
+        \end{aligned}
+    \end{equation}
+    
+    The optimisation problem has two inequality constraints and regarding the optimality
+    this means that:
+    
+    \begin{itemize}
+        \item either the optimum is away from the boundary of the optimization domain, and so the constraints plays no role;
+        \item or the optimum is on the constraint boundary.
+    \end{itemize}
+    
+    Thus, the following three cases must be considered:
+    
+    \textbf{Case 1:} The solution is on the boundary and any of the possible
+    combinations for $p_i \in \{0, 1\}$ for $i \in \{1, 2, 3, 4\}$ are candidate
+    optimal solutions.
+    
+    \textbf{Case 2:} The optimum is away from the boundary of the optimization domain
+    and the interior solution $p^*$ necessarily satisfies the condition
+    \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p^*) = 0\).
+    
+    \textbf{Case 3:} The optimum is away from the boundary of the optimization domain
+    but some constraints are equalities. The candidate solutions in this case
+    are any combinations of $p_j \in \{0, 1\} \quad \text{and} \quad \frac{d}{dp_k} 
+    \sum\limits_{i=1} ^ N  u_q^{(i)}(p) = 0$ 
+    forall $ j \in J \text{ \& } k \in K \text{ forall } J, K
+    \text{ where } J \cap K = \O \text{ and } J \cup K = \{1, 2, 3, 4\}.$
+    
+    Combining cases 1-3 a set of candidate solution is constructed as:
+    
+    \begin{equation*}
+        S_q =
+        \left\{p \in \mathbb{R} ^ 4 \left|
+            \begin{aligned}
+                \bullet\quad p_j \in \{0, 1\} & \quad \text{and} \quad \frac{d}{dp_k} 
+                \sum\limits_{i=1} ^ N  u_q^{(i)}(p) = 0
+                \quad \text{for all} \quad j \in J \quad \&  \quad k \in K  \quad \text{for all} \quad J, K \\
+                & \quad \text{where} \quad J \cap K = \O \quad
+                \text{and} \quad J \cup K = \{1, 2, 3, 4\}.\\
+                \bullet\quad  p \in \{0, 1\} ^ 4
+            \end{aligned}\right.
+        \right\}.
+    \end{equation*}
+    
+    This set is denoted as $S_q$ and the optimal solution to
+    Eq.~\ref{eq:mo_tournament_optimisation} is the point from $S_q$ for which the
+    utility is maximised.
+    \end{proof}
+
+\end{document}
