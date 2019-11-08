@@ -1,0 +1,16 @@
+\begin{algorithm}
+    \setstretch{1.35}
+    \caption{Best response dynamics algorithm}\label{algo:best_response_dynamics}
+    \begin{algorithmic}[1]
+    \Procedure{Approximate best evolutionary response}{}
+    \State $\tilde{p} \gets (0, 0, 0, 0)$
+    \State $p^* \gets (1, 1, 1, 1)$
+    \While{$p^* \neq \tilde{p}$}:
+    \State \text{temp} $\gets \tilde{p}$
+    \State $\tilde{p} \gets p^*$
+    \State $p^* = \text{argmax}_{p^*}(\sum\limits_{i=1} ^ N  u_q(p^*)) + u_{\text{temp}}(p^*))$ 
+    \EndWhile
+    \State \textbf{return} $p^*$;
+    \EndProcedure
+    \end{algorithmic}
+\end{algorithm}

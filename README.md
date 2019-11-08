@@ -1,30 +1,37 @@
-Memory size in the Prisoner's Dilemma.
+Stability of defection, optimisation of strategies and the limits of
+memory in the Prisoner's Dilemma.
 --------------------------------------
 
-A repository for an article on the memory size of strategies for the game the Prisoner's Dilemma.
+**Authors**: @Nikoleta-v3 @drvinceknight
 
-The repository is structured as follows:
+This repository contains the source code for a paper titled 
+"Stability of defection, optimisation of strategies and the limits of
+memory in the Prisoner's Dilemma".
+
+## Software
+
+A conda environment specifying all versions of libraries used is given in
+`environment.yml`. To create and activate this environment run:
 
 ```
-.
-|---  opt-mo # source code
-|---  nds # notebooks for each section
-|---  imgs # all images
-|---  tex # all tex files
-|---  tests # tests source code
-|---  .gitignore
-|---  environment.yml
-|---  bibliography.bib
-|---  main.pdf
-|---  main.tex
-|---  README.md
+$ conda env create -f environment.yml
+$ source activate opt-mo
 ```
 
-To compile the `.pdf` run the following command:
+The source code for this work have been packaged under the name `opt-mo`.
+Install the source code by running the following command
+(ensure that you have activated the environment):
 
-The environment is installed using `conda` environments. To create use the following
-command:
+```
+$ python setup.py install
+```
 
-To install all `opt-mo` run the following command:
+The package has been tested with `pytest`. To test run:
 
-To run all tests runs the following command:
+```
+$ sh test.sh
+```
+
+The entire analysis described in the paper can be found in `nbs/`.
+
+The software is released under an MIT license.

@@ -3,6 +3,8 @@
 *.log
 *.bbl
 *.blg
+*.out
+
 
 # notebooks
 */.ipynb_checkpoints/*
@@ -25,8 +27,17 @@ __pycache__/*
 
 # data
 data/*
+*.DS_store
 
 # images
 img/mean_average/*
 img/reactive/*
 img/convexity/*
+img/Fingerprints/*
+
+# coverage 
+.coverage*
+
+
+build/lib/opt_mo/*
+dist/*

@@ -1,0 +1,37 @@
+The utility \(u_q(p)\) is non concave and neither are it's numerator or
+denominator. Furthermore, the denominator is not always strictly positive.
+
+\begin{proof}
+
+The utility \(u_q(p)\) is non concave because the concavity condition fails for at
+least one pair of points see Appendix~\ref{appendix:non_concave}.
+
+Furthermore, regarding the numerator and denominator of \(u_q(p)\)
+in~\cite{Anton2014} it is stated that a quadratic form will be concave if and
+only if it's symmetric matrix is semi-negative definite. A matrix \(A\) is
+semi-negative definite if:
+
+\begin{equation}\label{def:semi_negative}
+|A|_i \leq 0 \text{ for } i \text{ is odd and } |A|_i \geq 0  \text{ for } i
+\text{ is even,}
+\end{equation}
+
+where \(|A|_i\) is the eigenvalues of the submatrix \(A_i\).
+
+For (\ref{eq:optimisation_quadratic}), neither \(\frac{1}{2}pQp^T + cp + a\)
+or \(\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}\) are concave because for an even \(i=2\):
+
+\[|Q|_2 = - \left(q_{1} - q_{3}\right)^{2} \left(q_{2} - 5 q_{4} - 1\right)^{2} \text{and}\]
+\[|\bar{Q}|_2 =- \left(q_{1} - q_{3}\right)^{2} \left(q_{2} - q_{4} - 1\right)^{2}\]
+
+are negative.
+
+Moreover, for a quadratic to be strictly positive it has to be positive definite.
+A quadratic form is positive definite iff every eigenvalue of is positive,
+however, \(\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}\) is not positive definite
+because:
+
+\[|\bar{Q}|_2 =- \left(q_{1} - q_{3}\right)^{2} \left(q_{2} - q_{4} - 1\right)^{2}\]
+
+is negative.
+\end{proof}
