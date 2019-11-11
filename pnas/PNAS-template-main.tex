@@ -92,7 +92,7 @@ was stated that ``Press and Dyson have fundamentally changed the viewpoint on
 the Prisoner's Dilemma''.
 A special case of ZDs are extortionate strategies that choose their actions so that a linear relationship is forced
 between the players' score ensuring that they will always
-receive at least as much as their opponents. Zero-determinants are
+receive at least as much as their opponents. ZDs are
 indeed mathematically unique and are proven to be robust in pairwise
 interactions, however, their true effectiveness in tournaments and
 evolutionary dynamics has been questioned~\cite{adami2013, Hilbe2013b,
@@ -107,7 +107,7 @@ identifying the best response memory-one strategy against a given set of
 opponents, and evaluates whether it behaves in a
 zero-determinant way. This is also done in evolutionary settings. Moreover, we
 introduce a well designed framework that allows the comparison of an optimal
-memory one strategy and a more complex strategy which has a larger memory and an
+memory one strategy and a more complex strategy which has a larger memory, and an
 identification of conditions for which defection is known to be stable; thus
 identifying environments where cooperation will not occur.
 
@@ -184,7 +184,7 @@ dominates cooperation.
 \subsection*{Stability of defection}\label{subsection:stability_defection}
 
 An immediate result from our formulation can be
-obtained by evaluating the sign of the utility's Eq. \ref{eq:tournament_utility} derivative
+obtained by evaluating the sign of Eq. \ref{eq:tournament_utility} derivative
 at \(p=(0, 0, 0, 0)\). If at that point the
 derivative is negative, then the utility of a player only decreases if they were
 to change their behaviour, and thus \textbf{defection at that point is stable}.
@@ -263,7 +263,7 @@ in pairwise interactions, their behaviour ensures that the strategies will never
 lose a game. However, this paper argues that in multi opponent interactions,
 where the payoffs matter, strategies trying to exploit their opponents will
 suffer.
-Compared to ZDs, best response memory-one strategies which have a
+Compared to ZDs, best response memory-one strategies, which have a
 theory of mind of their opponents, utilise their behaviour in order to gain the
 most from their interactions. The question that arises then is whether best
 response strategies are optimal because they behave in an extortionate way.
@@ -340,22 +340,22 @@ and can be found at~\cite{nikoleta_glynatsi_2019}.
 
 In order to investigate whether best responses
 behave in an extortionate matter the SSE method~\cite{Knight2019} is used.
-In~\cite{Knight2019} it is proven that all
-all extortionate ZDs reside on a triangular plane. For a given strategy \(p\),
-\(x^*\) is defined as the the nearest extortionate strategy. The distance between
-the two strategy is explicitly calculated and referred to as sum of squared
-errors of prediction (SSE). Thus, how far \(p\) is from behaving as a ZDs.
-A high SSE implies a non extortionate behaviour. The SSE method has been applied to the data set.
+In~\cite{Knight2019} it is proven that
+all extortionate ZDs reside on a triangular plane. For a given \(p\), a strategy
+\(x^*\) is defined as  its nearest extortionate strategy. The distance between
+the two strategies is explicitly calculated and referred to as sum of squared
+errors of prediction (SSE); how far \(p\) is from behaving as a ZDs.
+Thus, a high SSE implies a non extortionate behaviour. The SSE method has been applied to the data set.
 A statistics summary
 of the SSE distribution for the best response in tournaments and evolutionary dynamics is
 given in Table~\ref{table:sserror_stats}.
 
 For the best response in tournaments the distribution of SSE is skewed to the
-left, indicating that the best response does exhibit ZD behaviour and so could
+left, indicating that the best response does exhibit ZDs behaviour and so could
 be extortionate,
-however, the best response is not uniformly ZD. A positive measure of
+however, the best response is not uniformly a ZDs. A positive measure of
 skewness and kurtosis indicates a heavy tail to the right. Therefore, in several
-cases the strategy is not trying to extort its the opponents. Similarly the
+cases the strategy is not trying to extort its opponents. Similarly the
 evolutionary best response strategy does not behave uniformly extortionately. A
 larger value of both the kurtosis and the skewness of the SSE distribution
 indicates that in evolutionary settings a memory-one best response is even more
@@ -366,7 +366,7 @@ settings is further explored by Fig.~\ref{fig:behaviour_violin_plots}.
 Though, no statistically significant differences have been found, from
 Fig.~\ref{fig:behaviour_violin_plots}, it seems that evolutionary best
 response has a higher median $p_2$; which corresponds to the probability of cooperating
-after being tricked. Thus, they are more likely to forgive after
+after receiving a defection. Thus, they are more likely to forgive after
 being tricked. This is due to the fact that they could be playing against
 themselves, and they need to be able to forgive so that future cooperation can
 occur.
@@ -402,7 +402,7 @@ occur.
 
 This section focuses on the memory size of strategies. The effectiveness of
 memory in the IPD has been previously explored in the literature, however, no one
-have compared the performance of longer-memory
+has compared the performance of longer-memory
 strategies to memory-one best responses.
 
 In~\cite{Harper2017}, a strategy called \textit{Gambler} which makes
@@ -440,12 +440,12 @@ dimensions). As a result, the analysis of this section is based on a total of
 152 trials. For each trial two random opponents have been selected. The 152 pair
 of opponents are a sub set of the opponents used in the previous section.
 
-The ratio long memory utility / best response memory-one utility has been calculated and its distribution in
+The ratio between Gambler's utility and the best response memory-one strategy's utility has been calculated and its distribution in
 given in Fig.~\ref{fig:utilities_gambler_mem_one}.
 It is evident from Fig.~\ref{fig:utilities_gambler_mem_one} that
-Gambler always performs as well as the best response memory-one or better. There
-no points where the ratio is less than 1, thus Gambler never performed less
-than the best response memory-one. This seems to be at odd with the
+Gambler always performs as well as the best response memory-one or better. There are
+no points where the ratio value is less than 1, thus Gambler never performed less
+than the best response memory-one strategy. This seems to be at odd with the
 result of~\cite{Press2012} that against a memory-one opponent having a longer memory
 will not give a strategy any
 advantage. However, against two memory-one opponents, Gambler's performance is better than
@@ -457,7 +457,7 @@ of adaptability.
     \centering
     \includegraphics[width=.45\textwidth]{gambler_performance_against_mem_one.pdf}
     \caption{The ratio between the utilities of Gambler and best response memory-one
-    strategies for 152 different pair of opponents.}\label{fig:utilities_gambler_mem_one}
+    strategy for 152 different pair of opponents.}\label{fig:utilities_gambler_mem_one}
 \end{figure}
 
 \section*{Discussion}
