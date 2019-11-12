@@ -15,8 +15,8 @@
 memory in the Prisoner's Dilemma.}
 
 % Use letters for affiliations, numbers to show equal authorship (if applicable) and to indicate the corresponding author
-\author[a, 1, 2]{Nikoleta E. Glynatsi}
-\author[a, 1]{Vince A. Knight}
+\author[a, 2]{Nikoleta E. Glynatsi}
+\author[a]{Vince A. Knight}
 
 \affil[a]{Cardiff University, School of Mathematics, Cardiff, United Kingdom}
 
@@ -24,9 +24,10 @@ memory in the Prisoner's Dilemma.}
 \leadauthor{Nikoleta E. Glynatsi} 
 
 % Please include corresponding author, author contribution and author declaration information
-\authorcontributions{Please provide details of author contributions here.}
+\authorcontributions{Designed research N.G. and V.K; Performed research N.G;
+Analyzed data N.G.; Wrote the paper N.G. and V.K.}
 \authordeclaration{We declare no competing interests.}
-\equalauthors{\textsuperscript{1}V.K. contributed equally to this work with N.G.}
+% \equalauthors{\textsuperscript{1}V.K. contributed equally to this work with N.G.}
 \correspondingauthor{\textsuperscript{2}E-mail: glynatsine@cardiff.ac.uk}
 
 % At least three keywords are required at submission. Please provide three to five keywords, separated by the pipe symbol
@@ -342,10 +343,11 @@ In order to investigate whether best responses
 behave in an extortionate matter the SSE method~\cite{Knight2019} is used.
 In~\cite{Knight2019} it is proven that
 all extortionate ZDs reside on a triangular plane. For a given \(p\), a strategy
-\(x^*\) is defined as  its nearest extortionate strategy. The distance between
-the two strategies is explicitly calculated and referred to as sum of squared
-errors of prediction (SSE); how far \(p\) is from behaving as a ZDs.
-Thus, a high SSE implies a non extortionate behaviour. The SSE method has been applied to the data set.
+\(x^*\) is defined as the nearest ZDs. The distance between
+the two strategies is explicitly calculated and referred to as the sum of squared
+errors of prediction (SSE); which corresponds to how far \(p\) is from behaving as a ZDs.
+Thus, a high SSE implies non ZD, which in turn implies a non extortionate behaviour.
+The SSE method has been applied to the data set.
 A statistics summary
 of the SSE distribution for the best response in tournaments and evolutionary dynamics is
 given in Table~\ref{table:sserror_stats}.
@@ -390,11 +392,10 @@ occur.
 
 \begin{figure}[!htbp]
     \includegraphics[width=.55\textwidth]{behaviour_violin_plots.pdf}
-    \caption{Distributions of \(p^*\) for best responses in tournaments are
-    evolutionary settings. Medians \(\bar{p}^*\) in tournaments: \(\bar{p}^*_{1}=0\),
-    \(\bar{p}^*_{2}=0\), \(\bar{p}^*_{3}=0\), \(\bar{p}^*_{4}=0\).
-    Medians \(\bar{p}^*\) in evolutionary setting: \(\bar{p}^*_{1}=0\),
-    \(\bar{p}^*_{2}=0.19\), \(\bar{p}^*_{3}=0\), \(\bar{p}^*_{4}=0\).}
+    \caption{Distributions of \(p^*\) for best responses in tournaments and
+    evolutionary settings. The medians, denoted as \(\bar{p}^*\), for tournaments
+    are \(\bar{p}^* = (0, 0, 0, 0)\), and for evolutionary settings
+    \(\bar{p}^* = (0, 0.19, 0, 0)\).}
     \label{fig:behaviour_violin_plots}
 \end{figure}
 
@@ -492,10 +493,10 @@ contained best responses in tournaments and in evolutionary settings for $N=2$
 was generated. This allowed us to investigate their respective behaviours, and
 whether it was extortionate acts that made them the most favorable strategies.
 However, it was shown that it was not extortion but adaptability that allowed
-the strategies to gain the most from their interactions. In evolutionary
-settings the best response memory-one strategy exhibited that the cooperating
-probability after being tricked should not zero, and a best response
-strategy gains by forgiving and allowing for cooperation to occur. Moreover, the performance of
+the strategies to gain the most from their interactions. In evolutionary settings
+it was shown that the best response strategy was even more adaptable, and there
+is some evidence that it is more likely to forgive after being tricked.
+Moreover, the performance of
 memory-one strategies was put against the performance of a longer memory
 strategy called Gambler. There were several cases where Gambler would outperform
 the memory-one strategy, however, a memory-one strategy never managed to
@@ -509,6 +510,11 @@ believe that for larger values of $N$ the results that have been presented here
 would only be more evident. In addition, we would investigate potential
 theoretical results for the evolutionary best responses dynamics algorithm
 discussed.
+
+By specifically exploring the entire memory space-one strategies to identify
+the optimal strategy for a variety of situations, this work casts doubt
+on the effectiveness of ZDs, highlights the importance of adaptability and provides
+a framework for the continuous understanding of these important questions.
 
 \showmatmethods{} % Display the Materials and Methods section
 
