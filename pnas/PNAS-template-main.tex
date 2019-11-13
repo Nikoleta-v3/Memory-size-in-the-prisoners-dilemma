@@ -235,23 +235,15 @@ These have been simulated using~\cite{axelrodproject} an open
 source research framework for the study of the IPD.
 
 \begin{figure}
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering
-        \includegraphics[width=.8\linewidth]{population_defection_takes_over.pdf}
-        \caption{\(q_{1}=(0.22199, 0.87073, 0.20672, 0.91861)\),
-        $q_{2}=(0.48841, 0.61174, 0.76591, 0.51842)$ and
-        $q_{3}=(0.2968, 0.18772, 0.08074, 0.73844)$}\label{fig:stable_defection}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering
-        \includegraphics[width=.8\linewidth]{population_defection_fails.pdf}
-        \caption{$q_{1}=(0.96703, 0.54723, 0.97268, 0.71482)$,
-        $q_{2}=(0.69773, 0.21609, 0.97627, 0.0062)$ and
-        $q_{3}=(0.25298, 0.43479, 0.77938, 0.19769)$}\label{fig:unstable_defection}
-    \end{subfigure}
-    \caption{Fig.~\ref{fig:stable_defection} Eq.~\ref{eq:defection_condition_one} and
+    \centering
+    \includegraphics[width=.75\linewidth]{stability_of_defection_plots.pdf}
+    \caption{A. For \(q_{1}=(0.22199, 0.87073, 0.20672, 0.91861)\),
+    $q_{2}=(0.48841, 0.61174, 0.76591, 0.51842)$ and
+    $q_{3}=(0.2968, 0.18772, 0.08074, 0.73844)$, Eq.~\ref{eq:defection_condition_one} and
     Eq.~\ref{eq:defection_condition_two} hold and Defector takes over the
-    population. Fig.~\ref{fig:unstable_defection} Eq.~\ref{eq:defection_condition_one} fails and
+    population. B. For $q_{1}=(0.96703, 0.54723, 0.97268, 0.71482)$,
+    $q_{2}=(0.69773, 0.21609, 0.97627, 0.0062)$ and
+    $q_{3}=(0.25298, 0.43479, 0.77938, 0.19769)$, Eq.~\ref{eq:defection_condition_one} fails and
     Eq.~\ref{eq:defection_condition_two} holds and Defector does not take over
     the population.}
 \end{figure}
@@ -391,12 +383,12 @@ occur.
 \end{table}
 
 \begin{figure}[!htbp]
-    \includegraphics[width=.55\textwidth]{behaviour_violin_plots.pdf}
-    \caption{Distributions of \(p^*\) for best responses in tournaments and
-    evolutionary settings. The medians, denoted as \(\bar{p}^*\), for tournaments
-    are \(\bar{p}^* = (0, 0, 0, 0)\), and for evolutionary settings
-    \(\bar{p}^* = (0, 0.19, 0, 0)\).}
-    \label{fig:behaviour_violin_plots}
+        \includegraphics[width=.45\textwidth]{behaviour_violin_plots.pdf}
+        \caption{Distributions of \(p^*\) for best responses in tournaments and
+        evolutionary settings. The medians, denoted as \(\bar{p}^*\), for tournaments
+        are \(\bar{p}^* = (0, 0, 0, 0)\), and for evolutionary settings
+        \(\bar{p}^* = (0, 0.19, 0, 0)\).}
+        \label{fig:behaviour_violin_plots}
 \end{figure}
 
 \subsection*{Longer memory best responses}
@@ -456,7 +448,7 @@ of adaptability.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=.45\textwidth]{gambler_performance_against_mem_one.pdf}
+    \includegraphics[width=.40\textwidth]{gambler_performance_against_mem_one.pdf}
     \caption{The ratio between the utilities of Gambler and best response memory-one
     strategy for 152 different pair of opponents.}\label{fig:utilities_gambler_mem_one}
 \end{figure}
