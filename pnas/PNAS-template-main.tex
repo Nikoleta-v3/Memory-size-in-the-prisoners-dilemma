@@ -106,7 +106,7 @@ multidimensional optimisation approach to identify the best response to a given
 group of opponents. In particular, this work presents a compact method of
 identifying the best response memory-one strategy against a given set of
 opponents, and evaluates whether it behaves in a
-zero-determinant way. This is also done in evolutionary settings. Moreover, we
+zero-determinant way which in turn indicates whether it can be extortionate. This is also done in evolutionary settings. Moreover, we
 introduce a well designed framework that allows the comparison of an optimal
 memory one strategy and a more complex strategy which has a larger memory, and an
 identification of conditions for which defection is known to be stable; thus
@@ -185,7 +185,7 @@ dominates cooperation.
 \subsection*{Stability of defection}\label{subsection:stability_defection}
 
 An immediate result from our formulation can be
-obtained by evaluating the sign of Eq. \ref{eq:tournament_utility} derivative
+obtained by evaluating the sign of Eq. \ref{eq:tournament_utility}'s derivative
 at \(p=(0, 0, 0, 0)\). If at that point the
 derivative is negative, then the utility of a player only decreases if they were
 to change their behaviour, and thus \textbf{defection at that point is stable}.
@@ -280,8 +280,10 @@ optimal points. This is also intuitive. The best response against a cooperator,
 \(q=(1, 1, 1, 1)\), is a defector \(p^*=(0, 0, 0, 0)\). The strategies
 \(p=(\frac{1}{2}, 0, 0, 0)\) and \(p=(\frac{1}{2}, 0, 0, \frac{1}{2})\) are also
 best responses. The approach taken here is to introduce a compact way of
-constructing the discrete candidate set of all local optimal points, and evaluating which
-corresponds to the best response strategy. The approach is given in Theorem~\ref{memone_group_best_response}.
+constructing the discrete candidate set of all local optimal points, and evaluating
+the objective function Eq.~\ref{eq:tournament_utility}. This gives the best
+response memory-one strategy. The approach is given in
+Theorem~\ref{memone_group_best_response}.
 
 Finding best response memory-one strategies is analytically feasible using the
 formulation of Theorem~\ref{memone_group_best_response} and resultant
@@ -436,7 +438,7 @@ of opponents are a sub set of the opponents used in the previous section.
 The ratio between Gambler's utility and the best response memory-one strategy's utility has been calculated and its distribution in
 given in Fig.~\ref{fig:utilities_gambler_mem_one}.
 It is evident from Fig.~\ref{fig:utilities_gambler_mem_one} that
-Gambler always performs as well as the best response memory-one or better. There are
+Gambler always performs as well as the best response memory-one strategy and often performs better. There are
 no points where the ratio value is less than 1, thus Gambler never performed less
 than the best response memory-one strategy. This seems to be at odd with the
 result of~\cite{Press2012} that against a memory-one opponent having a longer memory
@@ -506,7 +508,7 @@ discussed.
 By specifically exploring the entire memory space-one strategies to identify
 the optimal strategy for a variety of situations, this work casts doubt
 on the effectiveness of ZDs, highlights the importance of adaptability and provides
-a framework for the continuous understanding of these important questions.
+a framework for the continued understanding of these important questions.
 
 \showmatmethods{} % Display the Materials and Methods section
 
