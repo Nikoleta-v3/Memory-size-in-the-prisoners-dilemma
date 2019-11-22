@@ -230,13 +230,13 @@ to change their behaviour, and thus \textbf{defection at that point is stable}.
 Consider a population for which defection is known to be stable. In that
 population all the members will over time adopt the same behaviour; thus in such
 population cooperation will never take over. This is demonstrated in
-Fig.~\ref{fig:stable_defection} and Fig.~\ref{fig:unstable_defection}.
+Fig.~\ref{fig:stability_of_defection}.
 These have been simulated using~\cite{axelrodproject} an open
 source research framework for the study of the IPD.
 
 \begin{figure}
     \centering
-    \includegraphics[width=.75\linewidth]{stability_of_defection_plots.pdf}
+    \includegraphics[width=.8\linewidth]{stability_of_defection_plots.pdf}
     \caption{A. For \(q_{1}=(0.22199, 0.87073, 0.20672, 0.91861)\),
     $q_{2}=(0.48841, 0.61174, 0.76591, 0.51842)$ and
     $q_{3}=(0.2968, 0.18772, 0.08074, 0.73844)$, Eq.~\ref{eq:defection_condition_one} and
@@ -244,7 +244,7 @@ source research framework for the study of the IPD.
     population. B. For $q_{1}=(0.96703, 0.54723, 0.97268, 0.71482)$,
     $q_{2}=(0.69773, 0.21609, 0.97627, 0.0062)$ and
     $q_{3}=(0.25298, 0.43479, 0.77938, 0.19769)$, Eq.~\ref{eq:defection_condition_one} fails
-    and Defector does not take over the population.}
+    and Defector does not take over the population.}\label{fig:stability_of_defection}
 \end{figure}
 
 \subsection*{Best response memory-one strategies}
@@ -288,8 +288,8 @@ Finding best response memory-one strategies is analytically feasible using the
 formulation of Theorem~\ref{memone_group_best_response} and resultant
 theory~\cite{Jonsson2005}. However, for large systems building the resultant
 becomes intractable. As a result, best responses will be estimated
-heuristically using a numerical method taking advantage of the technique called
-Bayesian optimisation~\cite{Mokus1978}.
+heuristically using a numerical method, suitable for problems with local optima,
+called Bayesian optimisation~\cite{Mokus1978}.
 
 This is extended to evolutionary settings. In these settings
 self interactions are key. Self interactions can be incorporated in the
