@@ -130,8 +130,7 @@ memory one strategy and a more complex strategy which has a larger memory. This
 is used to identify conditions for which defection is stable; thus identifying
 environments where cooperation will not occur.
 
-\section{Methods and Results}
-\subsection{Utility}
+\section{Methods}
 
 One specific advantage of memory-one strategies is their mathematical
 tractability. They can be represented completely as an element of \(\R^{4}_{[0, 1]}\). This
@@ -199,71 +198,72 @@ It will be used to obtain best response memory-one strategies, in tournaments
 and evolutionary dynamics, and to explore the conditions under which defection
 dominates cooperation.
 
-\subsection{Stability of defection}\label{subsection:stability_defection}
+% \subsection{Stability of defection}\label{subsection:stability_defection}
 
-An immediate result from our formulation can be
-obtained by evaluating the sign of Eq. \ref{eq:tournament_utility}'s derivative
-at \(p=(0, 0, 0, 0)\). If at that point the
-derivative is negative, then the utility of a player only decreases if they were
-to change their behaviour, and thus \textbf{defection at that point is stable}.
+% An immediate result from our formulation can be
+% obtained by evaluating the sign of Eq. \ref{eq:tournament_utility}'s derivative
+% at \(p=(0, 0, 0, 0)\). If at that point the
+% derivative is negative, then the utility of a player only decreases if they were
+% to change their behaviour, and thus \textbf{defection at that point is stable}.
 
-\begin{lemma}\label{lemma:stability_of_defection}
-    In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
-    for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
-    defection is stable if the transition probabilities of the
-    opponents satisfy conditions Eq. \ref{eq:defection_condition_one} and Eq. \ref{eq:defection_condition_two}.
+% \begin{lemma}\label{lemma:stability_of_defection}
+%     In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
+%     for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
+%     defection is stable if the transition probabilities of the
+%     opponents satisfy conditions Eq. \ref{eq:defection_condition_one} and Eq. \ref{eq:defection_condition_two}.
 
-    \begin{equation}\label{eq:defection_condition_one}
-        \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
-    \end{equation}
+%     \begin{equation}\label{eq:defection_condition_one}
+%         \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
+%     \end{equation}
 
-    while,
+%     while,
 
-    \begin{equation}\label{eq:defection_condition_two}
-        \sum_{i=1} ^ N \bar{a}^{(i)} \neq 0
-    \end{equation}
-\end{lemma}
+%     \begin{equation}\label{eq:defection_condition_two}
+%         \sum_{i=1} ^ N \bar{a}^{(i)} \neq 0
+%     \end{equation}
+% \end{lemma}
 
-\begin{proof}
-    For defection to be stable the derivative of the utility
-    at the point \(p = (0, 0, 0, 0)\) must be negative.
+% \begin{proof}
+%     For defection to be stable the derivative of the utility
+%     at the point \(p = (0, 0, 0, 0)\) must be negative.
 
-    Substituting \(p = (0, 0, 0, 0)\) in
-    Eq. \ref{eq:mo_tournament_derivative} gives:
+%     Substituting \(p = (0, 0, 0, 0)\) in
+%     Eq. \ref{eq:mo_tournament_derivative} gives:
 
-    \begin{equation}
-        \left.\frac{d\sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)}{dp} \right\rvert_{p=(0,0,0,0)} =
-    \sum_{i=1} ^ N \frac{(c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})}
-    {(\bar{a}^{(i)})^2}
-    \end{equation}
+%     \begin{equation}
+%         \left.\frac{d\sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)}{dp} \right\rvert_{p=(0,0,0,0)} =
+%     \sum_{i=1} ^ N \frac{(c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})}
+%     {(\bar{a}^{(i)})^2}
+%     \end{equation}
 
-    The sign of the numerator \( \displaystyle\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\)
-    can vary based on the transition probabilities of the opponents.
-    The denominator can not be negative, and otherwise is always positive.
-    Thus the sign of the derivative is negative if and only if
-    \( \displaystyle\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0\).
-\end{proof}
+%     The sign of the numerator \( \displaystyle\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\)
+%     can vary based on the transition probabilities of the opponents.
+%     The denominator can not be negative, and otherwise is always positive.
+%     Thus the sign of the derivative is negative if and only if
+%     \( \displaystyle\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0\).
+% \end{proof}
 
-Consider a population for which defection is known to be stable. In that
-population all the members will over time adopt the same behaviour; thus in such
-population cooperation will never take over. This is demonstrated in
-Fig.~\ref{fig:stability_of_defection}.
-These have been simulated using~\cite{axelrodproject} an open
-source research framework for the study of the IPD.
+% Consider a population for which defection is known to be stable. In that
+% population all the members will over time adopt the same behaviour; thus in such
+% population cooperation will never take over. This is demonstrated in
+% Fig.~\ref{fig:stability_of_defection}.
+% These have been simulated using~\cite{axelrodproject} an open
+% source research framework for the study of the IPD.
 
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=.4\linewidth]{img/stability_of_defection_plots.pdf}
-    \caption{A. For \(q_{1}=(0.22199, 0.87073, 0.20672, 0.91861)\),
-    $q_{2}=(0.48841, 0.61174, 0.76591, 0.51842)$ and
-    $q_{3}=(0.2968, 0.18772, 0.08074, 0.73844)$, Eq.~\ref{eq:defection_condition_one} and
-    Eq.~\ref{eq:defection_condition_two} hold and Defector takes over the
-    population. B. For $q_{1}=(0.96703, 0.54723, 0.97268, 0.71482)$,
-    $q_{2}=(0.69773, 0.21609, 0.97627, 0.0062)$ and
-    $q_{3}=(0.25298, 0.43479, 0.77938, 0.19769)$, Eq.~\ref{eq:defection_condition_one} fails
-    and Defector does not take over the population.}\label{fig:stability_of_defection}
-\end{figure}
+% \begin{figure}[!htbp]
+%     \centering
+%     \includegraphics[width=.4\linewidth]{img/stability_of_defection_plots.pdf}
+%     \caption{A. For \(q_{1}=(0.22199, 0.87073, 0.20672, 0.91861)\),
+%     $q_{2}=(0.48841, 0.61174, 0.76591, 0.51842)$ and
+%     $q_{3}=(0.2968, 0.18772, 0.08074, 0.73844)$, Eq.~\ref{eq:defection_condition_one} and
+%     Eq.~\ref{eq:defection_condition_two} hold and Defector takes over the
+%     population. B. For $q_{1}=(0.96703, 0.54723, 0.97268, 0.71482)$,
+%     $q_{2}=(0.69773, 0.21609, 0.97627, 0.0062)$ and
+%     $q_{3}=(0.25298, 0.43479, 0.77938, 0.19769)$, Eq.~\ref{eq:defection_condition_one} fails
+%     and Defector does not take over the population.}\label{fig:stability_of_defection}
+% \end{figure}
 
+\section{Results}
 \subsection{Best response memory-one strategies}\label{section:best_response_memory_one}
 
 As discussed ZDs have been acclaimed for their robustness
