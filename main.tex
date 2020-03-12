@@ -167,16 +167,50 @@ Eq.~\ref{eq:press_dyson_utility}.
 This manuscript has explored the form of \(u_q(p)\), to the authors knowledge no
 previous work has done this, and it proves that \(u_q(p)\) is given by a ratio
 of two quadratic forms~\cite{kepner2011},
-(Theorem~\ref{theorem_one}):
+Theorem~\ref{theorem_one}.
 
-\begin{equation}\label{eq:optimisation_quadratic}
-       u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
-                   {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}},
-\end{equation}
+\begin{theorem}\label{theorem_one}
+    The expected utility of a memory-one strategy \(p\in\mathbb{R}_{[0,1]}^4\)
+    against a memory-one opponent \(q\in\mathbb{R}_{[0,1]}^4\), denoted
+    as \(u_q(p)\), can be written as a ratio of two quadratic forms:
 
-where \(Q=Q(q), \bar{Q}=\bar{Q}(q)\) \(\in \R^{4\times4}\), \(c=c(q) \text{ and } \bar{c}=\bar{c}(q)\)
-\(\in \R^{4 \times 1}\), \(a=a(q) \text{ and } \bar{a}=\bar{a}(q) \in \R.\)
+    \begin{equation}\label{eq:optimisation_quadratic}
+    u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
+                {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}},
+    \end{equation}
+    where \(Q, \bar{Q}\) \(\in \R^{4\times4}\) are square matrices defined by the
+    transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
 
+    \begin{center}
+    \begin{equation}
+    \resizebox{0.9\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(
+    Q = \input{tex/q_numerator}\)},
+    \end{equation}
+    \begin{equation}\label{eq:q_bar_matrix}
+    \resizebox{0.8\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(
+    \bar{Q} =  \input{tex/q_denominator}\)}.
+    \end{equation}
+    \end{center}
+
+    \(c \text{ and } \bar{c}\) \(\in \R^{4 \times 1}\) are similarly defined by:
+
+    \begin{equation}\label{eq:q_matrix_numerator}
+    \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(c = \input{tex/c_numerator}\),}
+    \end{equation}
+    \begin{equation}\label{eq:q_matrix_denominator}
+    \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
+    \boldmath\(\bar{c} = \input{tex/c_denominator}\),
+    }
+    \end{equation}
+    and the constant terms \(a, \bar{a}\) are defined as \(a = \input{tex/numerator_constant}\) and
+    \(\bar{a} = \input{tex/denominator_constant}\).
+\end{theorem}
+
+The proof of Theorem~\ref{theorem_one} is given in
+Appendix~\ref{appendix:theorem_one}.
 This can be extended to consider multiple
 opponents. The IPD is commonly studied in tournaments and/or Moran Processes
 where a strategy interacts with a number of opponents. The payoff of a player in
@@ -446,7 +480,7 @@ occur.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=.55\textwidth]{img/behaviour_violin_plots.pdf}
+    \includegraphics[width=.75\textwidth]{img/behaviour_violin_plots.pdf}
     \caption{Distributions of \(p^*\) for best responses in tournaments and
     evolutionary settings. The medians, denoted as \(\bar{p}^*\), for tournaments
     are \(\bar{p}^* = (0, 0, 0, 0)\), and for evolutionary settings
@@ -588,47 +622,7 @@ A variety of software libraries have been used in this work:
 
 \section{Appendix}
 
-\subsection{Theorem~\ref{theorem_one}}
-\begin{theorem}\label{theorem_one}
-
-    The expected utility of a memory-one strategy \(p\in\mathbb{R}_{[0,1]}^4\)
-    against a memory-one opponent \(q\in\mathbb{R}_{[0,1]}^4\), denoted
-    as \(u_q(p)\), can be written as a ratio of two quadratic forms:
-
-    \begin{equation}\label{eq:optimisation_quadratic}
-    u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
-                {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}},
-    \end{equation}
-    where \(Q, \bar{Q}\) \(\in \R^{4\times4}\) are square matrices defined by the
-    transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
-
-    \begin{center}
-    \begin{equation}
-    \resizebox{.65\linewidth}{!}{\arraycolsep=2.5pt%
-    \boldmath\(
-    Q = \input{tex/q_numerator}\)},
-    \end{equation}
-    \begin{equation}\label{eq:q_bar_matrix}
-    \resizebox{.65\linewidth}{!}{\arraycolsep=2.5pt%
-    \boldmath\(
-    \bar{Q} =  \input{tex/q_denominator}\)}.
-    \end{equation}
-    \end{center}
-
-    \(c \text{ and } \bar{c}\) \(\in \R^{4 \times 1}\) are similarly defined by:
-
-    \begin{equation}\label{eq:q_matrix_numerator}
-    \resizebox{0.25\linewidth}{!}{\arraycolsep=2.5pt%
-    \boldmath\(c = \input{tex/c_numerator}\),}
-    \end{equation}
-    \begin{equation}\label{eq:q_matrix_denominator}
-    \resizebox{0.25\linewidth}{!}{\arraycolsep=2.5pt%
-    \boldmath\(\bar{c} = \input{tex/c_denominator}\),
-    }
-    \end{equation}
-    and the constant terms \(a, \bar{a}\) are defined as \(a = \input{tex/numerator_constant}\) and
-    \(\bar{a} = \input{tex/denominator_constant}\).
-\end{theorem}
+\subsection{Theorem~\ref{theorem_one} Proof}\label{appendix:theorem_one}
 
 \begin{proof}
 
