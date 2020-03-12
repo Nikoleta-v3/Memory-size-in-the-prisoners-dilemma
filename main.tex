@@ -354,17 +354,74 @@ randomly generated and the memory-one best responses against them is found.
 % and can be found at~\cite{nikoleta_glynatsi_2019}.
 
 In order to investigate whether best responses
-behave in an extortionate matter the SSE method~\cite{Knight2019} is used.
-In~\cite{Knight2019} it is proven that
-all extortionate ZDs reside on a triangular plane. For a given \(p\), a strategy
-\(x^*\) is defined as the nearest ZDs. The distance between
-the two strategies is explicitly calculated and referred to as the sum of squared
-errors of prediction (SSE); which corresponds to how far \(p\) is from behaving as a ZDs.
-Thus, a high SSE implies non ZD, which in turn implies a non extortionate behaviour.
-The SSE method has been applied to the data set.
-A statistics summary
-of the SSE distribution for the best response in tournaments and evolutionary dynamics is
-given in Table~\ref{table:sserror_stats}.
+behave in an extortionate matter the SSE method~\cite{Knight2019} is used. More
+specifically,
+in~\cite{Knight2019} a point \(x^*\), in the space of memory-one strategies, is
+defined as the nearest extortionate strategy to a given strategy \(p\). \(x^*\) is
+given by,
+
+\begin{equation}\label{eqn:x_star_formula}
+    x^* = {\left(C^{T}C\right)}^{-1}C^{T}\bar{p}
+\end{equation}
+
+where \(\bar{p}=(p_1 - 1, p_2 - 1, p_3, p_4)\) and
+
+\begin{equation}\label{eq:definition_of_C}
+    C =
+    \begin{bmatrix}
+        R - P & R- P \\
+        S - P & T- P \\
+        T - P & S- P \\
+        0     & 0 \\
+    \end{bmatrix}.
+\end{equation}
+
+The squared norm of the remaining error is referred to as sum of squared errors
+of prediction (SSE):
+
+\begin{equation}\label{eqn:x_SSError_formula}
+    \text{SSE} = {\bar{p}} ^ T \bar{p} -
+           \bar{p} C \left(C ^ T C \right) ^ {-1} C ^ T \bar{p}
+         = {\bar{p}} ^ T \bar{p} - \bar{p} C x ^ *
+\end{equation}
+
+Thus, SSE is defined as how far a strategy is from behaving as a ZD and thus a
+high SSE implies a non extortionate behaviour. The SSE method has been applied
+to the data set. A statistics summary of the SSE distribution for the best
+response in tournaments and evolutionary dynamics is given in
+Table~\ref{table:sserror_stats}.
+
+\begin{table}[!htbp]
+    \begin{center}
+    \resizebox{.6\columnwidth}{!}{%
+    \begin{tabular}{lrrrrrrrrrrr}
+        \toprule
+        & mean & std  & 5\% & 50\% &  95\% & max & median & skew & kurt\\
+        \midrule
+    \textbf{Tournament} & 0.34  & 0.40  & 0.028  & 0.17  &
+    1.05  & 2.47  & 0.17  & 1.87 & 3.60 \\
+    \textbf{Evolutionary Setting} & 0.17 & 0.23 & 0.01 &
+    0.12 & 0.67 & 1.53 & 0.12 & 3.42 & 1.92 \\
+        \bottomrule
+    \end{tabular}}
+    \end{center}
+    \caption{SSE of best response memory-one when \(N=2\)}\label{table:sserror_stats}
+\end{table}
+
+\begin{figure}[!htbp]
+    \begin{subfigure}{0.5\textwidth}
+        \begin{center}
+            \includegraphics[width=\linewidth]{img/best_respones_sserror.pdf}
+        \end{center}
+        \caption{.}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.5\textwidth}
+        \begin{center}
+            \includegraphics[width=\linewidth]{img/evo_sserror.pdf}
+        \end{center}
+        \caption{.}
+    \end{subfigure}
+\end{figure}
 
 For the best response in tournaments the distribution of SSE is skewed to the
 left, indicating that the best response does exhibit ZDs behaviour and so could
@@ -386,23 +443,6 @@ after receiving a defection. Thus, they are more likely to forgive after
 being tricked. This is due to the fact that they could be playing against
 themselves, and they need to be able to forgive so that future cooperation can
 occur.
-
-\begin{table}
-\begin{center}
-\resizebox{.6\columnwidth}{!}{%
-\begin{tabular}{lrrrrrrrrrrr}
-    \toprule
-    & mean & std  & 5\% & 50\% &  95\% & max & median & skew & kurt\\
-    \midrule
-\textbf{Tournament} & 0.34  & 0.40  & 0.028  & 0.17  &
-1.05  & 2.47  & 0.17  & 1.87 & 3.60 \\
-\textbf{Evolutionary Setting} & 0.17 & 0.23 & 0.01 &
-0.12 & 0.67 & 1.53 & 0.12 & 3.42 & 1.92 \\
-    \bottomrule
-\end{tabular}}
-\end{center}
-\caption{SSE of best response memory-one when \(N=2\)}\label{table:sserror_stats}
-\end{table}
 
 \begin{figure}[!htbp]
     \centering
