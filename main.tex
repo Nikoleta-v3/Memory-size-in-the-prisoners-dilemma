@@ -197,7 +197,7 @@ Theorem~\ref{theorem_one}.
     \(c \text{ and } \bar{c}\) \(\in \R^{4 \times 1}\) are similarly defined by:
 
     \begin{equation}\label{eq:q_matrix_numerator}
-    \resizebox{0.3\linewidth}{!}{\arraycolsep=2.5pt%
+    \resizebox{0.6\linewidth}{!}{\arraycolsep=2.5pt%
     \boldmath\(c = \input{tex/c_numerator}\),}
     \end{equation}
     \begin{equation}\label{eq:q_matrix_denominator}
@@ -211,7 +211,7 @@ Theorem~\ref{theorem_one}.
 
 The proof of Theorem~\ref{theorem_one} is given in
 Appendix~\ref{appendix:theorem_one}.
-This can be extended to consider multiple
+Theorem~\ref{theorem_one} can be extended to consider multiple
 opponents. The IPD is commonly studied in tournaments and/or Moran Processes
 where a strategy interacts with a number of opponents. The payoff of a player in
 such interactions is given by the average payoff the player received against
@@ -226,11 +226,14 @@ against a \(N\) number of opponents is given by:
        {\prod\limits_{i=1} ^ N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}.
 \end{align}
 
+The proof of Eq.~(\ref{eq:tournament_utility}) is a straightforward algebraic
+manipulation.
+
 Estimating the utility of a memory-one strategy against any number of opponents
 without simulating the interactions is the main result used in the rest of this manuscript.
 It will be used to obtain best response memory-one strategies, in tournaments
-and evolutionary dynamics, and to explore the conditions under which defection
-dominates cooperation.
+with and without self interactions, and to explore the limitations of extortion
+and of short memory.
 
 % \subsection{Stability of defection}\label{subsection:stability_defection}
 
