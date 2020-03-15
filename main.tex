@@ -301,7 +301,7 @@ and of short memory.
 % \end{figure}
 
 \section{Results}
-\subsection{Best response memory-one strategies}\label{section:best_response_memory_one}
+% \subsection{Best response memory-one strategies}\label{section:best_response_memory_one}
 
 As discussed ZDs have been acclaimed for their robustness
 against a single opponent. ZDs are evidence that extortion works
@@ -345,11 +345,11 @@ becomes intractable. As a result, best responses will be estimated
 heuristically using a numerical method, suitable for problems with local optima,
 called Bayesian optimisation~\cite{Mokus1978}.
 
-This is extended to evolutionary settings. In these settings
-self interactions are key. Self interactions can be incorporated in the
+This is extended to include self interactions. In several evolutionary settings
+such as Moran processes self interactions are key. Self interactions can be
+incorporated in the
 formulation that has been used so far. More specifically, the optimisation
-problem of Eq.~\ref{eq:mo_tournament_optimisation} is extended to include self
-interactions:
+problem of Eq.~\ref{eq:mo_tournament_optimisation} is extended to:
 
 \begin{equation}\label{eq:mo_evolutionary_optimisation}
 \begin{aligned}
@@ -359,7 +359,7 @@ interactions:
 \end{aligned}
 \end{equation}
 
-For determining the memory-one best response in an evolutionary setting, an
+For determining the memory-one best response with self interactions, an
 algorithmic approach is considered, called \textit{best response dynamics}. The
 best response dynamics approach used in this manuscript is given by
 Algorithm~\ref{algo:best_response_dynamics}.
@@ -379,10 +379,10 @@ Algorithm~\ref{algo:best_response_dynamics}.
 \end{center}
 
 The results of this section use Bayesian optimisation to generate a data set of best response
-memory-one strategies, in tournaments and evolutionary dynamics whilst \(N=2\).
+memory-one strategies, in tournaments with and without self interactions whilst \(N=2\).
 The data set is available at~\cite{glynatsi2019}. It contains a total of 1000 trials
 corresponding to 1000 different instances of a best response strategy in
-tournaments and evolutionary dynamics. For each trial a set of 2 opponents is
+tournaments in tournaments with and without self interactions. For each trial a set of 2 opponents is
 randomly generated and the memory-one best responses against them is found.
 
 % The source code for the experiments presented in this manuscript has been written in a sustainable manner~\cite{Benureau2018}.
