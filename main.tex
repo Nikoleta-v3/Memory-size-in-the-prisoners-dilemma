@@ -62,7 +62,7 @@ of extortion and restricted memory.}
     response} memory-one strategies as a multidimensional
     optimisation problem. Though extortionate memory-one strategies have gained
     much attention, we demonstrate that best response memory-one strategies do not
-    behave in an extortionate way, and moreover, for memory one strategies to be
+    behave in an extortionate way, and moreover, for memory-one strategies to be
     evolutionary robust they need to be able to behave in a forgiving way. We
     also provide evidence that memory-one strategies suffer from their limited
     memory in multi agent interactions and can be out performed by
@@ -128,9 +128,7 @@ opponents, and evaluates whether it behaves in a
 zero-determinant way which in turn indicates whether it can be extortionate.
 This done in tournaments with and without including self interactions. Moreover, we
 introduce a well designed framework that allows the comparison of an optimal
-memory one strategy and a more complex strategy which has a larger memory. This
-is used to identify conditions for which defection is stable; thus identifying
-environments where cooperation will not occur.
+memory one strategy and a more complex strategy which has a larger memory.
 
 The numerical experiments of this manuscript are carried out the payoff values
 of \((R, P, S, T) = (3, 1, 0, 5)\). The source code for the experiments presented
@@ -407,21 +405,22 @@ response is not uniformly a ZDs. A positive measure of skewness and kurtosis,
 and a mean of 0.34 indicate a heavy tail to the right. Therefore, in several
 cases the strategy is not trying to extort its opponents. More specifically,
 the best response memory-one with a theory of mind is being more adaptable than a ZDs.
-In~\cite{Hilbe2018} this behaviour is refereed to as the \textit{partners
+In~\cite{Hilbe2018} a similar behaviour is refereed to as the \textit{partners
 strategy}. Partners
 strategy aims to share the payoff for mutual cooperation, but it is ready
-to fight back when being exploited. It is shown that partner strategies are
+to fight back when being exploited. In~\cite{Hilbe2018} they showed that partner strategies are
 selected in evolutionary settings when populations are large and relationships
-stable and they allow for evolution of cooperation. A best response memory-one strategy
-in evolutionary settings is has not been incorporated in the study of this manuscript, however,
+stable and they allow for the evolution of cooperation. A best response memory-one strategy
+in evolutionary settings has not been incorporated in the study of this manuscript, however,
 the best response memory-one strategy with self interactions can used to approximate
 the behaviour of a evolutionary stable best response memory-one strategy.
 The distribution of SSE for the best response strategy that includes self
 interactions is skewed to the left, however, a positive measure
-of skewness and kurtosis indicate a heavy tail to the right, thus it is
+of skewness and kurtosis indicate a heavy tail to the right. Thus, the best
+response memory-one strategy when considering self interactions is
 no behaving uniformly extortionately either. This indicates that evolutionary
-stable memory-one strategies need to more adaptable than a ZDs and aim for
-mutual cooperation as well as exploitation, which is line with the results of
+stable memory-one strategies need to more adaptable than a ZDs, and aim for
+mutual cooperation as well as exploitation which is line with the results of
 \cite{Hilbe2018}.
 
 The difference between best responses in tournaments without and with self interactions
