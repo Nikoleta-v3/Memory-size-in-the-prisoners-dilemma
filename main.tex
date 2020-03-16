@@ -244,71 +244,6 @@ It will be used to obtain best response memory-one strategies in tournaments
 with and without self interactions in order to explore the limitations of extortion
 and restricted memory.
 
-% \subsection{Stability of defection}\label{subsection:stability_defection}
-
-% An immediate result from our formulation can be
-% obtained by evaluating the sign of Eq. \ref{eq:tournament_utility}'s derivative
-% at \(p=(0, 0, 0, 0)\). If at that point the
-% derivative is negative, then the utility of a player only decreases if they were
-% to change their behaviour, and thus \textbf{defection at that point is stable}.
-
-% \begin{lemma}\label{lemma:stability_of_defection}
-%     In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
-%     for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
-%     defection is stable if the transition probabilities of the
-%     opponents satisfy conditions Eq. \ref{eq:defection_condition_one} and Eq. \ref{eq:defection_condition_two}.
-
-%     \begin{equation}\label{eq:defection_condition_one}
-%         \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
-%     \end{equation}
-
-%     while,
-
-%     \begin{equation}\label{eq:defection_condition_two}
-%         \sum_{i=1} ^ N \bar{a}^{(i)} \neq 0
-%     \end{equation}
-% \end{lemma}
-
-% \begin{proof}
-%     For defection to be stable the derivative of the utility
-%     at the point \(p = (0, 0, 0, 0)\) must be negative.
-
-%     Substituting \(p = (0, 0, 0, 0)\) in
-%     Eq. \ref{eq:mo_tournament_derivative} gives:
-
-%     \begin{equation}
-%         \left.\frac{d\sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)}{dp} \right\rvert_{p=(0,0,0,0)} =
-%     \sum_{i=1} ^ N \frac{(c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})}
-%     {(\bar{a}^{(i)})^2}
-%     \end{equation}
-
-%     The sign of the numerator \( \displaystyle\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\)
-%     can vary based on the transition probabilities of the opponents.
-%     The denominator can not be negative, and otherwise is always positive.
-%     Thus the sign of the derivative is negative if and only if
-%     \( \displaystyle\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0\).
-% \end{proof}
-
-% Consider a population for which defection is known to be stable. In that
-% population all the members will over time adopt the same behaviour; thus in such
-% population cooperation will never take over. This is demonstrated in
-% Fig.~\ref{fig:stability_of_defection}.
-% These have been simulated using~\cite{axelrodproject} an open
-% source research framework for the study of the IPD.
-
-% \begin{figure}[!htbp]
-%     \centering
-%     \includegraphics[width=.4\linewidth]{img/stability_of_defection_plots.pdf}
-%     \caption{A. For \(q_{1}=(0.22199, 0.87073, 0.20672, 0.91861)\),
-%     $q_{2}=(0.48841, 0.61174, 0.76591, 0.51842)$ and
-%     $q_{3}=(0.2968, 0.18772, 0.08074, 0.73844)$, Eq.~\ref{eq:defection_condition_one} and
-%     Eq.~\ref{eq:defection_condition_two} hold and Defector takes over the
-%     population. B. For $q_{1}=(0.96703, 0.54723, 0.97268, 0.71482)$,
-%     $q_{2}=(0.69773, 0.21609, 0.97627, 0.0062)$ and
-%     $q_{3}=(0.25298, 0.43479, 0.77938, 0.19769)$, Eq.~\ref{eq:defection_condition_one} fails
-%     and Defector does not take over the population.}\label{fig:stability_of_defection}
-% \end{figure}
-
 \section{Results}
 % \subsection{Best response memory-one strategies}\label{section:best_response_memory_one}
 
@@ -570,14 +505,13 @@ shorter memory is limiting.
 
 \section{Discussion}
 This manuscript has considered \textit{best response} strategies in the IPD game, and
-more specifically, \textit{memory-one best responses}. It has proven that there is
-a compact way of identifying a memory-one best response to a group of opponents,
-and moreover it obtained a condition for which in an
-environment of memory-one opponents defection is the stable choice, based only
-on the coefficients of the opponents.
-The later parts of this paper focused on a series of empirical results, where it
+more specifically, \textit{memory-one best responses}. It has proven that the utility
+of a memory-one strategy against a set of memory-one opponents can be written as a sum
+of ratios of quadratic forms and there is
+a compact way of identifying a memory-one best response to a group of opponents.
+The main results of this paper focused on a series of empirical results, where it
 was shown that the performance and the evolutionary stability of memory-one
-strategies rely on adaptability and not on extortion. Finally, it was shown that
+strategies rely on adaptability and not on extortion, and that
 memory-one strategies' performance is limited by their memory in cases where
 they interact with multiple opponents.
 
@@ -590,18 +524,20 @@ This formulation allowed us to introduce an approach for identifying memory-one
 best responses to any number of opponents;
 Theorem~\ref{memone_group_best_response}. This does not only have game theoretic
 novelty, but also a mathematical novelty of solving quadratic ratio optimisation
-problems where the quadratics are non concave. The results were used to
-define a condition for which defection is known to be stable.
+problems where the quadratics are non concave. Our formulation can be used to obtained further theoretical results, such as
+obtaining a condition for which in an
+environment of memory-one opponents defection is the stable choice, based only
+on the coefficients of the opponents. This is proven in Appendix~\ref{subsection:stability_defection}
 
 This manuscript presented several experimental results. All data for the results
 is archived in~\cite{glynatsi2019}. These results were mainly to investigate the
 behaviour of memory-one strategies and their limitations. A large data set which
-contained best responses in tournaments and in evolutionary settings for $N=2$
+contained best responses in tournaments whilst including and not self interactions for $N=2$
 was generated. This allowed us to investigate their respective behaviours, and
 whether it was extortionate acts that made them the most favorable strategies.
 However, it was shown that it was not extortion but adaptability that allowed
-the strategies to gain the most from their interactions. In evolutionary settings
-it was shown that the best response strategy was even more adaptable, and there
+the strategies to gain the most from their interactions. In settings with self interactions
+there
 is some evidence that it is more likely to forgive after being tricked.
 Moreover, the performance of
 memory-one strategies was put against the performance of a longer memory
@@ -615,7 +551,7 @@ All the empirical results presented in this manuscript have been for the case of
 $N=2$. In future work we would consider larger values of $N$, however, we
 believe that for larger values of $N$ the results that have been presented here
 would only be more evident. In addition, we would investigate potential
-theoretical results for the evolutionary best responses dynamics algorithm
+theoretical results for the best responses dynamics algorithm
 discussed.
 
 By specifically exploring the entire memory space-one strategies to identify
@@ -980,5 +916,70 @@ For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
     The optimal solution to Eq.~\ref{eq:mo_tournament_optimisation} is the point
     from $S_q$ for which the utility is maximised.
 \end{proof}
+
+\subsection{Stability of defection}\label{subsection:stability_defection}
+
+An immediate result from our formulation can be
+obtained by evaluating the sign of Eq. \ref{eq:tournament_utility}'s derivative
+at \(p=(0, 0, 0, 0)\). If at that point the
+derivative is negative, then the utility of a player only decreases if they were
+to change their behaviour, and thus \textbf{defection at that point is stable}.
+
+\begin{lemma}\label{lemma:stability_of_defection}
+    In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
+    for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
+    defection is stable if the transition probabilities of the
+    opponents satisfy conditions Eq. \ref{eq:defection_condition_one} and Eq. \ref{eq:defection_condition_two}.
+
+    \begin{equation}\label{eq:defection_condition_one}
+        \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
+    \end{equation}
+
+    while,
+
+    \begin{equation}\label{eq:defection_condition_two}
+        \sum_{i=1} ^ N \bar{a}^{(i)} \neq 0
+    \end{equation}
+\end{lemma}
+
+\begin{proof}
+    For defection to be stable the derivative of the utility
+    at the point \(p = (0, 0, 0, 0)\) must be negative.
+
+    Substituting \(p = (0, 0, 0, 0)\) in
+    Eq. \ref{eq:mo_tournament_derivative} gives:
+
+    \begin{equation}
+        \left.\frac{d\sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)}{dp} \right\rvert_{p=(0,0,0,0)} =
+    \sum_{i=1} ^ N \frac{(c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})}
+    {(\bar{a}^{(i)})^2}
+    \end{equation}
+
+    The sign of the numerator \( \displaystyle\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\)
+    can vary based on the transition probabilities of the opponents.
+    The denominator can not be negative, and otherwise is always positive.
+    Thus the sign of the derivative is negative if and only if
+    \( \displaystyle\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0\).
+\end{proof}
+
+Consider a population for which defection is known to be stable. In that
+population all the members will over time adopt the same behaviour; thus in such
+population cooperation will never take over. This is demonstrated in
+Fig.~\ref{fig:stability_of_defection}.
+These have been simulated using~\cite{axelrodproject} an open
+source research framework for the study of the IPD.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=.4\linewidth]{img/stability_of_defection_plots.pdf}
+    \caption{A. For \(q_{1}=(0.22199, 0.87073, 0.20672, 0.91861)\),
+    $q_{2}=(0.48841, 0.61174, 0.76591, 0.51842)$ and
+    $q_{3}=(0.2968, 0.18772, 0.08074, 0.73844)$, Eq.~\ref{eq:defection_condition_one} and
+    Eq.~\ref{eq:defection_condition_two} hold and Defector takes over the
+    population. B. For $q_{1}=(0.96703, 0.54723, 0.97268, 0.71482)$,
+    $q_{2}=(0.69773, 0.21609, 0.97627, 0.0062)$ and
+    $q_{3}=(0.25298, 0.43479, 0.77938, 0.19769)$, Eq.~\ref{eq:defection_condition_one} fails
+    and Defector does not take over the population.}\label{fig:stability_of_defection}
+\end{figure}
 
 \end{document}
