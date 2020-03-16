@@ -345,7 +345,7 @@ best responses. The approach taken here is to introduce a compact way of
 constructing the discrete candidate set of all local optimal points, and evaluating
 the objective function Eq.~\ref{eq:tournament_utility}. This gives the best
 response memory-one strategy. The approach is given in
-Theorem~\ref{memone_group_best_response}.
+Theorem~\ref{memone_group_best_response} in Appendix~\ref{appendix:memone_group_best_response}.
 
 Finding best response memory-one strategies is analytically feasible using the
 formulation of Theorem~\ref{memone_group_best_response} and resultant
@@ -355,8 +355,8 @@ heuristically using a numerical method, suitable for problems with local optima,
 called Bayesian optimisation~\cite{Mokus1978}.
 
 This is extended to include self interactions. In several evolutionary settings
-such as Moran processes self interactions are key. Self interactions can be
-incorporated in the
+such as Moran Processes self interactions are key. %TODO Vince to add to the discussion
+Self interactions can be incorporated in the
 formulation that has been used so far. More specifically, the optimisation
 problem of Eq.~\ref{eq:mo_tournament_optimisation} is extended to:
 
@@ -391,9 +391,8 @@ The results of this section use Bayesian optimisation to generate a data set of 
 memory-one strategies, in tournaments with and without self interactions whilst \(N=2\).
 The data set is available at~\cite{glynatsi2019}. It contains a total of 1000 trials
 corresponding to 1000 different instances of a best response strategy in
-tournaments in tournaments with and without self interactions. For each trial a set of 2 opponents is
+tournaments with and without including self interactions. For each trial a set of 2 opponents is
 randomly generated and the memory-one best responses against them is found.
-
 In order to investigate whether best responses
 behave in an extortionate matter the SSE method~\cite{Knight2019} is used. More
 specifically,
@@ -451,13 +450,13 @@ distributions is given in Table~\ref{table:sserror_stats}.
 \end{table}
 
 \begin{figure}[!htbp]
-    \begin{subfigure}{0.45\textwidth}
+    \begin{subfigure}{0.47\textwidth}
         \begin{center}
             \includegraphics[width=\linewidth]{img/best_respones_sserror.pdf}
         \end{center}
         \caption{SEE distribution for best response in tournaments without self interactions.}
     \end{subfigure}\hfill
-    \begin{subfigure}{0.45\textwidth}
+    \begin{subfigure}{0.47\textwidth}
         \begin{center}
             \includegraphics[width=\linewidth]{img/evo_sserror.pdf}
         \end{center}
@@ -466,22 +465,35 @@ distributions is given in Table~\ref{table:sserror_stats}.
     \caption{SEE distributions for best response in tournaments without and with self interactions.}\label{fig:sse_distributions}
 \end{figure}
 
-For the best response in tournaments with self interactions the distribution of SSE is skewed to the
-left, indicating that the best response does exhibit ZDs behaviour and so could
-be extortionate,
-however, the best response is not uniformly a ZDs. A positive measure of
-skewness and kurtosis indicates a heavy tail to the right. Therefore, in several
-cases the strategy is not trying to extort its opponents. Similarly the
-evolutionary best response strategy does not behave uniformly extortionately. A
-larger value of both the kurtosis and the skewness of the SSE distribution
-indicates that in evolutionary settings a memory-one best response is even more
-adaptable.
+For the best response in tournaments that do not include self interactions the
+distribution of SSE is skewed to the left, indicating that the best response
+does exhibit ZDs behaviour and so could be extortionate, however, the best
+response is not uniformly a ZDs. A positive measure of skewness and kurtosis,
+and a mean of 0.34 indicate a heavy tail to the right. Therefore, in several
+cases the strategy is not trying to extort its opponents. More specifically,
+the best response memory-one with a theory of mind is being more adaptable than a ZDs.
+In~\cite{Hilbe2018} this behaviour is refereed to as the \textit{partners
+strategy}. Partners
+strategy aims to share the payoff for mutual cooperation, but it is ready
+to fight back when being exploited. It is shown that partner strategies are
+selected in evolutionary settings when populations are large and relationships
+stable and they allow for evolution of cooperation. A best response memory-one strategy
+in evolutionary settings is has not been incorporated in the study of this manuscript, however,
+the best response memory-one strategy with self interactions can used to approximate
+the behaviour of a evolutionary stable best response memory-one strategy.
+The distribution of SSE for the best response strategy that includes self
+interactions is skewed to the left, however, a positive measure
+of skewness and kurtosis indicate a heavy tail to the right, thus it is
+no behaving uniformly extortionately either. This indicates that evolutionary
+stable memory-one strategies need to more adaptable than a ZDs and aim for
+mutual cooperation as well as exploitation, which is line with the results of
+\cite{Hilbe2018}.
 
-The difference between best responses in tournaments and in evolutionary
-settings is further explored by Fig.~\ref{fig:behaviour_violin_plots}.
+The difference between best responses in tournaments without and with self interactions
+is further explored by Fig.~\ref{fig:behaviour_violin_plots}.
 Though, no statistically significant differences have been found, from
-Fig.~\ref{fig:behaviour_violin_plots}, it seems that evolutionary best
-response has a higher median $p_2$; which corresponds to the probability of cooperating
+Fig.~\ref{fig:behaviour_violin_plots}, it seems that the best
+response that incorporate self interactions has a higher median $p_2$; which corresponds to the probability of cooperating
 after receiving a defection. Thus, they are more likely to forgive after
 being tricked. This is due to the fact that they could be playing against
 themselves, and they need to be able to forgive so that future cooperation can
@@ -497,10 +509,11 @@ occur.
     \label{fig:behaviour_violin_plots}
 \end{figure}
 
-This section focuses on the memory size of strategies. The effectiveness of
-memory in the IPD has been previously explored in the literature, however, no one
-has compared the performance of longer-memory
-strategies to memory-one best responses.
+The second limitation this paper argues that memory-one extortionate strategies
+face in multi opponents interactions is that of their restricted memory. To demonstrate
+the effectiveness of memory in the IPD we compare the performance of longer-memory
+strategies to memory-one best responses, which has not been previously explored
+in the literature.
 
 In~\cite{Harper2017}, a strategy called \textit{Gambler} which makes
 probabilistic decisions based on the opponent's \(n_1\) first moves, the
@@ -534,8 +547,7 @@ instances of an optimal Gambler and a memory-one best response, available
 at~\cite{glynatsi2019}. Estimating a best response Gambler (17 dimensions) is
 computational more expensive compared to a best response memory-one (4
 dimensions). As a result, the analysis of this section is based on a total of
-152 trials. For each trial two random opponents have been selected. The 152 pair
-of opponents are a sub set of the opponents used in section~\ref{section:best_response_memory_one}.
+152 trials. For each trial two random opponents have been selected.
 
 The ratio between Gambler's utility and the best response memory-one strategy's utility has been calculated and its distribution in
 given in Fig.~\ref{fig:utilities_gambler_mem_one}.
@@ -811,7 +823,7 @@ can be written as a ratio of two quadratic forms on \(R^4\).
     The same process is done for the denominator.
 \end{proof}
 
-\subsection{Theorem~\ref{memone_group_best_response}}
+\subsection{Theorem~\ref{memone_group_best_response}}\label{appendix:memone_group_best_response}
 \begin{theorem}\label{memone_group_best_response}
 
 The optimal behaviour of a memory-one strategy player \(p^* \in \R_{[0, 1]} ^
