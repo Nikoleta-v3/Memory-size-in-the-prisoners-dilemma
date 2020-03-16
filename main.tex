@@ -424,20 +424,21 @@ of prediction (SSE):
 
 Thus, SSE is defined as how far a strategy is from behaving as a ZD and thus a
 high SSE implies a non extortionate behaviour. The SSE method has been applied
-to the data set. A statistics summary of the SSE distribution for the best
-response in tournaments and evolutionary dynamics is given in
-Table~\ref{table:sserror_stats}.
+to the data set. The distributions of SSE for the best response in tournaments
+with and without self interactions are given in
+Figure~\ref{fig:sse_distributions}. Moreover, a statistics summary of the SSE
+distributions is given in Table~\ref{table:sserror_stats}.
 
 \begin{table}[!htbp]
     \begin{center}
-    \resizebox{.6\columnwidth}{!}{%
+    \resizebox{.8\columnwidth}{!}{%
     \begin{tabular}{lrrrrrrrrrrr}
         \toprule
         & mean & std  & 5\% & 50\% &  95\% & max & median & skew & kurt\\
         \midrule
-    \textbf{Tournament} & 0.34  & 0.40  & 0.028  & 0.17  &
+    \textbf{Tournament without self interactions} & 0.34  & 0.40  & 0.028  & 0.17  &
     1.05  & 2.47  & 0.17  & 1.87 & 3.60 \\
-    \textbf{Evolutionary Setting} & 0.17 & 0.23 & 0.01 &
+    \textbf{Tournament with self interactions} & 0.17 & 0.23 & 0.01 &
     0.12 & 0.67 & 1.53 & 0.12 & 3.42 & 1.92 \\
         \bottomrule
     \end{tabular}}
@@ -446,21 +447,22 @@ Table~\ref{table:sserror_stats}.
 \end{table}
 
 \begin{figure}[!htbp]
-    \begin{subfigure}{0.5\textwidth}
+    \begin{subfigure}{0.45\textwidth}
         \begin{center}
             \includegraphics[width=\linewidth]{img/best_respones_sserror.pdf}
         \end{center}
-        \caption{.}
+        \caption{SEE distribution for best response in tournaments without self interactions.}
     \end{subfigure}\hfill
-    \begin{subfigure}{0.5\textwidth}
+    \begin{subfigure}{0.45\textwidth}
         \begin{center}
             \includegraphics[width=\linewidth]{img/evo_sserror.pdf}
         \end{center}
-        \caption{.}
+        \caption{SEE distribution for best response in tournaments with self interactions.}
     \end{subfigure}
+    \caption{SEE distributions for best response in tournaments without and with self interactions.}\label{fig:sse_distributions}
 \end{figure}
 
-For the best response in tournaments the distribution of SSE is skewed to the
+For the best response in tournaments with self interactions the distribution of SSE is skewed to the
 left, indicating that the best response does exhibit ZDs behaviour and so could
 be extortionate,
 however, the best response is not uniformly a ZDs. A positive measure of
@@ -483,15 +485,13 @@ occur.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=.75\textwidth]{img/behaviour_violin_plots.pdf}
+    \includegraphics[width=.9\textwidth]{img/behaviour_violin_plots.pdf}
     \caption{Distributions of \(p^*\) for best responses in tournaments and
     evolutionary settings. The medians, denoted as \(\bar{p}^*\), for tournaments
     are \(\bar{p}^* = (0, 0, 0, 0)\), and for evolutionary settings
     \(\bar{p}^* = (0, 0.19, 0, 0)\).}
     \label{fig:behaviour_violin_plots}
 \end{figure}
-
-\subsection{Longer memory best responses}
 
 This section focuses on the memory size of strategies. The effectiveness of
 memory in the IPD has been previously explored in the literature, however, no one
