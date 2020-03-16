@@ -38,8 +38,8 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \def\arraystretch{1.5}
 
-\title{Stability of defection, optimisation of strategies and the limits of
-       memory in the Prisoner's Dilemma.}
+\title{Best response memory-one strategies with a theory of mind: the limitations
+of extortion and restricted memory.}
 \author[1, *]{Nikoleta E. Glynatsi}
 \author[1]{Vincent A. Knight}
 
@@ -114,7 +114,8 @@ Hilbe2013, Hilbe2015, Knight2018, Harper2015}.
 In a similar fashion to~\cite{Press2012} the purpose of this work is to consider
 a given memory-one strategy; however, whilst~\cite{Press2012} found a way for a
 player to manipulate a given opponent, this work will consider a
-multidimensional optimisation approach to identify the best response to a given
+multidimensional optimisation approach to identify the best response strategy with
+a theory of mind about a given
 group of opponents. The outcomes of our work reinforce known results, namely
 that memory-one strategies must be forgiving to be evolutionarily stable~\cite{Stewart2013, Stewart2016}
 and that longer-memory strategies have a certain form of advantage over short memory
@@ -124,11 +125,19 @@ strategies~\cite{Hilbe2017, Pan2015}.
 In particular, this work presents a compact method of
 identifying the best response memory-one strategy against a given set of
 opponents, and evaluates whether it behaves in a
-zero-determinant way which in turn indicates whether it can be extortionate. This is also done in evolutionary settings. Moreover, we
+zero-determinant way which in turn indicates whether it can be extortionate.
+This done in tournaments with and without including self interactions. Moreover, we
 introduce a well designed framework that allows the comparison of an optimal
 memory one strategy and a more complex strategy which has a larger memory. This
 is used to identify conditions for which defection is stable; thus identifying
 environments where cooperation will not occur.
+
+The numerical experiments of this manuscript are carried out the payoff values
+of \((R, P, S, T) = (3, 1, 0, 5)\). The source code for the experiments presented
+in this manuscript has been written in a sustainable manner~\cite{Benureau2018}.
+It is open source (\url{https://github.com/Nikoleta-v3/Memory-size-in-the-prisoners-dilemma})
+and tested which ensures the validity of the results. It has also been archived
+and can be found at~\cite{nikoleta_glynatsi_2019}.
 
 \section{Methods}
 
@@ -384,11 +393,6 @@ The data set is available at~\cite{glynatsi2019}. It contains a total of 1000 tr
 corresponding to 1000 different instances of a best response strategy in
 tournaments in tournaments with and without self interactions. For each trial a set of 2 opponents is
 randomly generated and the memory-one best responses against them is found.
-
-% The source code for the experiments presented in this manuscript has been written in a sustainable manner~\cite{Benureau2018}.
-% It is open source (\url{https://github.com/Nikoleta-v3/Memory-size-in-the-prisoners-dilemma})
-% and tested which ensures the validity of the results. It has also been archived
-% and can be found at~\cite{nikoleta_glynatsi_2019}.
 
 In order to investigate whether best responses
 behave in an extortionate matter the SSE method~\cite{Knight2019} is used. More
