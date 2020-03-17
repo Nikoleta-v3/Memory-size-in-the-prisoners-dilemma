@@ -287,7 +287,11 @@ heuristically using a numerical method, suitable for problems with local optima,
 called Bayesian optimisation~\cite{Mokus1978}.
 
 This is extended to include self interactions. In several evolutionary settings
-such as Moran Processes self interactions are key. %TODO Vince to add to the discussion
+such as Moran Processes self interactions are key. %TODO Vince to add to the discussion and add weighting to 
+                                                                                       % algorithm so as to make this clear that this CAN be used in an 
+                                                                                       % evolutionary way. Possibly add discussion of how you could 
+                                                                                       % update strategy in a Moran process so that it at every stage of 
+                                                                                       % the process recalculates itself and carries on.
 Self interactions can be incorporated in the
 formulation that has been used so far. More specifically, the optimisation
 problem of Eq.~\ref{eq:mo_tournament_optimisation} is extended to:
