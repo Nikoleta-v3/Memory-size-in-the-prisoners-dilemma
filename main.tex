@@ -289,19 +289,18 @@ becomes intractable. As a result, best responses will be estimated
 heuristically using a numerical method, suitable for problems with local optima,
 called Bayesian optimisation~\cite{Mokus1978}.
 
-This is extended to include self interactions. In several evolutionary settings
-such as Moran Processes self interactions are key. %TODO Vince to add to the discussion and add weighting to 
-                                                                                       % algorithm so as to make this clear that this CAN be used in an 
-                                                                                       % evolutionary way. Possibly add discussion of how you could 
-                                                                                       % update strategy in a Moran process so that it at every stage of 
-                                                                                       % the process recalculates itself and carries on.
-Self interactions can be incorporated in the
-formulation that has been used so far. More specifically, the optimisation
-problem of Eq.~\ref{eq:mo_tournament_optimisation} is extended to:
+In several evolutionary settings
+such as Moran Processes self interactions are key. Previous worked has
+identified interesting results such as the appearance of self recognition
+mechanisms when training strategies using evolutionary algorithms in Moran
+processes~\cite{Knight2018}. This aspect of reinforcement learning be done for
+best response memory-one strategies by incorporating the strategy itself in the
+objective function as shown in Eq.~\ref{eq:mo_tournament_optimisation} where
+\(K\) is the number of self interactions that will take place.
 
 \begin{equation}\label{eq:mo_evolutionary_optimisation}
 \begin{aligned}
-\max_p: & \ \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + u_p(p)
+\max_p: & \ \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + Ku_p(p)
 \\
 \text{such that}: & \ p \in \R_{[0, 1]}
 \end{aligned}
@@ -318,13 +317,18 @@ Algorithm~\ref{algo:best_response_dynamics}.
        $p^{(t)}\leftarrow (1, 1, 1, 1)$\;
        \While{$p^{(t)} \neq p ^{(t -1)}$}{
        $p^{(t + 1)} =  \text{argmax} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)}
-       (p^{(t)}) + u_{p^{(t)}}(p^{(t)})$\;
+       (p^{(t)}) + Ku_{p^{(t)}}(p^{(t)})$\;
        }
        \caption{Best response dynamics Algorithm}
        \label{algo:best_response_dynamics}
 \end{algorithm}
 \end{minipage}
 \end{center}
+
+Using this approach it would be possible to create a memory-one best response
+strategy that updates on every generation of a Moran process to recalculate the
+optimal behaviour given the population. This extension of the ``theory of mind''
+is not done in this work.
 
 The results of this section use Bayesian optimisation to generate a data set of best response
 memory-one strategies, in tournaments with and without self interactions whilst \(N=2\).
@@ -367,7 +371,7 @@ of prediction (SSE):
 Thus, SSE is defined as how far a strategy is from behaving as a ZD and thus a
 high SSE implies a non extortionate behaviour. The SSE method has been applied
 to the data set. The distributions of SSE for the best response in tournaments
-with and without self interactions are given in
+with and without self interactions (with \(K=1\)) are given in
 Figure~\ref{fig:sse_distributions}. Moreover, a statistics summary of the SSE
 distributions is given in Table~\ref{table:sserror_stats}.
 
