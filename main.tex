@@ -277,14 +277,6 @@ becomes intractable. As a result, best responses will be estimated
 heuristically using a numerical method, suitable for problems with local optima,
 called Bayesian optimisation~\cite{Mokus1978}.
 
-In multi opponent interactions,
-where the payoffs matter, strategies trying to exploit their opponents will
-suffer.
-Compared to ZDs, best response memory-one strategies, which have a
-theory of mind of their opponents, utilise their behaviour in order to gain the
-most from their interactions. The question that arises then is whether best
-response strategies are optimal because they behave in an extortionate way.
-
 In several evolutionary settings
 such as Moran Processes self interactions are key. Previous work has
 identified interesting results such as the appearance of self recognition
@@ -325,6 +317,14 @@ Using this approach it would be possible to create a memory-one best response
 strategy that updates on every generation of a Moran process to recalculate the
 optimal behaviour given the population. This extension of the ``theory of mind''
 is an interesting avenue for future work.
+
+In multi opponent settings,
+where the payoffs matter, strategies trying to exploit their opponents will
+suffer.
+Compared to ZDs, best response memory-one strategies, which have a
+theory of mind of their opponents, utilise their behaviour in order to gain the
+most from their interactions. The question that arises then is whether best
+response strategies are optimal because they behave in an extortionate way.
 
 The results of this section use Bayesian optimisation to generate a data set of best response
 memory-one strategies for \(N=2\) opponents.
