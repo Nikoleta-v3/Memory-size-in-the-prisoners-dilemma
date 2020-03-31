@@ -58,15 +58,15 @@ of extortion and restricted memory.}
 \begin{abstract}
     Memory-one strategies are a set of Iterated Prisoner's Dilemma strategies
     that have been praised for their mathematical tractability and performance
-    against single opponents. This manuscript investigates \textit{best
-    response} memory-one strategies as a multidimensional
-    optimisation problem. Though extortionate memory-one strategies have gained
-    much attention, we demonstrate that best response memory-one strategies do not
-    behave in an extortionate way, and moreover, for memory-one strategies to be
-    a best response to a group of opponents and themselves they need to be able to behave in a forgiving way. We
+    against single opponents. This manuscript investigates a theory of mind: \textit{best
+    response} memory-one strategies, as a multidimensional
+    optimisation problem. We add to the literature that has shown that
+    extortionate play is not always optimal by showing that optimal play is
+    often not extortionate.
+    We
     also provide evidence that memory-one strategies suffer from their limited
     memory in multi agent interactions and can be out performed by
-    longer memory strategies.
+    optimised strategies with longer memory.
 \end{abstract}
 
 The Prisoner's Dilemma (PD) is a two player game used in understanding the
@@ -117,21 +117,22 @@ In~\cite{Press2012} the authors stated that ``Only a player with a theory of
 mind about his opponent can do better, in which case Iterated Prisoner's Dilemma
 is an Ultimatum Game''. The purpose of this work is to investigate the first
 part of this sentence, more specifically, to identify the best response strategy
-with a theory of mind about a given group of opponents. The outcomes of our work
+with a theory of mind of a given group of opponents. The outcomes of our work
 reinforce known results, namely that memory-one strategies must be forgiving to
 be evolutionarily stable~\cite{Stewart2013, Stewart2016} and that longer-memory
 strategies have a certain form of advantage over short memory
 strategies~\cite{Hilbe2017, Pan2015}.
 
 In particular, this work presents a closed form algebraic expression for the utility
-of a memory-one strategy against a given set of opponents and a compact method of
-identifying it's best response to that given set of opponents whilst having a theory
+of a memory-one strategy against a given set of opponents, a compact method of
+identifying it's best response to that given set of opponents essentially: a theory
 of mind. The aim is
 to evaluate whether a best response memory-one strategy behaves in a
-zero-determinant way which in turn indicates whether it can be extortionate.
-This done in tournaments with and without including self interactions. Moreover, we
-introduce a well designed framework that allows the comparison of an optimal
-memory one strategy and a more complex strategy which has a larger memory.
+zero-determinant way which in turn indicates whether it can be extortionate. We
+do this using a linear algebraic approach presented in~\cite{Knight2019}.
+This is done in tournaments with and without self interactions. Moreover, we
+introduce a framework that allows the comparison of an optimal
+memory-one strategy and an optimised strategy which has a larger memory.
 
 To illustrate the analytical results obtained in this manuscript a number of
 numerical experiments are run. The source code for these experiments has been
@@ -146,7 +147,7 @@ One specific advantage of memory-one strategies is their mathematical
 tractability. They can be represented completely as an element of \(\R^{4}_{[0, 1]}\). This
 originates from~\cite{Nowak1989} where it is stated that if a strategy is
 concerned with only the outcome of a single turn then there are four possible
-`states' the strategy could be in; both players cooperated (\(CC\)), 
+`states' the strategy could be in; both players cooperated (\(CC\)),
 the first player cooperated whilst the second player defected (\(CD\)),
 the first player defected whilst the second player cooperated (\(DC\)) and
 both players defected (\(DD\)).
@@ -175,9 +176,8 @@ Eq.~\ref{eq:press_dyson_utility}.
 \end{equation}
 
 This manuscript has explored the form of \(u_q(p)\), to the authors knowledge no
-previous work has done this, and it proves that \(u_q(p)\) is given by a ratio
-of two quadratic forms~\cite{kepner2011},
-Theorem~\ref{theorem_one}.
+previous work has done this, and Theorem~\ref{theorem_one} states that \(u_q(p)\) is given by a ratio
+of two quadratic forms~\cite{kepner2011}.
 
 \begin{theorem}\label{theorem_one}
     The expected utility of a memory-one strategy \(p\in\mathbb{R}_{[0,1]}^4\)
@@ -226,17 +226,17 @@ opponents. The IPD is commonly studied in tournaments and/or Moran Processes
 where a strategy interacts with a number of opponents. The payoff of a player in
 such interactions is given by the average payoff the player received against
 each opponent. More specifically the expected utility of a memory-one strategy
-against a \(N\) number of opponents is given by:
+against \(N\) opponents is given by:
 
 \begin{align}\label{eq:tournament_utility}
-       & \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) = 
+       & \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) =
        \frac{\frac{1}{N} \sum\limits_{i=1} ^ {N} (\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)})
        \prod\limits_{\tiny\begin{array}{l} j=1 \\ j \neq i \end{array}} ^
        N (\frac{1}{2} p\bar{Q}^{(j)} p^T + \bar{c}^{(j)} p + \bar{a}^ {(j)})}
        {\prod\limits_{i=1} ^ N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}.
 \end{align}
 
-Eq.~(\ref{eq:tournament_utility}) is the average score (using Eq.~(\ref{eq:})) against the set of opponents.
+Eq.~(\ref{eq:tournament_utility}) is the average score (using Eq.~(\ref{eq:optimisation_quadratic})) against the set of opponents.
 
 Estimating the utility of a memory-one strategy against any number of opponents
 without simulating the interactions is the main result used in the rest of this manuscript.
@@ -245,20 +245,8 @@ with and without self interactions in order to explore the limitations of extort
 and restricted memory.
 
 \section{Results}\label{section:results}
-% \subsection{Best response memory-one strategies}\label{section:best_response_memory_one}
 
-As discussed ZDs have been acclaimed for their robustness
-against a single opponent. ZDs are evidence that extortion works
-in pairwise interactions, their behaviour ensures that the strategies will never
-lose a game. However, this paper argues that in multi opponent interactions,
-where the payoffs matter, strategies trying to exploit their opponents will
-suffer.
-Compared to ZDs, best response memory-one strategies, which have a
-theory of mind of their opponents, utilise their behaviour in order to gain the
-most from their interactions. The question that arises then is whether best
-response strategies are optimal because they behave in an extortionate way.
-
-To answer this question, we initially define \textit{memory-one best response}
+Here we define \textit{memory-one best response}
 strategies as a multi dimensional optimisation problem given by:
 
 \begin{equation}\label{eq:mo_tournament_optimisation}
@@ -289,19 +277,18 @@ becomes intractable. As a result, best responses will be estimated
 heuristically using a numerical method, suitable for problems with local optima,
 called Bayesian optimisation~\cite{Mokus1978}.
 
-This is extended to include self interactions. In several evolutionary settings
-such as Moran Processes self interactions are key. %TODO Vince to add to the discussion and add weighting to 
-                                                                                       % algorithm so as to make this clear that this CAN be used in an 
-                                                                                       % evolutionary way. Possibly add discussion of how you could 
-                                                                                       % update strategy in a Moran process so that it at every stage of 
-                                                                                       % the process recalculates itself and carries on.
-Self interactions can be incorporated in the
-formulation that has been used so far. More specifically, the optimisation
-problem of Eq.~\ref{eq:mo_tournament_optimisation} is extended to:
+In several evolutionary settings
+such as Moran Processes self interactions are key. Previous work has
+identified interesting results such as the appearance of self recognition
+mechanisms when training strategies using evolutionary algorithms in Moran
+processes~\cite{Knight2018}. This aspect of reinforcement learning can be done for
+best response memory-one strategies by incorporating the strategy itself in the
+objective function as shown in Eq.~\ref{eq:mo_tournament_optimisation}.
+\(K\) is the number of self interactions that will take place.
 
 \begin{equation}\label{eq:mo_evolutionary_optimisation}
 \begin{aligned}
-\max_p: & \ \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + u_p(p)
+\max_p: & \ \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + Ku_p(p)
 \\
 \text{such that}: & \ p \in \R_{[0, 1]}
 \end{aligned}
@@ -318,7 +305,7 @@ Algorithm~\ref{algo:best_response_dynamics}.
        $p^{(t)}\leftarrow (1, 1, 1, 1)$\;
        \While{$p^{(t)} \neq p ^{(t -1)}$}{
        $p^{(t + 1)} =  \text{argmax} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)}
-       (p^{(t)}) + u_{p^{(t)}}(p^{(t)})$\;
+       (p^{(t)}) + Ku_{p^{(t)}}(p^{(t)})$\;
        }
        \caption{Best response dynamics Algorithm}
        \label{algo:best_response_dynamics}
@@ -326,17 +313,31 @@ Algorithm~\ref{algo:best_response_dynamics}.
 \end{minipage}
 \end{center}
 
+Using this approach it would be possible to create a memory-one best response
+strategy that updates on every generation of a Moran process to recalculate the
+optimal behaviour given the population. This extension of the ``theory of mind''
+is an interesting avenue for future work.
+
+In multi opponent settings,
+where the payoffs matter, strategies trying to exploit their opponents will
+suffer.
+Compared to ZDs, best response memory-one strategies, which have a
+theory of mind of their opponents, utilise their behaviour in order to gain the
+most from their interactions. The question that arises then is whether best
+response strategies are optimal because they behave in an extortionate way.
+
 The results of this section use Bayesian optimisation to generate a data set of best response
-memory-one strategies, in tournaments with and without self interactions whilst \(N=2\).
+memory-one strategies for \(N=2\) opponents.
 The data set is available at~\cite{glynatsi2019}. It contains a total of 1000 trials
 corresponding to 1000 different instances of a best response strategy in
-tournaments with and without including self interactions. For each trial a set of 2 opponents is
-randomly generated and the memory-one best responses against them is found.
+tournaments with and without self interactions. For each trial a set of 2 opponents is
+randomly generated and the memory-one best response against them is found.
 In order to investigate whether best responses
-behave in an extortionate matter the SSE method~\cite{Knight2019} is used. More
+behave in an extortionate matter the SSE method described in ~\cite{Knight2019} is used. More
 specifically,
-in~\cite{Knight2019} a point \(x^*\), in the space of memory-one strategies, is
-defined as the nearest extortionate strategy to a given strategy \(p\). \(x^*\) is
+in~\cite{Knight2019} the point \(x^*\), in the space of memory-one strategies,
+that is
+the nearest extortionate strategy to a given strategy \(p\) is
 given by,
 
 \begin{equation}\label{eqn:x_star_formula}
@@ -355,7 +356,7 @@ where \(\bar{p}=(p_1 - 1, p_2 - 1, p_3, p_4)\) and
     \end{bmatrix}.
 \end{equation}
 
-The squared norm of the remaining error is referred to as sum of squared errors
+Once this closest ZDs is found, the squared norm of the remaining error is referred to as sum of squared errors
 of prediction (SSE):
 
 \begin{equation}\label{eqn:x_SSError_formula}
@@ -364,11 +365,11 @@ of prediction (SSE):
          = {\bar{p}} ^ T \bar{p} - \bar{p} C x ^ *
 \end{equation}
 
-Thus, SSE is defined as how far a strategy is from behaving as a ZD and thus a
-high SSE implies a non extortionate behaviour. The SSE method has been applied
-to the data set. The distributions of SSE for the best response in tournaments
-with and without self interactions are given in
-Figure~\ref{fig:sse_distributions}. Moreover, a statistics summary of the SSE
+Thus, SSE is defined as how far a strategy is from behaving as a ZD. A
+high SSE implies a non extortionate behaviour.
+The distributions of SSE for the best response in tournaments
+(\(N=2\)) with and without self interactions (with \(K=1\)) are given in
+Figure~\ref{fig:sse_distributions}. Moreover, a statistical summary of the SSE
 distributions is given in Table~\ref{table:sserror_stats}.
 
 \begin{table}[!htbp]
@@ -409,27 +410,21 @@ distribution of SSE is skewed to the left, indicating that the best response
 does exhibit ZDs behaviour and so could be extortionate, however, the best
 response is not uniformly a ZDs. A positive measure of skewness and kurtosis,
 and a mean of 0.34 indicate a heavy tail to the right. Therefore, in several
-cases the strategy is not trying to extort its opponents. More specifically,
-the best response memory-one with a theory of mind is being more adaptable than a ZDs.
-In~\cite{Hilbe2018} a similar behaviour is refereed to as the \textit{partners
-strategy}. Partners
+cases the strategy is not trying to extort its opponents.
+In~\cite{Hilbe2018} a similar behaviour is refereed to as the \textit{partner
+strategy}. The partner
 strategy aims to share the payoff for mutual cooperation, but it is ready
-to fight back when being exploited. In~\cite{Hilbe2018} it is shown that partner strategies are
-selected in evolutionary settings when populations are large and relationships
-stable and they allow for the evolution of cooperation.
+to fight back when being exploited. The partner strategy was designed, but the
+best responses which are defined by their opponents seem to exhibit the same
+behaviour.
 
-A best response memory-one strategy
-in evolutionary settings has not been incorporated in the study of this manuscript, however,
-the best response memory-one strategy with self interactions can used to approximate % TODO Vince to work on this a bit
-the behaviour of a evolutionary stable best response memory-one strategy.
-The distribution of SSE for the best response strategy that includes self
-interactions is skewed to the left, however, a positive measure
-of skewness and kurtosis indicate a heavy tail to the right. Thus, the best
-response memory-one strategy when considering self interactions is
-no behaving uniformly extortionately either. This indicates that evolutionary
-stable memory-one strategies need to more adaptable than a ZDs, and aim for
-mutual cooperation as well as exploitation which is line with the results of
-\cite{Hilbe2018}.
+Similarly, when considering self interactions, the distribution of SSE for the best
+response strategy has skewness and kurtosis that indicate a heavy tail to the
+right. This indicates that evolutionary stable memory-one strategies need to
+more adaptable than a ZDs, and aim for mutual cooperation as well as
+exploitation which is in line with the results of \cite{Hilbe2018} where their
+strategy was designed to adapt and was shown to be evolutionary stable. The
+findings of this work show that an optimal strategy acts in the same way.
 
 The difference between best responses in tournaments without and with self interactions
 is further explored by Fig.~\ref{fig:behaviour_violin_plots}.
@@ -451,8 +446,9 @@ occur.
     \label{fig:behaviour_violin_plots}
 \end{figure}
 
-Extortion was not the only characteristic of the ZDs highlighted in~\cite{Press2012}, but it was also the short memory of the strategies.
-We argue that the second limitation ZDs from which they suffer in in multi opponents
+The other main finding presented in~\cite{Press20212} was that
+short memory of the strategies was all that was needed.
+We argue that the second limitation of ZDs in multi opponent
 interactions is that of their restricted memory.
 To demonstrate the effectiveness of memory in the IPD we explore a best response
 longer-memory strategy against a given set of memory-one opponents,  and compare
@@ -490,18 +486,17 @@ instances of an optimal Gambler and a memory-one best response, available
 at~\cite{glynatsi2019}. Estimating a best response Gambler (17 dimensions) is
 computational more expensive compared to a best response memory-one (4
 dimensions). As a result, the analysis of this section is based on a total of
-152 trials. For each trial two random opponents have been selected.
+152 trials. As before, for each trial \(N=2\) random opponents have been selected.
 
 The ratio between Gambler's utility and the best response memory-one strategy's utility has been calculated and its distribution in
 given in Fig.~\ref{fig:utilities_gambler_mem_one}.
 It is evident from Fig.~\ref{fig:utilities_gambler_mem_one} that
 Gambler always performs as well as the best response memory-one strategy and often performs better. There are
 no points where the ratio value is less than 1, thus Gambler never performed less
-than the best response memory-one strategy and in places outperforms it. This seems to be at odd with the
-result of~\cite{Press2012} that against a memory-one opponent having a longer memory
-will not give a strategy any
-advantage. However, against two memory-one opponents Gambler's performance is better than
-the optimal memory-one strategy. This is evidence that in the case of two opponents having a
+than the best response memory-one strategy and in places outperforms it.
+However, against two memory-one opponents Gambler's performance is better than
+the optimal memory-one strategy. This is evidence that in the case of multiple
+opponents, having a
 shorter memory is limiting.
 
 \begin{figure}[!htbp]
@@ -509,31 +504,29 @@ shorter memory is limiting.
     \includegraphics[width=.5\textwidth]{img/gambler_performance_against_mem_one.pdf}
     \caption{The ratio between the utilities of Gambler and best response memory-one
     strategy for 152 different pair of opponents.}\label{fig:utilities_gambler_mem_one}
+    % TODO Nik: a legend for the lines or a description of the lines in the
+    % caption?
 \end{figure}
 
 \section{Discussion}
 This manuscript has considered \textit{best response} strategies in the IPD game, and
-more specifically, \textit{memory-one best responses}. It has proven that the utility
-of a memory-one strategy against a set of memory-one opponents can be written as a sum
-of ratios of quadratic forms and there is
-a compact way of identifying a memory-one best response to a group of opponents.
-The main results of this paper focused on a series of empirical results, where it
-was shown that the performance and the evolutionary stability of memory-one
-strategies rely on adaptability and not on extortion, and that
-memory-one strategies' performance is limited by their memory in cases where
-they interact with multiple opponents.
+more specifically, \textit{memory-one best responses}. It has proven that:
 
-Following the work described in~\cite{Nowak1989}, where it was shown that the
-utility between two memory-one strategies can be estimated by a Markov
-stationary state, we proved that the utilities can be written as a ration of two
-quadratic forms in $R^4$, Theorem~\ref{theorem_one}. This was extended to
-include multiple opponents, as the IPD is commonly studied in such situations.
-This formulation allowed us to introduce an approach for identifying memory-one
-best responses to any number of opponents;
-Theorem~\ref{memone_group_best_response} which does not only have game theoretic
-novelty, but also a mathematical novelty of solving quadratic ratio optimisation
-problems where the quadratics are non concave. Moreover, it allowed us to 
-obtaining a condition for which in an environment of memory-one opponents
+\begin{itemize}
+    \item The utility
+          of a memory-one strategy against a set of memory-one opponents can be written as a sum
+          of ratios of quadratic forms (Theorem~\ref{theorem_one}).
+    \item There is a compact way of identifying a memory-one best response to a
+        group of opponents through a search over a discrete set
+        (Theorem~\ref{memone_group_best_response}).
+\end{itemize}
+
+Note that Theorem~\ref{memone_group_best_response} which does not only have game theoretic
+novelty, but also the mathematical novelty of solving quadratic ratio optimisation
+problems where the quadratics are non concave.
+
+Moreover Theorem~\ref{theorem_one}, allows us to
+obtain a condition for which in an environment of memory-one opponents
 defection is the stable choice, based only on the coefficients of the opponents,
 as stated in Lemma~\ref{lemma:stability_of_defection}.
 
@@ -556,7 +549,7 @@ as stated in Lemma~\ref{lemma:stability_of_defection}.
 
 The proof of Lemma~\ref{lemma:stability_of_defection} is given in
 Appendix~\ref{subsection:stability_defection} and a numerical simulation
-demonstrating the results of Lemma~\ref{lemma:stability_of_defection} is given
+demonstrating the result is given
 in Fig.~\ref{fig:stability_of_defection}.
 
 \begin{figure}[!htbp]
@@ -574,33 +567,33 @@ in Fig.~\ref{fig:stability_of_defection}.
     source research framework for the study of the IPD.}\label{fig:stability_of_defection}
 \end{figure}
 
-This manuscript presented several experimental results. All data for the results
-is archived in~\cite{glynatsi2019}. These results were mainly to investigate the
+The empirical results have shown that the performance and the evolutionary
+stability of memory-one strategies rely on adaptability and not on extortion,
+and that memory-one strategies' performance is limited by their memory in cases
+where they interact with multiple opponents.
+
+These results were mainly to investigate the
 behaviour of memory-one strategies and their limitations. A large data set which
-contained best responses in tournaments whilst including and not self interactions for $N=2$
-was generated. This allowed us to investigate their respective behaviours, and
+contained best responses in tournaments whilst including or not self
+interactions for \(N=2\)
+was generated and is archived in~\cite{glynatsi2019}. This allowed us to investigate their respective behaviours, and
 whether it was extortionate acts that made them the most favorable strategies.
-However, it was shown that it was not extortion but adaptability that allowed
+It was shown that it was not extortion but adaptability that allowed
 the strategies to gain the most from their interactions. In settings with self interactions
 there
 is some evidence that it is more likely to forgive after being tricked.
-Moreover, the performance of
-memory-one strategies was put against the performance of a longer memory
-strategy called Gambler. There were several cases where Gambler would outperform
-the memory-one strategy, however, a memory-one strategy never managed to
-outperform a Gambler. This result occurred whilst considering a Gambler with a
-sufficiently larger memory but not a sufficiently larger amount of information
-regarding the game.
 
 All the empirical results presented in this manuscript have been for the case of
 $N=2$. In future work we would consider larger values of $N$, however, we
 believe that for larger values of $N$ the results that have been presented here
 would only be more evident. In addition, we would investigate potential
 theoretical results for the best responses dynamics algorithm
-discussed.
+discussed. Another interesting avenue would be to study the Moran process with a
+dynamically updating best response.
 
-By specifically exploring the entire memory space-one strategies to identify
-the optimal strategy for a variety of situations, this work casts doubt
+By specifically exploring the entire space of memory-one strategies to identify
+the best strategy for a variety of situations, this work adds to the literature
+casting doubt
 on the effectiveness of ZDs, highlights the importance of adaptability and provides
 a framework for the continued understanding of these important questions.
 
@@ -631,10 +624,10 @@ can be written as a ratio of two quadratic forms on \(R^4\).
 
     It was discussed that \(u_q(p)\) it is the product of the steady state
     vector \(v\) and the PD payoffs,
-    
+
     \[u_q(p) = v \cdot (R, S, T, P).\]
 
-    The steady state vector which is the solution to \(vM = v\) is given by 
+    The steady state vector which is the solution to \(vM = v\) is given by
     \begingroup
     \tiny
     \begin{equation*}
@@ -645,11 +638,11 @@ can be written as a ratio of two quadratic forms on \(R^4\).
         q_{4}) + p_{3} p_{4} (q_{1} q_{2} - q_{1} q_{4} - q_{2} + q_{4}) + p_{3}q_{4} (q_{2} - 1) -
          p_{4} q_{2} (q_{4} + 1) + p_{4} (q_{4} - 1)}{\bar{v}} \right., \\
         & \left. \frac{- p_{1} p_{2} (q_{1} q_{4} - q_{3} q_{4}) - p_{1} p_{4} (- q_{1} q_{3} + q_{3} q_{4})
-          + p_{1} q_{1} q_{4} - p_{2} p_{4} (q_{1} q_{3} - q_{1} q_{4} - q_{3} + q_{4}) - 
-          p_{2} q_{4} (q_{3}  + 1) - p_{4}q_{4} (q_{1} + q_{3}) - p_{4} (q_{3} 
+          + p_{1} q_{1} q_{4} - p_{2} p_{4} (q_{1} q_{3} - q_{1} q_{4} - q_{3} + q_{4}) -
+          p_{2} q_{4} (q_{3}  + 1) - p_{4}q_{4} (q_{1} + q_{3}) - p_{4} (q_{3}
           + q_{4}) - q_{4}}{\bar{v}} \right., \\ 
         & \left. \frac{p_{1} p_{2} (q_{1} q_{2} - q_{1} - q_{2} q_{3} + q_{3}) + p_{1} p_{3} (- q_{1} q_{3} + q_{2} q_{3})
-         - p_{1} q_{1} (q_{2} + 1) + p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3} 
+         - p_{1} q_{1} (q_{2} + 1) + p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3}
          + q_{2} - q_{3}) + p_{2} (q_{3}q_{2}  - q_{2} - q_{3} - 1) +
           p_{3} (q_{1} q_{2} - q_{3}q_{2} - q_{2} - q_{3}) + q_{2} - 1}{\bar{v}}\right],
     \end{split}
@@ -663,15 +656,15 @@ can be written as a ratio of two quadratic forms on \(R^4\).
         \begin{split}
            \bar{v} = & \quad p_{1} p_{2} (q_{1} q_{2} - q_{1} q_{4} - q_{1} - q_{2} q_{3} + q_{3} q_{4} + q_{3}) - p_{1} p_{3} (q_{1} q_{3} - q_{1} q_{4} - q_{2} q_{3} + q_{2} q_{4}) -
            p_{1} p_{4} (q_{1} q_{2} - q_{1} q_{3} - q_{1} - q_{2} q_{4} + q_{3} q_{4} + q_{4}) - \\
-           & \quad p_{1} q_{1} (q_{2} + q_{4} + 1) + p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3} + q_{2} q_{4} + q_{2} - q_{3} q_{4} - q_{3}) 
+           & \quad p_{1} q_{1} (q_{2} + q_{4} + 1) + p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3} + q_{2} q_{4} + q_{2} - q_{3} q_{4} - q_{3})
            + p_{2} p_{4} (- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}) + p_{2} q_{2} (q_{3} - 1) - p_{2} q_{3} (q_{4} - 1) + \\
-           & \quad p_{2} (q_{4} + 1) +  p_{3} p_{4} (q_{1} q_{2} - q_{1} q_{4} - q_{2} q_{3} - q_{2} + q_{3} q_{4} + q_{4}) + p_{3} q_{2} q_{1} ( - p_{3} - 1) + p_{3} (q_{3} - 
+           & \quad p_{2} (q_{4} + 1) +  p_{3} p_{4} (q_{1} q_{2} - q_{1} q_{4} - q_{2} q_{3} - q_{2} + q_{3} q_{4} + q_{4}) + p_{3} q_{2} q_{1} ( - p_{3} - 1) + p_{3} (q_{3} -
            q_{4}) - p_{4} (q_{1} q_{4} + q_{2} + q_{3} q_{4} - q_{3} + q_{4} - 1) + \\
            & \quad q_{2} - q_{4} - 1
         \end{split}
         \end{equation*}
     \endgroup
-    
+
     The dot product of \(v \cdot (R, S, T, P)\) gives,
 
     \begingroup
@@ -684,11 +677,11 @@ can be written as a ratio of two quadratic forms on \(R^4\).
         q_{4}) + p_{3} p_{4} (q_{1} q_{2} - q_{1} q_{4} - q_{2} + q_{4}) + p_{3}q_{4} (q_{2} - 1) -
          p_{4} q_{2} (q_{4} + 1) + p_{4} (q_{4} - 1)\right)}{\bar{v}} + \\
         & \frac{T \left(- p_{1} p_{2} (q_{1} q_{4} - q_{3} q_{4}) - p_{1} p_{4} (- q_{1} q_{3} + q_{3} q_{4})
-          + p_{1} q_{1} q_{4} - p_{2} p_{4} (q_{1} q_{3} - q_{1} q_{4} - q_{3} + q_{4}) - 
-          p_{2} q_{4} (q_{3}  + 1) - p_{4}q_{4} (q_{1} + q_{3}) - p_{4} (q_{3} 
+          + p_{1} q_{1} q_{4} - p_{2} p_{4} (q_{1} q_{3} - q_{1} q_{4} - q_{3} + q_{4}) -
+          p_{2} q_{4} (q_{3}  + 1) - p_{4}q_{4} (q_{1} + q_{3}) - p_{4} (q_{3}
           + q_{4}) - q_{4}\right)}{\bar{v}} + \\ 
         & \frac{P \left(p_{1} (p_{2} (q_{1} q_{2} - q_{1} - q_{2} q_{3} + q_{3}) + p_{3} (- q_{1} q_{3} + q_{2} q_{3})
-        - q_{1} (q_{2} + 1)) + p_{2} p_{3} ((- q_{1} q_{2} + q_{1} q_{3} 
+        - q_{1} (q_{2} + 1)) + p_{2} p_{3} ((- q_{1} q_{2} + q_{1} q_{3}
         + q_{2} - q_{3}) + (q_{3}q_{2}  - q_{2} - q_{3} - 1))\right)}{\bar{v}} + \\
         & \frac{P \left(p_{3} (q_{1} q_{2} - q_{3}q_{2} - q_{2} - q_{3}) + q_{2} - 1\right)}{\bar{v}} \implies \\
     \end{split}
@@ -715,10 +708,10 @@ can be written as a ratio of two quadratic forms on \(R^4\).
         \right).
     \end{equation*}
     \endgroup
-    
+
     Let us consider the numerator of \(u_q(p)\). The cross product terms
     \(p_ip_j\) are given by,
-    
+
     \begingroup
     \footnotesize
     \begin{align*}
@@ -726,23 +719,23 @@ can be written as a ratio of two quadratic forms on \(R^4\).
     p_{2} p_{3} (q_{2} - q_{3}) (P q_{1} - P - R q_{4}) - p_{2} p_{4} (q_{3} - q_{4}) (R q_{2} - R - T q_{1} + T) + p_{3} p_{4} (q_{2} - q_{4}) (R q_{3} - S q_{1} + S)
     \end{align*}
     \endgroup
-    
+
     This can be re written in a matrix format given by
     Eq.~\ref{eq:cross_product_coeffs}.
-    
+
     \begin{equation}\label{eq:cross_product_coeffs}
         \resizebox{0.9\linewidth}{!}{\arraycolsep=2.5pt%
-        \boldmath\( 
-        (p_1, p_2, p_3, p_4) \frac{1}{2} \input{tex/q_numerator} \begin{pmatrix} 
+        \boldmath\(
+        (p_1, p_2, p_3, p_4) \frac{1}{2} \input{tex/q_numerator} \begin{pmatrix}
         p_1 \\
         p_2 \\
         p_3 \\
         p_4 \end{pmatrix}
         \) }
     \end{equation}
-    
+
     Similarly, the linear terms are given by,
-    
+
     \begingroup
     \footnotesize
     \begin{align*}
@@ -750,27 +743,27 @@ can be written as a ratio of two quadratic forms on \(R^4\).
     p_{4} & (- R q_{2} q_{4} + R q_{4} + S q_{2} q_{4} - S q_{2} - S q_{4} + S + T q_{1} q_{4} - T q_{3} q_{4} + T q_{3} - T q_{4})
     \end{align*}
     \endgroup
-    
+
     and the expression can be written using a matrix format as
     Eq.~\ref{eq:linear_coeffs}.
-    
+
     \begin{equation}\label{eq:linear_coeffs}
         \resizebox{0.60\linewidth}{!}{\arraycolsep=2.5pt%
         \boldmath\(
         (p_1, p_2, p_3, p_4) \input{tex/c_numerator}\)}
     \end{equation}
-    
+
     Finally, the constant term of the numerator, which is obtained by
     substituting $p=(0, 0, 0, 0)$, is given by Eq.~\ref{eq:constant}.
-    
+
     \begin{equation}\label{eq:constant}
     - P q_{2} + P + T q_{4}
     \end{equation}
-    
+
     Combining Eq.~\ref{eq:cross_product_coeffs}, Eq.~\ref{eq:linear_coeffs} and
     Eq.~\ref{eq:constant} gives that the numerator of \(u_q(p)\) can be written
     as,
-    
+
     \begingroup
     \tiny\boldmath
     \begin{align*}
@@ -778,29 +771,29 @@ can be written as a ratio of two quadratic forms on \(R^4\).
         & \input{tex/c_numerator} p - P q_{2} + P + T q_{4}
     \end{align*}
     \endgroup
-    
+
     and equivalently as,
-    
+
     \[\frac{1}{2}pQp^T + cp + a\]
-    
+
     where \(Q\) \(\in \R^{4\times4}\) is a square matrix defined by the
     transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
-    
+
     \begin{equation*}
         \resizebox{0.9\linewidth}{!}{\arraycolsep=2.5pt%
         \boldmath\(
         Q = \input{tex/q_numerator}\)},
     \end{equation*}
-    
+
     \(c\) \(\in \R^{4 \times 1}\) is similarly defined by:
-    
+
     \begin{equation*}
         \resizebox{0.55\linewidth}{!}{\arraycolsep=2.5pt%
         \boldmath\(c = \input{tex/c_numerator}\),}
     \end{equation*}
-    
+
     and \(a = \input{tex/numerator_constant}\).
-    
+
     The same process is done for the denominator.
 \end{proof}
 
@@ -820,7 +813,7 @@ The set \(S_q\) is defined as all the possible combinations of:
     S_q =
     \left\{p \in \mathbb{R} ^ 4 \left|
         \begin{aligned}
-            \bullet\quad p_j \in \{0, 1\} & \quad \text{and} \quad \frac{d}{dp_k} 
+            \bullet\quad p_j \in \{0, 1\} & \quad \text{and} \quad \frac{d}{dp_k}
             \sum\limits_{i=1} ^ N  u_q^{(i)}(p) = 0 \\
             & \quad \text{for all} \quad j \in J \quad \&  \quad k \in K  \quad \text{for all} \quad J, K \\
             & \quad \text{where} \quad J \cap K = \O \quad
@@ -858,7 +851,7 @@ For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
 \end{theorem}
 
 \begin{proof}
-    The optimisation problem of Eq.~\ref{eq:mo_tournament_optimisation} 
+    The optimisation problem of Eq.~\ref{eq:mo_tournament_optimisation}
 
     \begin{equation}\label{eq:mo_tournament_optimisation}
         \begin{aligned}
@@ -878,40 +871,40 @@ For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
         - p_i & \leq 0 \text{ for } \in \{1, 2, 3, 4\} \\
         \end{aligned}
     \end{equation}
-    
+
     The optimisation problem has two inequality constraints and regarding the
     optimality this means that:
-    
+
     \begin{itemize}
         \item either the optimum is away from the boundary of the optimization
         domain, and so the constraints plays no role;
         \item or the optimum is on the constraint boundary.
     \end{itemize}
-    
+
     Thus, the following three cases must be considered:
-    
+
     \textbf{Case 1:} The solution is on the boundary and any of the possible
     combinations for $p_i \in \{0, 1\}$ for $i \in \{1, 2, 3, 4\}$ are candidate
     optimal solutions.
-    
+
     \textbf{Case 2:} The optimum is away from the boundary of the optimization
     domain and the interior solution $p^*$ necessarily satisfies the condition
     \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p^*) = 0\).
-    
+
     \textbf{Case 3:} The optimum is away from the boundary of the optimization
     domain but some constraints are equalities. The candidate solutions in this
     case are any combinations of $p_j \in \{0, 1\} \quad \text{and} \quad
     \frac{d}{dp_k} \sum\limits_{i=1} ^ N  u_q^{(i)}(p) = 0$ forall $ j \in J
     \text{ \& } k \in K \text{ forall } J, K \text{ where } J \cap K = \O
     \text{ and } J \cup K = \{1, 2, 3, 4\}.$
-    
+
     Combining cases 1-3 a set of candidate solutions, denoted as \(S_q\), is
     constructed as: {\scriptsize
     \begin{equation*}
         S_q =
         \left\{p \in \mathbb{R} ^ 4 \left|
             \begin{aligned}
-                \bullet\quad p_j \in \{0, 1\} & \quad \text{and} \quad \frac{d}{dp_k} 
+                \bullet\quad p_j \in \{0, 1\} & \quad \text{and} \quad \frac{d}{dp_k}
                 \sum\limits_{i=1} ^ N  u_q^{(i)}(p) = 0
                 \quad \text{for all} \quad j \in J \quad \&  \quad k \in K  \quad \text{for all} \quad J, K \\
                 & \quad \text{where} \quad J \cap K = \O \quad
@@ -922,7 +915,7 @@ For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
     \end{equation*}}
 
     The derivative of \(\sum\limits_{i=1} ^ N  u_q^{(i)}(p)\) calculated using
-    the following property (proved in~\cite{Abadir2005}):
+    the following property (see~\cite{Abadir2005} for details):
 
     \begin{equation}\label{eq:first_derivative_property}
     \frac{d x A x^T}{dx} =  2Ax.
@@ -957,7 +950,7 @@ For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
         & = 0, \quad {while} \\
         \displaystyle\sum\limits_{i=1} ^ {N} \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)} & \neq 0.
     \end{align}}
-    
+
     The optimal solution to Eq.~\ref{eq:mo_tournament_optimisation} is the point
     from $S_q$ for which the utility is maximised.
 \end{proof}
