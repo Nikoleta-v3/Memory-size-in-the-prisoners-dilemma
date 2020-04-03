@@ -268,8 +268,62 @@ best responses. The approach taken here is to introduce a compact way of
 constructing the discrete candidate set of all local optimal points, and evaluating
 the objective function Eq.~\ref{eq:tournament_utility}. This gives the best
 response memory-one strategy. The approach is given in
-Theorem~\ref{memone_group_best_response} in Appendix~\ref{appendix:memone_group_best_response}.
+Theorem~\ref{memone_group_best_response}.
 
+\begin{theorem}\label{memone_group_best_response}
+
+    The optimal behaviour of a memory-one strategy player \(p^* \in \R_{[0, 1]} ^
+    4\) against a set of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
+    for \(q^{(i)} \in \R_{[0, 1]} ^ 4\) is given by:
+    
+    \[p^* = \textnormal{argmax}\sum\limits_{i=1} ^ N  u_q(p), \ p \in S_q.\]
+    
+    The set \(S_q\) is defined as all the possible combinations of:
+    
+    {\scriptsize
+    \begin{equation}\label{eq:s_q_set}
+        S_q =
+        \left\{p \in \mathbb{R} ^ 4 \left|
+            \begin{aligned}
+                \bullet\quad p_j \in \{0, 1\} & \quad \text{and} \quad \frac{d}{dp_k}
+                \sum\limits_{i=1} ^ N  u_q^{(i)}(p) = 0 \\
+                & \quad \text{for all} \quad j \in J \quad \&  \quad k \in K  \quad \text{for all} \quad J, K \\
+                & \quad \text{where} \quad J \cap K = \O \quad
+                \text{and} \quad J \cup K = \{1, 2, 3, 4\}.\\
+                \bullet\quad  p \in \{0, 1\} ^ 4
+            \end{aligned}\right.
+        \right\}.
+    \end{equation}
+    }
+    
+    Note that there is no immediate way to find the zeros of \(\frac{d}{dp}
+    \sum\limits_{i=1} ^ N  u_q(p)\) where,
+    
+    {\scriptsize
+    \begin{align}\label{eq:mo_tournament_derivative}
+        \frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) & = \displaystyle\sum\limits_{i=1} ^ {N}
+        \frac{\left(pQ^{(i)} + c^{(i)}\right) \left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)}
+        {\left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)^ 2}
+        - \frac{\left(p\bar{Q}^{(i)} + \bar{c}^{(i)}\right) \left(\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}\right)}
+        {\left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)^ 2}
+    \end{align}
+    }
+    
+    For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
+    
+    {\scriptsize
+    \begin{align}\label{eq:polynomials_roots}
+        \displaystyle\sum\limits_{i=1} ^ {N}
+        \left(pQ^{(i)} + c^{(i)}\right) \left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)
+        - \left(p\bar{Q}^{(i)} + \bar{c}^{(i)}\right) \left(\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}\right)
+        & = 0, \quad {while} \\
+        \displaystyle\sum\limits_{i=1} ^ {N} \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)} & \neq 0.
+    \end{align}}
+    
+\end{theorem}
+
+The proof of Theorem~\ref{memone_group_best_response} is given in
+Appendix~\ref{appendix:memone_group_best_response}.
 Finding best response memory-one strategies is analytically feasible using the
 formulation of Theorem~\ref{memone_group_best_response} and resultant
 theory~\cite{Jonsson2005}. However, for large systems building the resultant
@@ -797,9 +851,7 @@ can be written as a ratio of two quadratic forms on \(R^4\).
     The same process is done for the denominator.
 \end{proof}
 
-\subsection{Theorem~\ref{memone_group_best_response}}\label{appendix:memone_group_best_response}
-\begin{theorem}\label{memone_group_best_response}
-
+\subsection{Theorem~\ref{memone_group_best_response} Proof}\label{appendix:memone_group_best_response}
 The optimal behaviour of a memory-one strategy player \(p^* \in \R_{[0, 1]} ^
 4\) against a set of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
 for \(q^{(i)} \in \R_{[0, 1]} ^ 4\) is given by:
@@ -808,7 +860,6 @@ for \(q^{(i)} \in \R_{[0, 1]} ^ 4\) is given by:
 
 The set \(S_q\) is defined as all the possible combinations of:
 
-{\scriptsize
 \begin{equation}\label{eq:s_q_set}
     S_q =
     \left\{p \in \mathbb{R} ^ 4 \left|
@@ -822,33 +873,6 @@ The set \(S_q\) is defined as all the possible combinations of:
         \end{aligned}\right.
     \right\}.
 \end{equation}
-}
-
-Note that there is no immediate way to find the zeros of \(\frac{d}{dp}
-\sum\limits_{i=1} ^ N  u_q(p)\) where,
-
-{\scriptsize
-\begin{align}\label{eq:mo_tournament_derivative}
-    \frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) & = \displaystyle\sum\limits_{i=1} ^ {N}
-    \frac{\left(pQ^{(i)} + c^{(i)}\right) \left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)}
-    {\left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)^ 2}
-    - \frac{\left(p\bar{Q}^{(i)} + \bar{c}^{(i)}\right) \left(\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}\right)}
-    {\left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)^ 2}
-\end{align}
-}
-
-For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
-
-{\scriptsize
-\begin{align}\label{eq:polynomials_roots}
-    \displaystyle\sum\limits_{i=1} ^ {N}
-    \left(pQ^{(i)} + c^{(i)}\right) \left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)
-    - \left(p\bar{Q}^{(i)} + \bar{c}^{(i)}\right) \left(\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}\right)
-    & = 0, \quad {while} \\
-    \displaystyle\sum\limits_{i=1} ^ {N} \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)} & \neq 0.
-\end{align}}
-
-\end{theorem}
 
 \begin{proof}
     The optimisation problem of Eq.~\ref{eq:mo_tournament_optimisation}
@@ -955,32 +979,50 @@ For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
     from $S_q$ for which the utility is maximised.
 \end{proof}
 
-\subsection{Stability of defection}\label{subsection:stability_defection}
+\section{Lemma~\ref{lemma:stability_of_defection} Proof}\label{section:stability_defection}
 
-An immediate result from our formulation can be
-obtained by evaluating the sign of Eq. \ref{eq:tournament_utility}'s derivative
-at \(p=(0, 0, 0, 0)\). If at that point the
-derivative is negative, then the utility of a player only decreases if they were
-to change their behaviour, and thus defection at that point is stable.
+In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
+for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
+defection is stable if the transition probabilities of the
+opponents satisfy conditions Equation~(\ref{eq:defection_condition_one}) and Equation~(\ref{eq:defection_condition_two}).
+
+\begin{equation}\label{eq:defection_condition_one}
+    \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
+\end{equation}
+
+while,
+
+\begin{equation}\label{eq:defection_condition_two}
+    \sum_{i=1} ^ N \bar{a}^{(i)} \neq 0
+\end{equation}
 
 \begin{proof}
     For defection to be stable the derivative of the utility
     at the point \(p = (0, 0, 0, 0)\) must be negative.
 
-    Substituting \(p = (0, 0, 0, 0)\) in
-    Eq. \ref{eq:mo_tournament_derivative} gives:
+    Substituting \(p = (0, 0, 0, 0)\) in,
+
+    \begin{align}\label{eq:mo_tournament_derivative}
+        \frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) & = \displaystyle\sum\limits_{i=1} ^ {N}
+        \frac{\left(pQ^{(i)} + c^{(i)}\right) \left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)}
+        {\left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)^ 2}
+        - \frac{\left(p\bar{Q}^{(i)} + \bar{c}^{(i)}\right) \left(\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}\right)}
+        {\left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)^ 2}
+    \end{align}
+
+    gives:
 
     \begin{equation}
         \left.\frac{d\sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)}{dp} \right\rvert_{p=(0,0,0,0)} =
-    \sum_{i=1} ^ N \frac{(c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})}
+    \sum_{i=1} ^ N \frac{(c^{(i)} \bar{a}^{(i)} - \bar{c}^{(i)} a^{(i)})}
     {(\bar{a}^{(i)})^2}
     \end{equation}
 
-    The sign of the numerator \( \displaystyle\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)})\)
+    The sign of the numerator \( \displaystyle\sum_{i=1} ^ N (c^{(i)} \bar{a}^{(i)} - \bar{c}^{(i)} a^{(i)})\)
     can vary based on the transition probabilities of the opponents.
     The denominator can not be negative, and otherwise is always positive.
     Thus the sign of the derivative is negative if and only if
-    \( \displaystyle\sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0\).
+    \( \displaystyle\sum_{i=1} ^ N (c^{(i)} \bar{a}^{(i)} - \bar{c}^{(i)} a^{(i)}) \leq 0\).
 \end{proof}
 
 \end{document}
