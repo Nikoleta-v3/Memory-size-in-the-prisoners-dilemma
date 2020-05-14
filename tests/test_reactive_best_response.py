@@ -36,7 +36,7 @@ def test_reactive_set_against_player():
     axl.seed(21)
     opponent = [np.random.random(4)]
 
-    solution_set = opt_mo.reactive_best_response.get_candinate_reactive_best_responses(
+    solution_set = opt_mo.reactive_best_response.get_candidate_reactive_best_responses(
         opponent
     )
     assert solution_set == set([0, 0.4450664548206673, 0.31493358733410926, 1])
@@ -46,7 +46,7 @@ def test_result_from_numerical_experiments():
     axl.seed(2933)
     opponents = [np.random.random(4) for _ in range(1)]
 
-    solution_set = opt_mo.reactive_best_response.get_candinate_reactive_best_responses(
+    solution_set = opt_mo.reactive_best_response.get_candidate_reactive_best_responses(
         opponents
     )
     solution = opt_mo.reactive_best_response.get_argmax(opponents, solution_set)

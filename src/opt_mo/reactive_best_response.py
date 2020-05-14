@@ -111,7 +111,7 @@ def _roots_in_bound(coeffs):
     return feasible_roots
 
 
-def get_candinate_reactive_best_responses(opponents):
+def get_candidate_reactive_best_responses(opponents):
     """
     Creates a set of possible optimal solutions.
     """
@@ -124,23 +124,23 @@ def get_candinate_reactive_best_responses(opponents):
     fractions = [sym.fraction(expr) for expr in derivatives]
     num, den = [[expr for expr in fraction] for fraction in zip(*fractions)]
 
-    candinate_roots_p_one = _roots_using_eliminator_method(num, p_1, p_2)
+    candidate_roots_p_one = _roots_using_eliminator_method(num, p_1, p_2)
 
-    candinate_roots_p_two = set()
-    if len(candinate_roots_p_one) > 0:
-        candinate_roots_p_two.update(
+    candidate_roots_p_two = set()
+    if len(candidate_roots_p_one) > 0:
+        candidate_roots_p_two.update(
             _roots_solving_system_of_singel_unknown(
-                num, p_2, candinate_roots_p_one, p_1
+                num, p_2, candidate_roots_p_one, p_1
             )
         )
 
     for p_one in [0, 1]:
         coeffs = sym.Poly(num[1].subs({p_1: p_one}), p_2).all_coeffs()
         roots = _roots_in_bound(coeffs)
-        candinate_roots_p_two.update(roots)
+        candidate_roots_p_two.update(roots)
 
-    candinate_set = candinate_roots_p_one | candinate_roots_p_two | set([0, 1])
-    return candinate_set
+    candidate_set = candidate_roots_p_one | candidate_roots_p_two | set([0, 1])
+    return candidate_set
 
 
 def get_argmax(opponents, solution_set):
@@ -155,7 +155,7 @@ def get_reactive_best_response(opponents):
     """
     Calculates the best response reactive strategy using resultant theory.
     """
-    solution_set = get_candinate_reactive_best_responses(opponents)
+    solution_set = get_candidate_reactive_best_responses(opponents)
     solution = get_argmax(opponents=opponents, solution_set=solution_set)
 
     return np.array([solution[0], solution[1], solution[0], solution[1]])
