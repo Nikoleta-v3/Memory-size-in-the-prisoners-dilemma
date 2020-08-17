@@ -27,16 +27,24 @@ def get_evolutionary_best_response(
     best_response_function,
     tol=10 ** -5,
     initial=np.array([1, 1, 1, 1]),
+    K=1,
 ):
+    """
+    This implements the best response dynamics algorithm (Algorithm 1) in the
+    manuscript.
+
+    Given a set of opponents it repeatedly finds the best response to the
+    opponents including a `K` self interactions.
+    """
 
     history = [initial]
-    best_response = best_response_function(opponents + history)
+    best_response = best_response_function(opponents + history * K)
     history.append(best_response)
 
     repeat_length = get_repeat_length_in_history(history, tol=tol)
     while repeat_length >= float("inf"):
 
-        best_response = best_response_function(opponents + [history[-1]])
+        best_response = best_response_function(opponents + [history[-1]] * K)
         print("Next generation.")
         history.append(best_response)
         repeat_length = get_repeat_length_in_history(history, tol=tol)
