@@ -3,8 +3,10 @@ channels:
   - defaults
 dependencies:
   - python=3.6.7
+  - matplotlib=3.2.2
   - numpy=1.15.4
   - pandas=0.23.4
+  - scikit-learn=0.20.1
   - pip:
     - attrs==19.1.0
     - axelrod==4.4.0
