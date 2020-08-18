@@ -35,7 +35,7 @@ def obtain_payoff_matrix(opponent, K, N=4):
     total of N individuals.
     """
     best_ev_response, _, _ = opt_mo.get_evolutionary_best_response(
-        [opponent], opt_mo.get_memory_one_best_response, K=K,
+        [opponent], opt_mo.get_memory_one_best_response, K=K
     )
     players = [best_ev_response, opponent]
     return (

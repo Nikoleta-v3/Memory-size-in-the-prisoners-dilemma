@@ -137,7 +137,7 @@ def test_get_evolutionary_best_response_with_K_equal_2_against_random_opponent()
         hist,
         history_length,
     ) = opt_mo.get_evolutionary_best_response(
-        random_opponents, opt_mo.get_memory_one_best_response, K=2,
+        random_opponents, opt_mo.get_memory_one_best_response, K=2
     )
 
     expected_best_response = np.array([0.11235944, 0, 0, 0])
@@ -155,7 +155,7 @@ def test_get_evolutionary_best_response_with_K_equal_4_against_random_opponent()
         hist,
         history_length,
     ) = opt_mo.get_evolutionary_best_response(
-        random_opponents, opt_mo.get_memory_one_best_response, K=4,
+        random_opponents, opt_mo.get_memory_one_best_response, K=4
     )
 
     expected_best_response = np.array([0.01547687, 0, 0, 0])
@@ -188,7 +188,7 @@ def test_get_evolutionary_best_response_with_K_equal_1_against_2_defectors():
         hist,
         history_length,
     ) = opt_mo.get_evolutionary_best_response(
-        opponents, opt_mo.get_memory_one_best_response, K=1,
+        opponents, opt_mo.get_memory_one_best_response, K=1
     )
 
     expected_best_response = np.array([1, 0.45420466, 0, 0.03799109])
@@ -214,7 +214,7 @@ def test_get_evolutionary_best_response_with_K_equal_10_against_2_defectors():
         hist,
         history_length,
     ) = opt_mo.get_evolutionary_best_response(
-        opponents, opt_mo.get_memory_one_best_response, K=10,
+        opponents, opt_mo.get_memory_one_best_response, K=10
     )
 
     expected_best_response = np.array([0.26874769, 0.11697721, 0, 0])
