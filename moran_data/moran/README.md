@@ -13,7 +13,7 @@ $ python main.py
 The data set is of the form:
 
 ```
-Seed, Opponent p1, Opponent p2, Opponent p3, Opponent p4, K, Best response p1, Best response p2, Best response p3, Best respose p4, A_11, A_12, A_21, A_22, x_k
+Seed, Opponent p1, Opponent p2, Opponent p3, Opponent p4, K, Best response p1, Best response p2, Best response p3, Best respose p4, A_11, A_12, A_21, A_22, x_k, non_dynamic_x_k
 ```
 
 Approach:
