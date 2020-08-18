@@ -6,14 +6,28 @@ import pandas as pd
 
 import opt_mo
 
+
 def theoretic_fixation(N, payoff_matrix, K=1):
     """
     Calculate x_i assuming a non dynamic player
     """
-    f_ones = np.array([(payoff_matrix[0, 0] * (K - 1) + payoff_matrix[0, 1] * (N - K)) for K in range(1, N)])
-    f_twos = np.array([(payoff_matrix[1, 0] * K + payoff_matrix[1, 1] * (N - K- 1))  for K in range(1, N)])
+    f_ones = np.array(
+        [
+            (payoff_matrix[0, 0] * (K - 1) + payoff_matrix[0, 1] * (N - K))
+            for K in range(1, N)
+        ]
+    )
+    f_twos = np.array(
+        [
+            (payoff_matrix[1, 0] * K + payoff_matrix[1, 1] * (N - K - 1))
+            for K in range(1, N)
+        ]
+    )
     gammas = f_twos / f_ones
-    return (1 + np.sum(np.cumprod(gammas[:K-1]))) / (1 + np.sum(np.cumprod(gammas)))
+    return (1 + np.sum(np.cumprod(gammas[: K - 1]))) / (
+        1 + np.sum(np.cumprod(gammas))
+    )
+
 
 def obtain_payoff_matrix(opponent, K, N=4):
     """
@@ -24,20 +38,56 @@ def obtain_payoff_matrix(opponent, K, N=4):
         [opponent], opt_mo.get_memory_one_best_response, K=K,
     )
     players = [best_ev_response, opponent]
-    return np.array([[opt_mo.match_utility(player, opponent) for opponent in players] for player in  players]), best_ev_response
+    return (
+        np.array(
+            [
+                [opt_mo.match_utility(player, opponent) for opponent in players]
+                for player in players
+            ]
+        ),
+        best_ev_response,
+    )
+
 
 def best_response_moran_process(opponent, N=4):
     payoff_matrices = {}
     best_response_players = {}
     for K in range(1, N):
-        payoff_matrix, best_response = obtain_payoff_matrix(opponent=opponent, K=K)
+        payoff_matrix, best_response = obtain_payoff_matrix(
+            opponent=opponent, K=K
+        )
         payoff_matrices[K] = payoff_matrix
         best_response_players[K] = best_response
 
-    f_ones = np.array([(payoff_matrices[K][0, 0] * (K - 1) + payoff_matrices[K][0, 1] * (N - K))  for i in range(1, N)])
-    f_twos = np.array([(payoff_matrices[K][1, 0] * K + payoff_matrices[K][1, 1] * (N - K - 1))  for i in range(1, N)])
+    f_ones = np.array(
+        [
+            (
+                payoff_matrices[K][0, 0] * (K - 1)
+                + payoff_matrices[K][0, 1] * (N - K)
+            )
+            for i in range(1, N)
+        ]
+    )
+    f_twos = np.array(
+        [
+            (
+                payoff_matrices[K][1, 0] * K
+                + payoff_matrices[K][1, 1] * (N - K - 1)
+            )
+            for i in range(1, N)
+        ]
+    )
     gammas = f_twos / f_ones
-    return {K: (1 + np.sum(np.cumprod(gammas[:K-1]))) / (1 + np.sum(np.cumprod(gammas))) for K in range(1, N)}, payoff_matrices, best_response_players
+    return (
+        {
+            K: (1 + np.sum(np.cumprod(gammas[: K - 1])))
+            / (1 + np.sum(np.cumprod(gammas)))
+            for K in range(1, N)
+        },
+        payoff_matrices,
+        best_response_players,
+    )
+
 
 if __name__ == "__main__":
     N = 4
@@ -65,7 +115,7 @@ if __name__ == "__main__":
             "A_22",
             "x_K",
             "non_dynamic_x_K",
-            ]
+        ]
         seed = 0
         with open("data.csv", "w") as f:
             csv_writer = csv.writer(f)
@@ -77,14 +127,26 @@ if __name__ == "__main__":
 
             np.random.seed(seed)
             opponent = np.random.random(4)
-            fixation_probabilities, payoff_matrices,  best_response_players = best_response_moran_process(opponent, N=4)
+            (
+                fixation_probabilities,
+                payoff_matrices,
+                best_response_players,
+            ) = best_response_moran_process(opponent, N=4)
 
             row = [seed] + list(opponent)
             for K in range(1, 4):
                 payoff_matrix = list(payoff_matrices[K].flatten())
                 best_response = list(best_response_players[K])
                 x_K = fixation_probabilities[K]
-                non_dynamic_x_K = theoretic_fixation(payoff_matrix=payoff_matrices[K], N=N, K=K)
-                csv_writer.writerow(row + [K] + payoff_matrix + best_response + [x_K, non_dynamic_x_K])
+                non_dynamic_x_K = theoretic_fixation(
+                    payoff_matrix=payoff_matrices[K], N=N, K=K
+                )
+                csv_writer.writerow(
+                    row
+                    + [K]
+                    + payoff_matrix
+                    + best_response
+                    + [x_K, non_dynamic_x_K]
+                )
 
             seed += 1

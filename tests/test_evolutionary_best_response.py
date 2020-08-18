@@ -115,7 +115,11 @@ def test_get_evolutionary_best_response_against_random_opponent():
     axl.seed(2)
     random_opponents = [[random.random() for _ in range(4)]]
 
-    best_ev_response, hist, history_length = opt_mo.get_evolutionary_best_response(
+    (
+        best_ev_response,
+        hist,
+        history_length,
+    ) = opt_mo.get_evolutionary_best_response(
         random_opponents, opt_mo.get_memory_one_best_response
     )
 
@@ -128,7 +132,11 @@ def test_get_evolutionary_best_response_with_K_equal_2_against_random_opponent()
     axl.seed(2)
     random_opponents = [[random.random() for _ in range(4)]]
 
-    best_ev_response, hist, history_length = opt_mo.get_evolutionary_best_response(
+    (
+        best_ev_response,
+        hist,
+        history_length,
+    ) = opt_mo.get_evolutionary_best_response(
         random_opponents, opt_mo.get_memory_one_best_response, K=2,
     )
 
@@ -142,7 +150,11 @@ def test_get_evolutionary_best_response_with_K_equal_4_against_random_opponent()
     axl.seed(2)
     random_opponents = [[random.random() for _ in range(4)]]
 
-    best_ev_response, hist, history_length = opt_mo.get_evolutionary_best_response(
+    (
+        best_ev_response,
+        hist,
+        history_length,
+    ) = opt_mo.get_evolutionary_best_response(
         random_opponents, opt_mo.get_memory_one_best_response, K=4,
     )
 
@@ -171,7 +183,11 @@ def test_get_evolutionary_best_response_with_K_equal_1_against_2_defectors():
     opponents = [np.array([0, 0, 0, 0])] * 2
 
     axl.seed(2)
-    best_ev_response, hist, history_length = opt_mo.get_evolutionary_best_response(
+    (
+        best_ev_response,
+        hist,
+        history_length,
+    ) = opt_mo.get_evolutionary_best_response(
         opponents, opt_mo.get_memory_one_best_response, K=1,
     )
 
@@ -193,7 +209,11 @@ def test_get_evolutionary_best_response_with_K_equal_10_against_2_defectors():
     opponents = [np.array([0, 0, 0, 0])] * 2
 
     axl.seed(2)
-    best_ev_response, hist, history_length = opt_mo.get_evolutionary_best_response(
+    (
+        best_ev_response,
+        hist,
+        history_length,
+    ) = opt_mo.get_evolutionary_best_response(
         opponents, opt_mo.get_memory_one_best_response, K=10,
     )
 
