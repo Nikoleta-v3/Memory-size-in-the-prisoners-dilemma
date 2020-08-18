@@ -149,7 +149,7 @@ def test_get_evolutionary_best_response_with_K_equal_4_against_random_opponent()
     expected_best_response = np.array([0.01547687, 0, 0, 0])
     assert type(best_ev_response) is np.ndarray
     assert len(best_ev_response) == 4
-    assert np.allclose(expected_best_response, best_ev_response)
+    assert np.allclose(expected_best_response, best_ev_response, atol=1e-3)
 
 
 def test_get_evolutionary_best_response_with_K_equal_1_against_2_defectors():
@@ -200,4 +200,4 @@ def test_get_evolutionary_best_response_with_K_equal_10_against_2_defectors():
     expected_best_response = np.array([0.26874769, 0.11697721, 0, 0])
     assert type(best_ev_response) is np.ndarray
     assert len(best_ev_response) == 4
-    assert np.allclose(expected_best_response, best_ev_response)
+    assert np.allclose(expected_best_response, best_ev_response, atol=1e-3)
