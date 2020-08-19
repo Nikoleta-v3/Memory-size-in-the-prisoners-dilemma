@@ -35,7 +35,7 @@ def obtain_payoff_matrix(opponent, K, N=4):
     total of N individuals.
     """
     best_ev_response, _, _ = opt_mo.get_evolutionary_best_response(
-        [opponent], opt_mo.get_memory_one_best_response, K=K
+        [opponent] * (N - K), opt_mo.get_memory_one_best_response, K=K
     )
     players = [best_ev_response, opponent]
     return (
@@ -65,7 +65,7 @@ def best_response_moran_process(opponent, N=4):
                 payoff_matrices[K][0, 0] * (K - 1)
                 + payoff_matrices[K][0, 1] * (N - K)
             )
-            for i in range(1, N)
+            for K in range(1, N)
         ]
     )
     f_twos = np.array(
@@ -74,7 +74,7 @@ def best_response_moran_process(opponent, N=4):
                 payoff_matrices[K][1, 0] * K
                 + payoff_matrices[K][1, 1] * (N - K - 1)
             )
-            for i in range(1, N)
+            for K in range(1, N)
         ]
     )
     gammas = f_twos / f_ones
@@ -131,10 +131,10 @@ if __name__ == "__main__":
                 fixation_probabilities,
                 payoff_matrices,
                 best_response_players,
-            ) = best_response_moran_process(opponent, N=4)
+            ) = best_response_moran_process(opponent, N=N)
 
             row = [seed] + list(opponent)
-            for K in range(1, 4):
+            for K in range(1, N):
                 payoff_matrix = list(payoff_matrices[K].flatten())
                 best_response = list(best_response_players[K])
                 x_K = fixation_probabilities[K]
