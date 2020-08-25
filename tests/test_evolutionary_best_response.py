@@ -153,7 +153,7 @@ def test_get_evolutionary_best_response_against_random_opponent():
         random_opponents, opt_mo.get_memory_one_best_response
     )
 
-    expected_best_response = np.array([0.15993435, 0, 0, 0])
+    expected_best_response = np.array([0.0, 0.0, 0.0, 0.0])
     assert type(best_ev_response) is np.ndarray
     assert np.allclose(expected_best_response, best_ev_response)
 
@@ -232,9 +232,7 @@ def test_get_evolutionary_best_response_with_K_equal_10_against_2_defectors():
     With K = 10 and 2 defectors the best response changes from `[1, 0.45420466,
     0, 0.03799109]` (for K = 1) to:
 
-    [0.26874769, 0.11697721, 0, 0]
-
-    TODO: Nik does this make sense?
+    [1, 0.36819048, 1, 0.75011483]
     """
     opponents = [np.array([0, 0, 0, 0])] * 2
 
@@ -247,7 +245,7 @@ def test_get_evolutionary_best_response_with_K_equal_10_against_2_defectors():
         opponents, opt_mo.get_memory_one_best_response, K=10
     )
 
-    expected_best_response = np.array([0.26874769, 0.11697721, 0, 0])
+    expected_best_response = np.array([1, 0.36819048, 1, 0.75011483])
     assert type(best_ev_response) is np.ndarray
     assert len(best_ev_response) == 4
     assert np.allclose(expected_best_response, best_ev_response, atol=1e-3)
