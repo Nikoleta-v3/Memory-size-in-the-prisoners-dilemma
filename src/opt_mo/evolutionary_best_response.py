@@ -1,4 +1,5 @@
 import numpy as np
+import opt_mo
 
 
 def get_repeat_cycle_and_length(history, tol=10 ** -5):
@@ -49,4 +50,11 @@ def get_evolutionary_best_response(
         history.append(best_response)
         cycle, repeat_length = get_repeat_cycle_and_length(history, tol=tol)
 
+    utilities = [
+        opt_mo.tournament_utility(player, opponents)
+        + opt_mo.tournament_utility(player, [player] * K)
+        for player in cycle
+    ]
+
+    best_response = cycle[utilities.index(np.nanmax(utilities))]
     return best_response, history, repeat_length
