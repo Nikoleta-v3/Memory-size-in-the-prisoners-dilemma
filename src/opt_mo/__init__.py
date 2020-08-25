@@ -1,6 +1,6 @@
 from .evolutionary_best_response import (
     get_evolutionary_best_response,
-    get_repeat_length_in_history,
+    get_repeat_cycle_and_length,
 )
 from .gambler_best_response import (
     get_best_response_gambler,
