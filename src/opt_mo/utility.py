@@ -258,7 +258,6 @@ def tournament_utility(player, opponents):
     The tournament utility of a player is the sum of utilities against each
     opponent and against itself.
     """
-    obj = 0
     return np.mean([match_utility(player, opponent) for opponent in opponents])
 
 
