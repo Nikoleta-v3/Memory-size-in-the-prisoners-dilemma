@@ -18,11 +18,11 @@ Seed, Opponent p1, Opponent p2, Opponent p3, Opponent p4, K, Best response p1, B
 
 Approach:
 
-The fixation probability \\(x_i\\) is given by:
+The fixation probability \\(x_k\\) is given by:
 
 \\[
     x_k = \frac{
-            1 + \sum_{j=1}^{j-1}\prod_{i=1}^j\gamma_i
+            1 + \sum_{j=1}^{k-1}\prod_{i=1}^j\gamma_i
                 }{
             1 + \sum_{j=1}^{N-1}\prod_{i=1}^j\gamma_i
                 }
