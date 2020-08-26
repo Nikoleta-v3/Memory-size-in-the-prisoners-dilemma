@@ -51,8 +51,7 @@ def get_evolutionary_best_response(
         cycle, repeat_length = get_repeat_cycle_and_length(history, tol=tol)
 
     utilities = [
-        opt_mo.tournament_utility(player, opponents)
-        + opt_mo.tournament_utility(player, [player] * K)
+        opt_mo.tournament_utility(player, opponents + [player] * K)
         for player in cycle
     ]
 
