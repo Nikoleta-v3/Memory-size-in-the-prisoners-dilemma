@@ -36,6 +36,12 @@ def get_evolutionary_best_response(
 
     Given a set of opponents it repeatedly finds the best response to the
     opponents including a `K` self interactions.
+
+    The best response strategy is the strategy in the cycle that achieves the
+    highest utility.
+
+    In the edge case that the utilities of all the strategies in the cycle are
+    NaN, the best response strategy is the first strategy in the cycle.
     """
 
     history = [initial]
@@ -55,5 +61,9 @@ def get_evolutionary_best_response(
         for player in cycle
     ]
 
-    best_response = cycle[utilities.index(np.nanmax(utilities))]
+    if all(np.isnan(utilities)):
+        best_response = cycle[0]
+    else:
+        best_response = cycle[utilities.index(np.nanmax(utilities))]
+
     return best_response, history, repeat_length
