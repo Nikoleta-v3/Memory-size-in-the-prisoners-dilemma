@@ -37,6 +37,7 @@ def get_evolutionary_best_response(
     Given a set of opponents it repeatedly finds the best response to the
     opponents including a `K` self interactions.
 
+    In some cases a single strategy will not be found but a cycle will appear.
     The best response strategy is the strategy in the cycle that achieves the
     highest utility.
 
