@@ -500,6 +500,80 @@ occur.
     \label{fig:behaviour_violin_plots}
 \end{figure}
 
+% TODO Discuss if this is the correct location
+To investigate the above findings more formally a Moran process will be
+considered. % TODO Add general reference text about Moran process.
+In a population of \(N\) total individuals of two types, the probability that \(k\)
+individuals of a given type can take over the population, the fixation
+probability \(x_k\) is given by:
+
+\[ x_k = \frac{ 1 + \sum_{j=1}^{k-1}\prod_{i=1}^j\gamma_i }{ 1 +
+\sum_{j=1}^{N-1}\prod_{i=1}^j\gamma_i } \]
+
+where:
+
+\[ \gamma_i = \frac{ p_{k, k - 1} }{ p_{k, k + 1} } \]
+
+In the case considered here \(k\) is the number of best response players in the
+population, so that \(N - k\) is the number of opponents.
+
+The difference proposed here is to allow the best response player to act
+dynamically: adjusting their probability vector at every generation. In essence
+using the theory of mind to find the best response to not only the opponent but
+also the distribution of the population.
+Thus for every value of \(k\) there is a different best response player.
+
+In the case of the best response player the transition probabilities depend on the payoff matrix \(A ^ {(k)}\) where:
+
+\(A ^ {(k)}_{11}\) is the long run utility of the best response player against itself.
+\(A ^ {(k)}_{12}\) is the long run utility of the best response player against the opponent.
+\(A ^ {(k)}_{11}\) is the long run utility of the opponent against the best response player.
+\(A ^ {(k)}_{11}\) is the long run utility of the opponent against itself.
+
+The matrix \(A ^ {(k)}\) is calculated using (\ref{eq:optimisation_quadratic})
+for each value of \(k\) once the best response dynamics algorithm has calculated
+the best response player.
+
+Using this, the total utilities/fitnesses for each player can be written down:
+
+\[f_1^{(k)} = (k - 1) A_{11}^{(k)} + (N - k)A_{12}^{(k)}\]
+
+\[f_2^{(k)} = (k) A_{21}^{(k)} + (N - k - 1)A_{22}^{(k)}\]
+
+(\(f_1^{(k)}\) is the fitness of the best response player, and \(f_2^{(k)}\) is
+the fitness of the opponent)
+
+Using this:
+
+\[ p_{k, k - 1} = \frac{ (N - k)f_2^{(k)} }{ kf_1^{(k)}+(N - k)f_2^{(k)} } \frac{ k }{ N } \]
+
+and:
+
+\[ p_{k, k + 1} = \frac{ kf_1^{(k)} }{ kf_1^{(k)}+(N - k)f_2^{(k)} } \frac{ (N - k) }{ N } \]
+
+which are all that are required to calculate \(x_k\).
+
+Figure~\ref{fig:dynamic_moran_process_results} shows the results of an analysis
+of \(x_k\) for dynamically updating players. This is obtained over %TODO Add count of data points here
+data points. The ratio shows a relatively high performance compared to a non
+dynamic best response strategy the mean \(x_K\) over all values of \(K\) and all
+experiments is given by % TODO Add mean
+and in some cases this dynamic updating results in a 25\% increase in the
+absorption probability.
+As denoted before it is clear that the best response strategy does not have a
+low SSE % TODO Make sure we're using consistent language here.
+this is further compondounded by the ratio being above one showing that in many
+cases the dynamic strategy benefits from its ability to adapt.
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[width=.9\textwidth]{img/dynamic_moran_process_results/main.pdf}
+    \caption{Results for the best response player in a dynamic Moran process.
+    The ratio is taken as the ratio of \(x_k\) of the dynamically updating
+    player to the fixation probability of a best response player that does not
+    update as the population density changes.}\label{fig:dynamic_moran_process_results}
+\end{figure}
+
 The other main finding presented in~\cite{Press20212} was that
 short memory of the strategies was all that was needed.
 We argue that the second limitation of ZDs in multi opponent
@@ -644,6 +718,7 @@ would only be more evident. In addition, we would investigate potential
 theoretical results for the best responses dynamics algorithm
 discussed. Another interesting avenue would be to study the Moran process with a
 dynamically updating best response.
+% TODO We need to update this (as it has now been done).
 
 By specifically exploring the entire space of memory-one strategies to identify
 the best strategy for a variety of situations, this work adds to the literature
