@@ -633,49 +633,8 @@ Note that Theorem~\ref{memone_group_best_response} which does not only have game
 novelty, but also the mathematical novelty of solving quadratic ratio optimisation
 problems where the quadratics are non concave.
 
-Moreover Theorem~\ref{theorem_one}, allows us to
-obtain a condition for which in an environment of memory-one opponents
-defection is the stable choice, based only on the coefficients of the opponents,
-as stated in Lemma~\ref{lemma:stability_of_defection}.
-
-\begin{lemma}\label{lemma:stability_of_defection}
-    In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
-    for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
-    defection is stable if the transition probabilities of the
-    opponents satisfy conditions Eq. \ref{eq:defection_condition_one} and Eq. \ref{eq:defection_condition_two}.
-
-    \begin{equation}\label{eq:defection_condition_one}
-        \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
-    \end{equation}
-
-    while,
-
-    \begin{equation}\label{eq:defection_condition_two}
-        \sum_{i=1} ^ N \bar{a}^{(i)} \neq 0
-    \end{equation}
-\end{lemma}
-
-The proof of Lemma~\ref{lemma:stability_of_defection} is given in
-Appendix~\ref{subsection:stability_defection} and a numerical simulation
-demonstrating the result is given
-in Fig.~\ref{fig:stability_of_defection}.
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=.4\linewidth]{img/stability_of_defection_plots.pdf}
-    \caption{A. For \(q_{1}=(0.22199, 0.87073, 0.20672, 0.91861)\),
-    $q_{2}=(0.48841, 0.61174, 0.76591, 0.51842)$ and
-    $q_{3}=(0.2968, 0.18772, 0.08074, 0.73844)$, Eq.~\ref{eq:defection_condition_one} and
-    Eq.~\ref{eq:defection_condition_two} hold and Defector takes over the
-    population. B. For $q_{1}=(0.96703, 0.54723, 0.97268, 0.71482)$,
-    $q_{2}=(0.69773, 0.21609, 0.97627, 0.0062)$ and
-    $q_{3}=(0.25298, 0.43479, 0.77938, 0.19769)$, Eq.~\ref{eq:defection_condition_one} fails
-    and Defector does not take over the population.
-    These results have been obtained by using~\cite{axelrodproject} an open
-    source research framework for the study of the IPD.}\label{fig:stability_of_defection}
-\end{figure}
-
-The empirical results have shown that the performance of memory-one strategies rely on adaptability and not on extortion,
+The empirical results have shown that the performance and the evolutionary
+stability of memory-one strategies rely on adaptability and not on extortion,
 and that memory-one strategies' performance is limited by their memory in cases
 where they interact with multiple opponents.
 
@@ -1033,22 +992,34 @@ The set \(S_q\) is defined as all the possible combinations of:
     from $S_q$ for which the utility is maximised.
 \end{proof}
 
-\section{Lemma~\ref{lemma:stability_of_defection} Proof}\label{section:stability_defection}
+\subsection{Stability of defection}
 
-In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
-for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
-defection is stable if the transition probabilities of the
-opponents satisfy conditions Equation~(\ref{eq:defection_condition_one}) and Equation~(\ref{eq:defection_condition_two}).
+An additional theoretical result that is possible to obtain due to
+Theorem~\ref{theorem_one}, is a condition for which in an
+environment of memory-one opponents defection is the stable choice, based only
+on the coefficients of the opponents.
 
-\begin{equation}\label{eq:defection_condition_one}
-    \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
-\end{equation}
+This result is obtained by evaluating the sign of Equation
+(\ref{eq:tournament_utility})'s derivative at \(p=(0, 0, 0, 0)\). If at that
+point the derivative is negative, then the utility of a player only decreases if
+they were to change their behaviour, and thus defection at that point is stable.
 
-while,
+\begin{lemma}\label{lemma:stability_of_defection}
+    In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
+    for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
+    defection is stable if the transition probabilities of the
+    opponents satisfy conditions Eq. \ref{eq:defection_condition_one} and Eq. \ref{eq:defection_condition_two}.
 
-\begin{equation}\label{eq:defection_condition_two}
-    \sum_{i=1} ^ N \bar{a}^{(i)} \neq 0
-\end{equation}
+    \begin{equation}\label{eq:defection_condition_one}
+        \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
+    \end{equation}
+
+    while,
+
+    \begin{equation}\label{eq:defection_condition_two}
+        \sum_{i=1} ^ N \bar{a}^{(i)} \neq 0
+    \end{equation}
+\end{lemma}
 
 \begin{proof}
     For defection to be stable the derivative of the utility
@@ -1078,5 +1049,22 @@ while,
     Thus the sign of the derivative is negative if and only if
     \( \displaystyle\sum_{i=1} ^ N (c^{(i)} \bar{a}^{(i)} - \bar{c}^{(i)} a^{(i)}) \leq 0\).
 \end{proof}
+
+A numerical simulation demonstrating the result is given in Fig.~\ref{fig:stability_of_defection}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=.4\linewidth]{img/stability_of_defection_plots.pdf}
+    \caption{A. For \(q_{1}=(0.22199, 0.87073, 0.20672, 0.91861)\),
+    $q_{2}=(0.48841, 0.61174, 0.76591, 0.51842)$ and
+    $q_{3}=(0.2968, 0.18772, 0.08074, 0.73844)$, Eq.~\ref{eq:defection_condition_one} and
+    Eq.~\ref{eq:defection_condition_two} hold and Defector takes over the
+    population. B. For $q_{1}=(0.96703, 0.54723, 0.97268, 0.71482)$,
+    $q_{2}=(0.69773, 0.21609, 0.97627, 0.0062)$ and
+    $q_{3}=(0.25298, 0.43479, 0.77938, 0.19769)$, Eq.~\ref{eq:defection_condition_one} fails
+    and Defector does not take over the population.
+    These results have been obtained by using~\cite{axelrodproject} an open
+    source research framework for the study of the IPD.}\label{fig:stability_of_defection}
+\end{figure}
 
 \end{document}
