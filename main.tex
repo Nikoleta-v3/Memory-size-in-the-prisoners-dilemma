@@ -246,7 +246,7 @@ and restricted memory.
 
 \section{Results}\label{section:results}
 
-The formulation as presented in Theorem~\ref{theorem_one} can be used to 
+The formulation as presented in Theorem~\ref{theorem_one} can be used to
 define \textit{memory-one best response} strategies as a multi dimensional
 optimisation problem given by:
 
@@ -276,11 +276,11 @@ Theorem~\ref{memone_group_best_response}.
     The optimal behaviour of a memory-one strategy player \(p^* \in \R_{[0, 1]} ^
     4\) against a set of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
     for \(q^{(i)} \in \R_{[0, 1]} ^ 4\) is given by:
-    
+
     \[p^* = \textnormal{argmax}\sum\limits_{i=1} ^ N  u_q(p), \ p \in S_q.\]
-    
+
     The set \(S_q\) is defined as all the possible combinations of:
-    
+
     {\scriptsize
     \begin{equation}\label{eq:s_q_set}
         S_q =
@@ -296,10 +296,10 @@ Theorem~\ref{memone_group_best_response}.
         \right\}.
     \end{equation}
     }
-    
+
     Note that there is no immediate way to find the zeros of \(\frac{d}{dp}
     \sum\limits_{i=1} ^ N  u_q(p)\) where,
-    
+
     {\scriptsize
     \begin{align}\label{eq:mo_tournament_derivative}
         \frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) & = \displaystyle\sum\limits_{i=1} ^ {N}
@@ -309,9 +309,9 @@ Theorem~\ref{memone_group_best_response}.
         {\left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)^ 2}
     \end{align}
     }
-    
+
     For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
-    
+
     {\scriptsize
     \begin{align}\label{eq:polynomials_roots}
         \displaystyle\sum\limits_{i=1} ^ {N}
@@ -320,7 +320,7 @@ Theorem~\ref{memone_group_best_response}.
         & = 0, \quad {while} \\
         \displaystyle\sum\limits_{i=1} ^ {N} \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)} & \neq 0.
     \end{align}}
-    
+
 \end{theorem}
 
 The proof of Theorem~\ref{memone_group_best_response} is given in
@@ -331,42 +331,6 @@ theory~\cite{Jonsson2005}. However, for large systems building the resultant
 becomes intractable. As a result, best responses will be estimated
 heuristically using a numerical method, suitable for problems with local optima,
 called Bayesian optimisation~\cite{Mokus1978}.
-
-In several evolutionary settings
-such as Moran Processes self interactions are key. Previous work has
-identified interesting results such as the appearance of self recognition
-mechanisms when training strategies using evolutionary algorithms in Moran
-processes~\cite{Knight2018}. This aspect of reinforcement learning can be done for
-best response memory-one strategies, as presented in this manuscript, by incorporating the strategy itself in the
-objective function as shown in Eq.~\ref{eq:mo_tournament_optimisation}.
-\(K\) is the number of self interactions that will take place.
-
-\begin{equation}\label{eq:mo_evolutionary_optimisation}
-\begin{aligned}
-\max_p: & \ \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + Ku_p(p)
-\\
-\text{such that}: & \ p \in \R_{[0, 1]}
-\end{aligned}
-\end{equation}
-
-For determining the memory-one best response with self interactions, an
-algorithmic approach is considered, called \textit{best response dynamics}. The
-best response dynamics approach used in this manuscript is given by
-Algorithm~\ref{algo:best_response_dynamics}.
-
-\begin{center}
-\begin{minipage}{.55\textwidth}
-\begin{algorithm}[H]
-       $p^{(t)}\leftarrow (1, 1, 1, 1)$\;
-       \While{$p^{(t)} \neq p ^{(t -1)}$}{
-       $p^{(t + 1)} =  \text{argmax} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)}
-       (p^{(t)}) + Ku_{p^{(t)}}(p^{(t)})$\;
-       }
-       \caption{Best response dynamics Algorithm}
-       \label{algo:best_response_dynamics}
-\end{algorithm}
-\end{minipage}
-\end{center}
 
 \subsection{Limitations of extortionate behaviour} %TODO check that this is a good title
 
@@ -497,9 +461,147 @@ occur.
     \(\bar{p}^* = (0, 0.19, 0, 0)\).}
     \label{fig:behaviour_violin_plots}
 \end{figure}
+% TODO Remove self interactions results. There are no longer needed as we have
+% the Moran process results
 
+\subsection{Limitations of memory size} %TODO check that this is a good title
 
-\subsection{Dynamically evolutionarily player} %TODO check that this is a good title
+The other main finding presented in~\cite{Press20212} was that
+short memory of the strategies was all that was needed.
+We argue that the second limitation of ZDs in multi opponent
+interactions is that of their restricted memory.
+To demonstrate the effectiveness of memory in the IPD we explore a best response
+longer-memory strategy against a given set of memory-one opponents,  and compare
+it's performance to that of a memory-one best response.
+
+In~\cite{Harper2017}, a strategy called \textit{Gambler} which makes
+probabilistic decisions based on the opponent's \(n_1\) first moves, the
+opponent's \(m_1\) last moves and the player's \(m_2\) last moves was
+introduced. In this manuscript Gambler with parameters: $n_1 = 2, m_1 = 1$ and $m_2 = 1$ is used
+as a longer-memory strategy.
+By considering the opponent's first two moves, the opponents last move and the
+player's last move, there are only 16 $(4 \times 2 \times 2)$ possible outcomes
+that can occur, furthermore, Gambler also makes a probabilistic decision of
+cooperating in the opening move. Thus, Gambler is a function \(f: \{\text{C,
+D}\} \rightarrow [0, 1]_{\R}\). This can be hard coded as an element
+of \([0, 1]_{\R} ^ {16 + 1}\), one probability for each outcome plus the opening
+move. Hence, compared to Eq.~\ref{eq:mo_tournament_optimisation}, finding an
+optimal Gambler is a 17 dimensional problem given by:
+
+\begin{equation}\label{eq:gambler_optimisation}
+    \begin{aligned}
+    \max_p: & \ \sum_{i=1} ^ {N} {U_q}^{(i)} (f)
+    \\
+    \text{such that}: & \ f \in \R_{[0, 1]}^{17}
+    \end{aligned}
+\end{equation}
+
+Note that Eq. \ref{eq:tournament_utility} can not be used here for the utility
+of Gambler, and actual simulated players are used. This is done using~\cite{axelrodproject}
+with 500 turns and 200 repetitions, moreover, Eq. \ref{eq:gambler_optimisation}
+is solved numerically using Bayesian optimisation.
+
+Similarly to previous sections, a large data set has been generated with
+instances of an optimal Gambler and a memory-one best response, available
+at~\cite{glynatsi2019}. Estimating a best response Gambler (17 dimensions) is
+computational more expensive compared to a best response memory-one (4
+dimensions). As a result, the analysis of this section is based on a total of
+152 trials. As before, for each trial \(N=2\) random opponents have been selected.
+
+The ratio between Gambler's utility and the best response memory-one strategy's utility has been calculated and its distribution in
+given in Fig.~\ref{fig:utilities_gambler_mem_one}.
+It is evident from Fig.~\ref{fig:utilities_gambler_mem_one} that
+Gambler always performs as well as the best response memory-one strategy and often performs better. There are
+no points where the ratio value is less than 1, thus Gambler never performed less
+than the best response memory-one strategy and in places outperforms it.
+However, against two memory-one opponents Gambler's performance is better than
+the optimal memory-one strategy. This is evidence that in the case of multiple
+opponents, having a
+shorter memory is limiting.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=.5\textwidth]{img/gambler_performance_against_mem_one.pdf}
+    \caption{The ratio between the utilities of Gambler and best response memory-one
+    strategy for 152 different pair of opponents.}\label{fig:utilities_gambler_mem_one}
+    % TODO Nik: a legend for the lines or a description of the lines in the
+    % caption?
+\end{figure}
+
+\subsection{Dynamic best response player} %TODO check that this is a good title
+
+In several evolutionary settings
+such as Moran Processes self interactions are key. Previous work has
+identified interesting results such as the appearance of self recognition
+mechanisms when training strategies using evolutionary algorithms in Moran
+processes~\cite{Knight2018}. This aspect of reinforcement learning can be done for
+best response memory-one strategies, as presented in this manuscript, by incorporating the strategy itself in the
+objective function as shown in Eq.~\ref{eq:mo_tournament_optimisation}.
+\(K\) is the number of self interactions that will take place.
+
+\begin{equation}\label{eq:mo_evolutionary_optimisation}
+\begin{aligned}
+\max_p: & \ \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + Ku_p(p)
+\\
+\text{such that}: & \ p \in \R_{[0, 1]}
+\end{aligned}
+\end{equation}
+
+For determining the memory-one best response with self interactions, an
+algorithmic approach is considered, called \textit{best response dynamics}. The
+best response dynamics approach used in this manuscript is given by
+Algorithm~\ref{algo:best_response_dynamics}.
+
+\begin{center}
+\begin{minipage}{.55\textwidth}
+\begin{algorithm}[H]
+       $p^{(t)}\leftarrow (1, 1, 1, 1)$\;
+       \While{$p^{(t)} \neq p ^{(t -1)}$}{
+       $p^{(t + 1)} =  \text{argmax} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)}
+       (p^{(t)}) + Ku_{p^{(t)}}(p^{(t)})$\;
+       }
+       \caption{Best response dynamics Algorithm}
+       \label{algo:best_response_dynamics}
+\end{algorithm}
+\end{minipage}
+\end{center}
+
+In several evolutionary settings
+such as Moran Processes self interactions are key. Previous work has
+identified interesting results such as the appearance of self recognition
+mechanisms when training strategies using evolutionary algorithms in Moran
+processes~\cite{Knight2018}. This aspect of reinforcement learning can be done for
+best response memory-one strategies, as presented in this manuscript, by incorporating the strategy itself in the
+objective function as shown in Eq.~\ref{eq:mo_tournament_optimisation}.
+\(K\) is the number of self interactions that will take place.
+
+\begin{equation}\label{eq:mo_evolutionary_optimisation}
+\begin{aligned}
+\max_p: & \ \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + Ku_p(p)
+\\
+\text{such that}: & \ p \in \R_{[0, 1]}
+\end{aligned}
+\end{equation}
+
+For determining the memory-one best response with self interactions, an
+algorithmic approach is considered, called \textit{best response dynamics}. The
+best response dynamics approach used in this manuscript is given by
+Algorithm~\ref{algo:best_response_dynamics}.
+
+\begin{center}
+\begin{minipage}{.55\textwidth}
+\begin{algorithm}[H]
+       $p^{(t)}\leftarrow (1, 1, 1, 1)$\;
+       \While{$p^{(t)} \neq p ^{(t -1)}$}{
+       $p^{(t + 1)} =  \text{argmax} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)}
+       (p^{(t)}) + Ku_{p^{(t)}}(p^{(t)})$\;
+       }
+       \caption{Best response dynamics Algorithm}
+       \label{algo:best_response_dynamics}
+\end{algorithm}
+\end{minipage}
+\end{center}
+
 
 % TODO Discuss if this is the correct location
 To investigate the above findings more formally a Moran process will be
@@ -577,69 +679,6 @@ cases the dynamic strategy benefits from its ability to adapt.
     update as the population density changes.}\label{fig:dynamic_moran_process_results}
 \end{figure}
 
-\subsection{Limitations of memory size} %TODO check that this is a good title
-
-The other main finding presented in~\cite{Press20212} was that
-short memory of the strategies was all that was needed.
-We argue that the second limitation of ZDs in multi opponent
-interactions is that of their restricted memory.
-To demonstrate the effectiveness of memory in the IPD we explore a best response
-longer-memory strategy against a given set of memory-one opponents,  and compare
-it's performance to that of a memory-one best response.
-
-In~\cite{Harper2017}, a strategy called \textit{Gambler} which makes
-probabilistic decisions based on the opponent's \(n_1\) first moves, the
-opponent's \(m_1\) last moves and the player's \(m_2\) last moves was
-introduced. In this manuscript Gambler with parameters: $n_1 = 2, m_1 = 1$ and $m_2 = 1$ is used
-as a longer-memory strategy.
-By considering the opponent's first two moves, the opponents last move and the
-player's last move, there are only 16 $(4 \times 2 \times 2)$ possible outcomes
-that can occur, furthermore, Gambler also makes a probabilistic decision of
-cooperating in the opening move. Thus, Gambler is a function \(f: \{\text{C,
-D}\} \rightarrow [0, 1]_{\R}\). This can be hard coded as an element
-of \([0, 1]_{\R} ^ {16 + 1}\), one probability for each outcome plus the opening
-move. Hence, compared to Eq.~\ref{eq:mo_tournament_optimisation}, finding an
-optimal Gambler is a 17 dimensional problem given by:
-
-\begin{equation}\label{eq:gambler_optimisation}
-    \begin{aligned}
-    \max_p: & \ \sum_{i=1} ^ {N} {U_q}^{(i)} (f)
-    \\
-    \text{such that}: & \ f \in \R_{[0, 1]}^{17}
-    \end{aligned}
-\end{equation}
-
-Note that Eq. \ref{eq:tournament_utility} can not be used here for the utility
-of Gambler, and actual simulated players are used. This is done using~\cite{axelrodproject}
-with 500 turns and 200 repetitions, moreover, Eq. \ref{eq:gambler_optimisation}
-is solved numerically using Bayesian optimisation.
-
-Similarly to previous sections, a large data set has been generated with
-instances of an optimal Gambler and a memory-one best response, available
-at~\cite{glynatsi2019}. Estimating a best response Gambler (17 dimensions) is
-computational more expensive compared to a best response memory-one (4
-dimensions). As a result, the analysis of this section is based on a total of
-152 trials. As before, for each trial \(N=2\) random opponents have been selected.
-
-The ratio between Gambler's utility and the best response memory-one strategy's utility has been calculated and its distribution in
-given in Fig.~\ref{fig:utilities_gambler_mem_one}.
-It is evident from Fig.~\ref{fig:utilities_gambler_mem_one} that
-Gambler always performs as well as the best response memory-one strategy and often performs better. There are
-no points where the ratio value is less than 1, thus Gambler never performed less
-than the best response memory-one strategy and in places outperforms it.
-However, against two memory-one opponents Gambler's performance is better than
-the optimal memory-one strategy. This is evidence that in the case of multiple
-opponents, having a
-shorter memory is limiting.
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=.5\textwidth]{img/gambler_performance_against_mem_one.pdf}
-    \caption{The ratio between the utilities of Gambler and best response memory-one
-    strategy for 152 different pair of opponents.}\label{fig:utilities_gambler_mem_one}
-    % TODO Nik: a legend for the lines or a description of the lines in the
-    % caption?
-\end{figure}
 
 \section{Discussion}
 This manuscript has considered \textit{best response} strategies in the IPD game, and
