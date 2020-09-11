@@ -246,8 +246,9 @@ and restricted memory.
 
 \section{Results}\label{section:results}
 
-Here we define \textit{memory-one best response}
-strategies as a multi dimensional optimisation problem given by:
+The formulation as presented in Theorem~\ref{theorem_one} can be used to 
+define \textit{memory-one best response} strategies as a multi dimensional
+optimisation problem given by:
 
 \begin{equation}\label{eq:mo_tournament_optimisation}
     \begin{aligned}
@@ -336,7 +337,7 @@ such as Moran Processes self interactions are key. Previous work has
 identified interesting results such as the appearance of self recognition
 mechanisms when training strategies using evolutionary algorithms in Moran
 processes~\cite{Knight2018}. This aspect of reinforcement learning can be done for
-best response memory-one strategies by incorporating the strategy itself in the
+best response memory-one strategies, as presented in this manuscript, by incorporating the strategy itself in the
 objective function as shown in Eq.~\ref{eq:mo_tournament_optimisation}.
 \(K\) is the number of self interactions that will take place.
 
@@ -367,10 +368,7 @@ Algorithm~\ref{algo:best_response_dynamics}.
 \end{minipage}
 \end{center}
 
-Using this approach it would be possible to create a memory-one best response
-strategy that updates on every generation of a Moran process to recalculate the
-optimal behaviour given the population. This extension of the ``theory of mind''
-is an interesting avenue for future work.
+\subsection{Limitations of extortionate behaviour} %TODO check that this is a good title
 
 In multi opponent settings,
 where the payoffs matter, strategies trying to exploit their opponents will
@@ -500,6 +498,9 @@ occur.
     \label{fig:behaviour_violin_plots}
 \end{figure}
 
+
+\subsection{Dynamically evolutionarily player} %TODO check that this is a good title
+
 % TODO Discuss if this is the correct location
 To investigate the above findings more formally a Moran process will be
 considered. % TODO Add general reference text about Moran process.
@@ -575,6 +576,8 @@ cases the dynamic strategy benefits from its ability to adapt.
     player to the fixation probability of a best response player that does not
     update as the population density changes.}\label{fig:dynamic_moran_process_results}
 \end{figure}
+
+\subsection{Limitations of memory size} %TODO check that this is a good title
 
 The other main finding presented in~\cite{Press20212} was that
 short memory of the strategies was all that was needed.
