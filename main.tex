@@ -553,15 +553,15 @@ Algorithm~\ref{algo:best_response_dynamics}.
 \end{center}
 
 To investigate the effectiveness of this approach, more formally a Moran process
-will be considered. If a population of \(N\) total individuals of two types is
-considered, with \(K\) individuals of the first type and \(N-K\) of the second
+will be considered. If a population of \(n\) total individuals of two types is
+considered, with \(K\) individuals of the first type and \(n-K\) of the second
 type.
 The probability that the individuals of the first type will take over the
 population (the fixation probability) is denoted by \(x_K\) and is known to
 be~\cite{nowak2006evolutionary}:
 
 \[ x_K = \frac{ 1 + \sum_{j=1}^{K-1}\prod_{i=1}^j\gamma_i }{ 1 +
-\sum_{j=1}^{N-1}\prod_{i=1}^j\gamma_i } \]
+\sum_{j=1}^{n-1}\prod_{i=1}^j\gamma_i } \]
 
 where:
 
@@ -594,20 +594,20 @@ The matrix \(A ^ {(K)}\) is calculated using Eq.
 
 Using this, the total utilities/fitnesses for each player can be written down:
 
-\[f_1^{(K)} = (K - 1) A_{11}^{(K)} + (N - K)A_{12}^{(K)}\]
+\[f_1^{(K)} = (K - 1) A_{11}^{(K)} + (n - K)A_{12}^{(K)}\]
 
-\[f_2^{(K)} = (K) A_{21}^{(K)} + (N - K - 1)A_{22}^{(K)}\]
+\[f_2^{(K)} = (K) A_{21}^{(K)} + (n - K - 1)A_{22}^{(K)}\]
 
 where \(f_1^{(K)}\) is the fitness of the best response player, and \(f_2^{(K)}\) is
 the fitness of the opponent.
 
 Using this:
 
-\[ p_{K, K - 1} = \frac{ (N - K)f_2^{(K)} }{ Kf_1^{(K)}+(N - K)f_2^{(K)} } \frac{ K }{ N } \]
+\[ p_{K, K - 1} = \frac{ (n - K)f_2^{(K)} }{ Kf_1^{(K)}+(n - K)f_2^{(K)} } \frac{ K }{ n } \]
 
 and:
 
-\[ p_{K, K + 1} = \frac{ Kf_1^{(K)} }{ Kf_1^{(K)}+(N - K)f_2^{(K)} } \frac{ (N - K) }{ N } \]
+\[ p_{K, K + 1} = \frac{ Kf_1^{(K)} }{ Kf_1^{(K)}+(n - K)f_2^{(K)} } \frac{ (n - K) }{ n } \]
 
 which are all that are required to calculate \(x_K\).
 
