@@ -503,60 +503,60 @@ occur.
 % TODO Discuss if this is the correct location
 To investigate the above findings more formally a Moran process will be
 considered. % TODO Add general reference text about Moran process.
-In a population of \(N\) total individuals of two types, the probability that \(k\)
+In a population of \(N\) total individuals of two types, the probability that \(K\)
 individuals of a given type can take over the population, the fixation
-probability \(x_k\) is given by:
+probability \(x_K\) is given by:
 
-\[ x_k = \frac{ 1 + \sum_{j=1}^{k-1}\prod_{i=1}^j\gamma_i }{ 1 +
+\[ x_K = \frac{ 1 + \sum_{j=1}^{K-1}\prod_{i=1}^j\gamma_i }{ 1 +
 \sum_{j=1}^{N-1}\prod_{i=1}^j\gamma_i } \]
 
 where:
 
-\[ \gamma_i = \frac{ p_{k, k - 1} }{ p_{k, k + 1} }. \]
+\[ \gamma_i = \frac{ p_{K, K - 1} }{ p_{K, K + 1} }. \]
 
-In the case considered here \(k\) is the number of best response players in the
-population, so that \(N - k\) is the number of opponents.
+In the case considered here \(K\) is the number of best response players in the
+population, so that \(N - K\) is the number of opponents.
 
 The difference proposed here is to allow the best response player to act
 dynamically: adjusting their probability vector at every generation. In essence
 using the theory of mind to find the best response to not only the opponent but
 also the distribution of the population.
-Thus for every value of \(k\) there is a different best response player.
+Thus for every value of \(K\) there is a different best response player.
 
-In the case of the best response player the transition probabilities depend on the payoff matrix \(A ^ {(k)}\) where:
+In the case of the best response player the transition probabilities depend on the payoff matrix \(A ^ {(K)}\) where:
 
 \begin{itemize}
-\item \(A ^ {(k)}_{11}\) is the long run utility of the best response player against itself.
-\item \(A ^ {(k)}_{12}\) is the long run utility of the best response player against the opponent.
-\item \(A ^ {(k)}_{11}\) is the long run utility of the opponent against the best response player.
-\item \(A ^ {(k)}_{11}\) is the long run utility of the opponent against itself.
+\item \(A ^ {(K)}_{11}\) is the long run utility of the best response player against itself.
+\item \(A ^ {(K)}_{12}\) is the long run utility of the best response player against the opponent.
+\item \(A ^ {(K)}_{11}\) is the long run utility of the opponent against the best response player.
+\item \(A ^ {(K)}_{11}\) is the long run utility of the opponent against itself.
 \end{itemize}
 
-The matrix \(A ^ {(k)}\) is calculated using Eq. (\ref{eq:optimisation_quadratic})
-for each value of \(k\) once the best response dynamics algorithm has calculated
+The matrix \(A ^ {(K)}\) is calculated using Eq. (\ref{eq:optimisation_quadratic})
+for each value of \(K\) once the best response dynamics algorithm has calculated
 the best response player.
 
 Using this, the total utilities/fitnesses for each player can be written down:
 
-\[f_1^{(k)} = (k - 1) A_{11}^{(k)} + (N - k)A_{12}^{(k)}\]
+\[f_1^{(K)} = (K - 1) A_{11}^{(K)} + (N - K)A_{12}^{(K)}\]
 
-\[f_2^{(k)} = (k) A_{21}^{(k)} + (N - k - 1)A_{22}^{(k)}\]
+\[f_2^{(K)} = (K) A_{21}^{(K)} + (N - K - 1)A_{22}^{(K)}\]
 
-where \(f_1^{(k)}\) is the fitness of the best response player, and \(f_2^{(k)}\) is
+where \(f_1^{(K)}\) is the fitness of the best response player, and \(f_2^{(K)}\) is
 the fitness of the opponent.
 
 Using this:
 
-\[ p_{k, k - 1} = \frac{ (N - k)f_2^{(k)} }{ kf_1^{(k)}+(N - k)f_2^{(k)} } \frac{ k }{ N } \]
+\[ p_{K, K - 1} = \frac{ (N - K)f_2^{(K)} }{ Kf_1^{(K)}+(N - K)f_2^{(K)} } \frac{ K }{ N } \]
 
 and:
 
-\[ p_{k, k + 1} = \frac{ kf_1^{(k)} }{ kf_1^{(k)}+(N - k)f_2^{(k)} } \frac{ (N - k) }{ N } \]
+\[ p_{K, K + 1} = \frac{ Kf_1^{(K)} }{ Kf_1^{(K)}+(N - K)f_2^{(K)} } \frac{ (N - K) }{ N } \]
 
-which are all that are required to calculate \(x_k\).
+which are all that are required to calculate \(x_K\).
 
 Figure~\ref{fig:dynamic_moran_process_results} shows the results of an analysis
-of \(x_k\) for dynamically updating players. This is obtained over %TODO Add count of data points here
+of \(x_K\) for dynamically updating players. This is obtained over %TODO Add count of data points here
 data points. The ratio shows a relatively high performance compared to a non
 dynamic best response strategy the mean \(x_K\) over all values of \(K\) and all
 experiments is given by % TODO Add mean
