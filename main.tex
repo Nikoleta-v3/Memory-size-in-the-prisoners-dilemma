@@ -58,9 +58,9 @@ of extortion and restricted memory.}
 \begin{abstract}
     Memory-one strategies are a set of Iterated Prisoner's Dilemma strategies
     that have been praised for their mathematical tractability and performance
-    against single opponents. This manuscript investigates a theory of mind: \textit{best
-    response} memory-one strategies, as a multidimensional
-    optimisation problem. We add to the literature that has shown that
+    against single opponents. This manuscript investigates
+    \textit{best response} memory-one strategies with a theory of mind about
+    their opponents. Our results add to the literature that has shown that
     extortionate play is not always optimal by showing that optimal play is
     often not extortionate.
     We
@@ -113,26 +113,28 @@ interactions, however, their true effectiveness in tournaments and
 evolutionary dynamics has been questioned~\cite{adami2013, Hilbe2013b,
 Hilbe2013, Hilbe2015, Knight2018, Harper2015}.
 
-In~\cite{Press2012} the authors stated that ``Only a player with a theory of
-mind about his opponent can do better, in which case Iterated Prisoner's Dilemma
-is an Ultimatum Game''. The purpose of this work is to investigate the first
-part of this sentence, more specifically, to identify the best response strategy
-with a theory of mind of a given group of opponents. The outcomes of our work
-reinforce known results, namely that memory-one strategies must be forgiving to
-be evolutionarily stable~\cite{Stewart2013, Stewart2016} and that longer-memory
-strategies have a certain form of advantage over short memory
-strategies~\cite{Hilbe2017, Pan2015}.
+The purpose of this work is to reinforce the literature on the limitations of
+extortionate strategies by considering new approaches. More specifically, by
+considering best response memory-one strategies with a theory of mind about
+their opponents. There are several works in the literature that have considered
+strategies with a theory of mind~\cite{Han2011, Han2012, De2013, Devaine2014,
+Stewart2012, Press2012}. These works defined ``theory of mind'' as intention
+recognition~\cite{Han2011, Han2012, De2013, Devaine2014} and as the ability of a
+strategy to realise that their actions can influence
+opponents~\cite{Stewart2012}. Compared to these works, theory of mind is defined
+here as the ability of a strategy to know the behaviour of their opponents
+and alter their own behaviour in response to that.
 
-In particular, this work presents a closed form algebraic expression for the utility
-of a memory-one strategy against a given set of opponents, a compact method of
-identifying it's best response to that given set of opponents essentially: a theory
-of mind. The aim is
-to evaluate whether a best response memory-one strategy behaves in a
-zero-determinant way which in turn indicates whether it can be extortionate. We
-do this using a linear algebraic approach presented in~\cite{Knight2019}.
-This is done in tournaments with and without self interactions. Moreover, we
-introduce a framework that allows the comparison of an optimal
-memory-one strategy and an optimised strategy which has a larger memory.
+This work presents a closed form algebraic expression for the utility of a
+memory-one strategy against a given set of opponents, a compact method of
+identifying it's best response to that given set of opponents essentially: a
+theory of mind. The aim is to evaluate whether a best response memory-one
+strategy behaves in a zero-determinant way which in turn indicates whether it
+can be extortionate. We do this using a linear algebraic approach presented
+in~\cite{Knight2019}. This is done in tournaments with and without self
+interactions. Moreover, we introduce a framework that allows the comparison of
+an optimal memory-one strategy and an optimised strategy which has a larger
+memory.
 
 To illustrate the analytical results obtained in this manuscript a number of
 numerical experiments are run. The source code for these experiments has been
