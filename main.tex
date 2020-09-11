@@ -621,7 +621,8 @@ As well as recording \(x_K\), \(\tilde x_K\) is measured where \(\tilde
 x_K\) represents the fixation probability of the best response player
 calculated for a given \(K\) but not allowing it to dynamically update as the
 population changes. The ratio \(\frac{x_K}{\tilde x_K}\) is included in the
-Figure.
+Figure. This is done to be able to compare to a high performing strategy that
+has a theory of mind of the opponent but not of the population density.
 The ratio shows a relatively high performance compared to a non
 dynamic best response strategy. The mean ratio over all values of \(K\) and all
 experiments is given by % TODO Add mean 
@@ -709,30 +710,29 @@ in Fig.~\ref{fig:stability_of_defection}.
     source research framework for the study of the IPD.}\label{fig:stability_of_defection}
 \end{figure}
 
-The empirical results have shown that the performance and the evolutionary
-stability of memory-one strategies rely on adaptability and not on extortion,
+The empirical results have shown that the performance of memory-one strategies rely on adaptability and not on extortion,
 and that memory-one strategies' performance is limited by their memory in cases
 where they interact with multiple opponents.
 
 These results were mainly to investigate the
 behaviour of memory-one strategies and their limitations. A large data set which
-contained best responses in tournaments whilst including or not self
-interactions for \(N=2\)
-was generated and is archived in~\cite{glynatsi2019}. This allowed us to investigate their respective behaviours, and
+contained best responses in tournaments for \(N=2\)
+was generated and is archived in~\cite{glynatsi2019}. This allowed us to investigate their behaviours, and
 whether it was extortionate acts that made them the most favorable strategies.
 It was shown that it was not extortion but adaptability that allowed
-the strategies to gain the most from their interactions. In settings with self interactions
-there
-is some evidence that it is more likely to forgive after being tricked.
+the strategies to gain the most from their interactions.
 
-All the empirical results presented in this manuscript have been for the case of
-$N=2$. In future work we would consider larger values of $N$, however, we
-believe that for larger values of $N$ the results that have been presented here
+A further set of results for Moran processes with a dynamically updating best
+response player was generated and is archived in~\cite{}. % TODO Archive
+This confirmed the previous results which is that high performance
+requires adaptability and not extortion. It also provides a framework for future
+stability of optimal behaviour in evolutionary settings.
+
+In future work we would consider larger number of opponents, however, we
+believe that the results that have been presented here
 would only be more evident. In addition, we would investigate potential
 theoretical results for the best responses dynamics algorithm
-discussed. Another interesting avenue would be to study the Moran process with a
-dynamically updating best response.
-% TODO We need to update this (as it has now been done).
+discussed.
 
 By specifically exploring the entire space of memory-one strategies to identify
 the best strategy for a variety of situations, this work adds to the literature
