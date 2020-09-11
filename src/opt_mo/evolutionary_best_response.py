@@ -1,7 +1,8 @@
 import numpy as np
+import opt_mo
 
 
-def get_repeat_length_in_history(history, tol=10 ** -5):
+def get_repeat_cycle_and_length(history, tol=10 ** -5):
     """
     Find any repeat of last moves in history. Including repeats of just one element 
     (so this can be used to check simple convergence as well as "cyclic convergence").
@@ -18,8 +19,8 @@ def get_repeat_length_in_history(history, tol=10 ** -5):
             history[-2 * cycle_size : -cycle_size],
             atol=tol,
         ):
-            return len(history[-cycle_size:])
-    return float("inf")
+            return history[-cycle_size:], len(history[-cycle_size:])
+    return None, float("inf")
 
 
 def get_evolutionary_best_response(
@@ -27,18 +28,32 @@ def get_evolutionary_best_response(
     best_response_function,
     tol=10 ** -5,
     initial=np.array([1, 1, 1, 1]),
+    K=1,
 ):
+    """
+    This implements the best response dynamics algorithm (Algorithm 1) in the
+    manuscript.
+
+    Given a set of opponents it repeatedly finds the best response to the
+    opponents including a `K` self interactions.
+    """
 
     history = [initial]
-    best_response = best_response_function(opponents + history)
+    best_response = best_response_function(opponents + history * K)
     history.append(best_response)
 
-    repeat_length = get_repeat_length_in_history(history, tol=tol)
+    _, repeat_length = get_repeat_cycle_and_length(history, tol=tol)
     while repeat_length >= float("inf"):
 
-        best_response = best_response_function(opponents + [history[-1]])
+        best_response = best_response_function(opponents + [history[-1]] * K)
         print("Next generation.")
         history.append(best_response)
-        repeat_length = get_repeat_length_in_history(history, tol=tol)
+        cycle, repeat_length = get_repeat_cycle_and_length(history, tol=tol)
 
+    utilities = [
+        opt_mo.tournament_utility(player, opponents + [player] * K)
+        for player in cycle
+    ]
+
+    best_response = cycle[utilities.index(np.nanmax(utilities))]
     return best_response, history, repeat_length
