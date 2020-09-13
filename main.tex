@@ -346,7 +346,7 @@ The results of this section use Bayesian optimisation to generate a data set of 
 memory-one strategies for \(N=2\) opponents.
 The data set is available at~\cite{glynatsi2019}. It contains a total of 1000 trials
 corresponding to 1000 different instances of a best response strategy in
-tournaments with and without self interactions. For each trial a set of 2 opponents is
+tournaments with \(N=2\). For each trial a set of 2 opponents is
 randomly generated and the memory-one best response against them is found.
 In order to investigate whether best responses
 behave in an extortionate matter the SSE method described in ~\cite{Knight2019} is used. More
@@ -383,72 +383,37 @@ of prediction (SSE):
 
 Thus, SSE is defined as how far a strategy is from behaving as a ZD. A
 high SSE implies a non extortionate behaviour.
-The distributions of SSE for the best response in tournaments
-(\(N=2\)) with and without self interactions (with \(K=1\)) are given in
+The distribution of SSE for the best response in tournaments
+(\(N=2\)) is given in
 Figure~\ref{fig:sse_distributions}. Moreover, a statistical summary of the SSE
-distributions is given in Table~\ref{table:sserror_stats}.
+distribution is given in Table~\ref{table:sserror_stats}.
 
 \begin{table}[!htbp]
     \begin{center}
-    \resizebox{.8\columnwidth}{!}{%
+    \resizebox{.65\columnwidth}{!}{%
     \begin{tabular}{lrrrrrrrrrrr}
-        \toprule
-        & mean & std  & 5\% & 50\% &  95\% & max & median & skew & kurt\\
-        \midrule
-    \textbf{Tournament without self interactions} & 0.34  & 0.40  & 0.028  & 0.17  &
-    1.05  & 2.47  & 0.17  & 1.87 & 3.60 \\
-    \textbf{Tournament with self interactions} & 0.17 & 0.23 & 0.01 &
-    0.12 & 0.67 & 1.53 & 0.12 & 3.42 & 1.92 \\
-        \bottomrule
+    \toprule
+    mean & std  & 5\% & 50\% &  95\% & max & median & skew & kurt\\
+    \midrule
+    0.34  & 0.40  & 0.028  & 0.17  & 1.05  & 2.47  & 0.17  & 1.87 & 3.60 \\
     \end{tabular}}
     \end{center}
     \caption{SSE of best response memory-one when \(N=2\)}\label{table:sserror_stats}
 \end{table}
 
 \begin{figure}[!htbp]
-    \begin{subfigure}{0.47\textwidth}
-        \begin{center}
-            \includegraphics[width=\linewidth]{img/best_respones_sserror.pdf}
-        \end{center}
-        \caption{SEE distribution for best response in tournaments without self interactions.}
-    \end{subfigure}\hfill
-    \begin{subfigure}{0.47\textwidth}
-        \begin{center}
-            \includegraphics[width=\linewidth]{img/evo_sserror.pdf}
-        \end{center}
-        \caption{SEE distribution for best response in tournaments with self interactions.}
-    \end{subfigure}
-    \caption{SEE distributions for best response in tournaments without and with self interactions.}\label{fig:sse_distributions}
+    \begin{center}
+        \includegraphics[width=.65\linewidth]{img/best_respones_sserror.pdf}
+    \end{center}
+    \caption{SEE distribution for best response in tournaments without self interactions.}\label{fig:sse_distributions}
 \end{figure}
 
-For the best response in tournaments that do not include self interactions the
+For the best response in tournaments with \(N=2\) the
 distribution of SSE is skewed to the left, indicating that the best response
 does exhibit ZDs behaviour and so could be extortionate, however, the best
 response is not uniformly a ZDs. A positive measure of skewness and kurtosis,
 and a mean of 0.34 indicate a heavy tail to the right. Therefore, in several
 cases the strategy is not trying to extort its opponents.
-
-The difference between best responses in tournaments without and with self interactions
-is further explored by Fig.~\ref{fig:behaviour_violin_plots}.
-Though, no statistically significant differences have been found, from
-Fig.~\ref{fig:behaviour_violin_plots}, it seems that the best
-response that incorporate self interactions has a higher median $p_2$; which corresponds to the probability of cooperating
-after receiving a defection. Thus, they are more likely to forgive after
-being tricked. This is due to the fact that they could be playing against
-themselves, and they need to be able to forgive so that future cooperation can
-occur.
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=.9\textwidth]{img/behaviour_violin_plots.pdf}
-    \caption{Distributions of \(p^*\) for best responses in tournaments and
-    evolutionary settings. The medians, denoted as \(\bar{p}^*\), for tournaments
-    are \(\bar{p}^* = (0, 0, 0, 0)\), and for evolutionary settings
-    \(\bar{p}^* = (0, 0.19, 0, 0)\).}
-    \label{fig:behaviour_violin_plots}
-\end{figure}
-% TODO Remove self interactions results. There are no longer needed as we have
-% the Moran process results
 
 \subsection{Limitations of memory size} %TODO check that this is a good title
 
