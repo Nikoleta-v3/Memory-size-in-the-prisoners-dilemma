@@ -246,8 +246,9 @@ and restricted memory.
 
 \section{Results}\label{section:results}
 
-Here we define \textit{memory-one best response}
-strategies as a multi dimensional optimisation problem given by:
+The formulation as presented in Theorem~\ref{theorem_one} can be used to
+define \textit{memory-one best response} strategies as a multi dimensional
+optimisation problem given by:
 
 \begin{equation}\label{eq:mo_tournament_optimisation}
     \begin{aligned}
@@ -275,11 +276,11 @@ Theorem~\ref{memone_group_best_response}.
     The optimal behaviour of a memory-one strategy player \(p^* \in \R_{[0, 1]} ^
     4\) against a set of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
     for \(q^{(i)} \in \R_{[0, 1]} ^ 4\) is given by:
-    
+
     \[p^* = \textnormal{argmax}\sum\limits_{i=1} ^ N  u_q(p), \ p \in S_q.\]
-    
+
     The set \(S_q\) is defined as all the possible combinations of:
-    
+
     {\scriptsize
     \begin{equation}\label{eq:s_q_set}
         S_q =
@@ -295,10 +296,10 @@ Theorem~\ref{memone_group_best_response}.
         \right\}.
     \end{equation}
     }
-    
+
     Note that there is no immediate way to find the zeros of \(\frac{d}{dp}
     \sum\limits_{i=1} ^ N  u_q(p)\) where,
-    
+
     {\scriptsize
     \begin{align}\label{eq:mo_tournament_derivative}
         \frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) & = \displaystyle\sum\limits_{i=1} ^ {N}
@@ -308,9 +309,9 @@ Theorem~\ref{memone_group_best_response}.
         {\left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)^ 2}
     \end{align}
     }
-    
+
     For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
-    
+
     {\scriptsize
     \begin{align}\label{eq:polynomials_roots}
         \displaystyle\sum\limits_{i=1} ^ {N}
@@ -319,7 +320,7 @@ Theorem~\ref{memone_group_best_response}.
         & = 0, \quad {while} \\
         \displaystyle\sum\limits_{i=1} ^ {N} \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)} & \neq 0.
     \end{align}}
-    
+
 \end{theorem}
 
 The proof of Theorem~\ref{memone_group_best_response} is given in
@@ -331,46 +332,7 @@ becomes intractable. As a result, best responses will be estimated
 heuristically using a numerical method, suitable for problems with local optima,
 called Bayesian optimisation~\cite{Mokus1978}.
 
-In several evolutionary settings
-such as Moran Processes self interactions are key. Previous work has
-identified interesting results such as the appearance of self recognition
-mechanisms when training strategies using evolutionary algorithms in Moran
-processes~\cite{Knight2018}. This aspect of reinforcement learning can be done for
-best response memory-one strategies by incorporating the strategy itself in the
-objective function as shown in Eq.~\ref{eq:mo_tournament_optimisation}.
-\(K\) is the number of self interactions that will take place.
-
-\begin{equation}\label{eq:mo_evolutionary_optimisation}
-\begin{aligned}
-\max_p: & \ \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + Ku_p(p)
-\\
-\text{such that}: & \ p \in \R_{[0, 1]}
-\end{aligned}
-\end{equation}
-
-For determining the memory-one best response with self interactions, an
-algorithmic approach is considered, called \textit{best response dynamics}. The
-best response dynamics approach used in this manuscript is given by
-Algorithm~\ref{algo:best_response_dynamics}.
-
-\begin{center}
-\begin{minipage}{.55\textwidth}
-\begin{algorithm}[H]
-       $p^{(t)}\leftarrow (1, 1, 1, 1)$\;
-       \While{$p^{(t)} \neq p ^{(t -1)}$}{
-       $p^{(t + 1)} =  \text{argmax} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)}
-       (p^{(t)}) + Ku_{p^{(t)}}(p^{(t)})$\;
-       }
-       \caption{Best response dynamics Algorithm}
-       \label{algo:best_response_dynamics}
-\end{algorithm}
-\end{minipage}
-\end{center}
-
-Using this approach it would be possible to create a memory-one best response
-strategy that updates on every generation of a Moran process to recalculate the
-optimal behaviour given the population. This extension of the ``theory of mind''
-is an interesting avenue for future work.
+\subsection{Limitations of extortionate behaviour} %TODO check that this is a good title
 
 In multi opponent settings,
 where the payoffs matter, strategies trying to exploit their opponents will
@@ -384,7 +346,7 @@ The results of this section use Bayesian optimisation to generate a data set of 
 memory-one strategies for \(N=2\) opponents.
 The data set is available at~\cite{glynatsi2019}. It contains a total of 1000 trials
 corresponding to 1000 different instances of a best response strategy in
-tournaments with and without self interactions. For each trial a set of 2 opponents is
+tournaments with \(N=2\). For each trial a set of 2 opponents is
 randomly generated and the memory-one best response against them is found.
 In order to investigate whether best responses
 behave in an extortionate matter the SSE method described in ~\cite{Knight2019} is used. More
@@ -421,86 +383,41 @@ of prediction (SSE):
 
 Thus, SSE is defined as how far a strategy is from behaving as a ZD. A
 high SSE implies a non extortionate behaviour.
-The distributions of SSE for the best response in tournaments
-(\(N=2\)) with and without self interactions (with \(K=1\)) are given in
+The distribution of SSE for the best response in tournaments
+(\(N=2\)) is given in
 Figure~\ref{fig:sse_distributions}. Moreover, a statistical summary of the SSE
-distributions is given in Table~\ref{table:sserror_stats}.
+distribution is given in Table~\ref{table:sserror_stats}.
 
 \begin{table}[!htbp]
     \begin{center}
-    \resizebox{.8\columnwidth}{!}{%
+    \resizebox{.65\columnwidth}{!}{%
     \begin{tabular}{lrrrrrrrrrrr}
-        \toprule
-        & mean & std  & 5\% & 50\% &  95\% & max & median & skew & kurt\\
-        \midrule
-    \textbf{Tournament without self interactions} & 0.34  & 0.40  & 0.028  & 0.17  &
-    1.05  & 2.47  & 0.17  & 1.87 & 3.60 \\
-    \textbf{Tournament with self interactions} & 0.17 & 0.23 & 0.01 &
-    0.12 & 0.67 & 1.53 & 0.12 & 3.42 & 1.92 \\
-        \bottomrule
+    \toprule
+    mean & std  & 5\% & 50\% &  95\% & max & median & skew & kurt\\
+    \midrule
+    0.34  & 0.40  & 0.028  & 0.17  & 1.05  & 2.47  & 0.17  & 1.87 & 3.60 \\
     \end{tabular}}
     \end{center}
     \caption{SSE of best response memory-one when \(N=2\)}\label{table:sserror_stats}
 \end{table}
 
 \begin{figure}[!htbp]
-    \begin{subfigure}{0.47\textwidth}
-        \begin{center}
-            \includegraphics[width=\linewidth]{img/best_respones_sserror.pdf}
-        \end{center}
-        \caption{SEE distribution for best response in tournaments without self interactions.}
-    \end{subfigure}\hfill
-    \begin{subfigure}{0.47\textwidth}
-        \begin{center}
-            \includegraphics[width=\linewidth]{img/evo_sserror.pdf}
-        \end{center}
-        \caption{SEE distribution for best response in tournaments with self interactions.}
-    \end{subfigure}
-    \caption{SEE distributions for best response in tournaments without and with self interactions.}\label{fig:sse_distributions}
+    \begin{center}
+        \includegraphics[width=.65\linewidth]{img/best_respones_sserror.pdf}
+    \end{center}
+    \caption{SEE distribution for best response in tournaments without self interactions.}\label{fig:sse_distributions}
 \end{figure}
 
-For the best response in tournaments that do not include self interactions the
+For the best response in tournaments with \(N=2\) the
 distribution of SSE is skewed to the left, indicating that the best response
 does exhibit ZDs behaviour and so could be extortionate, however, the best
 response is not uniformly a ZDs. A positive measure of skewness and kurtosis,
 and a mean of 0.34 indicate a heavy tail to the right. Therefore, in several
 cases the strategy is not trying to extort its opponents.
-In~\cite{Hilbe2018} a similar behaviour is refereed to as the \textit{partner
-strategy}. The partner
-strategy aims to share the payoff for mutual cooperation, but it is ready
-to fight back when being exploited. The partner strategy was designed, but the
-best responses which are defined by their opponents seem to exhibit the same
-behaviour.
 
-Similarly, when considering self interactions, the distribution of SSE for the best
-response strategy has skewness and kurtosis that indicate a heavy tail to the
-right. This indicates that evolutionary stable memory-one strategies need to
-more adaptable than a ZDs, and aim for mutual cooperation as well as
-exploitation which is in line with the results of \cite{Hilbe2018} where their
-strategy was designed to adapt and was shown to be evolutionary stable. The
-findings of this work show that an optimal strategy acts in the same way.
+\subsection{Limitations of memory size} %TODO check that this is a good title
 
-The difference between best responses in tournaments without and with self interactions
-is further explored by Fig.~\ref{fig:behaviour_violin_plots}.
-Though, no statistically significant differences have been found, from
-Fig.~\ref{fig:behaviour_violin_plots}, it seems that the best
-response that incorporate self interactions has a higher median $p_2$; which corresponds to the probability of cooperating
-after receiving a defection. Thus, they are more likely to forgive after
-being tricked. This is due to the fact that they could be playing against
-themselves, and they need to be able to forgive so that future cooperation can
-occur.
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=.9\textwidth]{img/behaviour_violin_plots.pdf}
-    \caption{Distributions of \(p^*\) for best responses in tournaments and
-    evolutionary settings. The medians, denoted as \(\bar{p}^*\), for tournaments
-    are \(\bar{p}^* = (0, 0, 0, 0)\), and for evolutionary settings
-    \(\bar{p}^* = (0, 0.19, 0, 0)\).}
-    \label{fig:behaviour_violin_plots}
-\end{figure}
-
-The other main finding presented in~\cite{Press20212} was that
+The other main finding presented in~\cite{Press2012} was that
 short memory of the strategies was all that was needed.
 We argue that the second limitation of ZDs in multi opponent
 interactions is that of their restricted memory.
@@ -562,7 +479,144 @@ shorter memory is limiting.
     % caption?
 \end{figure}
 
+\subsection{Dynamic best response player} %TODO check that this is a good title
+
+In several evolutionary settings
+such as Moran Processes self interactions are key. Previous work has
+identified interesting results such as the appearance of self recognition
+mechanisms when training strategies using evolutionary algorithms in Moran
+processes~\cite{Knight2018}. This aspect of reinforcement learning can be done for
+best response memory-one strategies, as presented in this manuscript, by incorporating the strategy itself in the
+objective function as shown in Eq.~\ref{eq:mo_tournament_optimisation}.
+Where \(K\) is the number of self interactions that will take place.
+
+\begin{equation}\label{eq:mo_evolutionary_optimisation}
+\begin{aligned}
+\max_p: & \ \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) + Ku_p(p)
+\\
+\text{such that}: & \ p \in \R_{[0, 1]}
+\end{aligned}
+\end{equation}
+
+For determining the memory-one best response with self interactions, an
+algorithmic approach called \textit{best response dynamics} is proposed. The
+best response dynamics approach used in this manuscript is given by
+Algorithm~\ref{algo:best_response_dynamics}.
+
+\begin{center}
+\begin{minipage}{.55\textwidth}
+\begin{algorithm}[H]
+       $p^{(t)}\leftarrow (1, 1, 1, 1)$\;
+       \While{$p^{(t)} \neq p ^{(t -1)}$}{
+       $p^{(t + 1)} =  \text{argmax} \frac{1}{N} \sum\limits_{i=1} ^ {N} {u_q}^{(i)}
+       (p^{(t)}) + Ku_{p^{(t)}}(p^{(t)})$\;
+       }
+       \caption{Best response dynamics Algorithm}
+       \label{algo:best_response_dynamics}
+\end{algorithm}
+\end{minipage}
+\end{center}
+
+To investigate the effectiveness of this approach, more formally a Moran process
+will be considered. If a population of \(n\) total individuals of two types is
+considered, with \(K\) individuals of the first type and \(n-K\) of the second
+type.
+The probability that the individuals of the first type will take over the
+population (the fixation probability) is denoted by \(x_K\) and is known to
+be~\cite{nowak2006evolutionary}:
+
+\[ x_K = \frac{ 1 + \sum_{j=1}^{K-1}\prod_{i=1}^j\gamma_i }{ 1 +
+\sum_{j=1}^{n-1}\prod_{i=1}^j\gamma_i } \]
+
+where:
+
+\[ \gamma_i = \frac{ p_{K, K - 1} }{ p_{K, K + 1} }. \]
+
+To evaluate the formulation proposed here the best response player (taken to be
+the first type of individual in our population)  will be allowed to act
+dynamically: adjusting their probability vector at every generation. In essence
+using the theory of mind to find the best response to not only the opponent but
+also the distribution of the population.  Thus for every value of \(K\) there is
+a different best response player.
+
+Considering the dynamic best response player as a vector
+\(p\in\mathbb{R}^4_{[0, 1]}\) and the opponent as a vector
+\(q\in\mathbb{R}^4_{[0, 1]}\).
+In the case of the best response player the transition probabilities depend on
+the payoff matrix \(A ^ {(K)}\) where:
+
+\begin{itemize}
+    \item \(A ^ {(K)}_{11}=u_{p}(p)\) is the long run utility of the best response player against itself.
+    \item \(A ^ {(K)}_{12}=u_{q}(p)\) is the long run utility of the best response player against the opponent.
+    \item \(A ^ {(K)}_{11}=u_{p}(q)\) is the long run utility of the opponent against the best response player.
+    \item \(A ^ {(K)}_{11}=u_{q}(q)\) is the long run utility of the opponent against itself.
+\end{itemize}
+
+For every value of \(K\) the best response dynamics algorithm is used to
+calculate the best response player.
+The matrix \(A ^ {(K)}\) is calculated using Eq.
+(\ref{eq:optimisation_quadratic}).
+
+Using this, the total utilities/fitnesses for each player can be written down:
+
+\[f_1^{(K)} = (K - 1) A_{11}^{(K)} + (n - K)A_{12}^{(K)}\]
+
+\[f_2^{(K)} = (K) A_{21}^{(K)} + (n - K - 1)A_{22}^{(K)}\]
+
+where \(f_1^{(K)}\) is the fitness of the best response player, and \(f_2^{(K)}\) is
+the fitness of the opponent.
+
+Using this:
+
+\[ p_{K, K - 1} = \frac{ (n - K)f_2^{(K)} }{ Kf_1^{(K)}+(n - K)f_2^{(K)} } \frac{ K }{ n } \]
+
+and:
+
+\[ p_{K, K + 1} = \frac{ Kf_1^{(K)} }{ Kf_1^{(K)}+(n - K)f_2^{(K)} } \frac{ (n - K) }{ n } \]
+
+which are all that are required to calculate \(x_K\).
+
+Figure~\ref{fig:dynamic_moran_process_results} shows the results of an analysis
+of \(x_K\) for dynamically updating players. 
+This is obtained over % TODO Count moran processes
+Moran process against randomly selected opponents.
+For each Moran process the fixation probabilities for \(K\in\{1, 2, 3\}\) are
+collected.
+As well as recording \(x_K\), \(\tilde x_K\) is measured where \(\tilde
+x_K\) represents the fixation probability of the best response player
+calculated for a given \(K\) but not allowing it to dynamically update as the
+population changes. The ratio \(\frac{x_K}{\tilde x_K}\) is included in the
+Figure. This is done to be able to compare to a high performing strategy that
+has a theory of mind of the opponent but not of the population density.
+The ratio shows a relatively high performance compared to a non
+dynamic best response strategy. The mean ratio over all values of \(K\) and all
+experiments is given by % TODO Add mean 
+. In some cases this dynamic updating results in a 25\% increase in the
+absorption probability.
+
+As denoted before it is clear that the best response strategy does not have a
+low SSE % TODO Make sure we're using consistent language here and reference
+        % section
+this is further compounded by the ratio being above one showing that in many
+cases the dynamic strategy benefits from its ability to adapt.
+This indicates that memory-one strategies that perform well in Moran processes need to
+more adaptable than a ZDs, and aim for mutual cooperation as well as
+exploitation which is in line with the results of \cite{Hilbe2018} where their
+strategy was designed to adapt and was shown to be evolutionary stable. The
+findings of this work show that an optimal strategy acts in the same way.
+
+\begin{figure}[!hbtp]
+    \centering
+    \includegraphics[width=.9\textwidth]{img/dynamic_moran_process_results/main.pdf}
+    \caption{Results for the best response player in a dynamic Moran process.
+    The ratio is taken as the ratio of \(x_k\) of the dynamically updating
+    player to the fixation probability of a best response player that does not
+    update as the population density changes.}\label{fig:dynamic_moran_process_results}
+\end{figure}
+
+
 \section{Discussion}
+
 This manuscript has considered \textit{best response} strategies in the IPD game, and
 more specifically, \textit{memory-one best responses}. It has proven that:
 
@@ -621,29 +675,29 @@ in Fig.~\ref{fig:stability_of_defection}.
     source research framework for the study of the IPD.}\label{fig:stability_of_defection}
 \end{figure}
 
-The empirical results have shown that the performance and the evolutionary
-stability of memory-one strategies rely on adaptability and not on extortion,
+The empirical results have shown that the performance of memory-one strategies rely on adaptability and not on extortion,
 and that memory-one strategies' performance is limited by their memory in cases
 where they interact with multiple opponents.
 
 These results were mainly to investigate the
 behaviour of memory-one strategies and their limitations. A large data set which
-contained best responses in tournaments whilst including or not self
-interactions for \(N=2\)
-was generated and is archived in~\cite{glynatsi2019}. This allowed us to investigate their respective behaviours, and
+contained best responses in tournaments for \(N=2\)
+was generated and is archived in~\cite{glynatsi2019}. This allowed us to investigate their behaviours, and
 whether it was extortionate acts that made them the most favorable strategies.
 It was shown that it was not extortion but adaptability that allowed
-the strategies to gain the most from their interactions. In settings with self interactions
-there
-is some evidence that it is more likely to forgive after being tricked.
+the strategies to gain the most from their interactions.
 
-All the empirical results presented in this manuscript have been for the case of
-$N=2$. In future work we would consider larger values of $N$, however, we
-believe that for larger values of $N$ the results that have been presented here
+A further set of results for Moran processes with a dynamically updating best
+response player was generated and is archived in~\cite{}. % TODO Archive
+This confirmed the previous results which is that high performance
+requires adaptability and not extortion. It also provides a framework for future
+stability of optimal behaviour in evolutionary settings.
+
+In future work we would consider larger number of opponents, however, we
+believe that the results that have been presented here
 would only be more evident. In addition, we would investigate potential
 theoretical results for the best responses dynamics algorithm
-discussed. Another interesting avenue would be to study the Moran process with a
-dynamically updating best response.
+discussed.
 
 By specifically exploring the entire space of memory-one strategies to identify
 the best strategy for a variety of situations, this work adds to the literature
