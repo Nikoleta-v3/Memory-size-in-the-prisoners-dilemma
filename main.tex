@@ -1069,4 +1069,56 @@ A numerical simulation demonstrating the result is given in Fig.~\ref{fig:stabil
     source research framework for the study of the IPD.}\label{fig:stability_of_defection}
 \end{figure}
 
+\subsection{Best response memory-one strategy in environments with noise}
+
+Noise or error (in implementing a move, e.g. due to trembling hand or fuzzy
+mind) is a crucial aspect in the context of the IPD. Given that noise is
+unavoidable in real-world applications of the IPD, it’s therefore important
+to take them into account.
+
+Noise is the probability \(p_n\) that an error occured in a players actions,
+thus the players \(p\) and \(q\) are now given by:
+
+\[p = (p_1 (1 - p_n), p_2 (1 - p_n), p_3 (1 - p_n), p_4 (1 - p_n))\]
+
+and 
+
+\[q = (q_1 (1 - p_n), q_2 (1 - p_n), q_3 (1 - p_n), q_4 (1 - p_n))\]
+
+and the utility \(u_q(p)\) in an environment with noise is given by:
+
+\begin{equation}\label{eq:utility_with_noise}
+    u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
+                {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}},
+\end{equation}
+where \(Q, \bar{Q}\) \(\in \R^{4\times4}\) are square matrices defined by the
+transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
+
+\begin{center}
+\begin{equation*}
+\resizebox{\linewidth}{!}{\arraycolsep=2.5pt%
+\boldmath\(
+Q = \input{tex/q_numerator_with_noise}\)},
+\end{equation*}
+\begin{equation*}\label{eq:q_bar_matrix}
+\resizebox{\linewidth}{!}{\arraycolsep=2.5pt%
+\boldmath\(
+\bar{Q} =  \input{tex/q_denominator_with_noise}\)}.
+\end{equation*}
+\end{center}
+
+\(c \text{ and } \bar{c}\) \(\in \R^{4 \times 1}\) are similarly defined by:
+
+\begin{equation}\label{eq:q_matrix_numerator}
+\resizebox{0.7\linewidth}{!}{\arraycolsep=2.5pt%
+\boldmath\(c = \input{tex/c_numerator_with_noise}\),}
+\end{equation}
+\begin{equation}\label{eq:q_matrix_denominator}
+\resizebox{0.4\linewidth}{!}{\arraycolsep=2.5pt%
+\boldmath\(\bar{c} = \input{tex/c_denominator_with_noise}\),
+}
+\end{equation}
+and the constant terms \(a, \bar{a}\) are defined as \(a = \input{tex/numerator_constant_with_noise}\) and
+\(\bar{a} = \input{tex/denominator_constant_with_noise}\).
+
 \end{document}
