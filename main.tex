@@ -67,6 +67,11 @@ of extortion and restricted memory.}
     also provide evidence that memory-one strategies suffer from their limited
     memory in multi agent interactions and can be out performed by
     optimised strategies with longer memory.
+    We have developed a theory that has allowed to explore the the entire
+    space of memory-one strategies. The frame work presented in suitable to
+    study memory-one strategies in the inifite Prisoner's Dilemma, but to also
+    study evolutionary processes such as Moran process, the Prisoner's Dilemma
+    with noise and the stability of defection in populations of memory-one strategies.
 \end{abstract}
 
 The Prisoner's Dilemma (PD) is a two player game used in understanding the
@@ -415,7 +420,8 @@ distribution of SSE is skewed to the left, indicating that the best response
 does exhibit ZDs behaviour and so could be extortionate, however, the best
 response is not uniformly a ZDs. A positive measure of skewness and kurtosis,
 and a mean of 0.34 indicate a heavy tail to the right. Therefore, in several
-cases the strategy is not trying to extort its opponents.
+cases the strategy is not trying to extort its opponents. This exhibit that
+the best response strategy's behaviour is more adaptable than that of a ZDs.
 
 \subsection{Limitations of memory size}
 
@@ -629,22 +635,20 @@ more specifically, \textit{memory-one best responses}. It has proven that:
         (Theorem~\ref{memone_group_best_response}).
 \end{itemize}
 
-Note that Theorem~\ref{memone_group_best_response} which does not only have game theoretic
-novelty, but also the mathematical novelty of solving quadratic ratio optimisation
-problems where the quadratics are non concave.
+Theorem~\ref{theorem_one} has to a further theoretical result of identifying
+environments for which cooperation cannot occur (Details are in the
+Appendix\ref{appendix:stability_of_defection}). Moreover,
+Theorem~\ref{memone_group_best_response} does not only have game theoretic
+novelty, but also the mathematical novelty of solving quadratic ratio
+optimisation problems where the quadratics are non concave.
 
-The empirical results have shown that the performance and the evolutionary
-stability of memory-one strategies rely on adaptability and not on extortion,
+The empirical results of the manuscript investigated the behaviour of memory-one
+strategies and their limitations. The empirical results have shown that the
+performance of memory-one strategies rely on adaptability and not on extortion,
 and that memory-one strategies' performance is limited by their memory in cases
-where they interact with multiple opponents.
-
-These results were mainly to investigate the
-behaviour of memory-one strategies and their limitations. A large data set which
-contained best responses in tournaments for \(N=2\)
-was generated and is archived in~\cite{glynatsi2019}. This allowed us to investigate their behaviours, and
-whether it was extortionate acts that made them the most favorable strategies.
-It was shown that it was not extortion but adaptability that allowed
-the strategies to gain the most from their interactions.
+where they interact with multiple opponents. These relied on two bespoke
+data sets of 1000 and 152 pairs of memory-one opponents equivalently, archived
+at~\cite{glynatsi2019}.
 
 A further set of results for Moran processes with a dynamically updating best
 response player was generated and is archived in~\cite{}. % TODO Archive
@@ -652,11 +656,12 @@ This confirmed the previous results which is that high performance
 requires adaptability and not extortion. It also provides a framework for future
 stability of optimal behaviour in evolutionary settings.
 
-In future work we would consider larger number of opponents, however, we
-believe that the results that have been presented here
-would only be more evident. In addition, we would investigate potential
-theoretical results for the best responses dynamics algorithm
-discussed.
+In the interactions we have considered here the players do not make mistakes; their
+actions were executed with perfect accuracy. Mistakes, however, are relevant in
+the reasearch of repeated games~\cite{Boyd1989, Imhof2007, Nowak1993, Wu1995}. In
+future work we would consider interactions with ``noise''. Noise can be easily
+incoroporated into our formulation and it can be shown that the utility remains a ratio
+of quadratic forms (Details see Appendix~\ref{appendix:noise}).
 
 By specifically exploring the entire space of memory-one strategies to identify
 the best strategy for a variety of situations, this work adds to the literature
@@ -685,7 +690,7 @@ A variety of software libraries have been used in this work:
 \subsection{Theorem~\ref{theorem_one} Proof}\label{appendix:theorem_one}
 
 The utility of a memory one player \(p\) against an opponent \(q\), \(u_q(p)\),
-can be written as a ratio of two quadratic forms on \(R^4\).
+can be written as a ratio of two quadratic forms on \(R^{4}_[0, 1]\).
 
 \begin{proof}
 
@@ -992,7 +997,7 @@ The set \(S_q\) is defined as all the possible combinations of:
     from $S_q$ for which the utility is maximised.
 \end{proof}
 
-\subsection{Stability of defection}
+\subsection{Stability of defection}\label{appendix:stability_of_defection}
 
 An additional theoretical result that is possible to obtain due to
 Theorem~\ref{theorem_one}, is a condition for which in an
@@ -1067,23 +1072,21 @@ A numerical simulation demonstrating the result is given in Fig.~\ref{fig:stabil
     source research framework for the study of the IPD.}\label{fig:stability_of_defection}
 \end{figure}
 
-\subsection{Best response memory-one strategy in environments with noise}
+\subsection{Best response memory-one strategy in environments with noise}\label{appendix:noise}
 
-Noise or error (in implementing a move, e.g. due to trembling hand or fuzzy
-mind) is a crucial aspect in the context of the IPD. Given that noise is
-unavoidable in real-world applications of the IPD, it’s therefore important
-to take them into account.
-
-Noise is the probability \(p_n\) that an error occured in a players actions,
-thus the players \(p\) and \(q\) are now given by:
+Consider an envirnoment where there is a probability \(p_n\) that a players actions are
+executed wrong. This is referred to as the probability of noise.
+Two memory-one opponents \(p \in \R_{[0, 1]} ^ 4\) and \(q \in \R_{[0, 1]} ^ 4\)
+are now given by:
 
 \[p = (p_1 (1 - p_n), p_2 (1 - p_n), p_3 (1 - p_n), p_4 (1 - p_n))\]
 
 and 
 
-\[q = (q_1 (1 - p_n), q_2 (1 - p_n), q_3 (1 - p_n), q_4 (1 - p_n))\]
+\[q = (q_1 (1 - p_n), q_2 (1 - p_n), q_3 (1 - p_n), q_4 (1 - p_n)).\]
 
-and the utility \(u_q(p)\) in an environment with noise is given by:
+Following a similar approach to that of Theorem~\ref{appendix:theorem_one} it
+can be shown that the utility \(u_q(p)\) is give by:
 
 \begin{equation}\label{eq:utility_with_noise}
     u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
