@@ -584,8 +584,8 @@ which are all that are required to calculate \(x_K\).
 
 Figure~\ref{fig:dynamic_moran_process_results} shows the results of an analysis
 of \(x_K\) for dynamically updating players. 
-This is obtained over % TODO Count moran processes
-Moran process against randomly selected opponents.
+This is obtained over 182
+Moran process against 122 randomly selected opponents.
 For each Moran process the fixation probabilities for \(K\in\{1, 2, 3\}\) are
 collected.
 As well as recording \(x_K\), \(\tilde x_K\) is measured where \(\tilde
@@ -596,18 +596,17 @@ Figure. This is done to be able to compare to a high performing strategy that
 has a theory of mind of the opponent but not of the population density.
 The ratio shows a relatively high performance compared to a non
 dynamic best response strategy. The mean ratio over all values of \(K\) and all
-experiments is given by % TODO Add mean 
+experiments is \\(1.044\\).
 . In some cases this dynamic updating results in a 25\% increase in the
 absorption probability.
 
-As denoted before it is clear that the best response strategy does not have a
-low SSE % TODO Make sure we're using consistent language here and reference
-        % section
-this is further compounded by the ratio being above one showing that in many
+As denoted before it is clear that the best response strategy in general does not have a
+low SSE (only 25\% of the data is below .923 and the average is .454) this is
+further compounded by the ratio being above one showing that in many
 cases the dynamic strategy benefits from its ability to adapt.
 This indicates that memory-one strategies that perform well in Moran processes need to
 more adaptable than a ZDs, and aim for mutual cooperation as well as
-exploitation which is in line with the results of \cite{Hilbe2018} where their
+exploitation which is in line with the results of~\cite{Hilbe2018} where their
 strategy was designed to adapt and was shown to be evolutionary stable. The
 findings of this work show that an optimal strategy acts in the same way.
 
