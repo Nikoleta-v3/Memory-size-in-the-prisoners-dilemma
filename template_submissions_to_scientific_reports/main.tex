@@ -204,8 +204,8 @@ of two quadratic forms~\cite{kepner2011}.
     \(\bar{a} = \input{tex/denominator_constant}\).
 \end{theorem}
 
-The proof of Theorem~\ref{theorem_one} is given in
-Appendix~\ref{appendix:theorem_one}.
+The proof of Theorem~\ref{theorem_one} is given in the
+Supplementary Information.
 Theorem~\ref{theorem_one} can be extended to consider multiple
 opponents. The IPD is commonly studied in tournaments and/or Moran Processes
 where a strategy interacts with a number of opponents. The payoff of a player in
@@ -308,8 +308,8 @@ Theorem~\ref{memone_group_best_response}.
 
 \end{theorem}
 
-The proof of Theorem~\ref{memone_group_best_response} is given in
-Appendix~\ref{appendix:memone_group_best_response}.
+The proof of Theorem~\ref{memone_group_best_response} is given in the
+Supplementary Information.
 Finding best response memory-one strategies is analytically feasible using the
 formulation of Theorem~\ref{memone_group_best_response} and resultant
 theory~\cite{Jonsson2005}. However, for large systems building the resultant
@@ -375,12 +375,13 @@ distribution is given in Table~\ref{table:sserror_stats}.
 
 \begin{table}[!htbp]
     \begin{center}
-    \resizebox{.65\columnwidth}{!}{%
+    \resizebox{.5\columnwidth}{!}{%
     \begin{tabular}{lrrrrrrrrrrr}
     \toprule
     mean & std  & 5\% & 50\% &  95\% & max & median & skew & kurt\\
     \midrule
     0.34  & 0.40  & 0.028  & 0.17  & 1.05  & 2.47  & 0.17  & 1.87 & 3.60 \\
+    \bottomrule
     \end{tabular}}
     \end{center}
     \caption{SSE of best response memory-one when \(N=2\)}\label{table:sserror_stats}
@@ -445,8 +446,8 @@ dimensions). As a result, the analysis of this section is based on a total of
 152 trials. As before, for each trial \(N=2\) random opponents have been selected.
 
 The ratio between Gambler's utility and the best response memory-one strategy's utility has been calculated and its distribution in
-given in Fig.~\ref{fig:utilities_gambler_mem_one}.
-It is evident from Fig.~\ref{fig:utilities_gambler_mem_one} that
+given in Figure~\ref{fig:utilities_gambler_mem_one}.
+It is evident from Figure~\ref{fig:utilities_gambler_mem_one} that
 Gambler always performs as well as the best response memory-one strategy and often performs better. There are
 no points where the ratio value is less than 1, thus Gambler never performed less
 than the best response memory-one strategy and in places outperforms it.
@@ -614,7 +615,7 @@ more specifically, \textit{memory-one best responses}. It has proven that:
 There is one further theoretical result that can be obtained from Theorem~\ref{theorem_one},
 which allows the identification of
 environments for which cooperation cannot occur (Details are in the
-Appendix\ref{appendix:stability_of_defection}). Moreover,
+Supplementary Information). Moreover,
 Theorem~\ref{memone_group_best_response} does not only have game theoretic
 novelty, but also the mathematical novelty of solving quadratic ratio
 optimisation problems where the quadratics are non concave.
@@ -638,7 +639,7 @@ actions were executed with perfect accuracy. Mistakes, however, are relevant in
 the reasearch of repeated games~\cite{Boyd1989, Imhof2007, Nowak1993, Wu1995}. In
 future work we would consider interactions with ``noise''. Noise can be
 incoroporated into our formulation and it can be shown that the utility remains a ratio
-of quadratic forms (Details see Appendix~\ref{appendix:noise}).
+of quadratic forms (Details see the Supplementary Information).
 Another avenue of investigation would be to understand if and/or when an
 evolutionary trajectory leads to a best response strategy.
 
@@ -652,6 +653,7 @@ a framework for the continued understanding of these important questions.
 
 \section*{Acknowledgements}
 
+A variety of software libraries have been used in this work:
 A variety of software libraries have been used in this work:
 
 \begin{itemize}
