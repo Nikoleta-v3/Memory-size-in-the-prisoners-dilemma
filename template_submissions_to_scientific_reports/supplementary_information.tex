@@ -14,6 +14,7 @@
 \usepackage{amsthm}
 \newcommand{\R}{\mathbb{R}}
 \newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
 
 \usepackage{setspace}
 \usepackage{authblk}
@@ -22,9 +23,12 @@
 \title{Supplementary Information: A theory of mind: Best responses to memory-one strategies. The limitations
 of extortion and restricted memory}
 
-\author[1]{Nikoleta E. Glynatsi}
+\author[1,2,*]{Nikoleta E. Glynatsi}
 \author[1]{Vincent A. Knight}
 \affil[1]{Cardiff University, School of Mathematics, Cardiff, CF24 4AG, United Kingdom}
+\affil[2]{Max Planck Institute for Evolutionary Biology, Pl\"{o}n, 24 306, Germany}
+
+\affil[*]{glynatsi@evolbio.mpg.de}
 
 \date{}
 
@@ -341,22 +345,34 @@ The set \(S_q\) is defined as all the possible combinations of:
     from $S_q$ for which the utility is maximised.
 \end{proof}
 
-\section{Lemma~3 Proof}\label{section:stability_defection}
 
-In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
-for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
-defection is stable if the transition probabilities of the
-opponents satisfy conditions Equation~(\ref{eq:defection_condition_one}) and Equation~(\ref{eq:defection_condition_two}).
+\section{Stability of defection}\label{appendix:stability_of_defection}
 
-\begin{equation}\label{eq:defection_condition_one}
-    \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
-\end{equation}
+An additional theoretical result that is possible to obtain due to
+Theorem~1, is a condition for which in an
+environment of memory-one opponents defection is the stable choice, based only
+on the coefficients of the opponents.
 
-while,
+This result is obtained by evaluating the sign of Equation (4)'s derivative at \(p=(0, 0, 0, 0)\). If at that
+point the derivative is negative, then the utility of a player only decreases if
+they were to change their behaviour, and thus defection at that point is stable.
 
-\begin{equation}\label{eq:defection_condition_two}
-    \sum_{i=1} ^ N \bar{a}^{(i)} \neq 0
-\end{equation}
+\begin{lemma}\label{lemma:stability_of_defection}
+    In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
+    for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
+    defection is stable if the transition probabilities of the
+    opponents satisfy conditions Equation \ref{eq:defection_condition_one} and Equation \ref{eq:defection_condition_two}.
+
+    \begin{equation}\label{eq:defection_condition_one}
+        \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
+    \end{equation}
+
+    while,
+
+    \begin{equation}\label{eq:defection_condition_two}
+        \sum_{i=1} ^ N \bar{a}^{(i)} \neq 0
+    \end{equation}
+\end{lemma}
 
 \begin{proof}
     For defection to be stable the derivative of the utility
@@ -386,6 +402,73 @@ while,
     Thus the sign of the derivative is negative if and only if
     \( \displaystyle\sum_{i=1} ^ N (c^{(i)} \bar{a}^{(i)} - \bar{c}^{(i)} a^{(i)}) \leq 0\).
 \end{proof}
+
+A numerical simulation demonstrating the result is given in Figure~\ref{fig:stability_of_defection}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=.4\linewidth]{Figure_4.pdf}
+    \caption{A. For \(q_{1}=(0.22199, 0.87073, 0.20672, 0.91861)\),
+    $q_{2}=(0.48841, 0.61174, 0.76591, 0.51842)$ and
+    $q_{3}=(0.2968, 0.18772, 0.08074, 0.73844)$, Equation~(\ref{eq:defection_condition_one}) and
+    Equation~(\ref{eq:defection_condition_two}) hold and Defector takes over the
+    population. B. For $q_{1}=(0.96703, 0.54723, 0.97268, 0.71482)$,
+    $q_{2}=(0.69773, 0.21609, 0.97627, 0.0062)$ and
+    $q_{3}=(0.25298, 0.43479, 0.77938, 0.19769)$, Equation~(\ref{eq:defection_condition_one}) fails
+    and Defector does not take over the population.
+    These results have been obtained by using~\cite{axelrodproject} an open
+    source research framework for the study of the IPD.}\label{fig:stability_of_defection}
+\end{figure}
+
+\section{Best response memory-one strategy in environments with noise}\label{appendix:noise}
+
+Consider an environment where there is a probability \(p_n\) that a players actions are
+executed wrong. This is referred to as the probability of noise.
+Two memory-one opponents \(p \in \R_{[0, 1]} ^ 4\) and \(q \in \R_{[0, 1]} ^ 4\)
+are now given by:
+
+\[p = (p_1 (1 - p_n), p_2 (1 - p_n), p_3 (1 - p_n), p_4 (1 - p_n))\]
+
+and
+
+\[q = (q_1 (1 - p_n), q_2 (1 - p_n), q_3 (1 - p_n), q_4 (1 - p_n)).\]
+
+Following a similar approach to that of Theorem~1 it
+can be shown that the utility \(u_q(p)\) is give by:
+
+\begin{equation}\label{eq:utility_with_noise}
+    u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
+                {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}},
+\end{equation}
+where \(Q, \bar{Q}\) \(\in \R^{4\times4}\) are square matrices defined by the
+transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
+
+\begin{center}
+\begin{equation*}
+\resizebox{\linewidth}{!}{\arraycolsep=2.5pt%
+\boldmath\(
+Q = \input{tex/q_numerator_with_noise}\)},
+\end{equation*}
+\begin{equation*}\label{eq:q_bar_matrix}
+\resizebox{\linewidth}{!}{\arraycolsep=2.5pt%
+\boldmath\(
+\bar{Q} =  \input{tex/q_denominator_with_noise}\)}.
+\end{equation*}
+\end{center}
+
+\(c \text{ and } \bar{c}\) \(\in \R^{4 \times 1}\) are similarly defined by:
+
+\begin{equation}\label{eq:q_matrix_numerator}
+\resizebox{0.7\linewidth}{!}{\arraycolsep=2.5pt%
+\boldmath\(c = \input{tex/c_numerator_with_noise}\),}
+\end{equation}
+\begin{equation}\label{eq:q_matrix_denominator}
+\resizebox{0.4\linewidth}{!}{\arraycolsep=2.5pt%
+\boldmath\(\bar{c} = \input{tex/c_denominator_with_noise}\),
+}
+\end{equation}
+and the constant terms \(a, \bar{a}\) are defined as \(a = \input{tex/numerator_constant_with_noise}\) and
+\(\bar{a} = \input{tex/denominator_constant_with_noise}\).
 
 \bibliographystyle{plain}
 \bibliography{bibliography.bib}
