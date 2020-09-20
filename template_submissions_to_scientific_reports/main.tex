@@ -144,12 +144,12 @@ In~\cite{Nowak1989} it was shown that it is not necessary to simulate the play
 of a strategy $p$ against a memory-one opponent $q$. Rather this exact behaviour
 can be modeled as a stochastic process, and more specifically as a Markov chain
 whose corresponding transition matrix \(M\) is
-given by Equation~\ref{eq:transition_matrix}. The long run steady state probability
+given by Equation~(\ref{eq:transition_matrix}). The long run steady state probability
 vector \(v\), which is the solution to \(v M = v\), can be
-combined with the payoff matrices of Equation~\ref{equ:pd_definition} to give the expected
+combined with the payoff matrices of Equation~(\ref{equ:pd_definition}) to give the expected
 payoffs for each player. More specifically, the utility for a memory-one
 strategy \(p\) against an opponent \(q\), denoted as \(u_q(p)\), is given by
-Equation~\ref{eq:press_dyson_utility}.
+Equation~(\ref{eq:press_dyson_utility}).
 
 \begin{equation}\label{eq:transition_matrix}
     \resizebox{.5\hsize}{!}{$\input{tex/m_matrix.tex}$}
@@ -221,7 +221,7 @@ against \(N\) opponents is given by:
        {\prod\limits_{i=1} ^ N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}.
 \end{align}
 
-Equation~\ref{eq:tournament_utility} is the average score (using Equation~\ref{eq:optimisation_quadratic}) against the set of opponents.
+Equation~(\ref{eq:tournament_utility}) is the average score (using Equation~(\ref{eq:optimisation_quadratic})) against the set of opponents.
 
 Estimating the utility of a memory-one strategy against any number of opponents
 without simulating the interactions is the main result used in the rest of this manuscript.
@@ -252,7 +252,7 @@ optimal points. This is also intuitive. The best response against a cooperator,
 \(p=(\frac{1}{2}, 0, 0, 0)\) and \(p=(\frac{1}{2}, 0, 0, \frac{1}{2})\) are also
 best responses. The approach taken here is to introduce a compact way of
 constructing the discrete candidate set of all local optimal points, and evaluating
-the objective function Equation~\ref{eq:tournament_utility}. This gives the best
+the objective function Equation~(\ref{eq:tournament_utility}). This gives the best
 response memory-one strategy. The approach is given in
 Theorem~\ref{memone_group_best_response}.
 
@@ -422,7 +422,7 @@ that can occur, furthermore, Gambler also makes a probabilistic decision of
 cooperating in the opening move. Thus, Gambler is a function \(f: \{\text{C,
 D}\} \rightarrow [0, 1]_{\R}\). This can be hard coded as an element
 of \([0, 1]_{\R} ^ {16 + 1}\), one probability for each outcome plus the opening
-move. Hence, compared to Equation~\ref{eq:mo_tournament_optimisation}, finding an
+move. Hence, compared to Equation~(\ref{eq:mo_tournament_optimisation}), finding an
 optimal Gambler is a 17 dimensional problem given by:
 
 \begin{equation}\label{eq:gambler_optimisation}
@@ -433,9 +433,9 @@ optimal Gambler is a 17 dimensional problem given by:
     \end{aligned}
 \end{equation}
 
-Note that Equation \ref{eq:tournament_utility} can not be used here for the utility
+Note that Equation (\ref{eq:tournament_utility}) can not be used here for the utility
 of Gambler, and actual simulated players are used. This is done using~\cite{axelrodproject}
-with 500 turns and 200 repetitions, moreover, Equation \ref{eq:gambler_optimisation}
+with 500 turns and 200 repetitions, moreover, Equation (\ref{eq:gambler_optimisation})
 is solved numerically using Bayesian optimisation.
 
 Similarly to the previous section, a large data set has been generated with
@@ -471,7 +471,7 @@ identified interesting results such as the appearance of self recognition
 mechanisms when training strategies using evolutionary algorithms in Moran
 processes~\cite{Knight2018}. This aspect of reinforcement learning can be done for
 best response memory-one strategies, as presented in this manuscript, by incorporating the strategy itself in the
-objective function as shown in Equation~\ref{eq:mo_tournament_optimisation}.
+objective function as shown in Equation~(\ref{eq:mo_tournament_optimisation}).
 Where \(K\) is the number of self interactions that will take place.
 
 \begin{equation}\label{eq:mo_evolutionary_optimisation}
@@ -535,7 +535,7 @@ the payoff matrix \(A ^ {(K)}\) where:
     \item \(A ^ {(K)}_{11}=u_{q}(q)\) is the long run utility of the opponent against itself.
 \end{itemize}
 
-The matrix \(A ^ {(K)}\) is calculated using Equation~\ref{eq:optimisation_quadratic}.
+The matrix \(A ^ {(K)}\) is calculated using Equation~(\ref{eq:optimisation_quadratic}).
 For every value of \(K\) the best response dynamics algorithm
 (Algorithm~\ref{algo:best_response_dynamics})
 is used to
