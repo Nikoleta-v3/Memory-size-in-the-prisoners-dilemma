@@ -1,79 +1,56 @@
-\documentclass[10pt]{article}
-
-% Manage page layout
-\usepackage[margin=2.5cm, includefoot, footskip=30pt]{geometry}
-\pagestyle{plain}
-\setlength{\parindent}{0em}
-\setlength{\parskip}{1em}
-\renewcommand{\baselinestretch}{1}
-
-%%%%%%%PACKAGES HERE%%%%%%%
-\usepackage{tikz}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{mathtools}
-\usepackage{amsthm}
-\usepackage{graphicx}
-\usepackage{subcaption}
-\usepackage{standalone}
-\usepackage{booktabs}
-\usepackage{setspace}
+\documentclass[fleqn,10pt]{wlscirep}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[algoruled,lined]{algorithm2e}
-\usepackage[noend]{algpseudocode}
-\usepackage{wrapfig}
-\usepackage{hyperref}
-\usepackage{authblk}
-\usepackage[toc,page]{appendix}
-\usetikzlibrary{calc, shapes, patterns, decorations.pathreplacing}
-
-\makeatletter
-\def\BState{\State\hskip-\ALG@thistlm}
-\makeatother
+\usepackage{subcaption}
 
 \newcommand{\R}{\mathbb{R}}
 \newtheorem{theorem}{Theorem}
-\usetikzlibrary{decorations.pathmorphing, decorations.pathreplacing, angles,
-                quotes, calc, er, positioning}
-
 \newtheorem{lemma}[theorem]{Lemma}
-\def\arraystretch{1.5}
 
 \title{Using a theory of mind to find best responses to memory-one strategies.}
-\author[1, 2, *]{Nikoleta E. Glynatsi}
+
+\author[1,2,*]{Nikoleta E. Glynatsi}
 \author[1]{Vincent A. Knight}
+\affil[1]{Cardiff University, School of Mathematics, Cardiff, CF24 4AG, United Kingdom}
+\affil[2]{Max Planck Institute for Evolutionary Biology, Pl\"{o}n, 24 306, Germany}
 
-\affil[1]{Cardiff University, School of Mathematics, Cardiff, United Kingdom}
-\affil[2]{Max Planck Institute for Evolutionary Biology, Pl\"{o}n, Germany}
-\affil[*]{Corresponding author: Nikoleta E. Glynatsi, glynatsi@evolbio.mpg.de}
-\date{}
-\setcounter{Maxaffil}{0}
-\renewcommand\Affilfont{\itshape\small}
+\affil[*]{glynatsi@evolbio.mpg.de}
 
-\begin{document}
+% \affil[+]{these authors contributed equally to this work}
 
-\maketitle
-
-\newpage
+%\keywords{Keyword1, Keyword2, Keyword3}
 
 \begin{abstract}
-    Memory-one strategies are a set of Iterated Prisoner's Dilemma strategies
-    that have been praised for their mathematical tractability and performance
-    against single opponents. This manuscript investigates
-    \textit{best response} memory-one strategies with a theory of mind for
-    their opponents. The results add to the literature that has shown that
-    extortionate play is not always optimal by showing that optimal play is
-    often not extortionate.
-    They
-    also provide evidence that memory-one strategies suffer from their limited
-    memory in multi agent interactions and can be out performed by
-    optimised strategies with longer memory.
-    We have developed a theory that has allowed to explore the entire
-    space of memory-one strategies. The framework presented is suitable to
-    study memory-one strategies in the Prisoner's Dilemma, but also
-    in evolutionary processes such as the Moran process,
-    Furthermore, results on the stability of defection in populations of
-    memory-one strategies are also obtained.
+Memory-one strategies are a set of Iterated Prisoner's Dilemma strategies
+that have been praised for their mathematical tractability and performance
+against single opponents. This manuscript investigates
+\textit{best response} memory-one strategies with a theory of mind for
+their opponents. The results add to the literature that has shown that
+extortionate play is not always optimal by showing that optimal play is
+often not extortionate.
+They
+also provide evidence that memory-one strategies suffer from their limited
+memory in multi agent interactions and can be out performed by
+optimised strategies with longer memory.
+We have developed a theory that has allowed to explore the entire
+space of memory-one strategies. The framework presented is suitable to
+study memory-one strategies in the Prisoner's Dilemma, but also
+in evolutionary processes such as the Moran process.
+Furthermore, results on the stability of defection in populations of
+memory-one strategies are also obtained.
 \end{abstract}
+\begin{document}
+
+\flushbottom
+\maketitle
+% * <john.hammersley@gmail.com> 2015-02-09T12:07:31.197Z:
+%
+%  Click the title above to edit the author information and abstract
+%
+\thispagestyle{empty}
+
+\section*{Introduction}
 
 The Prisoner's Dilemma (PD) is a two player game used in understanding the
 evolution of cooperative behaviour, formally introduced in~\cite{Flood1958}.
@@ -147,10 +124,9 @@ numerical experiments are run. The source code for these experiments has been
 written in a sustainable manner~\cite{Benureau2018}.
 It is open source (\url{https://github.com/Nikoleta-v3/Memory-size-in-the-prisoners-dilemma})
 and tested which ensures the validity of the results. It has also been archived
-and can be found at~\cite{nikoleta_glynatsi_2019}.
+and can be found at~\cite{opt_mo2019}.
 
-\section{Methods}
-
+\section*{Methods}
 One specific advantage of memory-one strategies is their mathematical
 tractability. They can be represented completely as an element of \(\R^{4}_{[0, 1]}\). This
 originates from~\cite{Nowak1989} where it is stated that if a strategy is
@@ -167,12 +143,12 @@ In~\cite{Nowak1989} it was shown that it is not necessary to simulate the play
 of a strategy $p$ against a memory-one opponent $q$. Rather this exact behaviour
 can be modeled as a stochastic process, and more specifically as a Markov chain
 whose corresponding transition matrix \(M\) is
-given by Eq.~\ref{eq:transition_matrix}. The long run steady state probability
+given by Equation~(\ref{eq:transition_matrix}). The long run steady state probability
 vector \(v\), which is the solution to \(v M = v\), can be
-combined with the payoff matrices of Eq.~\ref{equ:pd_definition} to give the expected
+combined with the payoff matrices of Equation~(\ref{equ:pd_definition}) to give the expected
 payoffs for each player. More specifically, the utility for a memory-one
 strategy \(p\) against an opponent \(q\), denoted as \(u_q(p)\), is given by
-Eq.~\ref{eq:press_dyson_utility}.
+Equation~(\ref{eq:press_dyson_utility}).
 
 \begin{equation}\label{eq:transition_matrix}
     \resizebox{.5\hsize}{!}{$\input{tex/m_matrix.tex}$}
@@ -227,8 +203,8 @@ of two quadratic forms~\cite{kepner2011}.
     \(\bar{a} = \input{tex/denominator_constant}\).
 \end{theorem}
 
-The proof of Theorem~\ref{theorem_one} is given in
-Appendix~\ref{appendix:theorem_one}.
+The proof of Theorem~\ref{theorem_one} is given in the
+Supplementary Information.
 Theorem~\ref{theorem_one} can be extended to consider multiple
 opponents. The IPD is commonly studied in tournaments and/or Moran Processes
 where a strategy interacts with a number of opponents. The payoff of a player in
@@ -244,7 +220,7 @@ against \(N\) opponents is given by:
        {\prod\limits_{i=1} ^ N (\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)})}.
 \end{align}
 
-Eq.~\ref{eq:tournament_utility} is the average score (using Eq.~\ref{eq:optimisation_quadratic}) against the set of opponents.
+Equation~(\ref{eq:tournament_utility}) is the average score (using Equation~(\ref{eq:optimisation_quadratic})) against the set of opponents.
 
 Estimating the utility of a memory-one strategy against any number of opponents
 without simulating the interactions is the main result used in the rest of this manuscript.
@@ -252,7 +228,7 @@ It will be used to obtain best response memory-one strategies in tournaments
 in order to explore the limitations of extortion
 and restricted memory.
 
-\section{Results}\label{section:results}
+\section*{Results}
 
 The formulation as presented in Theorem~\ref{theorem_one} can be used to
 define \textit{memory-one best response} strategies as a multi dimensional
@@ -275,7 +251,7 @@ optimal points. This is also intuitive. The best response against a cooperator,
 \(p=(\frac{1}{2}, 0, 0, 0)\) and \(p=(\frac{1}{2}, 0, 0, \frac{1}{2})\) are also
 best responses. The approach taken here is to introduce a compact way of
 constructing the discrete candidate set of all local optimal points, and evaluating
-the objective function Eq.~\ref{eq:tournament_utility}. This gives the best
+the objective function Equation~(\ref{eq:tournament_utility}). This gives the best
 response memory-one strategy. The approach is given in
 Theorem~\ref{memone_group_best_response}.
 
@@ -331,8 +307,8 @@ Theorem~\ref{memone_group_best_response}.
 
 \end{theorem}
 
-The proof of Theorem~\ref{memone_group_best_response} is given in
-Appendix~\ref{appendix:memone_group_best_response}.
+The proof of Theorem~\ref{memone_group_best_response} is given in the
+Supplementary Information.
 Finding best response memory-one strategies is analytically feasible using the
 formulation of Theorem~\ref{memone_group_best_response} and resultant
 theory~\cite{Jonsson2005}. However, for large systems building the resultant
@@ -340,7 +316,7 @@ becomes intractable. As a result, best responses will be estimated
 heuristically using a numerical method, suitable for problems with local optima,
 called Bayesian optimisation~\cite{Mokus1978}.
 
-\subsection{Limitations of extortionate behaviour}
+\subsection*{Limitations of extortionate behaviour}
 
 In multi opponent settings,
 where the payoffs matter, strategies trying to exploit their opponents will
@@ -398,12 +374,13 @@ distribution is given in Table~\ref{table:sserror_stats}.
 
 \begin{table}[!htbp]
     \begin{center}
-    \resizebox{.65\columnwidth}{!}{%
+    \resizebox{.5\columnwidth}{!}{%
     \begin{tabular}{lrrrrrrrrrrr}
     \toprule
     mean & std  & 5\% & 50\% &  95\% & max & median & skew & kurt\\
     \midrule
     0.34  & 0.40  & 0.028  & 0.17  & 1.05  & 2.47  & 0.17  & 1.87 & 3.60 \\
+    \bottomrule
     \end{tabular}}
     \end{center}
     \caption{SSE of best response memory-one when \(N=2\)}\label{table:sserror_stats}
@@ -411,7 +388,7 @@ distribution is given in Table~\ref{table:sserror_stats}.
 
 \begin{figure}[!htbp]
     \begin{center}
-        \includegraphics[width=.5\linewidth]{img/best_respones_sserror.pdf}
+        \includegraphics[width=.5\linewidth]{Figure_1.pdf}
     \end{center}
     \caption{SEE distribution for best response in tournaments with \(N=2\).}\label{fig:sse_distributions}
 \end{figure}
@@ -423,7 +400,7 @@ response is not uniformly a ZDs. A positive measure of skewness and kurtosis,
 and a mean of 0.34 indicate a heavy tail to the right. Therefore, in several
 cases the strategy is not trying to extort its opponents. This highlights the importance of adaptability since the best response strategy against an opponent is rarely (if ever) a unique ZDs.
 
-\subsection{Limitations of memory size}
+\subsection*{Limitations of memory size}
 
 The other main finding presented in~\cite{Press2012} was that
 short memory of the strategies was all that was needed.
@@ -444,7 +421,7 @@ that can occur, furthermore, Gambler also makes a probabilistic decision of
 cooperating in the opening move. Thus, Gambler is a function \(f: \{\text{C,
 D}\} \rightarrow [0, 1]_{\R}\). This can be hard coded as an element
 of \([0, 1]_{\R} ^ {16 + 1}\), one probability for each outcome plus the opening
-move. Hence, compared to Eq.~\ref{eq:mo_tournament_optimisation}, finding an
+move. Hence, compared to Equation~(\ref{eq:mo_tournament_optimisation}), finding an
 optimal Gambler is a 17 dimensional problem given by:
 
 \begin{equation}\label{eq:gambler_optimisation}
@@ -455,9 +432,9 @@ optimal Gambler is a 17 dimensional problem given by:
     \end{aligned}
 \end{equation}
 
-Note that Eq. \ref{eq:tournament_utility} can not be used here for the utility
+Note that Equation (\ref{eq:tournament_utility}) can not be used here for the utility
 of Gambler, and actual simulated players are used. This is done using~\cite{axelrodproject}
-with 500 turns and 200 repetitions, moreover, Eq. \ref{eq:gambler_optimisation}
+with 500 turns and 200 repetitions, moreover, Equation (\ref{eq:gambler_optimisation})
 is solved numerically using Bayesian optimisation.
 
 Similarly to the previous section, a large data set has been generated with
@@ -468,8 +445,8 @@ dimensions). As a result, the analysis of this section is based on a total of
 152 trials. As before, for each trial \(N=2\) random opponents have been selected.
 
 The ratio between Gambler's utility and the best response memory-one strategy's utility has been calculated and its distribution in
-given in Fig.~\ref{fig:utilities_gambler_mem_one}.
-It is evident from Fig.~\ref{fig:utilities_gambler_mem_one} that
+given in Figure~\ref{fig:utilities_gambler_mem_one}.
+It is evident from Figure~\ref{fig:utilities_gambler_mem_one} that
 Gambler always performs as well as the best response memory-one strategy and often performs better. There are
 no points where the ratio value is less than 1, thus Gambler never performed less
 than the best response memory-one strategy and in places outperforms it.
@@ -480,12 +457,12 @@ shorter memory is limiting.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=.5\textwidth]{img/gambler_performance_against_mem_one.pdf}
+    \includegraphics[width=.5\textwidth]{Figure_2.pdf}
     \caption{The ratio between the utilities of Gambler and best response memory-one
     strategy for 152 different pair of opponents.}\label{fig:utilities_gambler_mem_one}
 \end{figure}
 
-\subsection{Dynamic best response player}
+\subsection*{Dynamic best response player}
 
 In several evolutionary settings
 such as Moran Processes self interactions are key. Previous work has
@@ -493,7 +470,7 @@ identified interesting results such as the appearance of self recognition
 mechanisms when training strategies using evolutionary algorithms in Moran
 processes~\cite{Knight2018}. This aspect of reinforcement learning can be done for
 best response memory-one strategies, as presented in this manuscript, by incorporating the strategy itself in the
-objective function as shown in Eq.~\ref{eq:mo_tournament_optimisation}.
+objective function as shown in Equation~(\ref{eq:mo_tournament_optimisation}).
 Where \(K\) is the number of self interactions that will take place.
 
 \begin{equation}\label{eq:mo_evolutionary_optimisation}
@@ -557,7 +534,7 @@ the payoff matrix \(A ^ {(K)}\) where:
     \item \(A ^ {(K)}_{11}=u_{q}(q)\) is the long run utility of the opponent against itself.
 \end{itemize}
 
-The matrix \(A ^ {(K)}\) is calculated using Eq.~\ref{eq:optimisation_quadratic}.
+The matrix \(A ^ {(K)}\) is calculated using Equation~(\ref{eq:optimisation_quadratic}).
 For every value of \(K\) the best response dynamics algorithm
 (Algorithm~\ref{algo:best_response_dynamics})
 is used to
@@ -612,7 +589,7 @@ findings of this work show that an optimal strategy acts in the same way.
 
 \begin{figure}[!hbtp]
     \centering
-    \includegraphics[width=.9\textwidth]{img/dynamic_moran_process_results/main.pdf}
+    \includegraphics[width=.9\textwidth]{Figure_3.pdf}
     \caption{Results for the best response player in a dynamic Moran process.
     The ratio is taken as the ratio of \(x_k\) of the dynamically updating
     player to the fixation probability of a best response player that does not
@@ -620,7 +597,7 @@ findings of this work show that an optimal strategy acts in the same way.
 \end{figure}
 
 
-\section{Discussion}
+\section*{Discussion}
 
 This manuscript has considered \textit{best response} strategies in the IPD game, and
 more specifically, \textit{memory-one best responses}. It has proven that:
@@ -637,7 +614,7 @@ more specifically, \textit{memory-one best responses}. It has proven that:
 There is one further theoretical result that can be obtained from Theorem~\ref{theorem_one},
 which allows the identification of
 environments for which cooperation cannot occur (Details are in the
-Appendix\ref{appendix:stability_of_defection}). Moreover,
+Supplementary Information). Moreover,
 Theorem~\ref{memone_group_best_response} does not only have game theoretic
 novelty, but also the mathematical novelty of solving quadratic ratio
 optimisation problems where the quadratics are non concave.
@@ -661,7 +638,7 @@ actions were executed with perfect accuracy. Mistakes, however, are relevant in
 the reasearch of repeated games~\cite{Boyd1989, Imhof2007, Nowak1993, Wu1995}. In
 future work we would consider interactions with ``noise''. Noise can be
 incoroporated into our formulation and it can be shown that the utility remains a ratio
-of quadratic forms (Details see Appendix~\ref{appendix:noise}).
+of quadratic forms (Details see the Supplementary Information).
 Another avenue of investigation would be to understand if and/or when an
 evolutionary trajectory leads to a best response strategy.
 
@@ -671,7 +648,9 @@ casting doubt
 on the effectiveness of ZDs, highlights the importance of adaptability and provides
 a framework for the continued understanding of these important questions.
 
-\section{Acknowledgements}
+\bibliography{bibliography}
+
+\section*{Acknowledgements}
 
 A variety of software libraries have been used in this work:
 
@@ -683,445 +662,13 @@ A variety of software libraries have been used in this work:
     \item The Numpy library for data manipulation~\cite{walt2011numpy}.
 \end{itemize}
 
-% Bibliography
-\bibliographystyle{plain}
-\bibliography{bibliography.bib}
+\section*{Author contributions statement}
 
-\section{Appendix}
+N.G. and V.K. conceived the idea. N.G. conducted the experiments, N.G. and V.K.
+analysed the results. All authors reviewed the manuscript.
 
-\subsection{Theorem~\ref{theorem_one} Proof}\label{appendix:theorem_one}
+\section*{Additional information}
 
-The utility of a memory one player \(p\) against an opponent \(q\), \(u_q(p)\),
-can be written as a ratio of two quadratic forms on \(R^{4}_[0, 1]\).
-
-\begin{proof}
-
-    It was discussed that \(u_q(p)\) it is the product of the steady state
-    vector \(v\) and the PD payoffs,
-
-    \[u_q(p) = v \cdot (R, S, T, P).\]
-
-    The steady state vector which is the solution to \(vM = v\) is given by
-    \begingroup
-    \tiny
-    \begin{equation*}
-    \begin{split}
-        v =  & \left[ \frac{p_{2} p_{3} (q_{2} q_{4} - q_{3} q_{4}) + p_{2} p_{4} (q_{2} q_{3} - q_{2} q_{4} - q_{3} + q_{4}) +
-        p_{3} p_{4} (- q_{2} q_{3} + q_{3} q_{4}) - p_{3} q_{2} q_{4} + p_{4}q_{4} (q_{2} - 1)}{\bar{v}} \right., \\
-        & \left. \frac{p_{1} p_{3} (q_{1} q_{4} - q_{2} q_{4}) + p_{1} p_{4} (- q_{1} q_{2} + q_{1} + q_{2} q_{4} -
-        q_{4}) + p_{3} p_{4} (q_{1} q_{2} - q_{1} q_{4} - q_{2} + q_{4}) + p_{3}q_{4} (q_{2} - 1) -
-         p_{4} q_{2} (q_{4} + 1) + p_{4} (q_{4} - 1)}{\bar{v}} \right., \\
-        & \left. \frac{- p_{1} p_{2} (q_{1} q_{4} - q_{3} q_{4}) - p_{1} p_{4} (- q_{1} q_{3} + q_{3} q_{4})
-          + p_{1} q_{1} q_{4} - p_{2} p_{4} (q_{1} q_{3} - q_{1} q_{4} - q_{3} + q_{4}) -
-          p_{2} q_{4} (q_{3}  + 1) - p_{4}q_{4} (q_{1} + q_{3}) - p_{4} (q_{3}
-          + q_{4}) - q_{4}}{\bar{v}} \right., \\ 
-        & \left. \frac{p_{1} p_{2} (q_{1} q_{2} - q_{1} - q_{2} q_{3} + q_{3}) + p_{1} p_{3} (- q_{1} q_{3} + q_{2} q_{3})
-         - p_{1} q_{1} (q_{2} + 1) + p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3}
-         + q_{2} - q_{3}) + p_{2} (q_{3}q_{2}  - q_{2} - q_{3} - 1) +
-          p_{3} (q_{1} q_{2} - q_{3}q_{2} - q_{2} - q_{3}) + q_{2} - 1}{\bar{v}}\right],
-    \end{split}
-    \end{equation*}
-    \endgroup
-
-    where,
-    \begingroup
-    \footnotesize
-    \begin{equation*}
-        \begin{split}
-           \bar{v} = & \quad p_{1} p_{2} (q_{1} q_{2} - q_{1} q_{4} - q_{1} - q_{2} q_{3} + q_{3} q_{4} + q_{3}) - p_{1} p_{3} (q_{1} q_{3} - q_{1} q_{4} - q_{2} q_{3} + q_{2} q_{4}) -
-           p_{1} p_{4} (q_{1} q_{2} - q_{1} q_{3} - q_{1} - q_{2} q_{4} + q_{3} q_{4} + q_{4}) - \\
-           & \quad p_{1} q_{1} (q_{2} + q_{4} + 1) + p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3} + q_{2} q_{4} + q_{2} - q_{3} q_{4} - q_{3})
-           + p_{2} p_{4} (- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}) + p_{2} q_{2} (q_{3} - 1) - p_{2} q_{3} (q_{4} - 1) + \\
-           & \quad p_{2} (q_{4} + 1) +  p_{3} p_{4} (q_{1} q_{2} - q_{1} q_{4} - q_{2} q_{3} - q_{2} + q_{3} q_{4} + q_{4}) + p_{3} q_{2} q_{1} ( - p_{3} - 1) + p_{3} (q_{3} -
-           q_{4}) - p_{4} (q_{1} q_{4} + q_{2} + q_{3} q_{4} - q_{3} + q_{4} - 1) + \\
-           & \quad q_{2} - q_{4} - 1
-        \end{split}
-        \end{equation*}
-    \endgroup
-
-    The dot product of \(v \cdot (R, S, T, P)\) gives,
-
-    \begingroup
-    \scriptsize
-    \begin{equation*}
-    \begin{split}
-        u_q(p) = & \frac{R \left(p_{2} p_{3} (q_{2} q_{4} - q_{3} q_{4}) + p_{2} p_{4} (q_{2} q_{3} - q_{2} q_{4} - q_{3} + q_{4}) +
-        p_{3} p_{4} (- q_{2} q_{3} + q_{3} q_{4}) - p_{3} q_{2} q_{4} + p_{4}q_{4} (q_{2} - 1)\right)}{\bar{v}}  +  \\
-        & \frac{S \left(p_{1} p_{3} (q_{1} q_{4} - q_{2} q_{4}) + p_{1} p_{4} (- q_{1} q_{2} + q_{1} + q_{2} q_{4} -
-        q_{4}) + p_{3} p_{4} (q_{1} q_{2} - q_{1} q_{4} - q_{2} + q_{4}) + p_{3}q_{4} (q_{2} - 1) -
-         p_{4} q_{2} (q_{4} + 1) + p_{4} (q_{4} - 1)\right)}{\bar{v}} + \\
-        & \frac{T \left(- p_{1} p_{2} (q_{1} q_{4} - q_{3} q_{4}) - p_{1} p_{4} (- q_{1} q_{3} + q_{3} q_{4})
-          + p_{1} q_{1} q_{4} - p_{2} p_{4} (q_{1} q_{3} - q_{1} q_{4} - q_{3} + q_{4}) -
-          p_{2} q_{4} (q_{3}  + 1) - p_{4}q_{4} (q_{1} + q_{3}) - p_{4} (q_{3}
-          + q_{4}) - q_{4}\right)}{\bar{v}} + \\ 
-        & \frac{P \left(p_{1} (p_{2} (q_{1} q_{2} - q_{1} - q_{2} q_{3} + q_{3}) + p_{3} (- q_{1} q_{3} + q_{2} q_{3})
-        - q_{1} (q_{2} + 1)) + p_{2} p_{3} ((- q_{1} q_{2} + q_{1} q_{3}
-        + q_{2} - q_{3}) + (q_{3}q_{2}  - q_{2} - q_{3} - 1))\right)}{\bar{v}} + \\
-        & \frac{P \left(p_{3} (q_{1} q_{2} - q_{3}q_{2} - q_{2} - q_{3}) + q_{2} - 1\right)}{\bar{v}} \implies \\
-    \end{split}
-    \end{equation*}
-    \endgroup
-
-    \begingroup
-    \scriptsize
-    \begin{equation*}
-        u_q(p) =
-        \left(
-          \frac
-            {\parbox{6in}{$ - p_{1} p_{2} (q_{1} - q_{3}) (P q_{2} - P - T q_{4}) + p_{1} p_{3} (q_{1} - q_{2}) (P q_{3} - S q_{4}) + p_{1} p_{4} (q_{1} - q_{4}) (S q_{2} - S - T q_{3}) + p_{2} p_{3} (q_{2} - q_{3}) (P q_{1} - P - R q_{4}) - $ \\
-            $ p_{2} p_{4} (q_{3} - q_{4}) (R q_{2} - R - T q_{1} + T) + p_{3} p_{4} (q_{2} - q_{4}) (R q_{3} - S q_{1} + S) + p_{1} q_{1} (P q_{2} - P - T q_{4}) - p_{2} (q_{3} - 1) (P q_{2} - P - T q_{4}) + $ \\
-            $ p_{3} (- P q_{1} q_{2} + P q_{2} q_{3} + P q_{2} - P q_{3} + R q_{2} q_{4} - S q_{2} q_{4} + S q_{4}) + p_{4} (- R q_{2} q_{4} + R q_{4} + S q_{2} q_{4} - S q_{2} - S q_{4} + S + T q_{1} q_{4} - T q_{3} q_{4} + T q_{3} - T q_{4}) $ \\
-            \hspace*{6.7cm} $- P q_{2} + P + T q_{4}$
-            }}
-            {\parbox{6in}{$
-            p_{1} p_{2} (q_{1} q_{2} - q_{1} q_{4} - q_{1} - q_{2} q_{3} + q_{3} q_{4} + q_{3}) + p_{1} p_{3} (- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}) + p_{1} p_{4} (- q_{1} q_{2} + q_{1} q_{3} + q_{1} + q_{2} q_{4} - q_{3} q_{4} - q_{4}) +$ \\
-            $ p_{2} p_{3} (- q_{1} q_{2} + q_{1} q_{3} + q_{2} q_{4} + q_{2} - q_{3} q_{4} - q_{3}) + p_{2} p_{4} (- q_{1} q_{3} + q_{1} q_{4} + q_{2} q_{3} - q_{2} q_{4}) + p_{3} p_{4} (q_{1} q_{2} - q_{1} q_{4} - q_{2} q_{3} - q_{2} + q_{3} q_{4} + q_{4}) + $ \\
-            $ p_{1} (- q_{1} q_{2} + q_{1} q_{4} + q_{1}) + p_{2} (q_{2} q_{3} - q_{2} - q_{3} q_{4} - q_{3} + q_{4} + 1) + p_{3} (q_{1} q_{2} - q_{2} q_{3} - q_{2} + q_{3} - q_{4}) + p_{4} (- q_{1} q_{4} + q_{2} + q_{3} q_{4} - q_{3} + q_{4} - 1) + $ \\
-            \hspace*{7cm} $q_{2} - q_{4} - 1$
-          }}
-        \right).
-    \end{equation*}
-    \endgroup
-
-    Let us consider the numerator of \(u_q(p)\). The cross product terms
-    \(p_ip_j\) are given by,
-
-    \begingroup
-    \footnotesize
-    \begin{align*}
-    - p_{1} p_{2} (q_{1} - q_{3}) (P q_{2} - P - T q_{4}) + p_{1} p_{3} (q_{1} - q_{2}) (P q_{3} - S q_{4}) + p_{1} p_{4} (q_{1} - q_{4}) (S q_{2} - S - T q_{3}) + \\
-    p_{2} p_{3} (q_{2} - q_{3}) (P q_{1} - P - R q_{4}) - p_{2} p_{4} (q_{3} - q_{4}) (R q_{2} - R - T q_{1} + T) + p_{3} p_{4} (q_{2} - q_{4}) (R q_{3} - S q_{1} + S)
-    \end{align*}
-    \endgroup
-
-    This can be re written in a matrix format given by
-    Eq.~\ref{eq:cross_product_coeffs}.
-
-    \begin{equation}\label{eq:cross_product_coeffs}
-        \resizebox{0.9\linewidth}{!}{\arraycolsep=2.5pt%
-        \boldmath\(
-        (p_1, p_2, p_3, p_4) \frac{1}{2} \input{tex/q_numerator} \begin{pmatrix}
-        p_1 \\
-        p_2 \\
-        p_3 \\
-        p_4 \end{pmatrix}
-        \) }
-    \end{equation}
-
-    Similarly, the linear terms are given by,
-
-    \begingroup
-    \footnotesize
-    \begin{align*}
-    p_{1} q_{1} (P q_{2} - P - T q_{4}) - p_{2} & (q_{3} - 1) (P q_{2} - P - T q_{4}) + p_{3} (- P q_{1} q_{2} + P q_{2} q_{3} + P q_{2} - P q_{3} + R q_{2} q_{4} - S q_{2} q_{4} + S q_{4}) + \\
-    p_{4} & (- R q_{2} q_{4} + R q_{4} + S q_{2} q_{4} - S q_{2} - S q_{4} + S + T q_{1} q_{4} - T q_{3} q_{4} + T q_{3} - T q_{4})
-    \end{align*}
-    \endgroup
-
-    and the expression can be written using a matrix format as
-    Eq.~\ref{eq:linear_coeffs}.
-
-    \begin{equation}\label{eq:linear_coeffs}
-        \resizebox{0.60\linewidth}{!}{\arraycolsep=2.5pt%
-        \boldmath\(
-        (p_1, p_2, p_3, p_4) \input{tex/c_numerator}\)}
-    \end{equation}
-
-    Finally, the constant term of the numerator, which is obtained by
-    substituting $p=(0, 0, 0, 0)$, is given by Eq.~\ref{eq:constant}.
-
-    \begin{equation}\label{eq:constant}
-    - P q_{2} + P + T q_{4}
-    \end{equation}
-
-    Combining Eq.~\ref{eq:cross_product_coeffs}, Eq.~\ref{eq:linear_coeffs} and
-    Eq.~\ref{eq:constant} gives that the numerator of \(u_q(p)\) can be written
-    as,
-
-    \begingroup
-    \tiny\boldmath
-    \begin{align*}
-        \frac{1}{2}p & \input{tex/q_numerator} p^T +  \\
-        & \input{tex/c_numerator} p - P q_{2} + P + T q_{4}
-    \end{align*}
-    \endgroup
-
-    and equivalently as,
-
-    \[\frac{1}{2}pQp^T + cp + a\]
-
-    where \(Q\) \(\in \R^{4\times4}\) is a square matrix defined by the
-    transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
-
-    \begin{equation*}
-        \resizebox{0.9\linewidth}{!}{\arraycolsep=2.5pt%
-        \boldmath\(
-        Q = \input{tex/q_numerator}\)},
-    \end{equation*}
-
-    \(c\) \(\in \R^{4 \times 1}\) is similarly defined by:
-
-    \begin{equation*}
-        \resizebox{0.55\linewidth}{!}{\arraycolsep=2.5pt%
-        \boldmath\(c = \input{tex/c_numerator}\),}
-    \end{equation*}
-
-    and \(a = \input{tex/numerator_constant}\).
-
-    The same process is done for the denominator.
-\end{proof}
-
-\subsection{Theorem~\ref{memone_group_best_response} Proof}\label{appendix:memone_group_best_response}
-The optimal behaviour of a memory-one strategy player \(p^* \in \R_{[0, 1]} ^
-4\) against a set of \(N\) opponents \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
-for \(q^{(i)} \in \R_{[0, 1]} ^ 4\) is given by:
-
-\[p^* = \textnormal{argmax}\sum\limits_{i=1} ^ N  u_q(p), \ p \in S_q.\]
-
-The set \(S_q\) is defined as all the possible combinations of:
-
-\begin{equation}\label{eq:s_q_set}
-    S_q =
-    \left\{p \in \mathbb{R} ^ 4 \left|
-        \begin{aligned}
-            \bullet\quad p_j \in \{0, 1\} & \quad \text{and} \quad \frac{d}{dp_k}
-            \sum\limits_{i=1} ^ N  u_q^{(i)}(p) = 0 \\
-            & \quad \text{for all} \quad j \in J \quad \&  \quad k \in K  \quad \text{for all} \quad J, K \\
-            & \quad \text{where} \quad J \cap K = \O \quad
-            \text{and} \quad J \cup K = \{1, 2, 3, 4\}.\\
-            \bullet\quad  p \in \{0, 1\} ^ 4
-        \end{aligned}\right.
-    \right\}.
-\end{equation}
-
-\begin{proof}
-    The optimisation problem of Eq.~\ref{eq:mo_tournament_optimisation}
-
-    \begin{equation}\label{eq:mo_tournament_optimisation}
-        \begin{aligned}
-        \max_p: & \ \sum_{i=1} ^ {N} {u_q}^{(i)} (p)
-        \\
-        \text{such that}: & \ p \in \R_{[0, 1]}
-        \end{aligned}
-    \end{equation}
-
-    can be written as:
-
-    \begin{equation}\label{eq:mo_tournament_optimisation_standard}
-        \begin{aligned}
-        \max_p: & \ \sum_{i=1} ^ {N} {u_q}^{(i)} (p)
-        \\
-        \text{such that}: p_i & \leq 1 \text{ for } \in \{1, 2, 3, 4\} \\
-        - p_i & \leq 0 \text{ for } \in \{1, 2, 3, 4\} \\
-        \end{aligned}
-    \end{equation}
-
-    The optimisation problem has two inequality constraints and regarding the
-    optimality this means that:
-
-    \begin{itemize}
-        \item either the optimum is away from the boundary of the optimization
-        domain, and so the constraints plays no role;
-        \item or the optimum is on the constraint boundary.
-    \end{itemize}
-
-    Thus, the following three cases must be considered:
-
-    \textbf{Case 1:} The solution is on the boundary and any of the possible
-    combinations for $p_i \in \{0, 1\}$ for $i \in \{1, 2, 3, 4\}$ are candidate
-    optimal solutions.
-
-    \textbf{Case 2:} The optimum is away from the boundary of the optimization
-    domain and the interior solution $p^*$ necessarily satisfies the condition
-    \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p^*) = 0\).
-
-    \textbf{Case 3:} The optimum is away from the boundary of the optimization
-    domain but some constraints are equalities. The candidate solutions in this
-    case are any combinations of $p_j \in \{0, 1\} \quad \text{and} \quad
-    \frac{d}{dp_k} \sum\limits_{i=1} ^ N  u_q^{(i)}(p) = 0$ forall $ j \in J
-    \text{ \& } k \in K \text{ forall } J, K \text{ where } J \cap K = \O
-    \text{ and } J \cup K = \{1, 2, 3, 4\}.$
-
-    Combining cases 1-3 a set of candidate solutions, denoted as \(S_q\), is
-    constructed as: {\scriptsize
-    \begin{equation*}
-        S_q =
-        \left\{p \in \mathbb{R} ^ 4 \left|
-            \begin{aligned}
-                \bullet\quad p_j \in \{0, 1\} & \quad \text{and} \quad \frac{d}{dp_k}
-                \sum\limits_{i=1} ^ N  u_q^{(i)}(p) = 0
-                \quad \text{for all} \quad j \in J \quad \&  \quad k \in K  \quad \text{for all} \quad J, K \\
-                & \quad \text{where} \quad J \cap K = \O \quad
-                \text{and} \quad J \cup K = \{1, 2, 3, 4\}.\\
-                \bullet\quad  p \in \{0, 1\} ^ 4
-            \end{aligned}\right.
-        \right\}.
-    \end{equation*}}
-
-    The derivative of \(\sum\limits_{i=1} ^ N  u_q^{(i)}(p)\) calculated using
-    the following property (see~\cite{Abadir2005} for details):
-
-    \begin{equation}\label{eq:first_derivative_property}
-    \frac{d x A x^T}{dx} =  2Ax.
-    \end{equation}
-
-    Using property~(\ref{eq:first_derivative_property}):
-
-    \begin{equation}\label{eq:quadratics_derivatives}
-    \frac{d}{dp} \frac{1}{2}pQp^T + cp + a = pQ + c \text{ and } \frac{d}{dp} \frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a} = p\bar{Q} + \bar{c}.
-    \end{equation}
-
-    Note that the derivative of \(cp\) is \(c\) and the constant disappears.
-    Combining these it can be proven that:
-
-    \begingroup
-    \footnotesize
-    \begin{align*}
-    \frac{d}{dp} \sum\limits_{i=1} ^ N  u_q^{(i)}(p) & = \sum\limits_{i=1} ^ N \frac{\frac{d}{dp}(\frac{1}{2}pQ^{(i)}p^T + c^{(i)}p + a^{(i)} )(\frac{1}{2}p\bar{Q^{(i)}}p^T + \bar{c^{(i)}}p + \bar{a^{(i)}}) -
-    \frac{d}{dp}(\frac{1}{2}p\bar{Q^{(i)}}p^T + \bar{c^{(i)}}p + \bar{a^{(i)}})(\frac{1}{2}pQ^{(i)}p^T + c^{(i)}p + a^{(i)})}{(\frac{1}{2}p\bar{Q^{(i)}}p^T + \bar{c^{(i)}}p + \bar{a^{(i)}})^2} \\
-    & = \sum\limits_{i=1} ^ N \frac{(pQ^{(i)} + c^{(i)} +)(\frac{1}{2}p\bar{Q^{(i)}}p^T + \bar{c^{(i)}}p + \bar{a^{(i)}})}{(\frac{1}{2}p\bar{Q^{(i)}}p^T + \bar{c^{(i)}}p + \bar{a^{(i)}})^2} -
-     \frac{(p\bar{Q^{(i)}}+ \bar{c^{(i)}})(\frac{1}{2}pQ^{(i)}p^T + c^{(i)}p + a^{(i)})}{(\frac{1}{2}p\bar{Q^{(i)}}p^T + \bar{c^{(i)}}p + \bar{a^{(i)}})^2}
-    \end{align*}
-    \endgroup
-
-    For \(\frac{d}{dp} \sum\limits_{i=1} ^ N  u_q(p)\) to equal zero then:
-
-    {\scriptsize
-    \begin{align}\label{eq:polynomials_roots}
-        \displaystyle\sum\limits_{i=1} ^ {N}
-        \left(pQ^{(i)} + c^{(i)}\right) \left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)
-        - \left(p\bar{Q}^{(i)} + \bar{c}^{(i)}\right) \left(\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}\right)
-        & = 0, \quad {while} \\
-        \displaystyle\sum\limits_{i=1} ^ {N} \frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)} & \neq 0.
-    \end{align}}
-
-    The optimal solution to Eq.~\ref{eq:mo_tournament_optimisation} is the point
-    from $S_q$ for which the utility is maximised.
-\end{proof}
-
-\subsection{Stability of defection}\label{appendix:stability_of_defection}
-
-An additional theoretical result that is possible to obtain due to
-Theorem~\ref{theorem_one}, is a condition for which in an
-environment of memory-one opponents defection is the stable choice, based only
-on the coefficients of the opponents.
-
-This result is obtained by evaluating the sign of Eq.
-\ref{eq:tournament_utility}'s derivative at \(p=(0, 0, 0, 0)\). If at that
-point the derivative is negative, then the utility of a player only decreases if
-they were to change their behaviour, and thus defection at that point is stable.
-
-\begin{lemma}\label{lemma:stability_of_defection}
-    In a tournament of \(N\) players \(\{q^{(1)}, q^{(2)}, \dots, q^{(N)} \}\)
-    for \(q^{(i)} \in \R_{[0, 1]} ^ 4\)
-    defection is stable if the transition probabilities of the
-    opponents satisfy conditions Eq. \ref{eq:defection_condition_one} and Eq. \ref{eq:defection_condition_two}.
-
-    \begin{equation}\label{eq:defection_condition_one}
-        \sum_{i=1} ^ N (c^{(i)T} \bar{a}^{(i)} - \bar{c}^{(i)T} a^{(i)}) \leq 0
-    \end{equation}
-
-    while,
-
-    \begin{equation}\label{eq:defection_condition_two}
-        \sum_{i=1} ^ N \bar{a}^{(i)} \neq 0
-    \end{equation}
-\end{lemma}
-
-\begin{proof}
-    For defection to be stable the derivative of the utility
-    at the point \(p = (0, 0, 0, 0)\) must be negative.
-
-    Substituting \(p = (0, 0, 0, 0)\) in,
-
-    \begin{align}\label{eq:mo_tournament_derivative}
-        \frac{d}{dp} \sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p) & = \displaystyle\sum\limits_{i=1} ^ {N}
-        \frac{\left(pQ^{(i)} + c^{(i)}\right) \left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)}
-        {\left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)^ 2}
-        - \frac{\left(p\bar{Q}^{(i)} + \bar{c}^{(i)}\right) \left(\frac{1}{2} pQ^{(i)} p^T + c^{(i)} p + a^ {(i)}\right)}
-        {\left(\frac{1}{2} p\bar{Q}^{(i)} p^T + \bar{c}^{(i)} p + \bar{a}^ {(i)}\right)^ 2}
-    \end{align}
-
-    gives:
-
-    \begin{equation}
-        \left.\frac{d\sum\limits_{i=1} ^ {N} {u_q}^{(i)} (p)}{dp} \right\rvert_{p=(0,0,0,0)} =
-    \sum_{i=1} ^ N \frac{(c^{(i)} \bar{a}^{(i)} - \bar{c}^{(i)} a^{(i)})}
-    {(\bar{a}^{(i)})^2}
-    \end{equation}
-
-    The sign of the numerator \( \displaystyle\sum_{i=1} ^ N (c^{(i)} \bar{a}^{(i)} - \bar{c}^{(i)} a^{(i)})\)
-    can vary based on the transition probabilities of the opponents.
-    The denominator can not be negative, and otherwise is always positive.
-    Thus the sign of the derivative is negative if and only if
-    \( \displaystyle\sum_{i=1} ^ N (c^{(i)} \bar{a}^{(i)} - \bar{c}^{(i)} a^{(i)}) \leq 0\).
-\end{proof}
-
-A numerical simulation demonstrating the result is given in Fig.~\ref{fig:stability_of_defection}.
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=.4\linewidth]{img/stability_of_defection_plots.pdf}
-    \caption{A. For \(q_{1}=(0.22199, 0.87073, 0.20672, 0.91861)\),
-    $q_{2}=(0.48841, 0.61174, 0.76591, 0.51842)$ and
-    $q_{3}=(0.2968, 0.18772, 0.08074, 0.73844)$, Eq.~\ref{eq:defection_condition_one} and
-    Eq.~\ref{eq:defection_condition_two} hold and Defector takes over the
-    population. B. For $q_{1}=(0.96703, 0.54723, 0.97268, 0.71482)$,
-    $q_{2}=(0.69773, 0.21609, 0.97627, 0.0062)$ and
-    $q_{3}=(0.25298, 0.43479, 0.77938, 0.19769)$, Eq.~\ref{eq:defection_condition_one} fails
-    and Defector does not take over the population.
-    These results have been obtained by using~\cite{axelrodproject} an open
-    source research framework for the study of the IPD.}\label{fig:stability_of_defection}
-\end{figure}
-
-\subsection{Best response memory-one strategy in environments with noise}\label{appendix:noise}
-
-Consider an environment where there is a probability \(p_n\) that a players actions are
-executed wrong. This is referred to as the probability of noise.
-Two memory-one opponents \(p \in \R_{[0, 1]} ^ 4\) and \(q \in \R_{[0, 1]} ^ 4\)
-are now given by:
-
-\[p = (p_1 (1 - p_n), p_2 (1 - p_n), p_3 (1 - p_n), p_4 (1 - p_n))\]
-
-and
-
-\[q = (q_1 (1 - p_n), q_2 (1 - p_n), q_3 (1 - p_n), q_4 (1 - p_n)).\]
-
-Following a similar approach to that of Theorem~\ref{appendix:theorem_one} it
-can be shown that the utility \(u_q(p)\) is give by:
-
-\begin{equation}\label{eq:utility_with_noise}
-    u_q(p) = \frac{\frac{1}{2}pQp^T + cp + a}
-                {\frac{1}{2}p\bar{Q}p^T + \bar{c}p + \bar{a}},
-\end{equation}
-where \(Q, \bar{Q}\) \(\in \R^{4\times4}\) are square matrices defined by the
-transition probabilities of the opponent \(q_1, q_2, q_3, q_4\) as follows:
-
-\begin{center}
-\begin{equation*}
-\resizebox{\linewidth}{!}{\arraycolsep=2.5pt%
-\boldmath\(
-Q = \input{tex/q_numerator_with_noise}\)},
-\end{equation*}
-\begin{equation*}\label{eq:q_bar_matrix}
-\resizebox{\linewidth}{!}{\arraycolsep=2.5pt%
-\boldmath\(
-\bar{Q} =  \input{tex/q_denominator_with_noise}\)}.
-\end{equation*}
-\end{center}
-
-\(c \text{ and } \bar{c}\) \(\in \R^{4 \times 1}\) are similarly defined by:
-
-\begin{equation}\label{eq:q_matrix_numerator}
-\resizebox{0.7\linewidth}{!}{\arraycolsep=2.5pt%
-\boldmath\(c = \input{tex/c_numerator_with_noise}\),}
-\end{equation}
-\begin{equation}\label{eq:q_matrix_denominator}
-\resizebox{0.4\linewidth}{!}{\arraycolsep=2.5pt%
-\boldmath\(\bar{c} = \input{tex/c_denominator_with_noise}\),
-}
-\end{equation}
-and the constant terms \(a, \bar{a}\) are defined as \(a = \input{tex/numerator_constant_with_noise}\) and
-\(\bar{a} = \input{tex/denominator_constant_with_noise}\).
+\textbf{Competing interests.} The author(s) declare no competing interests.
 
 \end{document}
